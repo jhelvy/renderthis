@@ -1,5 +1,8 @@
 library(roxygen2)
 
+# Load all functions for testing
+devtools::load_all()
+
 # Create the documentation for the package
 devtools::document()
 

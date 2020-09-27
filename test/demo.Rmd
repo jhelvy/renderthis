@@ -1,0 +1,19 @@
+---
+title: "Some xaringan slides!"
+author: "John Helveston"
+output:
+  xaringan::moon_reader:
+    css: 'default'
+    lib_dir: libs
+---
+
+---
+class: center, middle, inverse
+
+# Some xaringan slides!
+
+by John Paul Helveston
+
+---
+
+Here's another slide
