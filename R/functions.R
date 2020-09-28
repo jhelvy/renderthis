@@ -14,19 +14,39 @@ build_html <- function(input, output_file = NULL) {
 #' @param output_file The name of the path to the saved PDF file.
 #' @export
 build_pdf <- function(input, output_file = NULL) {
-    if (grepl(".Rmd", input)) {
-        # Create a temporary directory and copy the .Rmd file there
-        folder <- tempdir()
-        rmdPath <- file.path(folder, 'temp.Rmd')
-        file.copy(from = input, to = rmdPath)
-        # Build html as temp file
-        html <- rmarkdown::render(
-            input = rmdPath,
-            output_file = tempfile(fileext = '.html'))
+    if (! file.exists(input)) {
+        return(NULL)
     }
+    if (grepl(".Rmd", input)) {
+        pdf <- build_temp_pdf(input)
+        root <- getPaths(input)
+        file.copy(from = pdf, to = )
+    } else {
+        pagedown::chrome_print(
+            input  = input,
+            output = output_file)
+    }
+}
+
+getPaths <- function(input) {
+
+
+}
+
+#' Creates a PDF of the xaringan Rmd file.
+#' @param input The Rmd file to convert to a PDF.
+build_temp_pdf <- function(input) {
+    # Create a temporary directory and copy the Rmd file there
+    folder <- tempdir()
+    rmdPath <- file.path(folder, 'temp.Rmd')
+    file.copy(from = input, to = rmdPath)
+    # Build html as temp file, then build pdf as temp file
+    html <- rmarkdown::render(
+        input = rmdPath,
+        output_file =  file.path(folder, 'temp.html'))
     pdf <- pagedown::chrome_print(
-        input  = input,
-        output_file = tempfile(fileext = '.pdf'))
+        input  = html,
+        output = file.path(folder, 'temp.pdf'))
     return(pdf)
 }
 
