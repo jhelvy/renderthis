@@ -28,9 +28,11 @@ build_pdf <- function(input, output_file = NULL) {
     }
 }
 
-getPaths <- function(input) {
-
-
+getPaths <- function(x) {
+    if (dirname(x) == x) {
+        return(x)
+    }
+    return(c(basename(x), split_path(dirname(x))))
 }
 
 #' Creates a PDF of the xaringan Rmd file.
