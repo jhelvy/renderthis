@@ -65,6 +65,7 @@ get_paths <- function(input) {
 #' Build xaringan slides as html file.
 #' @param input Path to Rmd file of xaringan slides.
 #' @param output_file Name of the output html file.
+#' @export
 #' @examples
 #' # Build html from Rmd file
 #' build_html(here::here("test", "slides.Rmd"))

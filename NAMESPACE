@@ -2,5 +2,6 @@
 
 export(build_all)
 export(build_gif)
+export(build_html)
 export(build_pdf)
 export(build_thumbnail)
