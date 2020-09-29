@@ -3,8 +3,12 @@
 
 ## xaringanBuilder <img src="images/hex_sticker.png" align="right" width="200"/>
 
-Build xaringan slides into different formats: - html - pdf - gif - png
-thumbnail of first slide
+Build xaringan slides into different formats:
+
+  - html
+  - pdf
+  - gif
+  - png thumbnail of first slide
 
 ## Installation
 

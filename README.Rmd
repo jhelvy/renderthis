@@ -20,6 +20,7 @@ IS_README <- TRUE
 ## xaringanBuilder <img src="images/hex_sticker.png" align="right" width="200"/>
 
 Build xaringan slides into different formats:
+
 - html
 - pdf
 - gif
