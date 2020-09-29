@@ -1,7 +1,73 @@
-#' Creates the html of the xaringan Rmd file.
-#' @param input The Rmd file to build.
-#' @param output_file The name of the path to the saved html file.
+#' Build xaringan slides as multiple outputs, including html, pdf, gif, and thumbnail of first slide.
+#' @param input Path to Rmd file of xaringan slides.
+#' @param include A vector of the different output types to build, including "html", "pdf", "gif", and "thumbnail".
 #' @export
+#' @examples
+#' # Build html, pdf, gif, and thumbnail of first slide from Rmd file
+#' build_all(here::here("test", "slides.Rmd"))
+build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
+    if (! file.exists(input)) {
+        return(NULL)
+    }
+    paths <- get_paths(input)
+    if (paths$extension != "Rmd") {
+        stop("input must have .Rmd extension")
+    }
+    # If html is in include, then build it first and build everything else
+    # from it
+    if ("html" %in% include) {
+        build_html(input)
+        if ("thumnail" %in% include) {
+            build_thumbnail(paths$html)
+        }
+        if ("pdf" %in% include) {
+            build_pdf(paths$html)
+            if ("gif" %in% include) {
+                build_gif(paths$pdf)
+            }
+        } else if ("gif" %in% include) {
+                build_gif(paths$html)
+        }
+    # If html is not in include, check to build pdf next since it will
+    # build the html
+    } else if ("pdf" %in% include) {
+        build_pdf(paths$html)
+        if ("gif" %in% include) {
+            build_gif(paths$pdf)
+        }
+        if ("thumnail" %in% include) {
+            build_thumbnail(paths$html)
+        }
+    } else if ("gif" %in% include) {
+        build_gif(input)
+        if ("thumnail" %in% include) {
+            build_thumbnail(paths$html)
+        }
+    } else if ("thumnail" %in% include) {
+        build_thumbnail(input)
+    }
+}
+
+#' Returns a named list of the split full path into its components.
+#' @param input Path to Rmd file of xaringan slides.
+get_paths <- function(input) {
+    if (! file.exists(input)) {
+        return(NULL)
+    }
+    paths <- DescTools::SplitPath(input)
+    paths$html <- paste0(paths$fullpath, paths$filename, ".html")
+    paths$pdf <- paste0(paths$fullpath, paths$filename, ".pdf")
+    paths$png <- paste0(paths$fullpath, paths$filename, ".png")
+    paths$gif <- paste0(paths$fullpath, paths$filename, ".gif")
+    return(paths)
+}
+
+#' Build xaringan slides as html file.
+#' @param input Path to Rmd file of xaringan slides.
+#' @param output_file Name of the output html file.
+#' @examples
+#' # Build html from Rmd file
+#' build_html(here::here("test", "slides.Rmd"))
 build_html <- function(input, output_file = NULL) {
     if (! file.exists(input)) {
         return(NULL)
@@ -12,10 +78,14 @@ build_html <- function(input, output_file = NULL) {
         output_format = 'xaringan::moon_reader')
 }
 
-#' Creates a PDF of the xaringan Rmd file or html file.
-#' @param input The Rmd or html file.
-#' @param output_file The name of the path to the saved PDF file.
+#' Build xaringan slides as pdf file.
+#' @param input Path to Rmd or html file of xaringan slides.
+#' @param output_file Name of the output pdf file.
 #' @export
+#' @examples
+#' # Build pdf from Rmd or html file
+#' build_pdf(here::here("test", "slides.Rmd"))
+#' build_pdf(here::here("test", "slides.html"))
 build_pdf <- function(input, output_file = NULL) {
     if (! file.exists(input)) {
         return(NULL)
@@ -33,26 +103,14 @@ build_pdf <- function(input, output_file = NULL) {
         output = output_file)
 }
 
-#' Returns a named list of the split full path into its components
-#' @param input The path to a file.
+#' Build png thumbnail image of first xaringan slide.
+#' @param input Path to Rmd or html file of xaringan slides.
+#' @param output_file Name of the output png file.
 #' @export
-get_paths <- function(input) {
-    if (! file.exists(input)) {
-        return(NULL)
-    }
-    paths <- DescTools::SplitPath(input)
-    paths$html <- paste0(paths$fullpath, paths$filename, ".html")
-    paths$pdf <- paste0(paths$fullpath, paths$filename, ".pdf")
-    paths$png <- paste0(paths$fullpath, paths$filename, ".png")
-    paths$gif <- paste0(paths$fullpath, paths$filename, ".gif")
-    return(paths)
-}
-
-#' Creates a PNG thumbnail image of the first slide in the xaringan Rmd file
-#' or html file.
-#' @param input The Rmd or html file.
-#' @param output_file The name of the path to the saved PNG file.
-#' @export
+#' @examples
+#' # Build first slide thumbnail from Rmd or html file
+#' build_thumbnail(here::here("test", "slides.Rmd"))
+#' build_thumbnail(here::here("test", "slides.html"))
 build_thumbnail <- function(input, output_file = NULL) {
     if (! file.exists(input)) {
         return(NULL)
@@ -71,13 +129,17 @@ build_thumbnail <- function(input, output_file = NULL) {
         format = "png")
 }
 
-#' Creates a GIF image of the xaringan Rmd, html, or PDF file.
-#' or html file.
-#' @param input Path to the Rmd, html, or PDF file.
-#' @param output_file The name of the path to the saved GIF file.
-#' @param density Resolution of the resulting GIF file.
+#' Build xaringan slides as gif file.
+#' @param input Path to Rmd, html, or pdf file of xaringan slides.
+#' @param output_file Name of the output gif file.
+#' @param density Resolution of the resulting gif file.
 #' @param fps Frames per second.
 #' @export
+#' @examples
+#' # Build gif from Rmd, html, or pdf file
+#' build_gif(here::here("test", "slides.Rmd"))
+#' build_gif(here::here("test", "slides.html"))
+#' build_gif(here::here("test", "slides.pdf"))
 build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
     if (! file.exists(input)) {
         return(NULL)
