@@ -1,48 +1,41 @@
-## xaringanBuilder
 
-Build xaringan slides into different formats:
-- html
-- pdf
-- gif
-- png thumbnail of first slide
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+## xaringanBuilder <img src="images/hex_sticker.png" align="right" width="200"/>
+
+Build xaringan slides into different formats: - html - pdf - gif - png
+thumbnail of first slide
 
 ## Installation
 
 Install from github:
-```
-remotes::install_github("jhelvy/xaringanBuilder")
-```
+
+    remotes::install_github("jhelvy/xaringanBuilder")
 
 ## Usage
-```
-library(xaringanBuilder)
-```
+
+    library(xaringanBuilder)
 
 Build html from Rmd file:
-```
-build_html("slides.Rmd")
-```
+
+    build_html("slides.Rmd")
 
 Build pdf from Rmd or html file:
-```
-build_pdf("slides.Rmd")
-build_pdf("slides.html")
-```
+
+    build_pdf("slides.Rmd")
+    build_pdf("slides.html")
 
 Build gif from Rmd, html, or pdf file:
-```
-build_gif("slides.Rmd")
-build_gif("slides.html")
-build_gif("slides.pdf")
-```
+
+    build_gif("slides.Rmd")
+    build_gif("slides.html")
+    build_gif("slides.pdf")
 
 Build first slide thumbnail from Rmd or html file:
-```
-build_thumbnail("slides.Rmd")
-build_thumbnail("slides.html")
-```
+
+    build_thumbnail("slides.Rmd")
+    build_thumbnail("slides.html")
 
 Build html, pdf, gif, and thumbnail of first slide from Rmd file
-```
-build_all("slides.Rmd", include = c("html", "pdf", "gif", "thumbnail"))
-```
+
+    build_all("slides.Rmd", include = c("html", "pdf", "gif", "thumbnail"))
