@@ -17,16 +17,16 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
     # from it
     if ("html" %in% include) {
         build_html(input)
-        if ("thumnail" %in% include) {
-            build_thumbnail(paths$html)
-        }
         if ("pdf" %in% include) {
             build_pdf(paths$html)
             if ("gif" %in% include) {
                 build_gif(paths$pdf)
             }
         } else if ("gif" %in% include) {
-                build_gif(paths$html)
+            build_gif(paths$html)
+        }
+        if ("thumbnail" %in% include) {
+            build_thumbnail(paths$html)
         }
     # If html is not in include, check to build pdf next since it will
     # build the html
@@ -35,15 +35,15 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
         if ("gif" %in% include) {
             build_gif(paths$pdf)
         }
-        if ("thumnail" %in% include) {
+        if ("thumbnail" %in% include) {
             build_thumbnail(paths$html)
         }
     } else if ("gif" %in% include) {
         build_gif(input)
-        if ("thumnail" %in% include) {
+        if ("thumbnail" %in% include) {
             build_thumbnail(paths$html)
         }
-    } else if ("thumnail" %in% include) {
+    } else if ("thumbnail" %in% include) {
         build_thumbnail(input)
     }
 }

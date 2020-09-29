@@ -1,3 +1,5 @@
+# # Install from github
+# remotes::install_github('jhelvy/xaringanBuilder')
 library(xaringanBuilder)
 
 # Build html from Rmd file
