@@ -12,3 +12,12 @@ build_thumbnail(here::here("test", "demo.Rmd"))
 
 # Build first slide thumbnail from html file
 build_thumbnail(here::here("test", "demo.html"))
+
+# Build GIF of slides from Rmd file
+build_gif(here::here("test", "demo.Rmd"))
+
+# Build GIF of slides from html file
+build_gif(here::here("test", "demo.html"))
+
+# Build GIF of slides from PDF file
+build_gif(here::here("test", "demo.pdf"))
