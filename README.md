@@ -37,14 +37,18 @@ Build gif from Rmd, html, or pdf file:
     build_gif("slides.html")
     build_gif("slides.pdf")
 
-Example: <img src="example/slides.gif" width=660>
+Example:
+
+<img src="example/slides.gif" width=600>
 
 Build first slide thumbnail from Rmd or html file:
 
     build_thumbnail("slides.Rmd")
     build_thumbnail("slides.html")
 
-Example: <img src="example/slides.png" width=660>
+Example:
+
+<img src="example/slides.png" width=600>
 
 Build everything (html, pdf, gif, and thumbnail of first slide) from Rmd
 file:
