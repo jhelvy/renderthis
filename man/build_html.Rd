@@ -9,7 +9,9 @@ build_html(input, output_file = NULL)
 \arguments{
 \item{input}{Path to Rmd file of xaringan slides.}
 
-\item{output_file}{Name of the output html file.}
+\item{output_file}{The name of the output file. If using NULL then
+the output filename will be based on filename for the input file.
+If a filename is provided, a path to the output file can also be provided.}
 }
 \description{
 Build xaringan slides as html file.
