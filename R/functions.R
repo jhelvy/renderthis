@@ -25,35 +25,39 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
     }
     # If html is in include, then build it first and build everything else
     # from it
-    if ("html" %in% include) {
+    html <- "html" %in% include
+    pdf <- "pdf" %in% include
+    gif <- "gif" %in% include
+    thumbnail <- "thumbnail" %in% include
+    if (html) {
         build_html(input)
-        if ("pdf" %in% include) {
+        if (pdf) {
             build_pdf(paths$html)
-            if ("gif" %in% include) {
+            if (gif) {
                 build_gif(paths$pdf)
             }
-        } else if ("gif" %in% include) {
+        } else if (gif) {
             build_gif(paths$html)
         }
-        if ("thumbnail" %in% include) {
+        if (thumbnail) {
             build_thumbnail(paths$html)
         }
     # If html is not in include, check to build pdf next since it will
     # build the html
-    } else if ("pdf" %in% include) {
+    } else if (pdf) {
         build_pdf(paths$html)
-        if ("gif" %in% include) {
+        if (gif) {
             build_gif(paths$pdf)
         }
-        if ("thumbnail" %in% include) {
+        if (thumbnail) {
             build_thumbnail(paths$html)
         }
-    } else if ("gif" %in% include) {
+    } else if (gif) {
         build_gif(input)
-        if ("thumbnail" %in% include) {
+        if (thumbnail) {
             build_thumbnail(paths$html)
         }
-    } else if ("thumbnail" %in% include) {
+    } else if (thumbnail) {
         build_thumbnail(input)
     }
 }
@@ -97,6 +101,8 @@ build_pdf <- function(input, output_file = NULL) {
     }
     if (is.null(output_file)) {
         output_file <- paths$pdf
+    } else if (get_paths(output_file)$extension != "pdf") {
+        stop("output_file should be NULL or have .pdf extension")
     }
     pagedown::chrome_print(
         input  = input,
@@ -125,6 +131,8 @@ build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
     }
     if (is.null(output_file)) {
         output_file <- paths$gif
+    } else if (get_paths(output_file)$extension != "gif") {
+        stop("output_file should be NULL or have .gif extension")
     }
     pdf <- magick::image_read(input, density = density)
     pngs <- magick::image_convert(pdf, 'png')
@@ -152,6 +160,8 @@ build_thumbnail <- function(input, output_file = NULL) {
     }
     if (is.null(output_file)) {
         output_file <- paths$png
+    } else if (get_paths(output_file)$extension != "png") {
+        stop("output_file should be NULL or have .png extension")
     }
     pagedown::chrome_print(
         input  = input,

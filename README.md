@@ -20,13 +20,13 @@ Install from github:
 
     library(xaringanBuilder)
 
-Build html from Rmd file [view example html
-slides](https://jhelvy.github.io/xaringanBuilder/example/slides.html):
+Build html from Rmd file ([view example html
+slides](https://jhelvy.github.io/xaringanBuilder/example/slides.html)):
 
     build_html("slides.Rmd")
 
-Build pdf from Rmd or html file [view example pdf
-slides](https://jhelvy.github.io/xaringanBuilder/example/slides.pdf):
+Build pdf from Rmd or html file ([view example pdf
+slides](https://jhelvy.github.io/xaringanBuilder/example/slides.pdf)):
 
     build_pdf("slides.Rmd")
     build_pdf("slides.html")
