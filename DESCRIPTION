@@ -20,5 +20,4 @@ Imports:
     xaringan,
     rmarkdown,
     magick,
-    pagedown,
-    DescTools
+    pagedown
