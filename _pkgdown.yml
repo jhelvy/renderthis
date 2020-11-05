@@ -1,0 +1,32 @@
+home:
+  title: Functions for building xaringan slides as pdfs, pngs, and gifs.
+
+template:
+ params:
+    bootswatch: simplex
+twitter:
+    creator: "@JohnHelveston"
+    card: summary_large_image
+
+navbar:
+  title: "xaringanBuilder"
+  type: inverse
+  left:
+    - icon: fa-home fa-lg
+      href: index.html
+    - text: "Reference"
+      href: reference/index.html
+    - text: "Changelog"
+      href: news/index.html
+  right:
+   - icon: fa-github
+     href: https://github.com/jhelvy/xaringanBuilder
+
+reference:
+- title: "Build slides"
+  desc: "Functions for building xaringan slides as pdfs, pngs, and gifs."
+  contents:
+  - build_html
+  - build_pdf
+  - build_gif
+  - build_thumbnail
