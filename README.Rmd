@@ -38,12 +38,12 @@ remotes::install_github("jhelvy/xaringanBuilder")
 library(xaringanBuilder)
 ```
 
-Build html from Rmd file ([view example html slides](https://jhelvy.github.io/xaringanBuilder/example/slides.html)):
+Build html from Rmd file ([view example html slides](https://jhelvy.github.io/xaringanBuilder/inst/example/slides.html)):
 ```
 build_html("slides.Rmd")
 ```
 
-Build pdf from Rmd or html file ([view example pdf slides](https://jhelvy.github.io/xaringanBuilder/example/slides.pdf)):
+Build pdf from Rmd or html file ([view example pdf slides](https://jhelvy.github.io/xaringanBuilder/inst/example/slides.pdf)):
 ```
 build_pdf("slides.Rmd")
 build_pdf("slides.html")
@@ -57,7 +57,7 @@ build_gif("slides.pdf")
 ```
 Example:
 
-<img src="example/slides.gif" width=600>
+<img src="images/slides.gif" width=600>
 
 Build first slide thumbnail from Rmd or html file:
 ```
@@ -66,7 +66,7 @@ build_thumbnail("slides.html")
 ```
 Example:
 
-<img src="example/slides.png" width=600>
+<img src="images/slides.png" width=600>
 
 Build everything (html, pdf, gif, and thumbnail of first slide) from Rmd file:
 ```

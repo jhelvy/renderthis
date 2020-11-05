@@ -21,12 +21,12 @@ Install from github:
     library(xaringanBuilder)
 
 Build html from Rmd file ([view example html
-slides](https://jhelvy.github.io/xaringanBuilder/example/slides.html)):
+slides](https://jhelvy.github.io/xaringanBuilder/inst/example/slides.html)):
 
     build_html("slides.Rmd")
 
 Build pdf from Rmd or html file ([view example pdf
-slides](https://jhelvy.github.io/xaringanBuilder/example/slides.pdf)):
+slides](https://jhelvy.github.io/xaringanBuilder/inst/example/slides.pdf)):
 
     build_pdf("slides.Rmd")
     build_pdf("slides.html")
@@ -39,7 +39,7 @@ Build gif from Rmd, html, or pdf file:
 
 Example:
 
-<img src="example/slides.gif" width=600>
+<img src="images/slides.gif" width=600>
 
 Build first slide thumbnail from Rmd or html file:
 
@@ -48,7 +48,7 @@ Build first slide thumbnail from Rmd or html file:
 
 Example:
 
-<img src="example/slides.png" width=600>
+<img src="images/slides.png" width=600>
 
 Build everything (html, pdf, gif, and thumbnail of first slide) from Rmd
 file:
