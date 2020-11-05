@@ -15,6 +15,8 @@ build_all(input, include = c("html", "pdf", "gif", "thumbnail"))
 Build xaringan slides as multiple outputs, including html, pdf, gif, and thumbnail of first slide.
 }
 \examples{
+\dontrun{
 # Build html, pdf, gif, and thumbnail of first slide from Rmd file
-build_all(here::here("test", "slides.Rmd"))
+build_all(here::here("example", "slides.Rmd"))
+}
 }

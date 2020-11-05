@@ -15,7 +15,9 @@ build_pdf(input, output_file = NULL)
 Build xaringan slides as pdf file.
 }
 \examples{
+\dontrun{
 # Build pdf from Rmd or html file
-build_pdf(here::here("test", "slides.Rmd"))
-build_pdf(here::here("test", "slides.html"))
+build_pdf(here::here("example", "slides.Rmd"))
+build_pdf(here::here("example", "slides.html"))
+}
 }

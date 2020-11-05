@@ -19,8 +19,10 @@ build_gif(input, output_file = NULL, density = "72x72", fps = 1)
 Build xaringan slides as gif file.
 }
 \examples{
+\dontrun{
 # Build gif from Rmd, html, or pdf file
-build_gif(here::here("test", "slides.Rmd"))
-build_gif(here::here("test", "slides.html"))
-build_gif(here::here("test", "slides.pdf"))
+build_gif(here::here("example", "slides.Rmd"))
+build_gif(here::here("example", "slides.html"))
+build_gif(here::here("example", "slides.pdf"))
+}
 }

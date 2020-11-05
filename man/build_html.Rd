@@ -17,6 +17,8 @@ If a filename is provided, a path to the output file can also be provided.}
 Build xaringan slides as html file.
 }
 \examples{
+\dontrun{
 # Build html from Rmd file
-build_html(here::here("test", "slides.Rmd"))
+build_html(here::here("example", "slides.Rmd"))
+}
 }

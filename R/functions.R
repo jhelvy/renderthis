@@ -16,8 +16,10 @@
 #' @param include A vector of the different output types to build, including "html", "pdf", "gif", and "thumbnail".
 #' @export
 #' @examples
+#' \dontrun{
 #' # Build html, pdf, gif, and thumbnail of first slide from Rmd file
-#' build_all(here::here("test", "slides.Rmd"))
+#' build_all(here::here("example", "slides.Rmd"))
+#' }
 build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
     paths <- get_paths(input)
     if (! paths$extension %in% c("Rmd", "rmd")) {
@@ -69,8 +71,10 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
 #' If a filename is provided, a path to the output file can also be provided.
 #' @export
 #' @examples
+#' \dontrun{
 #' # Build html from Rmd file
-#' build_html(here::here("test", "slides.Rmd"))
+#' build_html(here::here("example", "slides.Rmd"))
+#' }
 build_html <- function(input, output_file = NULL) {
     paths <- get_paths(input)
     if (! paths$extension %in% c("Rmd", "rmd")) {
@@ -87,9 +91,11 @@ build_html <- function(input, output_file = NULL) {
 #' @param output_file Name of the output pdf file.
 #' @export
 #' @examples
+#' \dontrun{
 #' # Build pdf from Rmd or html file
-#' build_pdf(here::here("test", "slides.Rmd"))
-#' build_pdf(here::here("test", "slides.html"))
+#' build_pdf(here::here("example", "slides.Rmd"))
+#' build_pdf(here::here("example", "slides.html"))
+#' }
 build_pdf <- function(input, output_file = NULL) {
     paths <- get_paths(input)
     if (! paths$extension %in% c("Rmd", "rmd", "html")) {
@@ -116,10 +122,12 @@ build_pdf <- function(input, output_file = NULL) {
 #' @param fps Frames per second.
 #' @export
 #' @examples
+#' \dontrun{
 #' # Build gif from Rmd, html, or pdf file
-#' build_gif(here::here("test", "slides.Rmd"))
-#' build_gif(here::here("test", "slides.html"))
-#' build_gif(here::here("test", "slides.pdf"))
+#' build_gif(here::here("example", "slides.Rmd"))
+#' build_gif(here::here("example", "slides.html"))
+#' build_gif(here::here("example", "slides.pdf"))
+#' }
 build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
     paths <- get_paths(input)
     if (! paths$extension %in% c("Rmd", "rmd", "html", "pdf")) {
@@ -146,9 +154,11 @@ build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
 #' @param output_file Name of the output png file.
 #' @export
 #' @examples
+#' \dontrun{
 #' # Build first slide thumbnail from Rmd or html file
-#' build_thumbnail(here::here("test", "slides.Rmd"))
-#' build_thumbnail(here::here("test", "slides.html"))
+#' build_thumbnail(here::here("example", "slides.Rmd"))
+#' build_thumbnail(here::here("example", "slides.html"))
+#' }
 build_thumbnail <- function(input, output_file = NULL) {
     paths <- get_paths(input)
     if (! paths$extension %in% c("Rmd", "rmd", "html")) {
