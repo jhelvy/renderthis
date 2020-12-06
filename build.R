@@ -1,11 +1,14 @@
-# Load all functions for testing
-devtools::load_all()
-
 # Create the documentation for the package
 devtools::document()
 
-# Install the package from source files
+# Install the package
 devtools::install(force = TRUE)
+
+# Build the pkgdown site
+pkgdown::build_site()
+
+# Check package
+devtools::check()
 
 # Install from github
 remotes::install_github('jhelvy/xaringanBuilder')

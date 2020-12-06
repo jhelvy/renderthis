@@ -54,3 +54,32 @@ Build everything (html, pdf, gif, and thumbnail of first slide) from Rmd
 file:
 
     build_all("slides.Rmd", include = c("html", "pdf", "gif", "thumbnail"))
+
+## Author, Version, and License Information
+
+  - Author: *John Paul Helveston*
+    [www.jhelvy.com](http://www.jhelvy.com/)
+  - Date First Written: *September 27, 2020*
+  - Most Recent Update: December 06 2020
+  - License:
+    [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
+  - [Latest
+    Release](https://github.com/jhelvy/xaringanBuilder/releases/latest):
+    0.0.1
+
+## Citation Information
+
+If you use this package for in a publication, I would greatly appreciate
+it if you cited it. You can get the citation information by typing
+`citation("xaringanBuilder")` into R:
+
+To cite package ‘xaringanBuilder’ in publications use:
+
+John Helveston (2020). xaringanBuilder: Functions for building xaringan
+slides as pdfs, pngs, and gifs.. R package version 0.1.0.
+
+A BibTeX entry for LaTeX users is
+
+@Manual{, title = {xaringanBuilder: Functions for building xaringan
+slides as pdfs, pngs, and gifs.}, author = {John Helveston}, year =
+{2020}, note = {R package version 0.1.0}, }
