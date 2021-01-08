@@ -3,7 +3,6 @@ Title: Functions for building xaringan slides as pdfs, pngs, and gifs.
 Version: 0.0.1
 Maintainer: John Helveston <john.helveston@gmail.com>
 Author: John Helveston <john.helveston@gmail.com>
-Date: 2020-09-27
 Authors@R: c(
     person(given   = "John",
            family  = "Helveston",
