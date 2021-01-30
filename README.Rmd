@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 IS_README <- TRUE
 ```
 
-## xaringanBuilder <img src="images/hex_sticker.png" align="right" width="200"/>
+## xaringanBuilder <img src="man/figures/hex_sticker.png" align="right" width="200"/>
 
 Build xaringan slides into the following formats:
 
@@ -57,7 +57,7 @@ build_gif("slides.pdf")
 ```
 Example:
 
-<img src="images/slides.gif" width=600>
+<img src="man/figures/slides.gif" width=600>
 
 Build first slide thumbnail from Rmd or html file:
 ```
@@ -66,7 +66,7 @@ build_thumbnail("slides.html")
 ```
 Example:
 
-<img src="images/slides.png" width=600>
+<img src="man/figures/slides.png" width=600>
 
 Build everything (html, pdf, gif, and thumbnail of first slide) from Rmd file:
 ```
@@ -79,7 +79,6 @@ build_all("slides.Rmd", include = c("html", "pdf", "gif", "thumbnail"))
 - Date First Written: *September 27, 2020*
 - Most Recent Update: `r format(Sys.Date(), format="%B %d %Y")`
 - License: [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
-- [Latest Release](https://github.com/jhelvy/xaringanBuilder/releases/latest): 0.0.1
 
 ## Citation Information
 

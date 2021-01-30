@@ -4,4 +4,9 @@
 ^docs$
 ^pkgdown$
 ^\.github$
-images
+^README\.Rmd$
+^LICENSE\.md$
+^xaringanBuilder\.Rproj$
+build.R
+^\.travis\.yml$
+^CRAN-RELEASE$

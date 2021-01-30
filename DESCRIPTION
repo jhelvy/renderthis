@@ -1,8 +1,6 @@
 Package: xaringanBuilder
-Title: Functions for building xaringan slides as pdfs, pngs, and gifs.
-Version: 0.0.1
-Maintainer: John Helveston <john.helveston@gmail.com>
-Author: John Helveston <john.helveston@gmail.com>
+Title: Functions For Building Xaringan Slides as PDFs, PNGs, and GIFs
+Version: 0.0.1.9000
 Authors@R: c(
     person(given   = "John",
            family  = "Helveston",
