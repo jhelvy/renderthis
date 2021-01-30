@@ -18,7 +18,7 @@
 #' @examples
 #' \dontrun{
 #' # Build html, pdf, gif, and thumbnail of first slide from Rmd file
-#' build_all(here::here("example", "slides.Rmd"))
+#' build_all("slides.Rmd")
 #' }
 build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
     paths <- get_paths(input)
@@ -73,7 +73,7 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
 #' @examples
 #' \dontrun{
 #' # Build html from Rmd file
-#' build_html(here::here("example", "slides.Rmd"))
+#' build_html("slides.Rmd")
 #' }
 build_html <- function(input, output_file = NULL) {
     paths <- get_paths(input)
@@ -93,8 +93,8 @@ build_html <- function(input, output_file = NULL) {
 #' @examples
 #' \dontrun{
 #' # Build pdf from Rmd or html file
-#' build_pdf(here::here("example", "slides.Rmd"))
-#' build_pdf(here::here("example", "slides.html"))
+#' build_pdf("slides.Rmd")
+#' build_pdf("slides.html")
 #' }
 build_pdf <- function(input, output_file = NULL) {
     paths <- get_paths(input)
@@ -124,9 +124,9 @@ build_pdf <- function(input, output_file = NULL) {
 #' @examples
 #' \dontrun{
 #' # Build gif from Rmd, html, or pdf file
-#' build_gif(here::here("example", "slides.Rmd"))
-#' build_gif(here::here("example", "slides.html"))
-#' build_gif(here::here("example", "slides.pdf"))
+#' build_gif("slides.Rmd")
+#' build_gif("slides.html")
+#' build_gif("slides.pdf")
 #' }
 build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
     paths <- get_paths(input)
@@ -156,8 +156,8 @@ build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
 #' @examples
 #' \dontrun{
 #' # Build first slide thumbnail from Rmd or html file
-#' build_thumbnail(here::here("example", "slides.Rmd"))
-#' build_thumbnail(here::here("example", "slides.html"))
+#' build_thumbnail("slides.Rmd")
+#' build_thumbnail("slides.html")
 #' }
 build_thumbnail <- function(input, output_file = NULL) {
     paths <- get_paths(input)

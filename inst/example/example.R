@@ -22,3 +22,7 @@ build_thumbnail("slides.html")
 
 # Build html, pdf, gif, and thumbnail of first slide from Rmd file
 build_all("slides.Rmd")
+
+# Build PDF using xaringan_to_pdf, which includes complex slides
+# (e.g. with panelsets)
+xaringan_to_pdf(paste0("file:/", here::here("inst", "example", "slides.html")))
