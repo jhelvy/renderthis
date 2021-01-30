@@ -22,7 +22,7 @@
 #' }
 build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
     paths <- get_paths(input)
-    if (! paths$extension %in% c("Rmd", "rmd")) {
+    if (! tolower(paths$extension) == "rmd") {
         stop("input must have .Rmd extension")
     }
     # If html is in include, then build it first and build everything else
@@ -77,7 +77,7 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
 #' }
 build_html <- function(input, output_file = NULL) {
     paths <- get_paths(input)
-    if (! paths$extension %in% c("Rmd", "rmd")) {
+    if (! tolower(paths$extension) == "rmd") {
         stop("input must have .Rmd extension")
     }
     rmarkdown::render(
@@ -98,10 +98,10 @@ build_html <- function(input, output_file = NULL) {
 #' }
 build_pdf <- function(input, output_file = NULL) {
     paths <- get_paths(input)
-    if (! paths$extension %in% c("Rmd", "rmd", "html")) {
+    if (! tolower(paths$extension) %in% c("rmd", "html")) {
         stop("input must have .Rmd or .html extension")
     }
-    if (paths$extension %in% c("Rmd", "rmd")) {
+    if (tolower(paths$extension) == "rmd") {
         build_html(input, output_file)
         input <- paths$html
     }
@@ -130,10 +130,10 @@ build_pdf <- function(input, output_file = NULL) {
 #' }
 build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
     paths <- get_paths(input)
-    if (! paths$extension %in% c("Rmd", "rmd", "html", "pdf")) {
+    if (! tolower(paths$extension) %in% c("rmd", "html", "pdf")) {
         stop("input must have .Rmd, .html, or .pdf extension")
     }
-    if (paths$extension %in% c("Rmd", "rmd", "html")) {
+    if (tolower(paths$extension) %in% c("rmd", "html")) {
         build_pdf(input, output_file)
         input <- paths$pdf
     }
@@ -161,10 +161,10 @@ build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
 #' }
 build_thumbnail <- function(input, output_file = NULL) {
     paths <- get_paths(input)
-    if (! paths$extension %in% c("Rmd", "rmd", "html")) {
+    if (! tolower(paths$extension) %in% c("rmd", "html")) {
         stop("input must have .Rmd or .html extension")
     }
-    if (paths$extension %in% c("Rmd", "rmd")) {
+    if (tolower(paths$extension) == "rmd") {
         build_html(input, output_file)
         input <- paths$html
     }

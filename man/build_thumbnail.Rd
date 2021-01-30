@@ -17,7 +17,7 @@ Build png thumbnail image of first xaringan slide.
 \examples{
 \dontrun{
 # Build first slide thumbnail from Rmd or html file
-build_thumbnail(here::here("example", "slides.Rmd"))
-build_thumbnail(here::here("example", "slides.html"))
+build_thumbnail("slides.Rmd")
+build_thumbnail("slides.html")
 }
 }

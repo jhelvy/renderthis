@@ -25,4 +25,4 @@ build_all("slides.Rmd")
 
 # Build PDF using xaringan_to_pdf, which includes complex slides
 # (e.g. with panelsets)
-xaringan_to_pdf(paste0("file:/", here::here("inst", "example", "slides.html")))
+xaringan_to_pdf(paste0("file://", here::here("inst", "example", "slides.html")))
