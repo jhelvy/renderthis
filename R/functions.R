@@ -21,10 +21,11 @@
 #' build_all("slides.Rmd")
 #' }
 build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
-    paths <- get_paths(input)
-    if (! tolower(paths$extension) == "rmd") {
-        stop("input must have .Rmd extension")
-    }
+    assert_path_ext(input, "rmd")
+    input <- fs::path_abs(input)
+    input_html <- fs::path_ext_set(input, "html")
+    input_pdf <- fs::path_ext_set(input, "pdf")
+
     # If html is in include, then build it first and build everything else
     # from it
     html <- "html" %in% include
@@ -34,30 +35,30 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
     if (html) {
         build_html(input)
         if (pdf) {
-            build_pdf(paths$html)
+            build_pdf(input_html)
             if (gif) {
-                build_gif(paths$pdf)
+                build_gif(input_pdf)
             }
         } else if (gif) {
-            build_gif(paths$html)
+            build_gif(input_html)
         }
         if (thumbnail) {
-            build_thumbnail(paths$html)
+            build_thumbnail(input_html)
         }
     # If html is not in include, check to build pdf next since it will
     # build the html
     } else if (pdf) {
-        build_pdf(paths$html)
+        build_pdf(if (fs::file_exists(input_html)) input_html else input)
         if (gif) {
-            build_gif(paths$pdf)
+            build_gif(input_pdf)
         }
         if (thumbnail) {
-            build_thumbnail(paths$html)
+            build_thumbnail(input_html)
         }
     } else if (gif) {
         build_gif(input)
         if (thumbnail) {
-            build_thumbnail(paths$html)
+            build_thumbnail(input_html)
         }
     } else if (thumbnail) {
         build_thumbnail(input)
@@ -76,10 +77,9 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
 #' build_html("slides.Rmd")
 #' }
 build_html <- function(input, output_file = NULL) {
-    paths <- get_paths(input)
-    if (! tolower(paths$extension) == "rmd") {
-        stop("input must have .Rmd extension")
-    }
+    assert_path_ext(input, "rmd")
+    input <- fs::path_abs(input)
+
     rmarkdown::render(
         input = input,
         output_file = output_file,
@@ -97,17 +97,16 @@ build_html <- function(input, output_file = NULL) {
 #' build_pdf("slides.html")
 #' }
 build_pdf <- function(input, output_file = NULL) {
-    paths <- get_paths(input)
-    if (! tolower(paths$extension) %in% c("rmd", "html")) {
-        stop("input must have .Rmd or .html extension")
-    }
-    if (tolower(paths$extension) == "rmd") {
+    assert_path_ext(input, c("rmd", "html"))
+    input <- fs::path_abs(input)
+
+    if (test_path_ext(input, "rmd")) {
         build_html(input, output_file)
-        input <- paths$html
+        input <- fs::path_ext_set(input, "html")
     }
     if (is.null(output_file)) {
-        output_file <- paths$pdf
-    } else if (get_paths(output_file)$extension != "pdf") {
+        output_file <- fs::path_ext_set(input, "pdf")
+    } else if (!test_path_ext(output_file, "pdf")) {
         stop("output_file should be NULL or have .pdf extension")
     }
     pagedown::chrome_print(
@@ -129,18 +128,18 @@ build_pdf <- function(input, output_file = NULL) {
 #' build_gif("slides.pdf")
 #' }
 build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
-    paths <- get_paths(input)
-    if (! tolower(paths$extension) %in% c("rmd", "html", "pdf")) {
-        stop("input must have .Rmd, .html, or .pdf extension")
-    }
-    if (tolower(paths$extension) %in% c("rmd", "html")) {
+    assert_path_ext(input, c("rmd", "html", "pdf"))
+    input <- fs::path_abs(input)
+
+    if (test_path_ext(input, c("rmd", "html"))) {
         build_pdf(input, output_file)
-        input <- paths$pdf
+        input <- fs::path_ext_set(input, "pdf")
     }
+
     if (is.null(output_file)) {
-        output_file <- paths$gif
-    } else if (get_paths(output_file)$extension != "gif") {
-        stop("output_file should be NULL or have .gif extension")
+        output_file <- fs::path_ext_set(input, "gif")
+    } else if (test_path_ext(output_file, "gif")) {
+        stop("`output_file` should be NULL or have .gif extension")
     }
     pdf <- magick::image_read(input, density = density)
     pngs <- magick::image_convert(pdf, 'png')
@@ -160,17 +159,16 @@ build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
 #' build_thumbnail("slides.html")
 #' }
 build_thumbnail <- function(input, output_file = NULL) {
-    paths <- get_paths(input)
-    if (! tolower(paths$extension) %in% c("rmd", "html")) {
-        stop("input must have .Rmd or .html extension")
-    }
-    if (tolower(paths$extension) == "rmd") {
+    assert_path_ext(input, c("rmd", "html"))
+    input <- fs::path_abs(input)
+
+    if (test_path_ext(input, "rmd")) {
         build_html(input, output_file)
-        input <- paths$html
+        input <- fs::path_ext_set(input, "html")
     }
     if (is.null(output_file)) {
-        output_file <- paths$png
-    } else if (get_paths(output_file)$extension != "png") {
+        output_file <- fs::path_ext_set(input, "png")
+    } else if (test_path_ext(output_file, "png")) {
         stop("output_file should be NULL or have .png extension")
     }
     pagedown::chrome_print(
@@ -179,13 +177,13 @@ build_thumbnail <- function(input, output_file = NULL) {
         format = "png")
 }
 
-#' Returns a named list of the split full path into its components.
-#' @param input Path to Rmd file of xaringan slides.
-get_paths <- function(input) {
-    paths      <- DescTools::SplitPath(input)
-    paths$html <- paste0(paths$fullpath, paths$filename, ".html")
-    paths$pdf  <- paste0(paths$fullpath, paths$filename, ".pdf")
-    paths$png  <- paste0(paths$fullpath, paths$filename, ".png")
-    paths$gif  <- paste0(paths$fullpath, paths$filename, ".gif")
-    return(paths)
+test_path_ext <- function(path, expected_ext) {
+    tolower(fs::path_ext(path)) %in% expected_ext
+}
+
+assert_path_ext <- function(path, expected_ext, arg = "input") {
+    if (!test_path_ext(path, expected_ext)) {
+        expected_ext <- paste0(".", expected_ext, collapse = ", ")
+        stop("`", arg, "` must have extension: ", expected_ext, call. = FALSE)
+    }
 }
