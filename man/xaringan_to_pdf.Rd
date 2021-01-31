@@ -4,17 +4,26 @@
 \alias{xaringan_to_pdf}
 \title{Print xaringan slides to PDF}
 \usage{
-xaringan_to_pdf(url, path = paste0(basename(dirname(url)), ".pdf"), delay = 1)
+xaringan_to_pdf(
+  input,
+  output_file = NULL,
+  delay = 1,
+  include_partial_slides = FALSE
+)
 }
 \arguments{
+\item{delay}{Seconds of delay between advancing to and printing
+a new slide.}
+
+\item{include_partial_slides}{Should partial (continuation) slides be
+included in the output? If `FALSE`, the default, only the complete slide is
+included in the PDF.}
+
 \item{url}{The url to the xaringan slides, either online or local.
 If the slides are stored locally, you may need to add `file://`
 before the complete file path.}
 
 \item{path}{The path where the PDF file should be saved}
-
-\item{delay}{Seconds of delay between advancing to and printing
-a new slide.}
 }
 \description{
 Prints xaringan slides to a PDF file, even complicated slides
