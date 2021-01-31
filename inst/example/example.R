@@ -1,8 +1,13 @@
+
+# Setup --------------
 # # Install from github
 # remotes::install_github('jhelvy/xaringanBuilder')
 library(xaringanBuilder)
 
+# Set directory to example folder:
 setwd(here::here("inst", "example"))
+
+# Run examples --------------
 
 # Build html from Rmd file
 build_html("slides.Rmd")
@@ -25,4 +30,4 @@ build_all("slides.Rmd")
 
 # Build PDF using xaringan_to_pdf, which includes complex slides
 # (e.g. with panelsets)
-xaringan_to_pdf(paste0("file://", here::here("inst", "example", "slides.html")))
+xaringan_to_pdf("slides.html")

@@ -4,15 +4,15 @@
 #' with panelsets or other html widgets or advanced features.
 #' Requires a local installation of Chrome.
 #'
-#' @param url The url to the xaringan slides, either online or local.
-#'   If the slides are stored locally, you may need to add `file://`
-#'   before the complete file path.
-#' @param path The path where the PDF file should be saved
+#' @param input Path to Rmd or html file of xaringan slides.
+#' @param output_file The name of the output file. If using NULL then
+#' the output filename will be based on filename for the input file.
+#' If a filename is provided, a path to the output file can also be provided.
 #' @param delay Seconds of delay between advancing to and printing
 #'   a new slide.
 #' @param include_partial_slides Should partial (continuation) slides be
-#'   included in the output? If `FALSE`, the default, only the complete slide is
-#'   included in the PDF.
+#'   included in the output? If `FALSE`, the default, only the complete slide
+#' is included in the PDF.
 #' @export
 #' @examples
 #' \dontrun{

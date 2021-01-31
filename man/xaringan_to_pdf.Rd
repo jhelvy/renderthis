@@ -12,18 +12,18 @@ xaringan_to_pdf(
 )
 }
 \arguments{
+\item{input}{Path to Rmd or html file of xaringan slides.}
+
+\item{output_file}{The name of the output file. If using NULL then
+the output filename will be based on filename for the input file.
+If a filename is provided, a path to the output file can also be provided.}
+
 \item{delay}{Seconds of delay between advancing to and printing
 a new slide.}
 
 \item{include_partial_slides}{Should partial (continuation) slides be
-included in the output? If `FALSE`, the default, only the complete slide is
-included in the PDF.}
-
-\item{url}{The url to the xaringan slides, either online or local.
-If the slides are stored locally, you may need to add `file://`
-before the complete file path.}
-
-\item{path}{The path where the PDF file should be saved}
+  included in the output? If `FALSE`, the default, only the complete slide
+is included in the PDF.}
 }
 \description{
 Prints xaringan slides to a PDF file, even complicated slides
