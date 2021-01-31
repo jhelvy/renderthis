@@ -73,11 +73,18 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
 build_html <- function(input, output_file = NULL) {
     assert_path_ext(input, "rmd")
     input <- fs::path_abs(input)
+    input_file_html <- fs::path_file(fs::path_ext_set(input, "html"))
 
+    cli::cli_process_start(
+        "Building {.file {input_file_html}} from {.path {fs::path_file(input)}}",
+        on_exit = "done"
+    )
     rmarkdown::render(
         input = input,
         output_file = output_file,
-        output_format = 'xaringan::moon_reader')
+        output_format = 'xaringan::moon_reader',
+        quiet = TRUE
+    )
 }
 
 #' Build xaringan slides as pdf file.
@@ -103,6 +110,10 @@ build_pdf <- function(input, output_file = NULL) {
     } else if (!test_path_ext(output_file, "pdf")) {
         stop("output_file should be NULL or have .pdf extension")
     }
+    cli::cli_process_start(
+        "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
+        on_exit = "done"
+    )
     pagedown::chrome_print(
         input  = input,
         output = output_file)
@@ -135,6 +146,10 @@ build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
     } else if (test_path_ext(output_file, "gif")) {
         stop("`output_file` should be NULL or have .gif extension")
     }
+    cli::cli_process_start(
+        "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
+        on_exit = "done"
+    )
     pdf <- magick::image_read(input, density = density)
     pngs <- magick::image_convert(pdf, 'png')
     pngs_joined <- magick::image_join(pngs)
@@ -165,6 +180,10 @@ build_thumbnail <- function(input, output_file = NULL) {
     } else if (test_path_ext(output_file, "png")) {
         stop("output_file should be NULL or have .png extension")
     }
+    cli::cli_process_start(
+        "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
+        on_exit = "done"
+    )
     pagedown::chrome_print(
         input  = input,
         output = output_file,
