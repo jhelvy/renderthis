@@ -26,43 +26,37 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
     input_html <- fs::path_ext_set(input, "html")
     input_pdf <- fs::path_ext_set(input, "pdf")
 
-    # If html is in include, then build it first and build everything else
-    # from it
-    html <- "html" %in% include
-    pdf <- "pdf" %in% include
-    gif <- "gif" %in% include
-    thumbnail <- "thumbnail" %in% include
-    if (html) {
-        build_html(input)
-        if (pdf) {
-            build_pdf(input_html)
-            if (gif) {
-                build_gif(input_pdf)
-            }
-        } else if (gif) {
-            build_gif(input_html)
-        }
-        if (thumbnail) {
-            build_thumbnail(input_html)
-        }
-    # If html is not in include, check to build pdf next since it will
-    # build the html
-    } else if (pdf) {
-        build_pdf(if (fs::file_exists(input_html)) input_html else input)
-        if (gif) {
-            build_gif(input_pdf)
-        }
-        if (thumbnail) {
-            build_thumbnail(input_html)
-        }
-    } else if (gif) {
-        build_gif(input)
-        if (thumbnail) {
-            build_thumbnail(input_html)
-        }
-    } else if (thumbnail) {
-        build_thumbnail(input)
+    include <- match.arg(include, several.ok = TRUE)
+    do_htm <- "html" %in% include
+    do_pdf <- "pdf" %in% include
+    do_gif <- "gif" %in% include
+    do_thm <- "thumbnail" %in% include
+
+    # each step requires the format of the previous step
+    # html -> pdf -> gif
+    #
+    # currently calling a step out of order will create the intermediate steps
+    # if at some point intermediate files are removed if not requested, the
+    # logic here will need to be changed.
+
+    if (do_gif && (!fs::file_exists(input_pdf) || do_htm)) {
+        # to make a gif we need the PDF file
+        # or if we update the HTML, we should also update the PDF for the gif
+        do_pdf <- TRUE
     }
+    if ((do_pdf || do_thm) && !fs::file_exists(input_html)) {
+        # to make a PDF or thumbnail we need the html file
+        do_htm <- TRUE
+    }
+
+    # Do each step in order to ensure updates propagate
+    # (or we use the current version of the required build step)
+    if (do_htm) build_html(input)
+    if (do_pdf) build_pdf(input_html)
+    if (do_gif) build_gif(input_pdf)
+    if (do_thm) build_thumbnail(input_html)
+
+    invisible(input)
 }
 
 #' Build xaringan slides as html file.
