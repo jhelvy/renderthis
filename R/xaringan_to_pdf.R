@@ -10,6 +10,9 @@
 #' @param path The path where the PDF file should be saved
 #' @param delay Seconds of delay between advancing to and printing
 #'   a new slide.
+#' @param include_partial_slides Should partial (continuation) slides be
+#'   included in the output? If `FALSE`, the default, only the complete slide is
+#'   included in the PDF.
 #' @export
 #' @examples
 #' \dontrun{
@@ -18,29 +21,55 @@
 #' xaringan_to_pdf("slides.html")
 #' }
 xaringan_to_pdf <- function(
-  url,
-  path = paste0(basename(dirname(url)), ".pdf"),
-  delay = 0.5
+  input,
+  output_file = NULL,
+  delay = 1,
+  include_partial_slides = FALSE
 ) {
   if (!requireNamespace("chromote", quietly = TRUE)) {
     stop("`chromote` is required: devtools::install_github('rstudio/chromote')")
   }
-  required_packages <- c("progress", "jsonlite", "pdftools", "digest")
-  for (pkg in required_packages) {
-    if (!requireNamespace(pkg, quietly = TRUE)) {
-      stop("`", pkg, "` is required: install.packages('", pkg, "')")
+  if (!requireNamespace("pdftools", quietly = TRUE)) {
+    stop("`pdftools` is required: install.packages('pdftools')")
+  }
+
+  is_url <- grepl("^(ht|f)tp", tolower(input))
+
+  if (is.null(output_file)) {
+    if (is_url) {
+      output_file <- fs::path_ext_set(fs::path_file(input), "pdf")
+    } else {
+      output_file <- fs::path_ext_set(input, "pdf")
     }
+  }
+
+  if (!is_url && !grepl("^file://", input)) {
+    if (!tolower(fs::path_ext(input)) %in% c("htm", "html")) {
+      stop("`input` must be the HTML version of the slides.")
+    }
+    input <- paste0("file://", fs::path_abs(input))
   }
 
   b <- chromote::ChromoteSession$new()
   on.exit(b$close(), add = TRUE)
 
-  b$Page$navigate(url, wait_ = TRUE)
+  b$Page$navigate(input, wait_ = TRUE)
   b$Page$loadEventFired()
+
+  has_remark <- b$Runtime$evaluate("typeof slideshow !== 'undefined'")$result$value
+  if (!has_remark) {
+    stop("Input does not appear to be xaringan slides: ", input)
+  }
 
   current_slide <- function() {
     x <- b$Runtime$evaluate("slideshow.getCurrentSlideIndex()")$result$value
     as.integer(x) + 1L
+  }
+
+  slide_is_continuation <- function() {
+    b$Runtime$evaluate(
+      "document.querySelector('.remark-visible').matches('.has-continuation')"
+    )$result$value
   }
 
   hash_current_slide <- function() {
@@ -79,8 +108,9 @@ xaringan_to_pdf <- function(
   b$Runtime$evaluate(paste0(
     "let style = document.createElement('style')\n",
     "style.innerText = '@media print { ",
-    ".remark-slide-container:not(.remark-visible){ display:none; ",
-    "}}'\n",
+    ".remark-slide-container:not(.remark-visible){ display:none; }",
+    if (include_partial_slides) " .has-continuation { display: block }",
+    "}'\n",
     "document.head.appendChild(style)"
   ))
 
@@ -102,7 +132,6 @@ xaringan_to_pdf <- function(
         key = "ArrowRight",
         wait_ = TRUE
       )
-      Sys.sleep(delay)
     }
 
     if (current_slide() == idx_slide) {
@@ -114,6 +143,9 @@ xaringan_to_pdf <- function(
     }
     idx_slide <- current_slide()
     pb$tick(step, tokens = list(slide = idx_slide, part = idx_part))
+
+    if (!isTRUE(include_partial_slides) && slide_is_continuation()) next
+    Sys.sleep(delay)
 
     this_hash <- hash_current_slide()
     if (identical(last_hash, this_hash)) break
@@ -139,8 +171,8 @@ xaringan_to_pdf <- function(
     pdf_files <- c(pdf_files, b$wait_for(pdf_file_promise))
   }
 
-  pdftools::pdf_combine(pdf_files, output = path)
-  file.remove(pdf_files)
+  pdftools::pdf_combine(pdf_files, output = output_file)
+  fs::file_delete(pdf_files)
 
-  invisible(path)
+  invisible(output_file)
 }

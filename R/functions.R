@@ -21,47 +21,42 @@
 #' build_all("slides.Rmd")
 #' }
 build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
-    paths <- get_paths(input)
-    if (! tolower(paths$extension) == "rmd") {
-        stop("input must have .Rmd extension")
+    assert_path_ext(input, "rmd")
+    input <- fs::path_abs(input)
+    input_html <- fs::path_ext_set(input, "html")
+    input_pdf <- fs::path_ext_set(input, "pdf")
+
+    include <- match.arg(include, several.ok = TRUE)
+    do_htm <- "html" %in% include
+    do_pdf <- "pdf" %in% include
+    do_gif <- "gif" %in% include
+    do_thm <- "thumbnail" %in% include
+
+    # each step requires the format of the previous step
+    # html -> pdf -> gif
+    #
+    # currently calling a step out of order will create the intermediate steps
+    # if at some point intermediate files are removed if not requested, the
+    # logic here will need to be changed.
+
+    if (do_gif && (!fs::file_exists(input_pdf) || do_htm)) {
+        # to make a gif we need the PDF file
+        # or if we update the HTML, we should also update the PDF for the gif
+        do_pdf <- TRUE
     }
-    # If html is in include, then build it first and build everything else
-    # from it
-    html <- "html" %in% include
-    pdf <- "pdf" %in% include
-    gif <- "gif" %in% include
-    thumbnail <- "thumbnail" %in% include
-    if (html) {
-        build_html(input)
-        if (pdf) {
-            build_pdf(paths$html)
-            if (gif) {
-                build_gif(paths$pdf)
-            }
-        } else if (gif) {
-            build_gif(paths$html)
-        }
-        if (thumbnail) {
-            build_thumbnail(paths$html)
-        }
-    # If html is not in include, check to build pdf next since it will
-    # build the html
-    } else if (pdf) {
-        build_pdf(paths$html)
-        if (gif) {
-            build_gif(paths$pdf)
-        }
-        if (thumbnail) {
-            build_thumbnail(paths$html)
-        }
-    } else if (gif) {
-        build_gif(input)
-        if (thumbnail) {
-            build_thumbnail(paths$html)
-        }
-    } else if (thumbnail) {
-        build_thumbnail(input)
+    if ((do_pdf || do_thm) && !fs::file_exists(input_html)) {
+        # to make a PDF or thumbnail we need the html file
+        do_htm <- TRUE
     }
+
+    # Do each step in order to ensure updates propagate
+    # (or we use the current version of the required build step)
+    if (do_htm) build_html(input)
+    if (do_pdf) build_pdf(input_html)
+    if (do_gif) build_gif(input_pdf)
+    if (do_thm) build_thumbnail(input_html)
+
+    invisible(input)
 }
 
 #' Build xaringan slides as html file.
@@ -76,14 +71,20 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
 #' build_html("slides.Rmd")
 #' }
 build_html <- function(input, output_file = NULL) {
-    paths <- get_paths(input)
-    if (! tolower(paths$extension) == "rmd") {
-        stop("input must have .Rmd extension")
-    }
+    assert_path_ext(input, "rmd")
+    input <- fs::path_abs(input)
+    input_file_html <- fs::path_file(fs::path_ext_set(input, "html"))
+
+    cli::cli_process_start(
+        "Building {.file {input_file_html}} from {.path {fs::path_file(input)}}",
+        on_exit = "done"
+    )
     rmarkdown::render(
         input = input,
         output_file = output_file,
-        output_format = 'xaringan::moon_reader')
+        output_format = 'xaringan::moon_reader',
+        quiet = TRUE
+    )
 }
 
 #' Build xaringan slides as pdf file.
@@ -97,19 +98,22 @@ build_html <- function(input, output_file = NULL) {
 #' build_pdf("slides.html")
 #' }
 build_pdf <- function(input, output_file = NULL) {
-    paths <- get_paths(input)
-    if (! tolower(paths$extension) %in% c("rmd", "html")) {
-        stop("input must have .Rmd or .html extension")
-    }
-    if (tolower(paths$extension) == "rmd") {
+    assert_path_ext(input, c("rmd", "html"))
+    input <- fs::path_abs(input)
+
+    if (test_path_ext(input, "rmd")) {
         build_html(input, output_file)
-        input <- paths$html
+        input <- fs::path_ext_set(input, "html")
     }
     if (is.null(output_file)) {
-        output_file <- paths$pdf
-    } else if (get_paths(output_file)$extension != "pdf") {
+        output_file <- fs::path_ext_set(input, "pdf")
+    } else if (!test_path_ext(output_file, "pdf")) {
         stop("output_file should be NULL or have .pdf extension")
     }
+    cli::cli_process_start(
+        "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
+        on_exit = "done"
+    )
     pagedown::chrome_print(
         input  = input,
         output = output_file)
@@ -129,19 +133,23 @@ build_pdf <- function(input, output_file = NULL) {
 #' build_gif("slides.pdf")
 #' }
 build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
-    paths <- get_paths(input)
-    if (! tolower(paths$extension) %in% c("rmd", "html", "pdf")) {
-        stop("input must have .Rmd, .html, or .pdf extension")
-    }
-    if (tolower(paths$extension) %in% c("rmd", "html")) {
+    assert_path_ext(input, c("rmd", "html", "pdf"))
+    input <- fs::path_abs(input)
+
+    if (test_path_ext(input, c("rmd", "html"))) {
         build_pdf(input, output_file)
-        input <- paths$pdf
+        input <- fs::path_ext_set(input, "pdf")
     }
+
     if (is.null(output_file)) {
-        output_file <- paths$gif
-    } else if (get_paths(output_file)$extension != "gif") {
-        stop("output_file should be NULL or have .gif extension")
+        output_file <- fs::path_ext_set(input, "gif")
+    } else if (test_path_ext(output_file, "gif")) {
+        stop("`output_file` should be NULL or have .gif extension")
     }
+    cli::cli_process_start(
+        "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
+        on_exit = "done"
+    )
     pdf <- magick::image_read(input, density = density)
     pngs <- magick::image_convert(pdf, 'png')
     pngs_joined <- magick::image_join(pngs)
@@ -160,32 +168,35 @@ build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
 #' build_thumbnail("slides.html")
 #' }
 build_thumbnail <- function(input, output_file = NULL) {
-    paths <- get_paths(input)
-    if (! tolower(paths$extension) %in% c("rmd", "html")) {
-        stop("input must have .Rmd or .html extension")
-    }
-    if (tolower(paths$extension) == "rmd") {
+    assert_path_ext(input, c("rmd", "html"))
+    input <- fs::path_abs(input)
+
+    if (test_path_ext(input, "rmd")) {
         build_html(input, output_file)
-        input <- paths$html
+        input <- fs::path_ext_set(input, "html")
     }
     if (is.null(output_file)) {
-        output_file <- paths$png
-    } else if (get_paths(output_file)$extension != "png") {
+        output_file <- fs::path_ext_set(input, "png")
+    } else if (test_path_ext(output_file, "png")) {
         stop("output_file should be NULL or have .png extension")
     }
+    cli::cli_process_start(
+        "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
+        on_exit = "done"
+    )
     pagedown::chrome_print(
         input  = input,
         output = output_file,
         format = "png")
 }
 
-#' Returns a named list of the split full path into its components.
-#' @param input Path to Rmd file of xaringan slides.
-get_paths <- function(input) {
-    paths      <- DescTools::SplitPath(input)
-    paths$html <- paste0(paths$fullpath, paths$filename, ".html")
-    paths$pdf  <- paste0(paths$fullpath, paths$filename, ".pdf")
-    paths$png  <- paste0(paths$fullpath, paths$filename, ".png")
-    paths$gif  <- paste0(paths$fullpath, paths$filename, ".gif")
-    return(paths)
+test_path_ext <- function(path, expected_ext) {
+    tolower(fs::path_ext(path)) %in% expected_ext
+}
+
+assert_path_ext <- function(path, expected_ext, arg = "input") {
+    if (!test_path_ext(path, expected_ext)) {
+        expected_ext <- paste0(".", expected_ext, collapse = ", ")
+        stop("`", arg, "` must have extension: ", expected_ext, call. = FALSE)
+    }
 }
