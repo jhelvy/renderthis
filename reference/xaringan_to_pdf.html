@@ -125,14 +125,26 @@ Requires a local installation of Chrome.</p>
     </div>
 
     <pre class="usage"><span class='fu'>xaringan_to_pdf</span><span class='op'>(</span>
-  <span class='va'>url</span>,
-  path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/basename.html'>dirname</a></span><span class='op'>(</span><span class='va'>url</span><span class='op'>)</span><span class='op'>)</span>, <span class='st'>".pdf"</span><span class='op'>)</span>,
-  delay <span class='op'>=</span> <span class='fl'>0.5</span>
+  <span class='va'>input</span>,
+  output_file <span class='op'>=</span> <span class='cn'>NULL</span>,
+  delay <span class='op'>=</span> <span class='fl'>1</span>,
+  include_partial_slides <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>delay</th>
+      <td><p>Seconds of delay between advancing to and printing
+a new slide.</p></td>
+    </tr>
+    <tr>
+      <th>include_partial_slides</th>
+      <td><p>Should partial (continuation) slides be
+included in the output? If `FALSE`, the default, only the complete slide is
+included in the PDF.</p></td>
+    </tr>
     <tr>
       <th>url</th>
       <td><p>The url to the xaringan slides, either online or local.
@@ -142,11 +154,6 @@ before the complete file path.</p></td>
     <tr>
       <th>path</th>
       <td><p>The path where the PDF file should be saved</p></td>
-    </tr>
-    <tr>
-      <th>delay</th>
-      <td><p>Seconds of delay between advancing to and printing
-a new slide.</p></td>
     </tr>
     </table>
 
