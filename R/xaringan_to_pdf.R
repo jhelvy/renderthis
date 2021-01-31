@@ -20,7 +20,7 @@
 xaringan_to_pdf <- function(
   url,
   path = paste0(basename(dirname(url)), ".pdf"),
-  delay = 0.5
+  delay = 1
 ) {
   if (!requireNamespace("chromote", quietly = TRUE)) {
     stop("`chromote` is required: devtools::install_github('rstudio/chromote')")

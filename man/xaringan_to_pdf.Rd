@@ -4,11 +4,7 @@
 \alias{xaringan_to_pdf}
 \title{Print xaringan slides to PDF}
 \usage{
-xaringan_to_pdf(
-  url,
-  path = paste0(basename(dirname(url)), ".pdf"),
-  delay = 0.5
-)
+xaringan_to_pdf(url, path = paste0(basename(dirname(url)), ".pdf"), delay = 1)
 }
 \arguments{
 \item{url}{The url to the xaringan slides, either online or local.
