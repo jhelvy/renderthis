@@ -30,4 +30,7 @@ build_all("slides.Rmd")
 
 # Build PDF using xaringan_to_pdf, which includes complex slides
 # (e.g. with panelsets)
-xaringan_to_pdf("slides.html")
+xaringan_to_pdf("slides_complex.html")
+xaringan_to_pdf(input = "slides_complex.html",
+                output_file = "slides_complex_partial.pdf",
+                include_partial_slides = TRUE)

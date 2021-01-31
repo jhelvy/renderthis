@@ -22,7 +22,7 @@ If a filename is provided, a path to the output file can also be provided.}
 a new slide.}
 
 \item{include_partial_slides}{Should partial (continuation) slides be
-  included in the output? If `FALSE`, the default, only the complete slide
+included in the output? If `FALSE`, the default, only the complete slide
 is included in the PDF.}
 }
 \description{
@@ -33,7 +33,9 @@ Requires a local installation of Chrome.
 \examples{
 \dontrun{
 # Build pdf from Rmd or html file
-xaringan_to_pdf("slides.Rmd")
-xaringan_to_pdf("slides.html")
+xaringan_to_pdf("slides_complex.html")
+xaringan_to_pdf(input = "slides_complex.html",
+                output_file = "slides_complex_partial.pdf",
+                include_partial_slides = TRUE)
 }
 }

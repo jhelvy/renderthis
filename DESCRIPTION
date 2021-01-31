@@ -1,7 +1,7 @@
 Package: xaringanBuilder
 Title: Functions For Building Xaringan Slides as PDFs, PNGs, and GIFs
 Version: 0.0.1.9000
-Authors@R: 
+Authors@R:
     c(person(given = "John",
              family = "Helveston",
              role = c("aut", "cre", "cph"),
@@ -30,6 +30,7 @@ Imports:
     xaringan
 Suggests:
     chromote,
-    pdftools
+    pdftools,
+    xaringanExtra
 Remotes:
     rstudio/chromote
