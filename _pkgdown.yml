@@ -1,5 +1,5 @@
 home:
-  title: Functions for building xaringan slides as pdfs, pngs, and gifs.
+  title: Functions For Building Xaringan Slides To Different Outputs.
 
 template:
  params:
@@ -24,9 +24,11 @@ navbar:
 
 reference:
 - title: "Build slides"
-  desc: "Functions for building xaringan slides as pdfs, pngs, and gifs."
+  desc: "Functions For Building Xaringan Slides To Different Outputs."
   contents:
+  - build_all
   - build_html
   - build_pdf
   - build_gif
+  - build_pptx
   - build_thumbnail

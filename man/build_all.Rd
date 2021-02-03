@@ -16,7 +16,7 @@ Build xaringan slides as multiple outputs, including html, pdf, gif, and thumbna
 }
 \examples{
 \dontrun{
-# Build html, pdf, gif, and thumbnail of first slide from Rmd file
-build_all("slides.Rmd")
+# Build all outputs from Rmd file
+build_all("slides.Rmd", include = c("html", "pdf", "gif", "pptx", "thumbnail"))
 }
 }

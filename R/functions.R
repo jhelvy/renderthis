@@ -17,8 +17,8 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Build html, pdf, gif, and thumbnail of first slide from Rmd file
-#' build_all("slides.Rmd")
+#' # Build all outputs from Rmd file
+#' build_all("slides.Rmd", include = c("html", "pdf", "gif", "pptx", "thumbnail"))
 #' }
 build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
     assert_path_ext(input, "rmd")

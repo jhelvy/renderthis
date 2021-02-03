@@ -1,6 +1,6 @@
 Package: xaringanBuilder
-Title: Functions For Building Xaringan Slides as PDFs, PNGs, and GIFs
-Version: 0.0.1.9000
+Title: Functions For Building Xaringan Slides To Different Outputs
+Version: 0.0.2.9000
 Authors@R:
     c(person(given = "John",
              family = "Helveston",
@@ -11,8 +11,11 @@ Authors@R:
              family = "Aden-Buie",
              role = "ctb",
              email = "garrick@adenbuie.com",
-             comment = c(ORCID = "0000-0002-7111-0077")))
-Description: Functions for building xaringan slides as pdfs, pngs, and gifs.
+             comment = c(ORCID = "0000-0002-7111-0077")),
+      person(given = "Bryan",
+             family = "Shalloway",
+             role = "ctb"))
+Description: Functions for building xaringan slides to different outputs, including html, pdf, gif, pptx, and a png "thumbnail" of the first slide.
 Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -22,16 +25,16 @@ Imports:
     cli,
     digest,
     fs,
+    jsonlite,
     magick,
     pagedown,
     progress,
-    jsonlite,
     rmarkdown,
     xaringan
 Suggests:
     chromote,
+    officer,
     pdftools,
-    xaringanExtra,
-    officer
+    xaringanExtra
 Remotes:
     rstudio/chromote

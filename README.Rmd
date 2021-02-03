@@ -24,8 +24,8 @@ Build xaringan slides into the following formats:
 - html
 - pdf
 - gif
-- png thumbnail of first slide
 - pptx
+- png "thumbnail" of first slide
 
 ## Installation
 
@@ -39,17 +39,26 @@ remotes::install_github("jhelvy/xaringanBuilder")
 library(xaringanBuilder)
 ```
 
+### All output types
+Build all output types from Rmd file - control outputs with `include` argument:
+```
+build_all("slides.Rmd", include = c("html", "pdf", "gif", "pptx", "thumbnail"))
+```
+
+### HTML
 Build html from Rmd file ([view example html slides](https://jhelvy.github.io/xaringanBuilder/inst/example/slides.html)):
 ```
 build_html("slides.Rmd")
 ```
 
+### PDF
 Build pdf from Rmd or html file ([view example pdf slides](https://jhelvy.github.io/xaringanBuilder/inst/example/slides.pdf)):
 ```
 build_pdf("slides.Rmd")
 build_pdf("slides.html")
 ```
 
+### GIF
 Build gif from Rmd, html, or pdf file:
 ```
 build_gif("slides.Rmd")
@@ -60,7 +69,16 @@ Example:
 
 <img src="man/figures/slides.gif" width=600>
 
-Build first slide thumbnail from Rmd or html file:
+### PPTX
+Build pptx from Rmd, html or pdf file ([view example pptx slides](https://jhelvy.github.io/xaringanBuilder/inst/example/slides.pptx)):
+```
+build_pptx("slides.Rmd")
+build_pptx("slides.html")
+build_pptx("slides.pdf")
+```
+
+### Thumbnail
+Build first slide png "thumbnail" from Rmd or html file:
 ```
 build_thumbnail("slides.Rmd")
 build_thumbnail("slides.html")
@@ -68,18 +86,6 @@ build_thumbnail("slides.html")
 Example:
 
 <img src="man/figures/slides.png" width=600>
-
-Build pptx from Rmd, html or pdf file:
-```
-build_pptx("slides.Rmd")
-build_pptx("slides.html")
-build_pptx("slides.pdf")
-```
-
-Build everything except for pptx (html, pdf, gif, and thumbnail of first slide) from Rmd file:
-```
-build_all("slides.Rmd", include = c("html", "pdf", "gif", "thumbnail"))
-```
 
 ## Author, Version, and License Information
 
