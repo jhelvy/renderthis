@@ -9,6 +9,7 @@ Build xaringan slides into the following formats:
   - pdf
   - gif
   - png thumbnail of first slide
+  - pptx
 
 ## Installation
 
@@ -50,8 +51,14 @@ Example:
 
 <img src="man/figures/slides.png" width=600>
 
-Build everything (html, pdf, gif, and thumbnail of first slide) from Rmd
-file:
+Build pptx from Rmd, html or pdf file:
+
+    build_pptx("slides.Rmd")
+    build_pptx("slides.html")
+    build_pptx("slides.pdf")
+
+Build everything except for pptx (html, pdf, gif, and thumbnail of first
+slide) from Rmd file:
 
     build_all("slides.Rmd", include = c("html", "pdf", "gif", "thumbnail"))
 
@@ -60,14 +67,14 @@ file:
   - Author: *John Paul Helveston*
     [www.jhelvy.com](http://www.jhelvy.com/)
   - Date First Written: *September 27, 2020*
-  - Most Recent Update: January 30 2021
+  - Most Recent Update: February 03 2021
   - License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
 ## Citation Information
 
-If you use this package for in a publication, I would greatly appreciate
-it if you cited it. You can get the citation information by typing
+If you use this package in a publication, I would greatly appreciate it
+if you cited it. You can get the citation information by typing
 `citation("xaringanBuilder")` into R:
 
 To cite xaringanBuilder in publications use:

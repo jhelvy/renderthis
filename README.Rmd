@@ -69,7 +69,7 @@ Example:
 
 <img src="man/figures/slides.png" width=600>
 
-Build pptx from Rmd, html or pdf file ([view example pdf slides](https://jhelvy.github.io/xaringanBuilder/inst/example/slides.pptx)):
+Build pptx from Rmd, html or pdf file:
 ```
 build_pptx("slides.Rmd")
 build_pptx("slides.html")
