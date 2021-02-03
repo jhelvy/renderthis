@@ -1,4 +1,4 @@
-# Build hierarchy is html, pdf / png, gif.
+# Build hierarchy is html, pdf / png, gif / pptx.
 # - build_pdf() creates the pdf from the html file, so if the input is
 #   a .Rmd file, it calls build_html() to create the html file, then builds
 #   the pdf. If the input is a html file, it just builds the pdf.
@@ -7,13 +7,18 @@
 #   html and pdf files, then builds the gif file. If the input is a html file,
 #   it calls build_pdf() to create the the pdf before building the gif file.
 #   If the input is the pdf, it just builds the gif from the pdf.
+# - build_pptx() creates the pptx from the pdf file, so if the input is
+#   a .Rmd file, it calls build_pdf() (which calls build_html()) to create the
+#   html and pdf files, then builds the pptx file. If the input is a html file,
+#   it calls build_pdf() to create the the pdf before building the pptx file.
+#   If the input is the pdf, it just builds the pptx from the pdf.
 # - build_thumbnail() creates the png from the html file, so if the input is
 #   a .Rmd file, it calls build_html() to create the html file, then builds
 #   the png. If the input is a html file, it just builds the png.
 
 #' Build xaringan slides as multiple outputs, including html, pdf, gif, and thumbnail of first slide.
 #' @param input Path to Rmd file of xaringan slides.
-#' @param include A vector of the different output types to build, including "html", "pdf", "gif", and "thumbnail".
+#' @param include A vector of the different output types to build, including "html", "pdf", "gif", "pptx", and "thumbnail".
 #' @export
 #' @examples
 #' \dontrun{
@@ -30,10 +35,11 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
     do_htm <- "html" %in% include
     do_pdf <- "pdf" %in% include
     do_gif <- "gif" %in% include
+    do_ppt <- "pptx" %in% include
     do_thm <- "thumbnail" %in% include
 
     # each step requires the format of the previous step
-    # html -> pdf -> gif
+    # html -> pdf -> gif / pptx
     #
     # currently calling a step out of order will create the intermediate steps
     # if at some point intermediate files are removed if not requested, the
@@ -42,6 +48,11 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
     if (do_gif && (!fs::file_exists(input_pdf) || do_htm)) {
         # to make a gif we need the PDF file
         # or if we update the HTML, we should also update the PDF for the gif
+        do_pdf <- TRUE
+    }
+    if (do_ppt && (!fs::file_exists(input_pdf) || do_htm)) {
+        # to make a pptx we need the PDF file
+        # or if we update the HTML, we should also update the PDF for the pptx
         do_pdf <- TRUE
     }
     if ((do_pdf || do_thm) && !fs::file_exists(input_html)) {
@@ -54,6 +65,7 @@ build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
     if (do_htm) build_html(input)
     if (do_pdf) build_pdf(input_html)
     if (do_gif) build_gif(input_pdf)
+    if (do_ppt) build_pptx(input_pdf)
     if (do_thm) build_thumbnail(input_html)
 
     invisible(input)

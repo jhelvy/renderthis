@@ -9,7 +9,7 @@ build_all(input, include = c("html", "pdf", "gif", "thumbnail"))
 \arguments{
 \item{input}{Path to Rmd file of xaringan slides.}
 
-\item{include}{A vector of the different output types to build, including "html", "pdf", "gif", and "thumbnail".}
+\item{include}{A vector of the different output types to build, including "html", "pdf", "gif", "pptx", and "thumbnail".}
 }
 \description{
 Build xaringan slides as multiple outputs, including html, pdf, gif, and thumbnail of first slide.
