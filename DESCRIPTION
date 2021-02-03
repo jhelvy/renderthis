@@ -31,6 +31,7 @@ Imports:
 Suggests:
     chromote,
     pdftools,
-    xaringanExtra
+    xaringanExtra,
+    officer
 Remotes:
     rstudio/chromote
