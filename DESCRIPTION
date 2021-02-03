@@ -37,4 +37,5 @@ Suggests:
     pdftools,
     xaringanExtra
 Remotes:
-    rstudio/chromote
+    rstudio/chromote,
+    gadenbuie/xaringanExtra
