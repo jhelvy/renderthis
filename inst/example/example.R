@@ -25,6 +25,11 @@ build_gif("slides.pdf")
 build_thumbnail("slides.Rmd")
 build_thumbnail("slides.html")
 
+# Build pptx from Rmd, html, or pdf file
+build_pptx("slides.Rmd")
+build_pptx("slides.html")
+build_pptx("slides.pdf")
+
 # Build html, pdf, gif, and thumbnail of first slide from Rmd file
 build_all("slides.Rmd")
 

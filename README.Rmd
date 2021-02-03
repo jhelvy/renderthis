@@ -25,6 +25,7 @@ Build xaringan slides into the following formats:
 - pdf
 - gif
 - png thumbnail of first slide
+- pptx
 
 ## Installation
 
@@ -68,7 +69,14 @@ Example:
 
 <img src="man/figures/slides.png" width=600>
 
-Build everything (html, pdf, gif, and thumbnail of first slide) from Rmd file:
+Build pptx from Rmd, html or pdf file ([view example pdf slides](https://jhelvy.github.io/xaringanBuilder/inst/example/slides.pptx)):
+```
+build_pptx("slides.Rmd")
+build_pptx("slides.html")
+build_pptx("slides.pdf")
+```
+
+Build everything except for pptx (html, pdf, gif, and thumbnail of first slide) from Rmd file:
 ```
 build_all("slides.Rmd", include = c("html", "pdf", "gif", "thumbnail"))
 ```
@@ -82,7 +90,7 @@ build_all("slides.Rmd", include = c("html", "pdf", "gif", "thumbnail"))
 
 ## Citation Information
 
-If you use this package for in a publication, I would greatly appreciate it if you cited it. You can get the citation information by typing `citation("xaringanBuilder")` into R:
+If you use this package in a publication, I would greatly appreciate it if you cited it. You can get the citation information by typing `citation("xaringanBuilder")` into R:
 
 ```{r}
 citation("xaringanBuilder")

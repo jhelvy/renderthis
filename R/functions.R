@@ -190,6 +190,62 @@ build_thumbnail <- function(input, output_file = NULL) {
         format = "png")
 }
 
+#' Build xaringan slides as pptx file.
+#' @param input Path to Rmd, html, or pdf file of xaringan slides.
+#' @param output_file Name of the output pptx file.
+#' @param density Resolution of the resulting pptx file.
+#' @export
+#' @examples
+#' \dontrun{
+#' # Build gif from Rmd, html, or pdf file
+#' build_pptx("slides.Rmd")
+#' build_pptx("slides.html")
+#' build_pptx("slides.pdf")
+#' }
+build_pptx <- function(input, output_file = NULL, density = "72x72") {
+    if (!requireNamespace("officer", quietly = TRUE)) {
+        stop("`officer` is required: install.packages('officer')")
+    }
+
+    assert_path_ext(input, c("rmd", "html", "pdf"))
+    input <- fs::path_abs(input)
+
+    if (test_path_ext(input, c("rmd", "html"))) {
+        build_pdf(input, output_file)
+        input <- fs::path_ext_set(input, "pdf")
+    }
+
+    if (is.null(output_file)) {
+        output_file <- fs::path_ext_set(input, "pptx")
+    } else if (test_path_ext(output_file, "pptx")) {
+        stop("`output_file` should be NULL or have .pptx extension")
+    }
+    cli::cli_process_start(
+        "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
+        on_exit = "done"
+    )
+    pdf <- magick::image_read(input, density = density)
+    pngs <- magick::image_convert(pdf, 'png')
+
+    doc <- officer::read_pptx()
+    for (i in 1:length(pngs)) {
+        png_path <- magick::image_write(
+            pngs[i], tempfile(fileext = ".png"))
+        doc <- officer::add_slide(
+            doc,
+            layout = "Blank",
+            master = "Office Theme"
+        )
+        doc <- officer::ph_with(
+            doc,
+            value = officer::external_img(png_path),
+            location = officer::ph_location_fullsize()
+        )
+    }
+
+    print(doc, output_file)
+}
+
 test_path_ext <- function(path, expected_ext) {
     tolower(fs::path_ext(path)) %in% expected_ext
 }
