@@ -1,33 +1,38 @@
-#' Print xaringan slides to PDF
+#' Print "simple" xaringan slides to PDF
 #'
-#' Prints xaringan slides to a PDF file, even complicated slides
-#' with panelsets or other html widgets or advanced features.
-#' Requires a local installation of Chrome.
+#' Prints "simple" xaringan slides - those without panelsets or other html
+#' widgets or advanced features, and also slides without partial slides.
 #'
 #' @param input Path to Rmd or html file of xaringan slides.
-#' @param output_file The name of the output file. If using NULL then
+#' @param output_file The name of the output file. If `NULL` (the default) then
 #' the output filename will be based on filename for the input file.
 #' If a filename is provided, a path to the output file can also be provided.
-#' @param delay Seconds of delay between advancing to and printing
-#'   a new slide.
-#' @param include_partial_slides Should partial (continuation) slides be
+build_pdf_simple <- function(input, output_file) {
+    cli::cli_process_start(
+        "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
+        on_exit = "done"
+    )
+    pagedown::chrome_print(
+        input  = input,
+        output = output_file)
+}
+
+#' Print "complex" xaringan slides to PDF
+#'
+#' Prints "complex" xaringan slides (e.g. slides with panelsets or other html
+#' widgets or advanced features) to a PDF file. Requires a local installation
+#' of Chrome.
+#'
+#' @param input Path to Rmd or html file of xaringan slides.
+#' @param output_file The name of the output file. If `NULL` (the default) then
+#' the output filename will be based on filename for the input file.
+#' If a filename is provided, a path to the output file can also be provided.
+#' @param partial_slides Should partial (continuation) slides be
 #' included in the output? If `FALSE`, the default, only the complete slide
 #' is included in the PDF.
-#' @export
-#' @examples
-#' \dontrun{
-#' # Build pdf from Rmd or html file
-#' xaringan_to_pdf("slides_complex.html")
-#' xaringan_to_pdf(input = "slides_complex.html",
-#'                 output_file = "slides_complex_partial.pdf",
-#'                 include_partial_slides = TRUE)
-#' }
-xaringan_to_pdf <- function(
-  input,
-  output_file = NULL,
-  delay = 1,
-  include_partial_slides = FALSE
-) {
+#' @param delay Seconds of delay between advancing to and printing
+#' a new slide.
+build_pdf_complex <- function(input, output_file, partial_slides, delay) {
   if (!requireNamespace("chromote", quietly = TRUE)) {
     stop("`chromote` is required: devtools::install_github('rstudio/chromote')")
   }
@@ -111,7 +116,7 @@ xaringan_to_pdf <- function(
     "let style = document.createElement('style')\n",
     "style.innerText = '@media print { ",
     ".remark-slide-container:not(.remark-visible){ display:none; }",
-    if (include_partial_slides) " .has-continuation { display: block }",
+    if (partial_slides) " .has-continuation { display: block }",
     "}'\n",
     "document.head.appendChild(style)"
   ))
@@ -146,7 +151,7 @@ xaringan_to_pdf <- function(
     idx_slide <- current_slide()
     pb$tick(step, tokens = list(slide = idx_slide, part = idx_part))
 
-    if (!isTRUE(include_partial_slides) && slide_is_continuation()) next
+    if (!isTRUE(partial_slides) && slide_is_continuation()) next
     Sys.sleep(delay)
 
     this_hash <- hash_current_slide()
