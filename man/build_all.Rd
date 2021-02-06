@@ -2,21 +2,44 @@
 % Please edit documentation in R/functions.R
 \name{build_all}
 \alias{build_all}
-\title{Build xaringan slides as multiple outputs, including html, pdf, gif, and thumbnail of first slide.}
+\title{Build xaringan slides to multiple outputs.}
 \usage{
-build_all(input, include = c("html", "pdf", "gif", "thumbnail"))
+build_all(
+  input,
+  include = c("html", "pdf", "gif", "pptx", "thumbnail"),
+  exclude = NULL
+)
 }
 \arguments{
 \item{input}{Path to Rmd file of xaringan slides.}
 
-\item{include}{A vector of the different output types to build, including "html", "pdf", "gif", "pptx", and "thumbnail".}
+\item{include}{A vector of the different output types to build. Options are
+`"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the
+first slide). Defaults to `c("html", "pdf", "gif", "pptx", "thumbnail")`.}
+
+\item{exclude}{A vector of the different output types to NOT build. Options
+are `"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of
+the first slide). Defaults to `NULL`, in which case all all output types
+are rendered.}
 }
 \description{
-Build xaringan slides as multiple outputs, including html, pdf, gif, and thumbnail of first slide.
+Build xaringan slides to multiple outputs. Options are `"html"`, `"pdf"`,
+`"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the first slide).
+Note: If you want to include "complex" slides (e.g. slides with panelsets
+or other html widgets or advanced features), or you want to include partial
+(continuation) slides, then use `build_pdf()` with `complex_slides = TRUE`
+and / or `partial_slides = TRUE` to build the pdf first, then use
+`build_all()`.
 }
 \examples{
 \dontrun{
-# Build all outputs from Rmd file
-build_all("slides.Rmd", include = c("html", "pdf", "gif", "pptx", "thumbnail"))
+# Builds every output by default
+build_all("slides.Rmd")
+
+# Choose which output types to include
+build_all("slides.Rmd", include = c("html", "pdf", "gif"))
+
+# Choose which output types to exclude
+build_all("slides.Rmd", exclude = c("pptx", "thumbnail"))
 }
 }

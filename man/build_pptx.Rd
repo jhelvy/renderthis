@@ -14,7 +14,11 @@ build_pptx(input, output_file = NULL, density = "72x72")
 \item{density}{Resolution of the resulting pptx file.}
 }
 \description{
-Build xaringan slides as pptx file.
+Build xaringan slides as pptx file. Note: If you want to include "complex"
+slides (e.g. slides with panelsets or other html widgets or advanced
+features), or you want to include partial (continuation) slides, then use
+`build_pdf()` with `complex_slides = TRUE` and / or `partial_slides = TRUE`
+to build the pdf first, then use build_gif() with the pdf as the input.
 }
 \examples{
 \dontrun{
