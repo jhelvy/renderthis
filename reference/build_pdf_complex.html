@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • xaringanBuilder</title>
+<title>Print "complex" xaringan slides to PDF — build_pdf_complex • xaringanBuilder</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,10 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Print "complex" xaringan slides to PDF — build_pdf_complex" />
+<meta property="og:description" content="Prints &quot;complex&quot; xaringan slides (e.g. slides with panelsets or other html
+widgets or advanced features) to a PDF file. Requires a local installation
+of Chrome." />
 
 
 
@@ -58,7 +61,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -110,41 +113,52 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      
+    <h1>Print "complex" xaringan slides to PDF</h1>
+    
+    <div class="hidden name"><code>build_pdf_complex.Rd</code></div>
     </div>
 
-    <div id="xaringanbuilder-002" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.2">
-<a href="#xaringanbuilder-002" class="anchor"></a>xaringanBuilder 0.0.2</h1>
-<ul>
-<li>Added new functions:
-<ul>
-<li>
-<code>xaringan_to_pdf()</code>: Builds to pdf for slides that include complex slides (e.g. with panelsets)</li>
-<li>
-<code><a href="../reference/build_pptx.html">build_pptx()</a></code>: Builds to pptx format.</li>
-</ul>
-</li>
-<li>Added new contributors: Garrick Aden-Buie and Bryan Shalloway.</li>
-<li>Revised examples for new functions, and reduced example sizes.</li>
-</ul>
-</div>
-    <div id="xaringanbuilder-001" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.1">
-<a href="#xaringanbuilder-001" class="anchor"></a>xaringanBuilder 0.0.1</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Prints "complex" xaringan slides (e.g. slides with panelsets or other html
+widgets or advanced features) to a PDF file. Requires a local installation
+of Chrome.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>build_pdf_complex</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output_file</span>, <span class='va'>partial_slides</span>, <span class='va'>delay</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>input</th>
+      <td><p>Path to Rmd or html file of xaringan slides.</p></td>
+    </tr>
+    <tr>
+      <th>output_file</th>
+      <td><p>The name of the output file. If `NULL` (the default) then
+the output filename will be based on filename for the input file.
+If a filename is provided, a path to the output file can also be provided.</p></td>
+    </tr>
+    <tr>
+      <th>partial_slides</th>
+      <td><p>Should partial (continuation) slides be
+included in the output? If `FALSE`, the default, only the complete slide
+is included in the PDF.</p></td>
+    </tr>
+    <tr>
+      <th>delay</th>
+      <td><p>Seconds of delay between advancing to and printing
+a new slide.</p></td>
+    </tr>
+    </table>
+
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 

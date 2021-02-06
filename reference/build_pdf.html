@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build xaringan slides as pdf file. — build_pdf • xaringanBuilder</title>
+<title>Print xaringan slides to PDF. — build_pdf • xaringanBuilder</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,13 @@
 
 
 
-<meta property="og:title" content="Build xaringan slides as pdf file. — build_pdf" />
-<meta property="og:description" content="Build xaringan slides as pdf file." />
+<meta property="og:title" content="Print xaringan slides to PDF. — build_pdf" />
+<meta property="og:description" content="Prints xaringan slides to a PDF file. For &quot;complex&quot; slides (e.g. slides
+with panelsets or other html widgets or advanced features), set
+`complex_slides = TRUE` (defaults to `FALSE`). To include partial
+(continuation) slides, set `partial_slides = TRUE` (defaults to `FALSE`).
+For either `complex_slides = TRUE` or `partial_slides = TRUE`, a local
+installation of Chrome is required." />
 
 
 
@@ -111,16 +116,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build xaringan slides as pdf file.</h1>
+    <h1>Print xaringan slides to PDF.</h1>
     
     <div class="hidden name"><code>build_pdf.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Build xaringan slides as pdf file.</p>
+    <p>Prints xaringan slides to a PDF file. For "complex" slides (e.g. slides
+with panelsets or other html widgets or advanced features), set
+`complex_slides = TRUE` (defaults to `FALSE`). To include partial
+(continuation) slides, set `partial_slides = TRUE` (defaults to `FALSE`).
+For either `complex_slides = TRUE` or `partial_slides = TRUE`, a local
+installation of Chrome is required.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>build_pdf</span><span class='op'>(</span><span class='va'>input</span>, output_file <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>build_pdf</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  output_file <span class='op'>=</span> <span class='cn'>NULL</span>,
+  complex_slides <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  partial_slides <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  delay <span class='op'>=</span> <span class='fl'>1</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -131,16 +147,58 @@
     </tr>
     <tr>
       <th>output_file</th>
-      <td><p>Name of the output pdf file.</p></td>
+      <td><p>The name of the output file. If `NULL` (the default) then
+the output filename will be based on filename for the input file.
+If a filename is provided, a path to the output file can also be provided.</p></td>
+    </tr>
+    <tr>
+      <th>complex_slides</th>
+      <td><p>For "complex" slides (e.g. slides with panelsets or
+other html widgets or advanced features), set `complex_slides = TRUE`.
+Defaults to `FALSE`. This will use the chromote package to iterate through
+the slides at a pace set by the `delay` argument. Requires a local
+installation of Chrome.</p></td>
+    </tr>
+    <tr>
+      <th>partial_slides</th>
+      <td><p>Should partial (continuation) slides be
+included in the output? If `FALSE`, the default, only the complete slide
+is included in the PDF.</p></td>
+    </tr>
+    <tr>
+      <th>delay</th>
+      <td><p>Seconds of delay between advancing to and printing
+a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
+TRUE`.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># Build pdf from Rmd or html file</span>
+<span class='co'># Build simple pdf from Rmd or html file</span>
 <span class='fu'>build_pdf</span><span class='op'>(</span><span class='st'>"slides.Rmd"</span><span class='op'>)</span>
 <span class='fu'>build_pdf</span><span class='op'>(</span><span class='st'>"slides.html"</span><span class='op'>)</span>
+
+<span class='co'># Build simple pdf from Rmd or html file and include</span>
+<span class='co'># partial (continuation) slides</span>
+<span class='fu'>build_pdf</span><span class='op'>(</span><span class='st'>"slides.Rmd"</span>, partial_slides <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'>build_pdf</span><span class='op'>(</span><span class='st'>"slides.html"</span>, partial_slides <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='co'># Build "complex" xaringan slides to pdf from Rmd or html file</span>
+<span class='fu'>build_pdf</span><span class='op'>(</span><span class='st'>"slides_complex.Rmd"</span>, complex_slides <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'>build_pdf</span><span class='op'>(</span><span class='st'>"slides_complex.html"</span>, complex_slides <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='co'># Build "complex" xaringan slides to pdf from Rmd or html file and include</span>
+<span class='co'># partial (continuation) slides</span>
+<span class='fu'>build_pdf</span><span class='op'>(</span>input <span class='op'>=</span> <span class='st'>"slides_complex.Rmd"</span>,
+          output_file <span class='op'>=</span> <span class='st'>"slides_complex_partial.pdf"</span>,
+          complex_slides <span class='op'>=</span> <span class='cn'>TRUE</span>,
+          partial_slides <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'>build_pdf</span><span class='op'>(</span>input <span class='op'>=</span> <span class='st'>"slides_complex.html"</span>,
+          output_file <span class='op'>=</span> <span class='st'>"slides_complex_partial.pdf"</span>,
+          complex_slides <span class='op'>=</span> <span class='cn'>TRUE</span>,
+          partial_slides <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>

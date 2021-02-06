@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build xaringan slides as multiple outputs, including html, pdf, gif, and thumbnail of first slide. — build_all • xaringanBuilder</title>
+<title>Build xaringan slides to multiple outputs. — build_all • xaringanBuilder</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,14 @@
 
 
 
-<meta property="og:title" content="Build xaringan slides as multiple outputs, including html, pdf, gif, and thumbnail of first slide. — build_all" />
-<meta property="og:description" content="Build xaringan slides as multiple outputs, including html, pdf, gif, and thumbnail of first slide." />
+<meta property="og:title" content="Build xaringan slides to multiple outputs. — build_all" />
+<meta property="og:description" content="Build xaringan slides to multiple outputs. Options are `&quot;html&quot;`, `&quot;pdf&quot;`,
+`&quot;gif&quot;`, `&quot;pptx&quot;`, and `&quot;thumbnail&quot;` (a png image of the first slide).
+Note: If you want to include &quot;complex&quot; slides (e.g. slides with panelsets
+or other html widgets or advanced features), or you want to include partial
+(continuation) slides, then use `build_pdf()` with `complex_slides = TRUE`
+and / or `partial_slides = TRUE` to build the pdf first, then use
+`build_all()`." />
 
 
 
@@ -111,16 +117,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build xaringan slides as multiple outputs, including html, pdf, gif, and thumbnail of first slide.</h1>
+    <h1>Build xaringan slides to multiple outputs.</h1>
     
     <div class="hidden name"><code>build_all.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Build xaringan slides as multiple outputs, including html, pdf, gif, and thumbnail of first slide.</p>
+    <p>Build xaringan slides to multiple outputs. Options are `"html"`, `"pdf"`,
+`"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the first slide).
+Note: If you want to include "complex" slides (e.g. slides with panelsets
+or other html widgets or advanced features), or you want to include partial
+(continuation) slides, then use `build_pdf()` with `complex_slides = TRUE`
+and / or `partial_slides = TRUE` to build the pdf first, then use
+`build_all()`.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>build_all</span><span class='op'>(</span><span class='va'>input</span>, include <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"html"</span>, <span class='st'>"pdf"</span>, <span class='st'>"gif"</span>, <span class='st'>"thumbnail"</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>build_all</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  include <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"html"</span>, <span class='st'>"pdf"</span>, <span class='st'>"gif"</span>, <span class='st'>"pptx"</span>, <span class='st'>"thumbnail"</span><span class='op'>)</span>,
+  exclude <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -131,15 +147,30 @@
     </tr>
     <tr>
       <th>include</th>
-      <td><p>A vector of the different output types to build, including "html", "pdf", "gif", "pptx", and "thumbnail".</p></td>
+      <td><p>A vector of the different output types to build. Options are
+`"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the
+first slide). Defaults to `c("html", "pdf", "gif", "pptx", "thumbnail")`.</p></td>
+    </tr>
+    <tr>
+      <th>exclude</th>
+      <td><p>A vector of the different output types to NOT build. Options
+are `"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of
+the first slide). Defaults to `NULL`, in which case all all output types
+are rendered.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># Build all outputs from Rmd file</span>
-<span class='fu'>build_all</span><span class='op'>(</span><span class='st'>"slides.Rmd"</span>, include <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"html"</span>, <span class='st'>"pdf"</span>, <span class='st'>"gif"</span>, <span class='st'>"pptx"</span>, <span class='st'>"thumbnail"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># Builds every output by default</span>
+<span class='fu'>build_all</span><span class='op'>(</span><span class='st'>"slides.Rmd"</span><span class='op'>)</span>
+
+<span class='co'># Choose which output types to include</span>
+<span class='fu'>build_all</span><span class='op'>(</span><span class='st'>"slides.Rmd"</span>, include <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"html"</span>, <span class='st'>"pdf"</span>, <span class='st'>"gif"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Choose which output types to exclude</span>
+<span class='fu'>build_all</span><span class='op'>(</span><span class='st'>"slides.Rmd"</span>, exclude <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pptx"</span>, <span class='st'>"thumbnail"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>
