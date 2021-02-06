@@ -16,27 +16,34 @@
 #   a .Rmd file, it calls build_html() to create the html file, then builds
 #   the png. If the input is a html file, it just builds the png.
 
-#' Build xaringan slides as multiple outputs, including html, pdf, gif, and thumbnail of first slide.
+#' Build xaringan slides to multiple outputs. Options are `"html"`, `"pdf"`,
+#' `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the first slide).
 #' @param input Path to Rmd file of xaringan slides.
-#' @param include A vector of the different output types to build, including "html", "pdf", "gif", "pptx", and "thumbnail".
+#' @param include A vector of the different output types to build. Options are
+#' `"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the
+#' first slide). Defaults to `c("html", "pdf", "gif", "pptx", "thumbnail")`.
+#' @param exclude A vector of the different output types to NOT build. Options
+#' are `"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of
+#' the first slide). Defaults to `NULL`, in which case all all output types
+#' are rendered.
 #' @export
 #' @examples
 #' \dontrun{
-#' # Build all outputs from Rmd file
+#' # Build all output types from Rmd file
 #' build_all("slides.Rmd", include = c("html", "pdf", "gif", "pptx", "thumbnail"))
 #' }
-build_all <- function(input, include = c("html", "pdf", "gif", "thumbnail")) {
+build_all <- function(input, include = c("html", "pdf", "gif", "pptx", "thumbnail"), exclude = NULL) {
     assert_path_ext(input, "rmd")
     input <- fs::path_abs(input)
     input_html <- fs::path_ext_set(input, "html")
     input_pdf <- fs::path_ext_set(input, "pdf")
 
     include <- match.arg(include, several.ok = TRUE)
-    do_htm <- "html" %in% include
-    do_pdf <- "pdf" %in% include
-    do_gif <- "gif" %in% include
-    do_ppt <- "pptx" %in% include
-    do_thm <- "thumbnail" %in% include
+    do_htm <- ("html" %in% include) && (! "html" %in% exclude)
+    do_pdf <- ("pdf" %in% include) && (! "pdf" %in% exclude)
+    do_gif <- ("gif" %in% include) && (! "gif" %in% exclude)
+    do_ppt <- ("pptx" %in% include) && (! "pptx" %in% exclude)
+    do_thm <- ("thumbnail" %in% include) && (! "thumbnail" %in% exclude)
 
     # each step requires the format of the previous step
     # html -> pdf -> gif / pptx
