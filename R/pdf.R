@@ -121,6 +121,11 @@ build_pdf_complex <- function(input, output_file, partial_slides, delay) {
     "document.head.appendChild(style)"
   ))
 
+  cli::cli_process_start(
+    "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
+    on_exit = "done"
+  )
+
   pb <- progress::progress_bar$new(
     format = "Slide :slide (:part) [:bar] Eta: :eta",
     total = expected_slides
