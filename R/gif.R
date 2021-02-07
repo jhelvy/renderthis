@@ -36,7 +36,7 @@ build_gif <- function(
 
     if (test_path_ext(input, c("rmd", "html"))) {
         build_pdf(
-            input = input_html,
+            input = input,
             complex_slides = complex_slides,
             partial_slides = partial_slides,
             delay = delay)

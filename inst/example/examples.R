@@ -2,9 +2,6 @@
 # remotes::install_github('jhelvy/xaringanBuilder')
 library(xaringanBuilder)
 
-# Set directory to example folder:
-setwd(here::here("inst", "example"))
-
 # Build All Output Types --------------
 
 # Use `build_all()` to build all output types from a Rmd file:
