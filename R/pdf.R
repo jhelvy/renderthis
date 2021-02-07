@@ -85,10 +85,7 @@ build_pdf <- function(
 #' the output filename will be based on filename for the input file.
 #' If a filename is provided, a path to the output file can also be provided.
 build_pdf_simple <- function(input, output_file) {
-    cli::cli_process_start(
-        "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
-        on_exit = "done"
-    )
+    print_build_status(input, output_file)
     pagedown::chrome_print(
         input  = input,
         output = output_file)
@@ -202,10 +199,7 @@ build_pdf_complex <- function(input, output_file, partial_slides, delay) {
     "document.head.appendChild(style)"
   ))
 
-  cli::cli_process_start(
-    "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
-    on_exit = "done"
-  )
+  print_build_status(input, output_file)
 
   pb <- progress::progress_bar$new(
     format = "Slide :slide (:part) [:bar] Eta: :eta",

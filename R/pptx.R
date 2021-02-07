@@ -34,10 +34,9 @@ build_pptx <- function(input, output_file = NULL, density = "72x72") {
     } else if (test_path_ext(output_file, "pptx")) {
         stop("`output_file` should be NULL or have .pptx extension")
     }
-    cli::cli_process_start(
-        "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
-        on_exit = "done"
-    )
+
+    print_build_status(input, output_file)
+
     pdf <- magick::image_read(input, density = density)
     pngs <- magick::image_convert(pdf, 'png')
 
