@@ -15,3 +15,9 @@ assert_path_ext <- function(path, expected_ext, arg = "input") {
         stop("`", arg, "` must have extension: ", expected_ext, call. = FALSE)
     }
 }
+
+pdf_to_pngs <- function(input, density) {
+    pdf <- magick::image_read(input, density = density)
+    pngs <- magick::image_convert(pdf, 'png')
+    return(pngs)
+}

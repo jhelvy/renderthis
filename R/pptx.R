@@ -37,8 +37,7 @@ build_pptx <- function(input, output_file = NULL, density = "72x72") {
 
     print_build_status(input, output_file)
 
-    pdf <- magick::image_read(input, density = density)
-    pngs <- magick::image_convert(pdf, 'png')
+    pngs <- pdf_to_pngs(input, density)
 
     doc <- officer::read_pptx()
     for (i in 1:length(pngs)) {

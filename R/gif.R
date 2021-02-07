@@ -34,8 +34,7 @@ build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
 
     print_build_status(input, output_file)
 
-    pdf <- magick::image_read(input, density = density)
-    pngs <- magick::image_convert(pdf, 'png')
+    pngs <- pdf_to_pngs(input, density)
     pngs_joined <- magick::image_join(pngs)
     pngs_animated <- magick::image_animate(pngs_joined, fps = fps)
     magick::image_write(pngs_animated, output_file)
