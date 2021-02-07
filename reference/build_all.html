@@ -41,12 +41,7 @@
 
 <meta property="og:title" content="Build xaringan slides to multiple outputs. — build_all" />
 <meta property="og:description" content="Build xaringan slides to multiple outputs. Options are `&quot;html&quot;`, `&quot;pdf&quot;`,
-`&quot;gif&quot;`, `&quot;pptx&quot;`, and `&quot;thumbnail&quot;` (a png image of the first slide).
-Note: If you want to include &quot;complex&quot; slides (e.g. slides with panelsets
-or other html widgets or advanced features), or you want to include partial
-(continuation) slides, then use `build_pdf()` with `complex_slides = TRUE`
-and / or `partial_slides = TRUE` to build the pdf first, then use
-`build_all()`." />
+`&quot;gif&quot;`, `&quot;pptx&quot;`, and `&quot;thumbnail&quot;` (a png image of the first slide)." />
 
 
 
@@ -124,18 +119,16 @@ and / or `partial_slides = TRUE` to build the pdf first, then use
 
     <div class="ref-description">
     <p>Build xaringan slides to multiple outputs. Options are `"html"`, `"pdf"`,
-`"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the first slide).
-Note: If you want to include "complex" slides (e.g. slides with panelsets
-or other html widgets or advanced features), or you want to include partial
-(continuation) slides, then use `build_pdf()` with `complex_slides = TRUE`
-and / or `partial_slides = TRUE` to build the pdf first, then use
-`build_all()`.</p>
+`"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the first slide).</p>
     </div>
 
     <pre class="usage"><span class='fu'>build_all</span><span class='op'>(</span>
   <span class='va'>input</span>,
   include <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"html"</span>, <span class='st'>"pdf"</span>, <span class='st'>"gif"</span>, <span class='st'>"pptx"</span>, <span class='st'>"thumbnail"</span><span class='op'>)</span>,
-  exclude <span class='op'>=</span> <span class='cn'>NULL</span>
+  exclude <span class='op'>=</span> <span class='cn'>NULL</span>,
+  complex_slides <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  partial_slides <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  delay <span class='op'>=</span> <span class='fl'>1</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -157,6 +150,26 @@ first slide). Defaults to `c("html", "pdf", "gif", "pptx", "thumbnail")`.</p></t
 are `"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of
 the first slide). Defaults to `NULL`, in which case all all output types
 are rendered.</p></td>
+    </tr>
+    <tr>
+      <th>complex_slides</th>
+      <td><p>For "complex" slides (e.g. slides with panelsets or
+other html widgets or advanced features), set `complex_slides = TRUE`.
+Defaults to `FALSE`. This will use the chromote package to iterate through
+the slides at a pace set by the `delay` argument. Requires a local
+installation of Chrome.</p></td>
+    </tr>
+    <tr>
+      <th>partial_slides</th>
+      <td><p>Should partial (continuation) slides be
+included in the output? If `FALSE`, the default, only the complete slide
+is included in the PDF.</p></td>
+    </tr>
+    <tr>
+      <th>delay</th>
+      <td><p>Seconds of delay between advancing to and printing
+a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
+TRUE`.</p></td>
     </tr>
     </table>
 
