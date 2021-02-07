@@ -1,10 +1,4 @@
 #' Build xaringan slides as pptx file.
-#'
-#' Build xaringan slides as pptx file. Note: If you want to include "complex"
-#' slides (e.g. slides with panelsets or other html widgets or advanced
-#' features), or you want to include partial (continuation) slides, then use
-#' `build_pdf()` with `complex_slides = TRUE` and / or `partial_slides = TRUE`
-#' to build the pdf first, then use build_gif() with the pdf as the input.
 #' @param input Path to Rmd, html, or pdf file of xaringan slides.
 #' @param output_file Name of the output pptx file.
 #' @param density Resolution of the resulting pptx file.

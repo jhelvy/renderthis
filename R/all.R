@@ -20,11 +20,6 @@
 #'
 #' Build xaringan slides to multiple outputs. Options are `"html"`, `"pdf"`,
 #' `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the first slide).
-#' Note: If you want to include "complex" slides (e.g. slides with panelsets
-#' or other html widgets or advanced features), or you want to include partial
-#' (continuation) slides, then use `build_pdf()` with `complex_slides = TRUE`
-#' and / or `partial_slides = TRUE` to build the pdf first, then use
-#' `build_all()`.
 #' @param input Path to Rmd file of xaringan slides.
 #' @param include A vector of the different output types to build. Options are
 #' `"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the

@@ -1,11 +1,4 @@
-#' Print xaringan slides to PDF.
-#'
-#' Prints xaringan slides to a PDF file. For "complex" slides (e.g. slides
-#' with panelsets or other html widgets or advanced features), set
-#' `complex_slides = TRUE` (defaults to `FALSE`). To include partial
-#' (continuation) slides, set `partial_slides = TRUE` (defaults to `FALSE`).
-#' For either `complex_slides = TRUE` or `partial_slides = TRUE`, a local
-#' installation of Chrome is required.
+#' Prints xaringan slides to a PDF file.
 #' @param input Path to Rmd or html file of xaringan slides.
 #' @param output_file The name of the output file. If `NULL` (the default) then
 #' the output filename will be based on filename for the input file.

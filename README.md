@@ -121,7 +121,7 @@ well as the [chromote](https://github.com/rstudio/chromote) package.
   - Author: *John Paul Helveston*
     [www.jhelvy.com](http://www.jhelvy.com/)
   - Date First Written: *September 27, 2020*
-  - Most Recent Update: February 06 2021
+  - Most Recent Update: February 07 2021
   - License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
