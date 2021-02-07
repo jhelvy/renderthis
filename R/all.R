@@ -33,6 +33,17 @@
 #' are `"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of
 #' the first slide). Defaults to `NULL`, in which case all all output types
 #' are rendered.
+#' @param complex_slides For "complex" slides (e.g. slides with panelsets or
+#' other html widgets or advanced features), set `complex_slides = TRUE`.
+#' Defaults to `FALSE`. This will use the {chromote} package to iterate through
+#' the slides at a pace set by the `delay` argument. Requires a local
+#' installation of Chrome.
+#' @param partial_slides Should partial (continuation) slides be
+#' included in the output? If `FALSE`, the default, only the complete slide
+#' is included in the PDF.
+#' @param delay Seconds of delay between advancing to and printing
+#' a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
+#' TRUE`.
 #' @export
 #' @examples
 #' \dontrun{
@@ -45,7 +56,14 @@
 #' # Choose which output types to exclude
 #' build_all("slides.Rmd", exclude = c("pptx", "thumbnail"))
 #' }
-build_all <- function(input, include = c("html", "pdf", "gif", "pptx", "thumbnail"), exclude = NULL) {
+build_all <- function(
+    input,
+    include = c("html", "pdf", "gif", "pptx", "thumbnail"),
+    exclude = NULL,
+    complex_slides = FALSE,
+    partial_slides = FALSE,
+    delay = 1
+    ) {
     assert_path_ext(input, "rmd")
     input <- fs::path_abs(input)
     input_html <- fs::path_ext_set(input, "html")
@@ -83,7 +101,13 @@ build_all <- function(input, include = c("html", "pdf", "gif", "pptx", "thumbnai
     # Do each step in order to ensure updates propagate
     # (or we use the current version of the required build step)
     if (do_htm) build_html(input)
-    if (do_pdf) build_pdf(input_html)
+    if (do_pdf) {
+        build_pdf(
+            input = input_html,
+            complex_slides = complex_slides,
+            partial_slides = partial_slides,
+            delay = delay)
+    }
     if (do_gif) build_gif(input_pdf)
     if (do_ppt) build_pptx(input_pdf)
     if (do_thm) build_thumbnail(input_html)
