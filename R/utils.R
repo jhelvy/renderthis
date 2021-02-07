@@ -21,3 +21,12 @@ pdf_to_pngs <- function(input, density) {
     pngs <- magick::image_convert(pdf, 'png')
     return(pngs)
 }
+
+check_output_file <- function(input, output_file, ext) {
+    if (is.null(output_file)) {
+        return(fs::path_ext_set(input, ext))
+    } else if (! test_path_ext(output_file, ext)) {
+        stop(paste0("`output_file` should be NULL or have ", ext, " extension")
+    }
+    return(output_file)
+}

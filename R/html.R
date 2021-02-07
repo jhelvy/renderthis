@@ -14,6 +14,8 @@ build_html <- function(input, output_file = NULL) {
     input <- fs::path_abs(input)
     input_file_html <- fs::path_file(fs::path_ext_set(input, "html"))
 
+    output_file <- check_output_file(input, output_file, "html")
+
     print_build_status(input_file_html, output_file)
 
     rmarkdown::render(

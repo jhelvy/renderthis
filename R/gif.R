@@ -26,11 +26,7 @@ build_gif <- function(input, output_file = NULL, density = "72x72", fps = 1) {
         input <- fs::path_ext_set(input, "pdf")
     }
 
-    if (is.null(output_file)) {
-        output_file <- fs::path_ext_set(input, "gif")
-    } else if (test_path_ext(output_file, "gif")) {
-        stop("`output_file` should be NULL or have .gif extension")
-    }
+    output_file <- check_output_file(input, output_file, "gif")
 
     print_build_status(input, output_file)
 

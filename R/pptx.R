@@ -29,11 +29,7 @@ build_pptx <- function(input, output_file = NULL, density = "72x72") {
         input <- fs::path_ext_set(input, "pdf")
     }
 
-    if (is.null(output_file)) {
-        output_file <- fs::path_ext_set(input, "pptx")
-    } else if (test_path_ext(output_file, "pptx")) {
-        stop("`output_file` should be NULL or have .pptx extension")
-    }
+    output_file <- check_output_file(input, output_file, "pptx")
 
     print_build_status(input, output_file)
 

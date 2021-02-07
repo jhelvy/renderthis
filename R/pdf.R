@@ -62,11 +62,8 @@ build_pdf <- function(
         build_html(input, output_file)
         input <- fs::path_ext_set(input, "html")
     }
-    if (is.null(output_file)) {
-        output_file <- fs::path_ext_set(input, "pdf")
-    } else if (!test_path_ext(output_file, "pdf")) {
-        stop("output_file should be NULL or have .pdf extension")
-    }
+
+    output_file <- check_output_file(input, output_file, "pdf")
 
     if (complex_slides | partial_slides) {
         build_pdf_complex(input, output_file, partial_slides, delay)
