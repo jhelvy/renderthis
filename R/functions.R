@@ -215,6 +215,10 @@ build_pdf_simple <- function(input, output_file) {
         output = output_file)
 }
 
+# build_pdf_complex() was previously xaringan_to_pdf(), added by gadenbuie
+# in v0.0.2. He also posted it on his blog here:
+# https://www.garrickadenbuie.com/blog/print-xaringan-chromote/
+
 #' Print "complex" xaringan slides to PDF
 #'
 #' Prints "complex" xaringan slides (e.g. slides with panelsets or other html

@@ -3,49 +3,57 @@
 
 ## xaringanBuilder <img src="man/figures/hex_sticker.png" align="right" width="200"/>
 
-Build xaringan slides into the following formats:
+Build xaringan slides to multiple output formats:
 
--   html
--   pdf
--   gif
--   pptx
--   png “thumbnail” of first slide
+  - html
+  - pdf
+  - gif
+  - pptx
+  - png “thumbnail” of first slide
 
 ## Installation
 
-Install from github:
+You can install the current version of xaringanBuilder from GitHub:
 
+    # install.packages("remotes")
     remotes::install_github("jhelvy/xaringanBuilder")
 
 ## Usage
 
     library(xaringanBuilder)
 
-### All output types
+The xaringan Rmd files used in all examples below can be found
+[here](https://github.com/jhelvy/xaringanBuilder/tree/master/inst/example)
 
-Build all output types from Rmd file - control outputs with `include`
-argument:
+### Build All Output Types
 
-    build_all("slides.Rmd", include = c("html", "pdf", "gif", "pptx", "thumbnail"))
+Use `build_all()` to build all output types from a Rmd file:
 
-### HTML
+    build_all("slides.Rmd") # Builds every output by default
 
-Build html from Rmd file ([view example html
-slides](https://jhelvy.github.io/xaringanBuilder/inst/example/slides.html)):
+Use the `include` or `exclude` arguments to control which output types
+to include or exclude:
+
+    # Both of these build html, pdf, and gif outputs
+    build_all("slides.Rmd", include = c("html", "pdf", "gif"))
+    build_all("slides.Rmd", exclude = c("pptx", "thumbnail"))
+
+### Build HTML
+
+Build an html file from a Rmd file:
 
     build_html("slides.Rmd")
 
-### PDF
+### Build PDF
 
-Build pdf from Rmd or html file ([view example pdf
-slides](https://jhelvy.github.io/xaringanBuilder/inst/example/slides.pdf)):
+Build a pdf file from a Rmd or html file:
 
     build_pdf("slides.Rmd")
     build_pdf("slides.html")
 
-### GIF
+### Build GIF
 
-Build gif from Rmd, html, or pdf file:
+Build a gif file from a Rmd, html, or pdf file:
 
     build_gif("slides.Rmd")
     build_gif("slides.html")
@@ -53,35 +61,68 @@ Build gif from Rmd, html, or pdf file:
 
 Example:
 
-<img src="man/figures/slides.gif" width=600>
+<img src="man/figures/slides.gif" width=500>
 
-### PPTX
+### Build PPTX
 
-Build pptx from Rmd, html or pdf file ([view example pptx
-slides](https://jhelvy.github.io/xaringanBuilder/inst/example/slides.pptx)):
+Build a pptx file from a Rmd, html or pdf file (pptx contains slides of
+png images of each rendered xaringan slide):
 
     build_pptx("slides.Rmd")
     build_pptx("slides.html")
     build_pptx("slides.pdf")
 
-### Thumbnail
+### Build Thumbnail
 
-Build first slide png “thumbnail” from Rmd or html file:
+Build a “thumbnail” png image of the first slide from a Rmd or html
+file:
 
     build_thumbnail("slides.Rmd")
     build_thumbnail("slides.html")
 
 Example:
 
-<img src="man/figures/slides.png" width=600>
+<img src="man/figures/slides.png" width=500>
+
+## “Complex” slides
+
+“Complex” slides are slides that contain
+[panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) or
+other html widgets / advanced features that might not render well as a
+pdf. To render these, set `complex_slides = TRUE` in `build_pdf()`,
+`build_gif()`, `build_pptx()`, or `build_all()`.
+
+For example:
+
+    build_pdf("slides_complex.Rmd", complex_slides = TRUE)
+    build_pdf("slides_complex.html", complex_slides = TRUE)
+
+**Note**: This option requires a local installation of Google Chrome as
+well as the [chromote](https://github.com/rstudio/chromote) package.
+
+## Partial / incremental slides
+
+For pdf, gif, and pptx output types, if you want to build a new slide
+for each increment on [incremental
+slides](https://slides.yihui.org/xaringan/incremental.html#1), set
+`partial_slides = TRUE` in `build_pdf()`, `build_gif()`, `build_pptx()`,
+or `build_all()`.
+
+For example:
+
+    build_pdf("slides.Rmd", partial_slides = TRUE)
+    build_pdf("slides.html", partial_slides = TRUE)
+
+**Note**: This option requires a local installation of Google Chrome as
+well as the [chromote](https://github.com/rstudio/chromote) package.
 
 ## Author, Version, and License Information
 
--   Author: *John Paul Helveston*
+  - Author: *John Paul Helveston*
     [www.jhelvy.com](http://www.jhelvy.com/)
--   Date First Written: *September 27, 2020*
--   Most Recent Update: February 03 2021
--   License:
+  - Date First Written: *September 27, 2020*
+  - Most Recent Update: February 06 2021
+  - License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
 ## Citation Information

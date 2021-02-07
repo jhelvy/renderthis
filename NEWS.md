@@ -1,3 +1,7 @@
+# xaringanBuilder 0.0.3
+
+* Integrated the functionality of the `xaringan_to_pdf()` function into the `build_pdf()` function.
+
 # xaringanBuilder 0.0.2
 
 * Added new functions: 
