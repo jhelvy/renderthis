@@ -10,14 +10,11 @@
 #' build_html("slides.Rmd")
 #' }
 build_html <- function(input, output_file = NULL) {
-    assert_path_ext(input, "rmd")
-    input <- fs::path_abs(input)
-    input_file_html <- fs::path_file(fs::path_ext_set(input, "html"))
-
+    # Check input and output files have correct extensions
+    assert_path_ext(input, "rmd", arg = "input")
     output_file <- check_output_file(input, output_file, "html")
-
-    print_build_status(input_file_html, output_file)
-
+    input <- fs::path_abs(input)
+    print_build_status(input, output_file)
     rmarkdown::render(
         input = input,
         output_file = output_file,

@@ -48,15 +48,18 @@ build_pdf <- function(
   partial_slides = FALSE,
   delay = 1
 ) {
-    assert_path_ext(input, c("rmd", "html"))
+    # Check input and output files have correct extensions
+    assert_path_ext(input, c("rmd", "html"), arg = "input")
+    output_file <- check_output_file(input, output_file, "pdf")
     input <- fs::path_abs(input)
 
     if (test_path_ext(input, "rmd")) {
-        build_html(input, output_file)
+        build_html(
+          input = input,
+          output_file = fs::path_ext_set(output_file, "html")
+        )
         input <- fs::path_ext_set(input, "html")
     }
-
-    output_file <- check_output_file(input, output_file, "pdf")
 
     if (complex_slides | partial_slides) {
         build_pdf_complex(input, output_file, partial_slides, delay)

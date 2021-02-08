@@ -9,7 +9,7 @@ test_path_ext <- function(path, expected_ext) {
     tolower(fs::path_ext(path)) %in% expected_ext
 }
 
-assert_path_ext <- function(path, expected_ext, arg = "input") {
+assert_path_ext <- function(path, expected_ext, arg) {
     if (!test_path_ext(path, expected_ext)) {
         expected_ext <- paste0(".", expected_ext, collapse = ", ")
         stop("`", arg, "` must have extension: ", expected_ext, call. = FALSE)
@@ -25,10 +25,7 @@ pdf_to_pngs <- function(input, density) {
 check_output_file <- function(input, output_file, ext) {
     if (is.null(output_file)) {
         return(fs::path_ext_set(input, ext))
-    } else if (! test_path_ext(output_file, ext)) {
-        stop(paste0(
-            "`output_file` should be NULL or have ", ext, " extension"
-        ))
     }
+    assert_path_ext(output_file, ext, arg = "output_file")
     return(output_file)
 }

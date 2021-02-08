@@ -31,19 +31,20 @@ build_gif <- function(
     partial_slides = FALSE,
     delay = 1
     ) {
-    assert_path_ext(input, c("rmd", "html", "pdf"))
+    # Check input and output files have correct extensions
+    assert_path_ext(input, c("rmd", "html", "pdf"), arg = "input")
+    output_file <- check_output_file(input, output_file, "gif")
     input <- fs::path_abs(input)
 
     if (test_path_ext(input, c("rmd", "html"))) {
         build_pdf(
             input = input,
+            output_file = fs::path_ext_set(output_file, "pdf"),
             complex_slides = complex_slides,
             partial_slides = partial_slides,
             delay = delay)
         input <- fs::path_ext_set(input, "pdf")
     }
-
-    output_file <- check_output_file(input, output_file, "gif")
 
     print_build_status(input, output_file)
 

@@ -41,10 +41,10 @@ build_thumbnail("slides.html")
 # these, set `complex_slides = TRUE` in `build_pdf()`, `build_gif()`,
 # `build_pptx()`, or `build_all()`. **Note**: This option requires a local
 # installation of Google Chrome as well as the chromote package.
-build_pdf(input = "slides.Rmd",
+build_pdf(input = "slides_complex.Rmd",
           output_file = "slides_complex.pdf",
           complex_slides = TRUE)
-build_pdf(input = "slides.html",
+build_pdf(input = "slides_complex.html",
           output_file = "slides_complex.pdf",
           complex_slides = TRUE)
 
