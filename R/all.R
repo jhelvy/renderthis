@@ -1,19 +1,3 @@
-# Build hierarchy:
-#
-# Rmd
-#  |
-#  |--> social (png)
-#  |
-#  |--> html
-#        |
-#        |--> thumbnail (png)
-#        |
-#        |--> pdf
-#              |
-#              |--> gif
-#              |
-#              |--> pptx
-
 #' Build xaringan slides to multiple outputs.
 #'
 #' Build xaringan slides to multiple outputs. Options are `"html"`, `"pdf"`,
@@ -51,7 +35,7 @@
 #' }
 build_all <- function(
     input,
-    include = c("html", "pdf", "gif", "pptx", "thumbnail"),
+    include = c("html", "pdf", "gif", "pptx", "thumbnail", "social"),
     exclude = NULL,
     complex_slides = FALSE,
     partial_slides = FALSE,
@@ -68,9 +52,23 @@ build_all <- function(
     do_gif <- ("gif" %in% include) && (! "gif" %in% exclude)
     do_ppt <- ("pptx" %in% include) && (! "pptx" %in% exclude)
     do_thm <- ("thumbnail" %in% include) && (! "thumbnail" %in% exclude)
+    do_soc <- ("social" %in% include) && (! "social" %in% exclude)
 
-    # each step requires the format of the previous step
-    # html -> pdf -> gif / pptx
+    # Build hierarchy:
+    #
+    # Rmd
+    #  |
+    #  |--> social (png)
+    #  |
+    #  |--> html
+    #        |
+    #        |--> thumbnail (png)
+    #        |
+    #        |--> pdf
+    #              |
+    #              |--> gif
+    #              |
+    #              |--> pptx
     #
     # currently calling a step out of order will create the intermediate steps
     # if at some point intermediate files are removed if not requested, the
@@ -93,7 +91,9 @@ build_all <- function(
 
     # Do each step in order to ensure updates propagate
     # (or we use the current version of the required build step)
+    if (do_soc) build_html(input)
     if (do_htm) build_html(input)
+    if (do_thm) build_thumbnail(input_html)
     if (do_pdf) {
         build_pdf(
             input = input_html,
@@ -103,7 +103,6 @@ build_all <- function(
     }
     if (do_gif) build_gif(input_pdf)
     if (do_ppt) build_pptx(input_pdf)
-    if (do_thm) build_thumbnail(input_html)
 
     invisible(input)
 }

@@ -6,7 +6,7 @@
 \usage{
 build_all(
   input,
-  include = c("html", "pdf", "gif", "pptx", "thumbnail"),
+  include = c("html", "pdf", "gif", "pptx", "thumbnail", "social"),
   exclude = NULL,
   complex_slides = FALSE,
   partial_slides = FALSE,

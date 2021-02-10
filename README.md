@@ -27,19 +27,6 @@ You can install the current version of xaringanBuilder from GitHub:
 The xaringan Rmd files used in all examples below can be found
 [here](https://github.com/jhelvy/xaringanBuilder/tree/master/inst/example)
 
-### Build All Output Types
-
-Use `build_all()` to build all output types from a Rmd file:
-
-    build_all("slides.Rmd") # Builds every output by default
-
-Use the `include` or `exclude` arguments to control which output types
-to include or exclude:
-
-    # Both of these build html, pdf, and gif outputs
-    build_all("slides.Rmd", include = c("html", "pdf", "gif"))
-    build_all("slides.Rmd", exclude = c("pptx", "thumbnail"))
-
 ### Build HTML
 
 Build an html file from a Rmd file:
@@ -96,6 +83,19 @@ sharing on social media (e.g. Twitter).
 Example:
 
 <img src="man/figures/slides_social.png" width=500>
+
+### Build All Output Types
+
+Use `build_all()` to build all output types from a Rmd file:
+
+    build_all("slides.Rmd") # Builds every output by default
+
+Use the `include` or `exclude` arguments to control which output types
+to include or exclude:
+
+    # Both of these build html, pdf, and gif outputs
+    build_all("slides.Rmd", include = c("html", "pdf", "gif"))
+    build_all("slides.Rmd", exclude = c("pptx", "thumbnail", "social"))
 
 ## “Complex” slides
 
