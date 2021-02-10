@@ -5,7 +5,7 @@ citEntry(
   title    = "xaringanBuilder: Functions for building xaringan slides to different outputs.",
   author   = "John Paul Helveston",
   year     = "2021",
-  note     = "R package version 0.0.3",
+  note     = "R package version 0.0.4",
   url      = "https://jhelvy.github.io/xaringanBuilder/",
   textVersion = "John Paul Helveston (2021). xaringanBuilder: Functions for building xaringan slides to different outputs."
 )

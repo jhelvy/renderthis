@@ -23,7 +23,10 @@ build_social <- function(input, output_file = NULL) {
     # Check input and output files have correct extensions
     assert_path_ext(input, "rmd", arg = "input")
     output_file <- check_output_file(input, output_file, "png")
+
+    # Create full file paths from root
     input <- fs::path_abs(input)
+    output_file <- fs::path_abs(output_file)
 
     # Append "_social.png" to output_file name
     output_file <- fs::path_ext_set(
@@ -33,6 +36,7 @@ build_social <- function(input, output_file = NULL) {
         "png"
     )
 
+    # Build
     print_build_status(input, output_file)
 
     webshot2::rmdshot(

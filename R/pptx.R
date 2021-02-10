@@ -35,8 +35,12 @@ build_pptx <- function(
     # Check input and output files have correct extensions
     assert_path_ext(input, c("rmd", "html", "pdf"), arg = "input")
     output_file <- check_output_file(input, output_file, "pptx")
-    input <- fs::path_abs(input)
 
+    # Create full file paths from root
+    input <- fs::path_abs(input)
+    output_file <- fs::path_abs(output_file)
+
+    # Build
     if (test_path_ext(input, c("rmd", "html"))) {
         build_pdf(
             input = input,

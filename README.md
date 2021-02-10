@@ -76,8 +76,8 @@ png images of each rendered xaringan slide):
 
 ### Build Thumbnail
 
-Build a “thumbnail” png image of the first slide from a Rmd or html
-file:
+Build a “thumbnail” png image of the first slide from a Rmd or html file
+(useful for Youtube thumbnail):
 
     build_thumbnail("slides.Rmd")
     build_thumbnail("slides.html")
@@ -149,8 +149,6 @@ diagram of the build hierarchy:
                  |
                  |--> pptx
 
-# Build hierarchy is html, pdf / png, gif / pptx.
-
 ## Author, Version, and License Information
 
 -   Author: *John Paul Helveston*
@@ -168,12 +166,12 @@ if you cited it. You can get the citation information by typing
 
 To cite xaringanBuilder in publications use:
 
-John Paul Helveston (2020). xaringanBuilder: Functions for building
+John Paul Helveston (2021). xaringanBuilder: Functions for building
 xaringan slides to different outputs.
 
 A BibTeX entry for LaTeX users is
 
 @Manual{, title = {xaringanBuilder: Functions for building xaringan
 slides to different outputs.}, author = {John Paul Helveston}, year =
-{2020}, note = {R package version 0.0.1}, url =
+{2021}, note = {R package version 0.0.4}, url =
 {<https://jhelvy.github.io/xaringanBuilder/>}, }

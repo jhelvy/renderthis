@@ -104,7 +104,7 @@ build_pptx("slides.pdf")
 
 ### Build Thumbnail
 
-Build a "thumbnail" png image of the first slide from a Rmd or html file:
+Build a "thumbnail" png image of the first slide from a Rmd or html file (useful for Youtube thumbnail):
 
 ```
 build_thumbnail("slides.Rmd")
@@ -172,8 +172,6 @@ Rmd
              |
              |--> pptx
 ```
-
-# Build hierarchy is html, pdf / png, gif / pptx.
 
 ## Author, Version, and License Information
 

@@ -14,8 +14,11 @@ build_thumbnail <- function(input, output_file = NULL) {
     assert_path_ext(input, c("rmd", "html"), arg = "input")
     output_file <- check_output_file(input, output_file, "png")
 
+    # Create full file paths from root
     input <- fs::path_abs(input)
+    output_file <- fs::path_abs(output_file)
 
+    # Build
     if (test_path_ext(input, "rmd")) {
         build_html(
           input = input,
