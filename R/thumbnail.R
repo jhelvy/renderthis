@@ -24,6 +24,14 @@ build_thumbnail <- function(input, output_file = NULL) {
         input <- fs::path_ext_set(input, "html")
     }
 
+    # Append "_thumbnail.png" to output_file name
+    output_file <- fs::path_ext_set(
+        paste0(
+            fs::path_ext_remove(output_file),
+            "_thumbnail"),
+        "png"
+    )
+
     print_build_status(input, output_file)
 
     pagedown::chrome_print(
