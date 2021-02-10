@@ -140,6 +140,28 @@ build_pdf("slides.html", partial_slides = TRUE)
 
 **Note**: This option requires a local installation of Google Chrome as well as the [chromote](https://github.com/rstudio/chromote) package.
 
+## Build hierarchy
+
+Some output types depend on intermediate output types (e.g. to build a pdf from a Rmd file, you first have to build the html file). Here is a diagram of the build hierarchy:
+
+```
+Rmd
+ |
+ |--> social (png)
+ |
+ |--> html
+       |
+       |--> thumbnail (png)
+       |
+       |--> pdf
+             |
+             |--> gif
+             |
+             |--> pptx
+```
+
+# Build hierarchy is html, pdf / png, gif / pptx.
+
 ## Author, Version, and License Information
 
 - Author: *John Paul Helveston* [www.jhelvy.com](http://www.jhelvy.com/)
