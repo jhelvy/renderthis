@@ -5,11 +5,13 @@
 
 Build xaringan slides to multiple output formats:
 
-  - html
-  - pdf
-  - gif
-  - pptx
-  - png “thumbnail” of first slide
+-   html
+-   pdf
+-   gif
+-   pptx
+-   thumbnail - png of first slide (useful for Youtube thumbnail)
+-   social - png of first slide sized for social media sharing
+    (e.g. Twitter)
 
 ## Installation
 
@@ -82,7 +84,18 @@ file:
 
 Example:
 
-<img src="man/figures/slides.png" width=500>
+<img src="man/figures/slides_thumbnail.png" width=500>
+
+### Build Social
+
+Build a png of the first slide from a Rmd file. Image is sized for
+sharing on social media (e.g. Twitter).
+
+    build_social("slides.Rmd")
+
+Example:
+
+<img src="man/figures/slides_social.png" width=500>
 
 ## “Complex” slides
 
@@ -116,13 +129,35 @@ For example:
 **Note**: This option requires a local installation of Google Chrome as
 well as the [chromote](https://github.com/rstudio/chromote) package.
 
+## Build hierarchy
+
+Some output types depend on intermediate output types (e.g. to build a
+pdf from a Rmd file, you first have to build the html file). Here is a
+diagram of the build hierarchy:
+
+    Rmd
+     |
+     |--> social (png)
+     |
+     |--> html
+           |
+           |--> thumbnail (png)
+           |
+           |--> pdf
+                 |
+                 |--> gif
+                 |
+                 |--> pptx
+
+# Build hierarchy is html, pdf / png, gif / pptx.
+
 ## Author, Version, and License Information
 
-  - Author: *John Paul Helveston*
+-   Author: *John Paul Helveston*
     [www.jhelvy.com](http://www.jhelvy.com/)
-  - Date First Written: *September 27, 2020*
-  - Most Recent Update: February 07 2021
-  - License:
+-   Date First Written: *September 27, 2020*
+-   Most Recent Update: February 10 2021
+-   License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
 ## Citation Information

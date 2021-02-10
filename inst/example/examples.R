@@ -34,6 +34,10 @@ build_pptx("slides.pdf")
 build_thumbnail("slides.Rmd")
 build_thumbnail("slides.html")
 
+# Build a png of the first slide from a Rmd file.
+# Image is sized for sharing on social media (e.g. Twitter).
+build_social("slides.Rmd")
+
 # "Complex" slides --------------
 
 # "Complex" slides are slides that contain panelsets or other html

@@ -35,7 +35,8 @@ Suggests:
     chromote,
     officer,
     pdftools,
-    xaringanExtra
+    xaringanExtra,
+    webshot2
 Remotes:
     rstudio/chromote,
     gadenbuie/xaringanExtra

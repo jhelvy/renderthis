@@ -25,7 +25,8 @@ Build xaringan slides to multiple output formats:
 - pdf
 - gif
 - pptx
-- png "thumbnail" of first slide
+- thumbnail - png of first slide (useful for Youtube thumbnail)
+- social - png of first slide sized for social media sharing (e.g. Twitter)
 
 ## Installation
 
@@ -112,7 +113,19 @@ build_thumbnail("slides.html")
 
 Example:
 
-<img src="man/figures/slides.png" width=500>
+<img src="man/figures/slides_thumbnail.png" width=500>
+
+### Build Social
+
+Build a png of the first slide from a Rmd file. Image is sized for sharing on social media (e.g. Twitter).
+
+```
+build_social("slides.Rmd")
+```
+
+Example:
+
+<img src="man/figures/slides_social.png" width=500>
 
 ## "Complex" slides
 
