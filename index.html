@@ -96,36 +96,26 @@
 <a href="#usage" class="anchor"></a>Usage</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(xaringanBuilder)</span></code></pre></div>
 <p>The xaringan Rmd files used in all examples below can be found <a href="https://github.com/jhelvy/xaringanBuilder/tree/master/inst/example">here</a></p>
-<div id="build-all-output-types" class="section level3">
-<h3 class="hasAnchor">
-<a href="#build-all-output-types" class="anchor"></a>Build All Output Types</h3>
-<p>Use <code><a href="reference/build_all.html">build_all()</a></code> to build all output types from a Rmd file:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">build_all</span>(<span class="st">"slides.Rmd"</span>) <span class="co"># Builds every output by default</span></span></code></pre></div>
-<p>Use the <code>include</code> or <code>exclude</code> arguments to control which output types to include or exclude:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Both of these build html, pdf, and gif outputs</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">build_all</span>(<span class="st">"slides.Rmd"</span>, <span class="dt">include =</span> <span class="kw">c</span>(<span class="st">"html"</span>, <span class="st">"pdf"</span>, <span class="st">"gif"</span>))</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">build_all</span>(<span class="st">"slides.Rmd"</span>, <span class="dt">exclude =</span> <span class="kw">c</span>(<span class="st">"pptx"</span>, <span class="st">"thumbnail"</span>))</span></code></pre></div>
-</div>
 <div id="build-html" class="section level3">
 <h3 class="hasAnchor">
 <a href="#build-html" class="anchor"></a>Build HTML</h3>
 <p>Build an html file from a Rmd file:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">build_html</span>(<span class="st">"slides.Rmd"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">build_html</span>(<span class="st">"slides.Rmd"</span>)</span></code></pre></div>
 </div>
 <div id="build-pdf" class="section level3">
 <h3 class="hasAnchor">
 <a href="#build-pdf" class="anchor"></a>Build PDF</h3>
 <p>Build a pdf file from a Rmd or html file:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">build_pdf</span>(<span class="st">"slides.Rmd"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">build_pdf</span>(<span class="st">"slides.html"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">build_pdf</span>(<span class="st">"slides.Rmd"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">build_pdf</span>(<span class="st">"slides.html"</span>)</span></code></pre></div>
 </div>
 <div id="build-gif" class="section level3">
 <h3 class="hasAnchor">
 <a href="#build-gif" class="anchor"></a>Build GIF</h3>
 <p>Build a gif file from a Rmd, html, or pdf file:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">build_gif</span>(<span class="st">"slides.Rmd"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">build_gif</span>(<span class="st">"slides.html"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">build_gif</span>(<span class="st">"slides.pdf"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">build_gif</span>(<span class="st">"slides.Rmd"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">build_gif</span>(<span class="st">"slides.html"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">build_gif</span>(<span class="st">"slides.pdf"</span>)</span></code></pre></div>
 <p>Example:</p>
 <p><img src="reference/figures/slides.gif" width="500"></p>
 </div>
@@ -133,16 +123,16 @@
 <h3 class="hasAnchor">
 <a href="#build-pptx" class="anchor"></a>Build PPTX</h3>
 <p>Build a pptx file from a Rmd, html or pdf file (pptx contains slides of png images of each rendered xaringan slide):</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">build_pptx</span>(<span class="st">"slides.Rmd"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">build_pptx</span>(<span class="st">"slides.html"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">build_pptx</span>(<span class="st">"slides.pdf"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">build_pptx</span>(<span class="st">"slides.Rmd"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">build_pptx</span>(<span class="st">"slides.html"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">build_pptx</span>(<span class="st">"slides.pdf"</span>)</span></code></pre></div>
 </div>
 <div id="build-thumbnail" class="section level3">
 <h3 class="hasAnchor">
 <a href="#build-thumbnail" class="anchor"></a>Build Thumbnail</h3>
 <p>Build a “thumbnail” png image of the first slide from a Rmd or html file (useful for Youtube thumbnail):</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">build_thumbnail</span>(<span class="st">"slides.Rmd"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">build_thumbnail</span>(<span class="st">"slides.html"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">build_thumbnail</span>(<span class="st">"slides.Rmd"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">build_thumbnail</span>(<span class="st">"slides.html"</span>)</span></code></pre></div>
 <p>Example:</p>
 <p><img src="reference/figures/slides_thumbnail.png" width="500"></p>
 </div>
@@ -150,9 +140,19 @@
 <h3 class="hasAnchor">
 <a href="#build-social" class="anchor"></a>Build Social</h3>
 <p>Build a png of the first slide from a Rmd file. Image is sized for sharing on social media (e.g. Twitter).</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">build_social</span>(<span class="st">"slides.Rmd"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">build_social</span>(<span class="st">"slides.Rmd"</span>)</span></code></pre></div>
 <p>Example:</p>
 <p><img src="reference/figures/slides_social.png" width="500"></p>
+</div>
+<div id="build-all-output-types" class="section level3">
+<h3 class="hasAnchor">
+<a href="#build-all-output-types" class="anchor"></a>Build All Output Types</h3>
+<p>Use <code><a href="reference/build_all.html">build_all()</a></code> to build all output types from a Rmd file:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">build_all</span>(<span class="st">"slides.Rmd"</span>) <span class="co"># Builds every output by default</span></span></code></pre></div>
+<p>Use the <code>include</code> or <code>exclude</code> arguments to control which output types to include or exclude:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Both of these build html, pdf, and gif outputs</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">build_all</span>(<span class="st">"slides.Rmd"</span>, <span class="dt">include =</span> <span class="kw">c</span>(<span class="st">"html"</span>, <span class="st">"pdf"</span>, <span class="st">"gif"</span>))</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">build_all</span>(<span class="st">"slides.Rmd"</span>, <span class="dt">exclude =</span> <span class="kw">c</span>(<span class="st">"pptx"</span>, <span class="st">"thumbnail"</span>, <span class="st">"social"</span>))</span></code></pre></div>
 </div>
 </div>
 <div id="complex-slides" class="section level2">
