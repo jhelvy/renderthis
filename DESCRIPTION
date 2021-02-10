@@ -39,4 +39,5 @@ Suggests:
     webshot2
 Remotes:
     rstudio/chromote,
-    gadenbuie/xaringanExtra
+    gadenbuie/xaringanExtra,
+    rstudio/webshot2
