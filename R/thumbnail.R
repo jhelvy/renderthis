@@ -12,6 +12,7 @@ build_thumbnail <- function(input, output_file = NULL) {
 
     # Check input and output files have correct extensions
     assert_path_ext(input, c("rmd", "html"), arg = "input")
+    output_null <- is.null(output_file)
     output_file <- check_output_file(input, output_file, "png")
 
     # Create full file paths from root
@@ -27,13 +28,10 @@ build_thumbnail <- function(input, output_file = NULL) {
         input <- fs::path_ext_set(input, "html")
     }
 
-    # Append "_thumbnail.png" to output_file name
-    output_file <- fs::path_ext_set(
-        paste0(
-            fs::path_ext_remove(output_file),
-            "_thumbnail"),
-        "png"
-    )
+    # Append "_thumbnail" to output_file name if not provided by user
+    if (output_null) {
+        output_file <- append_to_file_path(output_file, "_thumbnail")
+    }
 
     print_build_status(input, output_file)
 

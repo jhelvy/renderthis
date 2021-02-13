@@ -5,6 +5,12 @@ print_build_status <- function(input, output_file) {
     )
 }
 
+pdf_to_pngs <- function(input, density) {
+    pdf <- magick::image_read(input, density = density)
+    pngs <- magick::image_convert(pdf, 'png')
+    return(pngs)
+}
+
 test_path_ext <- function(path, expected_ext) {
     tolower(fs::path_ext(path)) %in% expected_ext
 }
@@ -16,16 +22,23 @@ assert_path_ext <- function(path, expected_ext, arg) {
     }
 }
 
-pdf_to_pngs <- function(input, density) {
-    pdf <- magick::image_read(input, density = density)
-    pngs <- magick::image_convert(pdf, 'png')
-    return(pngs)
-}
-
 check_output_file <- function(input, output_file, ext) {
     if (is.null(output_file)) {
         return(fs::path_ext_set(input, ext))
     }
     assert_path_ext(output_file, ext, arg = "output_file")
     return(output_file)
+}
+
+append_to_file_path <- function(path, s) {
+    # Appends s to path before the extension, e.g.
+    # path:    "file.png"
+    # s:       "_social"
+    # returns: "file_social.png"
+    return(
+        fs::path_ext_set(
+            paste0(fs::path_ext_remove(path), s),
+            fs::path_ext(path)
+        )
+    )
 }
