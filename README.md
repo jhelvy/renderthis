@@ -1,16 +1,24 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<!-- badges: start -->
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Travis build
+status](https://travis-ci.com/jhelvy/xaringanBuilder.svg?branch=master)](https://travis-ci.com/jhelvy/xaringanBuilder)
+<!-- badges: end -->
+
 ## xaringanBuilder <img src="man/figures/hex_sticker.png" align="right" width="200"/>
 
 Build xaringan slides to multiple output formats:
 
--   html
--   pdf
--   gif
--   pptx
--   thumbnail - png of first slide (useful for Youtube thumbnail)
--   social - png of first slide sized for social media sharing
+  - html
+  - pdf
+  - gif
+  - pptx
+  - thumbnail - png of first slide (useful for Youtube thumbnail)
+  - social - png of first slide sized for social media sharing
     (e.g. Twitter)
 
 ## Installation
@@ -167,11 +175,11 @@ For example, to build a pptx from a Rmd file without Chrome, you could:
 
 ## Author, Version, and License Information
 
--   Author: *John Paul Helveston*
+  - Author: *John Paul Helveston*
     [www.jhelvy.com](http://www.jhelvy.com/)
--   Date First Written: *September 27, 2020*
--   Most Recent Update: February 13 2021
--   License:
+  - Date First Written: *September 27, 2020*
+  - Most Recent Update: February 14 2021
+  - License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
 ## Citation Information
