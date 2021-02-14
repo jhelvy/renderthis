@@ -69,6 +69,9 @@ png images of each rendered xaringan slide):
     build_pptx("slides.html")
     build_pptx("slides.pdf")
 
+(See the [slidex](https://github.com/datalorax/slidex) package by
+@datalorax to do the opposite: pptx –\> xaringan\!)
+
 ### Build Thumbnail
 
 Build a “thumbnail” png image of the first slide from a Rmd or html file
