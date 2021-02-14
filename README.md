@@ -149,17 +149,28 @@ diagram of the build hierarchy:
                  |
                  |--> pptx
 
-## Use case on a cluster without Chrome
-1. Build html
-2. Use vscode remote and vscode-preview-server extension to open html on a local machine (preferrably with Chrome installed)
-3. Save to pdf on Chrome -> build_pptx()/build_gif()
+## Local Chrome installation requirement
+
+Some build steps require a local installation on Chrome, which may not
+be available (e.g. on a computing cluster). If you are unable to install
+Chrome, the recommended workflow is to build intermediate output formats
+and use an alternative method for the output format that requires
+Chrome.
+
+For example, to build a pptx from a Rmd file without Chrome, you could:
+
+1.  Build the html with `build_html("slides.Rmd")`
+2.  Use vscode remote and vscode-preview-server extension to open the
+    html on a local machine (preferrably with Chrome installed)
+3.  Save to pdf on Chrome
+4.  Build the pptx with `build_pptx("slides.pdf")`
 
 ## Author, Version, and License Information
 
 -   Author: *John Paul Helveston*
     [www.jhelvy.com](http://www.jhelvy.com/)
 -   Date First Written: *September 27, 2020*
--   Most Recent Update: February 10 2021
+-   Most Recent Update: February 13 2021
 -   License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
