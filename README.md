@@ -149,6 +149,11 @@ diagram of the build hierarchy:
                  |
                  |--> pptx
 
+## Use case on a cluster without Chrome
+1. Build html
+2. Use vscode remote and vscode-preview-server extension to open html on a local machine (preferrably with Chrome installed)
+3. Save to pdf on Chrome -> build_pptx()/build_gif()
+
 ## Author, Version, and License Information
 
 -   Author: *John Paul Helveston*
