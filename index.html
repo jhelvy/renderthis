@@ -191,13 +191,18 @@
 <span id="cb13-12"><a href="#cb13-12"></a>             <span class="op">|</span></span>
 <span id="cb13-13"><a href="#cb13-13"></a><span class="st">             </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span>pptx</span></code></pre></div>
 </div>
-<div id="use-case-on-a-cluster-without-chrome" class="section level2">
+<div id="local-chrome-installation-requirement" class="section level2">
 <h2 class="hasAnchor">
-<a href="#use-case-on-a-cluster-without-chrome" class="anchor"></a>Use case on a cluster without Chrome</h2>
+<a href="#local-chrome-installation-requirement" class="anchor"></a>Local Chrome installation requirement</h2>
+<p>Some build steps require a local installation on Chrome, which may not be available (e.g. on a computing cluster). If you are unable to install Chrome, the recommended workflow is to build intermediate output formats and use an alternative method for the output format that requires Chrome.</p>
+<p>For example, to build a pptx from a Rmd file without Chrome, you could:</p>
 <ol>
-<li>Build html</li>
-<li>Use vscode remote and vscode-preview-server extension to open html on a local machine (preferrably with Chrome installed)</li>
-<li>Save to pdf on Chrome -&gt; build_pptx()/build_gif()</li>
+<li>Build the html with <code><a href="reference/build_html.html">build_html("slides.Rmd")</a></code>
+</li>
+<li>Use vscode remote and vscode-preview-server extension to open the html on a local machine (preferrably with Chrome installed)</li>
+<li>Save to pdf on Chrome</li>
+<li>Build the pptx with <code><a href="reference/build_pptx.html">build_pptx("slides.pdf")</a></code>
+</li>
 </ol>
 </div>
 <div id="author-version-and-license-information" class="section level2">
@@ -208,7 +213,7 @@
 </li>
 <li>Date First Written: <em>September 27, 2020</em>
 </li>
-<li>Most Recent Update: February 10 2021</li>
+<li>Most Recent Update: February 13 2021</li>
 <li>License: <a href="https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md">MIT</a>
 </li>
 </ul>
