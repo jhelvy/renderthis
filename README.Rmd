@@ -17,6 +17,10 @@ knitr::opts_chunk$set(
 IS_README <- TRUE
 ```
 
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.com/jhelvy/xaringanBuilder.svg?branch=master)](https://travis-ci.com/jhelvy/xaringanBuilder)
+<!-- badges: end -->
+
 ## xaringanBuilder <img src="man/figures/hex_sticker.png" align="right" width="200"/>
 
 Build xaringan slides to multiple output formats:
