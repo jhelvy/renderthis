@@ -2,7 +2,7 @@
 % Please edit documentation in R/pdf.R
 \name{build_pdf}
 \alias{build_pdf}
-\title{Prints xaringan slides to a PDF file.}
+\title{Build xaringan slides as pdf file.}
 \usage{
 build_pdf(
   input,
@@ -34,7 +34,10 @@ a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
 TRUE`.}
 }
 \description{
-Prints xaringan slides to a PDF file.
+Build xaringan slides to a pdf file. Requires a local installation of
+Chrome. If you set `complex_slides = TRUE` or `partial_slides = TRUE`,
+you will also need to install the {chromote} package:
+`devtools::install_github("rstudio/chromote")`
 }
 \examples{
 \dontrun{

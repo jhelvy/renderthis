@@ -1,4 +1,7 @@
 #' Build xaringan slides as html file.
+#'
+#' Build xaringan slides as html file. Essentially the same thing as
+#' `rmarkdown::render()` with `output_format = "xaringan::moon_reader"`
 #' @param input Path to Rmd file of xaringan slides.
 #' @param output_file The name of the output file. If using NULL then
 #' the output filename will be based on filename for the input file.

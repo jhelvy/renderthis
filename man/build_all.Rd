@@ -41,7 +41,7 @@ TRUE`.}
 }
 \description{
 Build xaringan slides to multiple outputs. Options are `"html"`, `"pdf"`,
-`"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the first slide).
+`"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`.
 }
 \examples{
 \dontrun{

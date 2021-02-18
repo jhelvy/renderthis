@@ -42,3 +42,19 @@ append_to_file_path <- function(path, s) {
         )
     )
 }
+
+assert_chrome_installed <- function() {
+    chromePath <- NULL
+    error <- paste0(
+        "This function requires a local installation of the Chrome ",
+        "browser. You can also use other browsers based on Chromium, ",
+        "such as Chromium itself, Edge, Vivaldi, Brave, or Opera.")
+    tryCatch({
+      chromePath <- chromote::find_chrome()
+      },
+      error = function(e) { message(error) }
+    )
+    if (is.null(chromePath)) {
+        stop(error)
+    }
+}

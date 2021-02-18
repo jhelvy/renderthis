@@ -1,4 +1,8 @@
 #' Build xaringan slides as pptx file.
+#'
+#' Build xaringan slides as pptx file from a Rmd, html, or pdf file. The
+#' function builds to the pdf and then inserts a png image of each slide
+#' as a new slide in a pptx file.
 #' @param input Path to Rmd, html, or pdf file of xaringan slides.
 #' @param output_file Name of the output pptx file.
 #' @param density Resolution of the resulting pptx file.

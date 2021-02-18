@@ -1,8 +1,11 @@
 # build_social() was inspired by this function from gadenbuie's blog:
 # https://www.garrickadenbuie.com/blog/sharing-xaringan-slides/#the-perfect-share-image-ratio
 
+#' Build png image of first slide sized for social media sharing.
+#'
 #' Build png image of first xaringan slide for sharing on social media.
-#' Requires a local installation of Chrome.
+#' Requires a local installation of Chrome as well as the {webshot2} package:
+#' `remotes::install_github("rstudio/webshot2")`.
 #' @param input Path to Rmd file of xaringan slides.
 #' @param output_file The name of the output file. If using NULL then
 #' the output filename will be based on filename for the input file.
@@ -22,6 +25,9 @@ build_social <- function(input, output_file = NULL) {
             'remotes::install_github("rstudio/webshot2")'
         )
     }
+
+    # Check if Chrome is installed
+    assert_chrome_installed()
 
     # Check input and output files have correct extensions
     assert_path_ext(input, "rmd", arg = "input")

@@ -1,4 +1,9 @@
-#' Prints xaringan slides to a PDF file.
+#' Build xaringan slides as pdf file.
+#'
+#' Build xaringan slides to a pdf file. Requires a local installation of
+#' Chrome. If you set `complex_slides = TRUE` or `partial_slides = TRUE`,
+#' you will also need to install the {chromote} package:
+#' `devtools::install_github("rstudio/chromote")`
 #' @param input Path to Rmd or html file of xaringan slides.
 #' @param output_file The name of the output file. If `NULL` (the default) then
 #' the output filename will be based on filename for the input file.
@@ -48,6 +53,9 @@ build_pdf <- function(
   partial_slides = FALSE,
   delay = 1
 ) {
+    # Check if Chrome is installed
+    assert_chrome_installed()
+
     # Check input and output files have correct extensions
     assert_path_ext(input, c("rmd", "html"), arg = "input")
     output_file <- check_output_file(input, output_file, "pdf")

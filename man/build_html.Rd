@@ -14,7 +14,8 @@ the output filename will be based on filename for the input file.
 If a filename is provided, a path to the output file can also be provided.}
 }
 \description{
-Build xaringan slides as html file.
+Build xaringan slides as html file. Essentially the same thing as
+`rmarkdown::render()` with `output_format = "xaringan::moon_reader"`
 }
 \examples{
 \dontrun{

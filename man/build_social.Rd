@@ -2,8 +2,7 @@
 % Please edit documentation in R/social.R
 \name{build_social}
 \alias{build_social}
-\title{Build png image of first xaringan slide for sharing on social media.
-Requires a local installation of Chrome.}
+\title{Build png image of first slide sized for social media sharing.}
 \usage{
 build_social(input, output_file = NULL)
 }
@@ -16,7 +15,8 @@ If a filename is provided, a path to the output file can also be provided.}
 }
 \description{
 Build png image of first xaringan slide for sharing on social media.
-Requires a local installation of Chrome.
+Requires a local installation of Chrome as well as the {webshot2} package:
+`remotes::install_github("rstudio/webshot2")`.
 }
 \examples{
 \dontrun{

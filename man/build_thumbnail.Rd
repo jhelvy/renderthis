@@ -2,7 +2,7 @@
 % Please edit documentation in R/thumbnail.R
 \name{build_thumbnail}
 \alias{build_thumbnail}
-\title{Build png thumbnail image of first xaringan slide.}
+\title{Build png thumbnail image of first slide.}
 \usage{
 build_thumbnail(input, output_file = NULL)
 }
@@ -12,7 +12,8 @@ build_thumbnail(input, output_file = NULL)
 \item{output_file}{Name of the output png file.}
 }
 \description{
-Build png thumbnail image of first xaringan slide.
+Build png thumbnail image of first xaringan slide. Requires a local
+installation of Chrome.
 }
 \examples{
 \dontrun{

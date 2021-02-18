@@ -1,7 +1,7 @@
 #' Build xaringan slides to multiple outputs.
 #'
 #' Build xaringan slides to multiple outputs. Options are `"html"`, `"pdf"`,
-#' `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the first slide).
+#' `"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`.
 #' @param input Path to Rmd file of xaringan slides.
 #' @param include A vector of the different output types to build. Options are
 #' `"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the

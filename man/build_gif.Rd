@@ -38,7 +38,8 @@ a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
 TRUE`.}
 }
 \description{
-Build xaringan slides as gif file.
+Build xaringan slides as a gif file from a Rmd, html, or pdf file. The
+function builds to the pdf and then converts it to a gif.
 }
 \examples{
 \dontrun{

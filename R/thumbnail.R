@@ -1,4 +1,7 @@
-#' Build png thumbnail image of first xaringan slide.
+#' Build png thumbnail image of first slide.
+#'
+#' Build png thumbnail image of first xaringan slide. Requires a local
+#' installation of Chrome.
 #' @param input Path to Rmd or html file of xaringan slides.
 #' @param output_file Name of the output png file.
 #' @export
@@ -9,6 +12,9 @@
 #' build_thumbnail("slides.html")
 #' }
 build_thumbnail <- function(input, output_file = NULL) {
+
+    # Check if Chrome is installed
+    assert_chrome_installed()
 
     # Check input and output files have correct extensions
     assert_path_ext(input, c("rmd", "html"), arg = "input")

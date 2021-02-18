@@ -1,4 +1,7 @@
 #' Build xaringan slides as gif file.
+#'
+#' Build xaringan slides as a gif file from a Rmd, html, or pdf file. The
+#' function builds to the pdf and then converts it to a gif.
 #' @param input Path to Rmd, html, or pdf file of xaringan slides.
 #' @param output_file Name of the output gif file.
 #' @param density Resolution of the resulting gif file.
