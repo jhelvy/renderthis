@@ -40,8 +40,8 @@
 
 
 <meta property="og:title" content="Build xaringan slides as gif file. — build_gif" />
-<meta property="og:description" content="Build xaringan slides as a gif file from a Rmd, html, or pdf file. The
-function builds to the pdf and then converts it to a gif." />
+<meta property="og:description" content="Build xaringan slides as a gif file. The function builds to the pdf and
+then converts it to a gif." />
 
 
 
@@ -73,7 +73,7 @@ function builds to the pdf and then converts it to a gif." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">xaringanBuilder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5.9000</span>
       </span>
     </div>
 
@@ -118,8 +118,8 @@ function builds to the pdf and then converts it to a gif." />
     </div>
 
     <div class="ref-description">
-    <p>Build xaringan slides as a gif file from a Rmd, html, or pdf file. The
-function builds to the pdf and then converts it to a gif.</p>
+    <p>Build xaringan slides as a gif file. The function builds to the pdf and
+then converts it to a gif.</p>
     </div>
 
     <pre class="usage"><span class='fu'>build_gif</span><span class='op'>(</span>
@@ -137,7 +137,9 @@ function builds to the pdf and then converts it to a gif.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>Path to Rmd, html, or pdf file of xaringan slides.</p></td>
+      <td><p>Path to a Rmd, html, or pdf file, or a url of xaringan slides.
+If the input is a url to xaringan slides on a website, you must provide the
+full url ending in ".html".</p></td>
     </tr>
     <tr>
       <th>output_file</th>

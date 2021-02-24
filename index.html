@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">xaringanBuilder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5.9000</span>
       </span>
     </div>
 
@@ -106,35 +106,39 @@
 <div id="build-pdf" class="section level3">
 <h3 class="hasAnchor">
 <a href="#build-pdf" class="anchor"></a>Build PDF</h3>
-<p>Build a pdf file from a Rmd or html file:</p>
+<p>Build a pdf file from a Rmd or html file, or a url to slides:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">build_pdf</span>(<span class="st">"slides.Rmd"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">build_pdf</span>(<span class="st">"slides.html"</span>)</span></code></pre></div>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">build_pdf</span>(<span class="st">"slides.html"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">build_pdf</span>(<span class="st">"http://www.mysite.com/myslides.html"</span>)</span></code></pre></div>
 </div>
 <div id="build-gif" class="section level3">
 <h3 class="hasAnchor">
 <a href="#build-gif" class="anchor"></a>Build GIF</h3>
-<p>Build a gif file from a Rmd, html, or pdf file:</p>
+<p>Build a gif file from a Rmd, html, or pdf file, or a url to slides:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">build_gif</span>(<span class="st">"slides.Rmd"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="kw">build_gif</span>(<span class="st">"slides.html"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">build_gif</span>(<span class="st">"slides.pdf"</span>)</span></code></pre></div>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">build_gif</span>(<span class="st">"slides.pdf"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">build_gif</span>(<span class="st">"http://www.mysite.com/myslides.html"</span>)</span></code></pre></div>
 <p>Example:</p>
 <p><img src="reference/figures/slides.gif" width="500"></p>
 </div>
 <div id="build-pptx" class="section level3">
 <h3 class="hasAnchor">
 <a href="#build-pptx" class="anchor"></a>Build PPTX</h3>
-<p>Build a pptx file from a Rmd, html or pdf file (pptx contains slides of png images of each rendered xaringan slide):</p>
+<p>Build a pptx file from a Rmd, html or pdf file, or a url to slides. The pptx file contains slides of png images of each rendered xaringan slide:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">build_pptx</span>(<span class="st">"slides.Rmd"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="kw">build_pptx</span>(<span class="st">"slides.html"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">build_pptx</span>(<span class="st">"slides.pdf"</span>)</span></code></pre></div>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">build_pptx</span>(<span class="st">"slides.pdf"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">build_pptx</span>(<span class="st">"http://www.mysite.com/myslides.html"</span>)</span></code></pre></div>
 <p>(See the <a href="https://github.com/datalorax/slidex">slidex</a> package by @datalorax to do the opposite: pptx –&gt; xaringan!)</p>
 </div>
 <div id="build-thumbnail" class="section level3">
 <h3 class="hasAnchor">
 <a href="#build-thumbnail" class="anchor"></a>Build Thumbnail</h3>
-<p>Build a “thumbnail” png image of the first slide from a Rmd or html file (useful for Youtube thumbnail):</p>
+<p>Build a “thumbnail” png image of the first slide from a Rmd or html file, or a url to slides (useful for Youtube thumbnail):</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">build_thumbnail</span>(<span class="st">"slides.Rmd"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">build_thumbnail</span>(<span class="st">"slides.html"</span>)</span></code></pre></div>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">build_thumbnail</span>(<span class="st">"slides.html"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">build_thumbnail</span>(<span class="st">"http://www.mysite.com/myslides.html"</span>)</span></code></pre></div>
 <p>Example:</p>
 <p><img src="reference/figures/slides_thumbnail.png" width="500"></p>
 </div>
@@ -215,7 +219,7 @@
 </li>
 <li>Date First Written: <em>September 27, 2020</em>
 </li>
-<li>Most Recent Update: February 14 2021</li>
+<li>Most Recent Update: February 24 2021</li>
 <li>License: <a href="https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md">MIT</a>
 </li>
 </ul>

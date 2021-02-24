@@ -40,9 +40,8 @@
 
 
 <meta property="og:title" content="Build xaringan slides as pptx file. — build_pptx" />
-<meta property="og:description" content="Build xaringan slides as pptx file from a Rmd, html, or pdf file. The
-function builds to the pdf and then inserts a png image of each slide
-as a new slide in a pptx file." />
+<meta property="og:description" content="Build xaringan slides as a pptx file. The function builds to the pdf and
+then inserts a png image of each slide as a new slide in a pptx file." />
 
 
 
@@ -74,7 +73,7 @@ as a new slide in a pptx file." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">xaringanBuilder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5.9000</span>
       </span>
     </div>
 
@@ -119,9 +118,8 @@ as a new slide in a pptx file." />
     </div>
 
     <div class="ref-description">
-    <p>Build xaringan slides as pptx file from a Rmd, html, or pdf file. The
-function builds to the pdf and then inserts a png image of each slide
-as a new slide in a pptx file.</p>
+    <p>Build xaringan slides as a pptx file. The function builds to the pdf and
+then inserts a png image of each slide as a new slide in a pptx file.</p>
     </div>
 
     <pre class="usage"><span class='fu'>build_pptx</span><span class='op'>(</span>
@@ -138,7 +136,9 @@ as a new slide in a pptx file.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>Path to Rmd, html, or pdf file of xaringan slides.</p></td>
+      <td><p>Path to a Rmd, html, or pdf file, or a url of xaringan slides.
+If the input is a url to xaringan slides on a website, you must provide the
+full url ending in ".html".</p></td>
     </tr>
     <tr>
       <th>output_file</th>

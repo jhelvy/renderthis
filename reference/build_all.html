@@ -41,7 +41,8 @@
 
 <meta property="og:title" content="Build xaringan slides to multiple outputs. — build_all" />
 <meta property="og:description" content="Build xaringan slides to multiple outputs. Options are `&quot;html&quot;`, `&quot;pdf&quot;`,
-`&quot;gif&quot;`, `&quot;pptx&quot;`, `&quot;thumbnail&quot;`, and `&quot;social&quot;`." />
+`&quot;gif&quot;`, `&quot;pptx&quot;`, `&quot;thumbnail&quot;`, and `&quot;social&quot;`. See individual
+build_..() functions for details about each output type." />
 
 
 
@@ -73,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">xaringanBuilder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5.9000</span>
       </span>
     </div>
 
@@ -119,7 +120,8 @@
 
     <div class="ref-description">
     <p>Build xaringan slides to multiple outputs. Options are `"html"`, `"pdf"`,
-`"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`.</p>
+`"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`. See individual
+build_..() functions for details about each output type.</p>
     </div>
 
     <pre class="usage"><span class='fu'>build_all</span><span class='op'>(</span>
@@ -141,15 +143,14 @@
     <tr>
       <th>include</th>
       <td><p>A vector of the different output types to build. Options are
-`"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the
-first slide). Defaults to `c("html", "pdf", "gif", "pptx", "thumbnail")`.</p></td>
+`"html"`, `"pdf"`, `"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`.
+Defaults to `c("html", "pdf", "gif", "pptx", "thumbnail", "social")`.</p></td>
     </tr>
     <tr>
       <th>exclude</th>
       <td><p>A vector of the different output types to NOT build. Options
-are `"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of
-the first slide). Defaults to `NULL`, in which case all all output types
-are rendered.</p></td>
+are `"html"`, `"pdf"`, `"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`.
+Defaults to `NULL`, in which case all all output types are built.</p></td>
     </tr>
     <tr>
       <th>complex_slides</th>
