@@ -7,7 +7,9 @@
 build_thumbnail(input, output_file = NULL)
 }
 \arguments{
-\item{input}{Path to Rmd or html file of xaringan slides.}
+\item{input}{Path to a Rmd file or html file / url of xaringan slides. If
+the input is a url to xaringan slides on a website, you must provide the
+full url ending in ".html".}
 
 \item{output_file}{Name of the output png file.}
 }

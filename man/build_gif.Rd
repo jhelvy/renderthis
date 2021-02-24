@@ -15,7 +15,9 @@ build_gif(
 )
 }
 \arguments{
-\item{input}{Path to Rmd, html, or pdf file of xaringan slides.}
+\item{input}{Path to a Rmd, html, or pdf file, or a url of xaringan slides.
+If the input is a url to xaringan slides on a website, you must provide the
+full url ending in ".html".}
 
 \item{output_file}{Name of the output gif file.}
 
@@ -38,8 +40,8 @@ a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
 TRUE`.}
 }
 \description{
-Build xaringan slides as a gif file from a Rmd, html, or pdf file. The
-function builds to the pdf and then converts it to a gif.
+Build xaringan slides as a gif file. The function builds to the pdf and
+then converts it to a gif.
 }
 \examples{
 \dontrun{

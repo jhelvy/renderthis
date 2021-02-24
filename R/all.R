@@ -1,15 +1,15 @@
 #' Build xaringan slides to multiple outputs.
 #'
 #' Build xaringan slides to multiple outputs. Options are `"html"`, `"pdf"`,
-#' `"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`.
+#' `"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`. See individual
+#' build_..() functions for details about each output type.
 #' @param input Path to Rmd file of xaringan slides.
 #' @param include A vector of the different output types to build. Options are
-#' `"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the
-#' first slide). Defaults to `c("html", "pdf", "gif", "pptx", "thumbnail")`.
+#' `"html"`, `"pdf"`, `"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`.
+#' Defaults to `c("html", "pdf", "gif", "pptx", "thumbnail", "social")`.
 #' @param exclude A vector of the different output types to NOT build. Options
-#' are `"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of
-#' the first slide). Defaults to `NULL`, in which case all all output types
-#' are rendered.
+#' are `"html"`, `"pdf"`, `"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`.
+#' Defaults to `NULL`, in which case all all output types are built.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #' other html widgets or advanced features), set `complex_slides = TRUE`.
 #' Defaults to `FALSE`. This will use the {chromote} package to iterate through
@@ -41,10 +41,11 @@ build_all <- function(
     partial_slides = FALSE,
     delay = 1
     ) {
+    # Check that input file has the correct extension
     assert_path_ext(input, "rmd")
-    input <- fs::path_abs(input)
-    input_html <- fs::path_ext_set(input, "html")
-    input_pdf <- fs::path_ext_set(input, "pdf")
+
+    # Build input and output paths
+    paths <- build_paths(input, output_file = NULL)
 
     include <- match.arg(include, several.ok = TRUE)
     do_htm <- ("html" %in% include) && (! "html" %in% exclude)
@@ -74,35 +75,36 @@ build_all <- function(
     # if at some point intermediate files are removed if not requested, the
     # logic here will need to be changed.
 
-    if (do_gif && (!fs::file_exists(input_pdf) || do_htm)) {
+    if (do_gif && (!fs::file_exists(paths$input$pdf) || do_htm)) {
         # to make a gif we need the PDF file
         # or if we update the HTML, we should also update the PDF for the gif
         do_pdf <- TRUE
     }
-    if (do_ppt && (!fs::file_exists(input_pdf) || do_htm)) {
+    if (do_ppt && (!fs::file_exists(paths$input$pdf) || do_htm)) {
         # to make a pptx we need the PDF file
         # or if we update the HTML, we should also update the PDF for the pptx
         do_pdf <- TRUE
     }
-    if ((do_pdf || do_thm) && !fs::file_exists(input_html)) {
+    if ((do_pdf || do_thm) && !fs::file_exists(paths$input$html)) {
         # to make a PDF or thumbnail we need the html file
         do_htm <- TRUE
     }
 
     # Do each step in order to ensure updates propagate
     # (or we use the current version of the required build step)
-    if (do_soc) build_html(input)
-    if (do_htm) build_html(input)
-    if (do_thm) build_thumbnail(input_html)
+    if (do_soc) build_social(paths$input$rmd, paths$output$social)
+    if (do_htm) build_html(paths$input$rmd, paths$output$html)
+    if (do_thm) build_thumbnail(paths$input$html, paths$output$thumbnail)
     if (do_pdf) {
         build_pdf(
-            input = input_html,
+            input = paths$input$html,
+            output_file = paths$output$pdf,
             complex_slides = complex_slides,
             partial_slides = partial_slides,
             delay = delay)
     }
-    if (do_gif) build_gif(input_pdf)
-    if (do_ppt) build_pptx(input_pdf)
+    if (do_gif) build_gif(paths$input$pdf, paths$output$gif)
+    if (do_ppt) build_pptx(paths$input$pdf, paths$output$pptx)
 
     invisible(input)
 }

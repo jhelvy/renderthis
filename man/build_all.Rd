@@ -17,13 +17,12 @@ build_all(
 \item{input}{Path to Rmd file of xaringan slides.}
 
 \item{include}{A vector of the different output types to build. Options are
-`"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of the
-first slide). Defaults to `c("html", "pdf", "gif", "pptx", "thumbnail")`.}
+`"html"`, `"pdf"`, `"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`.
+Defaults to `c("html", "pdf", "gif", "pptx", "thumbnail", "social")`.}
 
 \item{exclude}{A vector of the different output types to NOT build. Options
-are `"html"`, `"pdf"`, `"gif"`, `"pptx"`, and `"thumbnail"` (a png image of
-the first slide). Defaults to `NULL`, in which case all all output types
-are rendered.}
+are `"html"`, `"pdf"`, `"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`.
+Defaults to `NULL`, in which case all all output types are built.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set `complex_slides = TRUE`.
@@ -41,7 +40,8 @@ TRUE`.}
 }
 \description{
 Build xaringan slides to multiple outputs. Options are `"html"`, `"pdf"`,
-`"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`.
+`"gif"`, `"pptx"`, `"thumbnail"`, and `"social"`. See individual
+build_..() functions for details about each output type.
 }
 \examples{
 \dontrun{

@@ -1,9 +1,10 @@
 #' Build xaringan slides as pptx file.
 #'
-#' Build xaringan slides as pptx file from a Rmd, html, or pdf file. The
-#' function builds to the pdf and then inserts a png image of each slide
-#' as a new slide in a pptx file.
-#' @param input Path to Rmd, html, or pdf file of xaringan slides.
+#' Build xaringan slides as a pptx file. The function builds to the pdf and
+#' then inserts a png image of each slide as a new slide in a pptx file.
+#' @param input Path to a Rmd, html, or pdf file, or a url of xaringan slides.
+#' If the input is a url to xaringan slides on a website, you must provide the
+#' full url ending in ".html".
 #' @param output_file Name of the output pptx file.
 #' @param density Resolution of the resulting pptx file.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
@@ -32,33 +33,27 @@ build_pptx <- function(
     complex_slides = FALSE,
     partial_slides = FALSE,
     delay = 1
-    ) {
+) {
     if (!requireNamespace("officer", quietly = TRUE)) {
         stop("`officer` is required: install.packages('officer')")
     }
+
     # Check input and output files have correct extensions
-    assert_path_ext(input, c("rmd", "html", "pdf"), arg = "input")
-    output_file <- check_output_file(input, output_file, "pptx")
+    assert_io_paths(input, c("rmd", "html", "pdf"), output_file, "pptx")
 
-    # Create full file paths from root
-    input <- fs::path_abs(input)
-    output_file <- fs::path_abs(output_file)
+    # Build input and output paths
+    paths <- build_paths(input, output_file)
 
-    # Build
-    if (test_path_ext(input, c("rmd", "html"))) {
-        build_pdf(
-            input = input,
-            output_file = fs::path_ext_set(output_file, "pdf"),
-            complex_slides = complex_slides,
-            partial_slides = partial_slides,
-            delay = delay)
-        input <- fs::path_ext_set(input, "pdf")
+    # Build html and / or pdf (if input is not pdf)
+    if (!test_path_ext(input, "pdf")) {
+        build_to_pdf(input, paths, complex_slides, partial_slides, delay)
     }
 
+    # Build pptx from pdf
+    input <- paths$input$pdf
+    output_file <- paths$output$pptx
     print_build_status(input, output_file)
-
     pngs <- pdf_to_pngs(input, density)
-
     doc <- officer::read_pptx()
     for (i in 1:length(pngs)) {
         png_path <- magick::image_write(

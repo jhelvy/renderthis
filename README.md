@@ -1,6 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
 <!-- badges: start -->
 
 [![Lifecycle:
@@ -13,12 +12,12 @@ status](https://travis-ci.com/jhelvy/xaringanBuilder.svg?branch=master)](https:/
 
 Build xaringan slides to multiple output formats:
 
-  - html
-  - pdf
-  - gif
-  - pptx
-  - thumbnail - png of first slide (useful for Youtube thumbnail)
-  - social - png of first slide sized for social media sharing
+-   html
+-   pdf
+-   gif
+-   pptx
+-   thumbnail - png of first slide (useful for Youtube thumbnail)
+-   social - png of first slide sized for social media sharing
     (e.g. Twitter)
 
 ## Installation
@@ -43,18 +42,20 @@ Build an html file from a Rmd file:
 
 ### Build PDF
 
-Build a pdf file from a Rmd or html file:
+Build a pdf file from a Rmd or html file, or a url to slides:
 
     build_pdf("slides.Rmd")
     build_pdf("slides.html")
+    build_pdf("http://www.mysite.com/myslides.html")
 
 ### Build GIF
 
-Build a gif file from a Rmd, html, or pdf file:
+Build a gif file from a Rmd, html, or pdf file, or a url to slides:
 
     build_gif("slides.Rmd")
     build_gif("slides.html")
     build_gif("slides.pdf")
+    build_gif("http://www.mysite.com/myslides.html")
 
 Example:
 
@@ -62,23 +63,25 @@ Example:
 
 ### Build PPTX
 
-Build a pptx file from a Rmd, html or pdf file (pptx contains slides of
-png images of each rendered xaringan slide):
+Build a pptx file from a Rmd, html or pdf file, or a url to slides. The
+pptx file contains slides of png images of each rendered xaringan slide:
 
     build_pptx("slides.Rmd")
     build_pptx("slides.html")
     build_pptx("slides.pdf")
+    build_pptx("http://www.mysite.com/myslides.html")
 
 (See the [slidex](https://github.com/datalorax/slidex) package by
-@datalorax to do the opposite: pptx –\> xaringan\!)
+@datalorax to do the opposite: pptx –&gt; xaringan!)
 
 ### Build Thumbnail
 
-Build a “thumbnail” png image of the first slide from a Rmd or html file
-(useful for Youtube thumbnail):
+Build a “thumbnail” png image of the first slide from a Rmd or html
+file, or a url to slides (useful for Youtube thumbnail):
 
     build_thumbnail("slides.Rmd")
     build_thumbnail("slides.html")
+    build_thumbnail("http://www.mysite.com/myslides.html")
 
 Example:
 
@@ -178,11 +181,11 @@ For example, to build a pptx from a Rmd file without Chrome, you could:
 
 ## Author, Version, and License Information
 
-  - Author: *John Paul Helveston*
+-   Author: *John Paul Helveston*
     [www.jhelvy.com](http://www.jhelvy.com/)
-  - Date First Written: *September 27, 2020*
-  - Most Recent Update: February 14 2021
-  - License:
+-   Date First Written: *September 27, 2020*
+-   Most Recent Update: February 24 2021
+-   License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
 ## Citation Information

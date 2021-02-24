@@ -4,7 +4,7 @@
 \alias{build_pdf_simple}
 \title{Print "simple" xaringan slides to PDF}
 \usage{
-build_pdf_simple(input, output_file)
+build_pdf_simple(input, output_file = NULL)
 }
 \arguments{
 \item{input}{Path to Rmd or html file of xaringan slides.}

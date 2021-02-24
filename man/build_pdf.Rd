@@ -13,7 +13,9 @@ build_pdf(
 )
 }
 \arguments{
-\item{input}{Path to Rmd or html file of xaringan slides.}
+\item{input}{Path to a Rmd file or html file / url of xaringan slides. If
+the input is a url to xaringan slides on a website, you must provide the
+full url ending in ".html".}
 
 \item{output_file}{The name of the output file. If `NULL` (the default) then
 the output filename will be based on filename for the input file.
@@ -34,28 +36,29 @@ a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
 TRUE`.}
 }
 \description{
-Build xaringan slides to a pdf file. Requires a local installation of
+Build xaringan slides as a pdf file. Requires a local installation of
 Chrome. If you set `complex_slides = TRUE` or `partial_slides = TRUE`,
-you will also need to install the {chromote} package:
-`devtools::install_github("rstudio/chromote")`
+you will also need to install the {chromote} and {pdftools} packages.
 }
 \examples{
 \dontrun{
-# Build simple pdf from Rmd or html file
+# Build a pdf from a Rmd or html file
 build_pdf("slides.Rmd")
 build_pdf("slides.html")
 
-# Build simple pdf from Rmd or html file and include
-# partial (continuation) slides
+# Build a pdf from a url
+build_pdf("http://www.mysite.com/myslides.html")
+
+# Build a pdf with partial (continuation) slides
 build_pdf("slides.Rmd", partial_slides = TRUE)
 build_pdf("slides.html", partial_slides = TRUE)
 
-# Build "complex" xaringan slides to pdf from Rmd or html file
+# Build a pdf of "complex" xaringan slides
 build_pdf("slides_complex.Rmd", complex_slides = TRUE)
 build_pdf("slides_complex.html", complex_slides = TRUE)
 
-# Build "complex" xaringan slides to pdf from Rmd or html file and include
-# partial (continuation) slides
+# Build a pdf of "complex" xaringan slides and include partial
+# (continuation) slides
 build_pdf(input = "slides_complex.Rmd",
           output_file = "slides_complex_partial.pdf",
           complex_slides = TRUE,

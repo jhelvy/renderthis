@@ -1,10 +1,11 @@
 #' Build xaringan slides as pdf file.
 #'
-#' Build xaringan slides to a pdf file. Requires a local installation of
+#' Build xaringan slides as a pdf file. Requires a local installation of
 #' Chrome. If you set `complex_slides = TRUE` or `partial_slides = TRUE`,
-#' you will also need to install the {chromote} package:
-#' `devtools::install_github("rstudio/chromote")`
-#' @param input Path to Rmd or html file of xaringan slides.
+#' you will also need to install the {chromote} and {pdftools} packages.
+#' @param input Path to a Rmd file or html file / url of xaringan slides. If
+#' the input is a url to xaringan slides on a website, you must provide the
+#' full url ending in ".html".
 #' @param output_file The name of the output file. If `NULL` (the default) then
 #' the output filename will be based on filename for the input file.
 #' If a filename is provided, a path to the output file can also be provided.
@@ -22,21 +23,23 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Build simple pdf from Rmd or html file
+#' # Build a pdf from a Rmd or html file
 #' build_pdf("slides.Rmd")
 #' build_pdf("slides.html")
 #'
-#' # Build simple pdf from Rmd or html file and include
-#' # partial (continuation) slides
+#' # Build a pdf from a url
+#' build_pdf("http://www.mysite.com/myslides.html")
+#'
+#' # Build a pdf with partial (continuation) slides
 #' build_pdf("slides.Rmd", partial_slides = TRUE)
 #' build_pdf("slides.html", partial_slides = TRUE)
 #'
-#' # Build "complex" xaringan slides to pdf from Rmd or html file
+#' # Build a pdf of "complex" xaringan slides
 #' build_pdf("slides_complex.Rmd", complex_slides = TRUE)
 #' build_pdf("slides_complex.html", complex_slides = TRUE)
 #'
-#' # Build "complex" xaringan slides to pdf from Rmd or html file and include
-#' # partial (continuation) slides
+#' # Build a pdf of "complex" xaringan slides and include partial
+#' # (continuation) slides
 #' build_pdf(input = "slides_complex.Rmd",
 #'           output_file = "slides_complex_partial.pdf",
 #'           complex_slides = TRUE,
@@ -57,26 +60,24 @@ build_pdf <- function(
     assert_chrome_installed()
 
     # Check input and output files have correct extensions
-    assert_path_ext(input, c("rmd", "html"), arg = "input")
-    output_file <- check_output_file(input, output_file, "pdf")
+    assert_io_paths(input, c("rmd", "html"), output_file, "pdf")
 
-    # Create full file paths from root
-    input <- fs::path_abs(input)
-    output_file <- fs::path_abs(output_file)
+    # Build input and output paths
+    paths <- build_paths(input, output_file)
 
-    # Build
+    # Build html (if input is rmd)
     if (test_path_ext(input, "rmd")) {
-        build_html(
-          input = input,
-          output_file = fs::path_ext_set(output_file, "html")
-        )
-        input <- fs::path_ext_set(input, "html")
+        build_html(paths$input$rmd, paths$output$html)
     }
 
+    # Build pdf from html
+    output_file <- paths$output$pdf
     if (complex_slides | partial_slides) {
-        build_pdf_complex(input, output_file, partial_slides, delay)
+        build_pdf_complex(paths$input$url, output_file, partial_slides, delay)
     } else {
-        build_pdf_simple(input, output_file)
+      input <- paths$input$html
+      if (is_url(input)) { input <- paths$input$url }
+      build_pdf_simple(input, output_file)
     }
 }
 
@@ -89,7 +90,7 @@ build_pdf <- function(
 #' @param output_file The name of the output file. If `NULL` (the default) then
 #' the output filename will be based on filename for the input file.
 #' If a filename is provided, a path to the output file can also be provided.
-build_pdf_simple <- function(input, output_file) {
+build_pdf_simple <- function(input, output_file = NULL) {
     print_build_status(input, output_file)
     pagedown::chrome_print(
         input  = input,
@@ -121,23 +122,6 @@ build_pdf_complex <- function(input, output_file, partial_slides, delay) {
   }
   if (!requireNamespace("pdftools", quietly = TRUE)) {
     stop("`pdftools` is required: install.packages('pdftools')")
-  }
-
-  is_url <- grepl("^(ht|f)tp", tolower(input))
-
-  if (is.null(output_file)) {
-    if (is_url) {
-      output_file <- fs::path_ext_set(fs::path_file(input), "pdf")
-    } else {
-      output_file <- fs::path_ext_set(input, "pdf")
-    }
-  }
-
-  if (!is_url && !grepl("^file://", input)) {
-    if (!tolower(fs::path_ext(input)) %in% c("htm", "html")) {
-      stop("`input` must be the HTML version of the slides.")
-    }
-    input <- paste0("file://", fs::path_abs(input))
   }
 
   b <- chromote::ChromoteSession$new()

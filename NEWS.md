@@ -1,3 +1,16 @@
+# xaringanBuilder 0.0.5
+
+## Summary of larger updates:
+
+* Major improvements to how paths are handled by adding the build_paths() function (not exported). Now you can use a url to build to any output types except for social and html (which both require starting from the Rmd file).
+* Added build_to_pdf() function (not exported) as an internal helper to build from a Rmd or html file to the pdf.
+
+## Summary of smaller updates:
+
+* Added `assert_chrome_installed()` for issue #12
+
+## Bugs
+
 # xaringanBuilder 0.0.4
 
 * Added `build_social()` for making a png of the first slides sized for sharing on social media.

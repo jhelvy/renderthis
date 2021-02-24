@@ -14,14 +14,14 @@
 #' }
 build_html <- function(input, output_file = NULL) {
     # Check input and output files have correct extensions
-    assert_path_ext(input, "rmd", arg = "input")
-    output_file <- check_output_file(input, output_file, "html")
+    assert_io_paths(input, "rmd", output_file, "html")
 
-    # Create full file paths from root
-    input <- fs::path_abs(input)
-    output_file <- fs::path_abs(output_file)
+    # Build input and output paths
+    paths <- build_paths(input, output_file)
+    input <- paths$input$rmd
+    output_file <- paths$output$html
 
-    # Build
+    # Build html from rmd
     print_build_status(input, output_file)
     rmarkdown::render(
         input = input,

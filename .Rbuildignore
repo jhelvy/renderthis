@@ -10,3 +10,4 @@
 build.R
 ^\.travis\.yml$
 ^CRAN-RELEASE$
+next_release.md

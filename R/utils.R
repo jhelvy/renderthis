@@ -1,18 +1,8 @@
-print_build_status <- function(input, output_file) {
-    cli::cli_process_start(
-        "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
-        on_exit = "done"
-    )
-}
-
-pdf_to_pngs <- function(input, density) {
-    pdf <- magick::image_read(input, density = density)
-    pngs <- magick::image_convert(pdf, 'png')
-    return(pngs)
-}
-
-test_path_ext <- function(path, expected_ext) {
-    tolower(fs::path_ext(path)) %in% expected_ext
+assert_io_paths <- function(input, input_ext, output_file, output_file_ext) {
+    assert_path_ext(input, input_ext, arg = "input")
+    if (!is.null(output_file)) {
+        assert_path_ext(output_file, output_file_ext, arg = "output_file")
+    }
 }
 
 assert_path_ext <- function(path, expected_ext, arg) {
@@ -22,25 +12,8 @@ assert_path_ext <- function(path, expected_ext, arg) {
     }
 }
 
-check_output_file <- function(input, output_file, ext) {
-    if (is.null(output_file)) {
-        return(fs::path_ext_set(input, ext))
-    }
-    assert_path_ext(output_file, ext, arg = "output_file")
-    return(output_file)
-}
-
-append_to_file_path <- function(path, s) {
-    # Appends s to path before the extension, e.g.
-    # path:    "file.png"
-    # s:       "_social"
-    # returns: "file_social.png"
-    return(
-        fs::path_ext_set(
-            paste0(fs::path_ext_remove(path), s),
-            fs::path_ext(path)
-        )
-    )
+test_path_ext <- function(path, expected_ext) {
+    return(tolower(fs::path_ext(path)) %in% expected_ext)
 }
 
 assert_chrome_installed <- function() {
@@ -56,5 +29,111 @@ assert_chrome_installed <- function() {
     )
     if (is.null(chromePath)) {
         stop(error)
+    }
+}
+
+build_paths <- function(input, output_file = NULL) {
+    # Build input paths
+    if (is_url(input)) {
+      input_root <- fs::path_abs(fs::path_file(input))
+      input_html <- input
+      input_url <- input
+    } else {
+      input_root <- fs::path_abs(input)
+      input_html <- fs::path_ext_set(input_root, "html")
+      input_url <- paste0("file://", input_html)
+    }
+    input_rmd <- fs::path_ext_set(input_root, "rmd")
+    input_pdf <- fs::path_ext_set(input_root, "pdf")
+
+    # Build output_file paths
+    if (is.null(output_file)) {
+      if (is_url(input)) {
+        output_root <- fs::path_abs(fs::path_file(input))
+      } else {
+        output_root <- fs::path_abs(input)
+      }
+    } else {
+      output_root <- fs::path_abs(output_file)
+    }
+    output_html <- fs::path_ext_set(output_root, "html")
+    output_pdf <- fs::path_ext_set(output_root, "pdf")
+    output_gif <- fs::path_ext_set(output_root, "gif")
+    output_pptx <- fs::path_ext_set(output_root, "pptx")
+    output_png <- fs::path_ext_set(output_root, "png")
+    output_thumbnail <- output_png
+    output_social <- output_png
+    # Append "_thumbnail" and "_social" to png outputs
+    if (is.null(output_file)) {
+      output_thumbnail <- append_to_file_path(output_png, "_thumbnail")
+      output_social <- append_to_file_path(output_png, "_social")
+    }
+
+    # Return path list
+    return(list(
+      input = list(
+        url = input_url,
+        html = input_html,
+        rmd = input_rmd,
+        pdf = input_pdf
+      ),
+      output = list(
+        html = output_html,
+        pdf = output_pdf,
+        gif = output_gif,
+        pptx = output_pptx,
+        thumbnail = output_thumbnail,
+        social = output_social
+      )
+    ))
+}
+
+is_url <- function(input) {
+  return(grepl("^(ht|f)tp", tolower(input)))
+}
+
+append_to_file_path <- function(path, s) {
+    # Appends s to path before the extension, e.g.
+    # path:    "file.png"
+    # s:       "_social"
+    # returns: "file_social.png"
+    return(
+        fs::path_ext_set(
+            paste0(fs::path_ext_remove(path), s),
+            fs::path_ext(path)
+        )
+    )
+}
+
+pdf_to_pngs <- function(input, density) {
+    pdf <- magick::image_read(input, density = density)
+    pngs <- magick::image_convert(pdf, 'png')
+    return(pngs)
+}
+
+print_build_status <- function(input, output_file) {
+    cli::cli_process_start(
+        "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
+        on_exit = "done"
+    )
+}
+
+build_to_pdf <- function(
+  input,
+  paths,
+  complex_slides,
+  partial_slides,
+  delay
+) {
+    if (test_path_ext(input, "rmd")) {
+        build_pdf(
+          input = paths$input$rmd,
+          output_file = paths$output$pdf,
+          complex_slides, partial_slides, delay)
+    } else if (test_path_ext(input, "html")) {
+        build_pdf(
+          input = input,
+          output_file = paths$output$pdf,
+          complex_slides, partial_slides, delay)
     }
 }

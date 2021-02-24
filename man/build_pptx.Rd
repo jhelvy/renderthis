@@ -14,7 +14,9 @@ build_pptx(
 )
 }
 \arguments{
-\item{input}{Path to Rmd, html, or pdf file of xaringan slides.}
+\item{input}{Path to a Rmd, html, or pdf file, or a url of xaringan slides.
+If the input is a url to xaringan slides on a website, you must provide the
+full url ending in ".html".}
 
 \item{output_file}{Name of the output pptx file.}
 
@@ -35,9 +37,8 @@ a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
 TRUE`.}
 }
 \description{
-Build xaringan slides as pptx file from a Rmd, html, or pdf file. The
-function builds to the pdf and then inserts a png image of each slide
-as a new slide in a pptx file.
+Build xaringan slides as a pptx file. The function builds to the pdf and
+then inserts a png image of each slide as a new slide in a pptx file.
 }
 \examples{
 \dontrun{
