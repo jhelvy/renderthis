@@ -1,6 +1,6 @@
 Package: xaringanBuilder
 Title: Functions For Building Xaringan Slides To Different Outputs
-Version: 0.0.6.9000
+Version: 0.0.6.9001
 Authors@R:
     c(person(given = "John",
              family = "Helveston",

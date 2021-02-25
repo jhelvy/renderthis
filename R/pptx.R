@@ -57,7 +57,7 @@ build_pptx <- function(
     output_file <- paths$output$pptx
     print_build_status(input, output_file)
     pngs <- pdf_to_pngs(input, density)
-    doc <- officer::read_pptx()
+    doc <- get_pptx_template(pngs[1])
     for (i in 1:length(pngs)) {
         png_path <- magick::image_write(
             pngs[i], tempfile(fileext = ".png"))
@@ -74,4 +74,17 @@ build_pptx <- function(
     }
 
     print(doc, output_file)
+}
+
+get_pptx_template <- function(png) {
+    dims <- magick::image_info(png)
+    ar <- floor(100*(dims$width / dims$height))
+    if (ar == 177) {
+        file <- "16-9.pptx"
+    } else {
+        file <- "4-3.pptx"
+    }
+    template <- system.file(
+        "extdata", file, package = "xaringanBuilder", mustWork = TRUE)
+    return(officer::read_pptx(template))
 }
