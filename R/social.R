@@ -14,7 +14,7 @@
 #' @examples
 #' \dontrun{
 #' # Build png image of first xaringan slide from Rmd file
-#' # for sharing on social media
+#' # sized for sharing on social media
 #' build_social("slides.Rmd")
 #' }
 #'

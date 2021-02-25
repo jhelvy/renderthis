@@ -2,11 +2,12 @@
 #'
 #' Build xaringan slides as a gif file. The function builds to the pdf and
 #' then converts it to a gif.
-#' @param input Path to a Rmd, html, or pdf file, or a url of xaringan slides.
+#' @param input Path to a Rmd file, html file, pdf file, or a url.
 #' If the input is a url to xaringan slides on a website, you must provide the
 #' full url ending in ".html".
 #' @param output_file Name of the output gif file.
-#' @param density Resolution of the resulting gif file.
+#' @param density Resolution of the resulting gif file. Defaults to
+#' `"72x72"`.
 #' @param fps Frames per second of the resulting gif file.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #' other html widgets or advanced features), set `complex_slides = TRUE`.
@@ -22,10 +23,11 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Build gif from Rmd, html, or pdf file
+#' # Build gif from Rmd, html, pdf, or url
 #' build_gif("slides.Rmd")
 #' build_gif("slides.html")
 #' build_gif("slides.pdf")
+#' build_gif("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 #' }
 build_gif <- function(
     input,

@@ -29,6 +29,7 @@ reference:
   - build_all
   - build_html
   - build_pdf
+  - build_png
+  - build_social
   - build_gif
   - build_pptx
-  - build_thumbnail

@@ -42,12 +42,10 @@ you will also need to install the {chromote} and {pdftools} packages.
 }
 \examples{
 \dontrun{
-# Build a pdf from a Rmd or html file
+# Build pdf from Rmd, html, or url
 build_pdf("slides.Rmd")
 build_pdf("slides.html")
-
-# Build a pdf from a url
-build_pdf("http://www.mysite.com/myslides.html")
+build_pdf("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 
 # Build a pdf with partial (continuation) slides
 build_pdf("slides.Rmd", partial_slides = TRUE)

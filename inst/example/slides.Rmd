@@ -1,8 +1,7 @@
 ---
-title: "Presentation Ninja"
-subtitle: "⚔<br/>with xaringan"
-author: "Yihui Xie"
-institute: "RStudio, PBC"
+title: "{xaringanBuilder}"
+subtitle: "Build xaringan slides to different outputs"
+author: "John Paul Helveston"
 date: "2016/12/12 (updated: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
@@ -17,6 +16,7 @@ background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharin
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
+xaringanExtra::use_panelset() # So we can add some slides with fancy panelsets!
 ```
 
 ???
@@ -24,48 +24,101 @@ options(htmltools.dir.version = FALSE)
 Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
 
 ---
-class: center, middle
 
-# xaringan
+## Installation
 
-### /ʃaː.'riŋ.ɡan/
+You can install the current version of xaringanBuilder from GitHub:
 
----
-
-# Hello World
-
-Install the **xaringan** package from [Github](https://github.com/yihui/xaringan):
-
-```{r eval=FALSE, tidy=FALSE}
-devtools::install_github("yihui/xaringan")
+```
+# install.packages("remotes")
+remotes::install_github("jhelvy/xaringanBuilder")
 ```
 
---
+.pull-left[
+## Supported output types: 
 
-You are recommended to use the [RStudio IDE](https://www.rstudio.com/products/rstudio/), but you do not have to.
+- html
+- pdf
+- gif
+- pptx
+- png 
+- social: png image of first slide sized for social media sharing (e.g. Twitter)
 
-- Create a new R Markdown document from the menu `File -> New File -> R Markdown -> From Template -> Ninja Presentation`;<sup>1</sup>
+]
 
---
+.pull-right[
+## Build hierarchy:
 
-- Click the `Knit` button to compile it;
+```
+Rmd
+ |
+ |--> social (png)
+ |
+ |--> html
+       |
+       |--> pdf
+             |
+             |--> png
+                   |
+                   |--> gif
+                   |
+                   |--> pptx
+```
 
---
-
-- or use the [RStudio Addin](https://rstudio.github.io/rstudioaddins/)<sup>2</sup> "Infinite Moon Reader" to live preview the slides (every time you update and save the Rmd document, the slides will be automatically reloaded in RStudio Viewer.
-
-.footnote[
-[1] 中文用户请看[这份教程](https://slides.yihui.org/xaringan/zh-CN.html)
-
-[2] See [#2](https://github.com/yihui/xaringan/issues/2) if you do not see the template or addin in RStudio.
 ]
 
 ---
 
-class: center, middle
+## Partial / incremental slides
+
+For `pdf`, `png`, `gif`, and `pptx` output types, if you want to build a new slide for each increment on [incremental slides](https://slides.yihui.org/xaringan/incremental.html#1), set `partial_slides = TRUE` in any of the following build functions:
+
+```
+build_pdf()
+build_png()
+build_gif()
+build_pptx()
+build_all()
+```
+
+--
+
+For example, the following code would render this slide as two slides in a pdf instead of one:
+
+```
+build_pdf("slides.Rmd", partial_slides = TRUE)
+build_pdf("slides.html", partial_slides = TRUE)
+```
+
+> **Note**: This option requires the [chromote](https://github.com/rstudio/chromote) and [pdftools](https://github.com/ropensci/pdftools) packages.
+
+---
+
+## Complex slides
+
+"Complex" slides are slides that contain [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) (like the one on this slide) or other html widgets / advanced features that might not render well as a pdf. To render these on separate slides, set `complex_slides = TRUE` in `build_pdf()`, `build_png()`, `build_gif()`, `build_pptx()`, or `build_all()`.
+
+.panelset[
+.panel[.panel-name[Chunk]
+
+```{r, eval=FALSE}
+head(mtcars)
+```
+]
+
+.panel[.panel-name[Output]
+
+```{r, echo=FALSE}
+head(mtcars)
+```
+]
+]
+
+---
+class: center, middle, inverse
 
 # Thanks!
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
 
-The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](https://yihui.org/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
+More at https://jhelvy.github.io/xaringanBuilder

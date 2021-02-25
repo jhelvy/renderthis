@@ -60,12 +60,11 @@ build_paths <- function(input, output_file = NULL) {
     output_pdf <- fs::path_ext_set(output_root, "pdf")
     output_gif <- fs::path_ext_set(output_root, "gif")
     output_pptx <- fs::path_ext_set(output_root, "pptx")
+    output_zip <- fs::path_ext_set(output_root, "zip")
     output_png <- fs::path_ext_set(output_root, "png")
-    output_thumbnail <- output_png
     output_social <- output_png
-    # Append "_thumbnail" and "_social" to png outputs
+    # Append "_social" to png outputs
     if (is.null(output_file)) {
-      output_thumbnail <- append_to_file_path(output_png, "_thumbnail")
       output_social <- append_to_file_path(output_png, "_social")
     }
 
@@ -82,7 +81,8 @@ build_paths <- function(input, output_file = NULL) {
         pdf = output_pdf,
         gif = output_gif,
         pptx = output_pptx,
-        thumbnail = output_thumbnail,
+        zip = output_zip,
+        png = output_png,
         social = output_social
       )
     ))
@@ -105,17 +105,17 @@ append_to_file_path <- function(path, s) {
     )
 }
 
-pdf_to_pngs <- function(input, density) {
-    pdf <- magick::image_read(input, density = density)
-    pngs <- magick::image_convert(pdf, 'png')
-    return(pngs)
-}
-
 print_build_status <- function(input, output_file) {
     cli::cli_process_start(
         "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
         on_exit = "done"
     )
+}
+
+pdf_to_pngs <- function(input, density) {
+    pdf <- magick::image_read(input, density = density)
+    pngs <- magick::image_convert(pdf, 'png')
+    return(pngs)
 }
 
 build_to_pdf <- function(

@@ -15,13 +15,14 @@ build_gif(
 )
 }
 \arguments{
-\item{input}{Path to a Rmd, html, or pdf file, or a url of xaringan slides.
+\item{input}{Path to a Rmd file, html file, pdf file, or a url.
 If the input is a url to xaringan slides on a website, you must provide the
 full url ending in ".html".}
 
 \item{output_file}{Name of the output gif file.}
 
-\item{density}{Resolution of the resulting gif file.}
+\item{density}{Resolution of the resulting gif file. Defaults to
+`"72x72"`.}
 
 \item{fps}{Frames per second of the resulting gif file.}
 
@@ -45,9 +46,10 @@ then converts it to a gif.
 }
 \examples{
 \dontrun{
-# Build gif from Rmd, html, or pdf file
+# Build gif from Rmd, html, pdf, or url
 build_gif("slides.Rmd")
 build_gif("slides.html")
 build_gif("slides.pdf")
+build_gif("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 }
 }

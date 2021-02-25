@@ -23,12 +23,10 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Build a pdf from a Rmd or html file
+#' # Build pdf from Rmd, html, or url
 #' build_pdf("slides.Rmd")
 #' build_pdf("slides.html")
-#'
-#' # Build a pdf from a url
-#' build_pdf("http://www.mysite.com/myslides.html")
+#' build_pdf("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 #'
 #' # Build a pdf with partial (continuation) slides
 #' build_pdf("slides.Rmd", partial_slides = TRUE)
@@ -81,15 +79,6 @@ build_pdf <- function(
     }
 }
 
-#' Print "simple" xaringan slides to PDF
-#'
-#' Prints "simple" xaringan slides - those without panelsets or other html
-#' widgets or advanced features, and also slides without partial slides.
-#'
-#' @param input Path to Rmd or html file of xaringan slides.
-#' @param output_file The name of the output file. If `NULL` (the default) then
-#' the output filename will be based on filename for the input file.
-#' If a filename is provided, a path to the output file can also be provided.
 build_pdf_simple <- function(input, output_file = NULL) {
     print_build_status(input, output_file)
     pagedown::chrome_print(
@@ -101,21 +90,6 @@ build_pdf_simple <- function(input, output_file = NULL) {
 # in v0.0.2. He also posted it on his blog here:
 # https://www.garrickadenbuie.com/blog/print-xaringan-chromote/
 
-#' Print "complex" xaringan slides to PDF
-#'
-#' Prints "complex" xaringan slides (e.g. slides with panelsets or other html
-#' widgets or advanced features) to a PDF file. Requires a local installation
-#' of Chrome.
-#'
-#' @param input Path to Rmd or html file of xaringan slides.
-#' @param output_file The name of the output file. If `NULL` (the default) then
-#' the output filename will be based on filename for the input file.
-#' If a filename is provided, a path to the output file can also be provided.
-#' @param partial_slides Should partial (continuation) slides be
-#' included in the output? If `FALSE`, the default, only the complete slide
-#' is included in the PDF.
-#' @param delay Seconds of delay between advancing to and printing
-#' a new slide.
 build_pdf_complex <- function(input, output_file, partial_slides, delay) {
   if (!requireNamespace("chromote", quietly = TRUE)) {
     stop("`chromote` is required: devtools::install_github('rstudio/chromote')")

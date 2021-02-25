@@ -1,12 +1,14 @@
 #' Build xaringan slides as pptx file.
 #'
 #' Build xaringan slides as a pptx file. The function builds to the pdf and
-#' then inserts a png image of each slide as a new slide in a pptx file.
-#' @param input Path to a Rmd, html, or pdf file, or a url of xaringan slides.
+#' then converts it into png images that are inserted on each slide in the
+#' pptx file.
+#' @param input Path to a Rmd file, html file, pdf file, or a url.
 #' If the input is a url to xaringan slides on a website, you must provide the
 #' full url ending in ".html".
 #' @param output_file Name of the output pptx file.
-#' @param density Resolution of the resulting pptx file.
+#' @param density Resolution of the resulting gif file. Defaults to
+#' `"72x72"`.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #' other html widgets or advanced features), set `complex_slides = TRUE`.
 #' Defaults to `FALSE`. This will use the {chromote} package to iterate through
@@ -21,10 +23,11 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Build gif from Rmd, html, or pdf file
+#' # Build pptx from Rmd, html, pdf, or url
 #' build_pptx("slides.Rmd")
 #' build_pptx("slides.html")
 #' build_pptx("slides.pdf")
+#' build_pptx("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 #' }
 build_pptx <- function(
     input,

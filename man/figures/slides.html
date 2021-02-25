@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Presentation Ninja</title>
+    <title>{xaringanBuilder}</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Yihui Xie" />
+    <meta name="author" content="John Paul Helveston" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
@@ -14,11 +14,10 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Presentation Ninja
-## ⚔<br/>with xaringan
-### Yihui Xie
-### RStudio, PBC
-### 2016/12/12 (updated: 2021-02-10)
+# {xaringanBuilder}
+## Build xaringan slides to different outputs
+### John Paul Helveston
+### 2016/12/12 (updated: 2021-02-25)
 
 ---
 
@@ -32,46 +31,79 @@ background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharin
 Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
 
 ---
-class: center, middle
 
-# xaringan
+## Installation
 
-### /ʃaː.'riŋ.ɡan/
+You can install the current version of xaringanBuilder from GitHub:
 
----
-
-# Hello World
-
-Install the **xaringan** package from [Github](https://github.com/yihui/xaringan):
-
-
-```r
-devtools::install_github("yihui/xaringan")
+```
+# install.packages("remotes")
+remotes::install_github("jhelvy/xaringanBuilder")
 ```
 
---
+.pull-left[
+## Supported output types: 
 
-You are recommended to use the [RStudio IDE](https://www.rstudio.com/products/rstudio/), but you do not have to.
+- html
+- pdf
+- gif
+- pptx
+- png 
+- social: png image of first slide sized for social media sharing (e.g. Twitter)
 
-- Create a new R Markdown document from the menu `File -&gt; New File -&gt; R Markdown -&gt; From Template -&gt; Ninja Presentation`;&lt;sup&gt;1&lt;/sup&gt;
+]
 
---
+.pull-right[
+## Build hierarchy:
 
-- Click the `Knit` button to compile it;
+```
+Rmd
+ |
+ |--&gt; social (png)
+ |
+ |--&gt; html
+       |
+       |--&gt; pdf
+             |
+             |--&gt; png
+                   |
+                   |--&gt; gif
+                   |
+                   |--&gt; pptx
+```
 
---
-
-- or use the [RStudio Addin](https://rstudio.github.io/rstudioaddins/)&lt;sup&gt;2&lt;/sup&gt; "Infinite Moon Reader" to live preview the slides (every time you update and save the Rmd document, the slides will be automatically reloaded in RStudio Viewer.
-
-.footnote[
-[1] 中文用户请看[这份教程](https://slides.yihui.org/xaringan/zh-CN.html)
-
-[2] See [#2](https://github.com/yihui/xaringan/issues/2) if you do not see the template or addin in RStudio.
 ]
 
 ---
 
-# Panels!
+## Partial / incremental slides
+
+For `pdf`, `png`, `gif`, and `pptx` output types, if you want to build a new slide for each increment on [incremental slides](https://slides.yihui.org/xaringan/incremental.html#1), set `partial_slides = TRUE` in any of the following build functions:
+
+```
+build_pdf()
+build_png()
+build_gif()
+build_pptx()
+build_all()
+```
+
+--
+
+For example, the following code would render this slide as two slides in a pdf instead of one:
+
+```
+build_pdf("slides.Rmd", partial_slides = TRUE)
+build_pdf("slides.html", partial_slides = TRUE)
+```
+
+&gt; **Note**: This option requires the [chromote](https://github.com/rstudio/chromote) and [pdftools](https://github.com/ropensci/pdftools) packages.
+
+---
+
+## Complex slides
+
+"Complex" slides are slides that contain [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) (like the one on this slide) or other html widgets / advanced features that might not render well as a pdf. To render these on separate slides, set `complex_slides = TRUE` in `build_pdf()`, `build_png()`, `build_gif()`, `build_pptx()`, or `build_all()`.
 
 .panelset[
 .panel[.panel-name[Chunk]
@@ -86,26 +118,32 @@ head(mtcars)
 
 
 ```
-##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+##                    mpg cyl disp  hp drat    wt  qsec
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02
+## Valiant           18.1   6  225 105 2.76 3.460 20.22
+##                   vs am gear carb
+## Mazda RX4          0  1    4    4
+## Mazda RX4 Wag      0  1    4    4
+## Datsun 710         1  1    4    1
+## Hornet 4 Drive     1  0    3    1
+## Hornet Sportabout  0  0    3    2
+## Valiant            1  0    3    1
 ```
 ]
 ]
 
 ---
-
-class: center, middle
+class: center, middle, inverse
 
 # Thanks!
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
 
-The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](https://yihui.org/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
+More at https://jhelvy.github.io/xaringanBuilder
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
