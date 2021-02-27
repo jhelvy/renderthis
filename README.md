@@ -18,10 +18,8 @@ Build xaringan slides to multiple output formats:
   - gif
   - pptx
   - mp4
-  - png (convert some or all slides to png files; useful for generating
-    Youtube thumbnails, for example)
-  - social: png image of first slide sized for social media sharing
-    (e.g. Twitter)
+  - png
+  - social (png of first slide sized for sharing on social media)
 
 ## Installation
 
@@ -30,25 +28,45 @@ You can install the current version of xaringanBuilder from GitHub:
     # install.packages("remotes")
     remotes::install_github("jhelvy/xaringanBuilder")
 
+## Build hierarchy
+
+Some output types depend on intermediate outputs. Here is a diagram of
+the build hierarchy:
+
+    Rmd
+     |
+     |--> social (png)
+     |
+     |--> html
+           |
+           |--> pdf
+                 |
+                 |--> png
+                       |
+                       |--> gif
+                       |
+                       |--> mp4
+                       |
+                       |--> pptx
+
 ## Usage
 
-The xaringan Rmd files used in all examples below can be found
+You can build all of the examples below from
 [here](https://github.com/jhelvy/xaringanBuilder/tree/master/inst/example)
 
     library(xaringanBuilder)
 
 ### Input - Output
 
-All `build_**()` functions use the `input` and `output_file` arguments.
+All `build_*()` functions use the `input` and `output_file` arguments.
 
 The `input` argument is required and can be a full or local path to the
-input file (a Rmd, html, or pdf file), or a url to a set of xaringan
-slides on the web.
+input file.
 
-The `output_file` argument is optional. It can be a full or local path
-to the output file, and it must end in an appropriate extension
-(e.g. `slides.gif` for `build_gif()`). If it is not provided, the
-output file name will be determined based on the `input` argument.
+The `output_file` argument is optional. If provided, it can be a full or
+local path to the output file, and it must end in an appropriate
+extension (e.g. `slides.gif` for `build_gif()`). If it is not provided,
+the output file name will be determined based on the `input` argument.
 
 ### Build HTML
 
@@ -64,8 +82,8 @@ Input can be a Rmd file, html file, or url:
     build_pdf("slides.html")
     build_pdf("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 
-**Note**: Building the PDF requires a local installation of Google
-Chrome
+**Note**: Building the PDF requires a [local installation of Google
+Chrome](#local-chrome-installation-requirement)
 
 ### Build GIF
 
@@ -107,12 +125,13 @@ Input can be a Rmd file, html file, pdf file, or url:
 
 ### Build PNG
 
-Build png image(s) of some or all slides. Useful for generating Youtube
-thumbnails, for example.
+Build png image(s) of some or all slides. Use the `slides` argument to
+determine which slides to include (defaults to `1`, returning just the
+first slide) .
 
 Input can be a Rmd file, html file, pdf file, or url:
 
-    # By default, a png of only the first slide is built
+    # By default, creates a png of only the first slide:
     build_png("slides.Rmd")
     build_png("slides.html")
     build_png("slides.pdf")
@@ -161,12 +180,10 @@ to include or exclude:
 [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) or
 other html widgets / advanced features that might not render well as a
 pdf. To render these, set `complex_slides = TRUE` in `build_pdf()`,
-`build_png()`, `build_gif()`, `build_pptx()`, or `build_all()`.
-
-For example:
+`build_png()`, `build_gif()`, build\_mp4()`,`build\_pptx()`,
+or`build\_all()\`. For example:
 
     build_pdf("slides_complex.Rmd", complex_slides = TRUE)
-    build_pdf("slides_complex.html", complex_slides = TRUE)
 
 **Note**: This option requires the
 [chromote](https://github.com/rstudio/chromote) and
@@ -174,49 +191,35 @@ For example:
 
 ## Partial / incremental slides
 
-For pdf, gif, and pptx output types, if you want to build a new slide
-for each increment on [incremental
+If you want to build a new slide for each increment on [incremental
 slides](https://slides.yihui.org/xaringan/incremental.html#1), set
 `partial_slides = TRUE` in `build_pdf()`, `build_png()`, `build_gif()`,
-`build_pptx()`, or `build_all()`.
-
-For example:
+`build_mp4()`, `build_pptx()`, or `build_all()`. For example:
 
     build_pdf("slides.Rmd", partial_slides = TRUE)
-    build_pdf("slides.html", partial_slides = TRUE)
 
 **Note**: This option requires the
 [chromote](https://github.com/rstudio/chromote) and
 [pdftools](https://github.com/ropensci/pdftools) packages.
 
-## Build hierarchy
-
-Some output types depend on intermediate output types (e.g. to build a
-pdf from a Rmd file, you first have to build the html file). Here is a
-diagram of the build hierarchy:
-
-    Rmd
-     |
-     |--> social (png)
-     |
-     |--> html
-           |
-           |--> pdf
-                 |
-                 |--> png
-                       |
-                       |--> gif
-                       |
-                       |--> mp4
-                       |
-                       |--> pptx
-
 ## Local Chrome installation requirement
 
-Building the PDF requires a local installation on Chrome, which may not
-be available (e.g. on a computing cluster). If you are unable to install
-Chrome, the recommended workflow is to build intermediate output formats
-and use an alternative method for building the PDF.
+Building the PDF requires a local installation of Chrome. If you don’t
+have Chrome installed, you can use other browsers based on Chromium,
+such as Chromium itself, Edge, Vivaldi, Brave, or Opera. In this case,
+you will need to set the path to the browser you want to use for the
+[pagedown](https://github.com/rstudio/pagedown) package as well as the
+[chromote](https://github.com/rstudio/chromote) package if you use the
+`complex_slides = TRUE` or `partial_slides = TRUE` arguments.
+
+After installing the packages, you can set the paths like this:
+
+    Sys.setenv(PAGEDOWN_CHROME = "/path/to/browser")
+    Sys.setenv(CHROMOTE_CHROME = "/path/to/browser")
+
+If you are unable to install Chrome (e.g. on a computing cluster), the
+recommended workflow is to build intermediate output formats and use an
+alternative method for building the PDF.
 
 For example, to build a pptx from a Rmd file without Chrome, you could:
 
@@ -231,7 +234,7 @@ For example, to build a pptx from a Rmd file without Chrome, you could:
   - Author: *John Paul Helveston*
     [www.jhelvy.com](http://www.jhelvy.com/)
   - Date First Written: *September 27, 2020*
-  - Most Recent Update: February 26, 2021
+  - Most Recent Update: February 27, 2021
   - License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
