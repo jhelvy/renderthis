@@ -2,7 +2,7 @@
 title: "{xaringanBuilder}"
 subtitle: "Build xaringan slides to different outputs"
 author: "John Paul Helveston"
-date: "2016/12/12 (updated: `r Sys.Date()`)"
+date: "2020/09/27 (updated: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -34,20 +34,25 @@ You can install the current version of xaringanBuilder from GitHub:
 remotes::install_github("jhelvy/xaringanBuilder")
 ```
 
+--
+
 .pull-left[
-## Supported output types: 
+#### Supported output types: 
 
 - html
 - pdf
 - gif
+- mp4
 - pptx
 - png 
 - social: png image of first slide sized for social media sharing (e.g. Twitter)
 
 ]
 
+--
+
 .pull-right[
-## Build hierarchy:
+#### Build hierarchy:
 
 ```
 Rmd
@@ -62,6 +67,8 @@ Rmd
                    |
                    |--> gif
                    |
+                   |--> mp4
+                   |
                    |--> pptx
 ```
 
@@ -71,12 +78,13 @@ Rmd
 
 ## Partial / incremental slides
 
-For `pdf`, `png`, `gif`, and `pptx` output types, if you want to build a new slide for each increment on [incremental slides](https://slides.yihui.org/xaringan/incremental.html#1), set `partial_slides = TRUE` in any of the following build functions:
+For `pdf`, `png`, `gif`, `mp4`, and `pptx` output types, if you want to build a new slide for each increment on [incremental slides](https://slides.yihui.org/xaringan/incremental.html#1), set `partial_slides = TRUE` in any of the following build functions:
 
 ```
 build_pdf()
 build_png()
 build_gif()
+build_mp4()
 build_pptx()
 build_all()
 ```
@@ -96,7 +104,7 @@ build_pdf("slides.html", partial_slides = TRUE)
 
 ## Complex slides
 
-"Complex" slides are slides that contain [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) (like the one on this slide) or other html widgets / advanced features that might not render well as a pdf. To render these on separate slides, set `complex_slides = TRUE` in `build_pdf()`, `build_png()`, `build_gif()`, `build_pptx()`, or `build_all()`.
+"Complex" slides are slides that contain [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) (like the one on this slide) or other html widgets / advanced features that might not render well as a pdf. To render these on separate slides, set `complex_slides = TRUE` in `build_pdf()`, `build_png()`, `build_gif()`, `build_mp4()`, `build_pptx()`, or `build_all()`.
 
 .panelset[
 .panel[.panel-name[Chunk]

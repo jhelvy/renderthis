@@ -16,6 +16,12 @@ build_gif("slides.html")
 build_gif("slides.pdf")
 build_gif("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 
+# Build mp4 from Rmd, html, pdf, or url
+build_mp4("slides.Rmd")
+build_mp4("slides.html")
+build_mp4("slides.pdf")
+build_mp4("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+
 # Build pptx from Rmd, html, pdf, or url
 # (pptx contains slides of png images of each rendered xaringan slide)
 build_pptx("slides.Rmd")
@@ -43,7 +49,7 @@ build_all("slides.Rmd") # Builds every output by default
 # Use the `include` or `exclude` arguments to control which output types to
 # include or exclude. Both of these build html, pdf, and gif outputs
 build_all("slides.Rmd", include = c("html", "pdf", "gif"))
-build_all("slides.Rmd", exclude = c("pptx", "png", "social"))
+build_all("slides.Rmd", exclude = c("mp4", "pptx", "png", "social"))
 
 # "Complex" slides
 
