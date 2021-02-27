@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build xaringan slides as pptx file. — build_pptx • xaringanBuilder</title>
+<title>Build xaringan slides as a mp4 video file. — build_mp4 • xaringanBuilder</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,10 @@
 
 
 
-<meta property="og:title" content="Build xaringan slides as pptx file. — build_pptx" />
-<meta property="og:description" content="Build xaringan slides as a pptx file. The function builds to the pdf and
-then converts it into png images that are inserted on each slide in the
-pptx file." />
+<meta property="og:title" content="Build xaringan slides as a mp4 video file. — build_mp4" />
+<meta property="og:description" content="Build xaringan slides as a mp4 video file. The function builds to the pdf,
+converts each slide in the pdf to a png, and then converts the deck of
+png files to a mp4 video file." />
 
 
 
@@ -113,21 +113,22 @@ pptx file." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build xaringan slides as pptx file.</h1>
+    <h1>Build xaringan slides as a mp4 video file.</h1>
     
-    <div class="hidden name"><code>build_pptx.Rd</code></div>
+    <div class="hidden name"><code>build_mp4.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Build xaringan slides as a pptx file. The function builds to the pdf and
-then converts it into png images that are inserted on each slide in the
-pptx file.</p>
+    <p>Build xaringan slides as a mp4 video file. The function builds to the pdf,
+converts each slide in the pdf to a png, and then converts the deck of
+png files to a mp4 video file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>build_pptx</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>build_mp4</span><span class='op'>(</span>
   <span class='va'>input</span>,
   output_file <span class='op'>=</span> <span class='cn'>NULL</span>,
   density <span class='op'>=</span> <span class='st'>"100x100"</span>,
+  fps <span class='op'>=</span> <span class='fl'>1</span>,
   complex_slides <span class='op'>=</span> <span class='cn'>FALSE</span>,
   partial_slides <span class='op'>=</span> <span class='cn'>FALSE</span>,
   delay <span class='op'>=</span> <span class='fl'>1</span>
@@ -144,12 +145,16 @@ full url ending in ".html".</p></td>
     </tr>
     <tr>
       <th>output_file</th>
-      <td><p>Name of the output pptx file.</p></td>
+      <td><p>Name of the output mp4 file.</p></td>
     </tr>
     <tr>
       <th>density</th>
-      <td><p>Resolution of the resulting pngs in each slide file.
-Defaults to `"100x100"`.</p></td>
+      <td><p>Resolution of each slide in the video. Defaults to
+`"100x100"`.</p></td>
+    </tr>
+    <tr>
+      <th>fps</th>
+      <td><p>Frames per second of the resulting mp4 file.</p></td>
     </tr>
     <tr>
       <th>complex_slides</th>
@@ -176,11 +181,11 @@ TRUE`.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># Build pptx from Rmd, html, pdf, or url</span>
-<span class='fu'>build_pptx</span><span class='op'>(</span><span class='st'>"slides.Rmd"</span><span class='op'>)</span>
-<span class='fu'>build_pptx</span><span class='op'>(</span><span class='st'>"slides.html"</span><span class='op'>)</span>
-<span class='fu'>build_pptx</span><span class='op'>(</span><span class='st'>"slides.pdf"</span><span class='op'>)</span>
-<span class='fu'>build_pptx</span><span class='op'>(</span><span class='st'>"https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"</span><span class='op'>)</span>
+<span class='co'># Build mp4 from Rmd, html, pdf, or url</span>
+<span class='fu'>build_mp4</span><span class='op'>(</span><span class='st'>"slides.Rmd"</span><span class='op'>)</span>
+<span class='fu'>build_mp4</span><span class='op'>(</span><span class='st'>"slides.html"</span><span class='op'>)</span>
+<span class='fu'>build_mp4</span><span class='op'>(</span><span class='st'>"slides.pdf"</span><span class='op'>)</span>
+<span class='fu'>build_mp4</span><span class='op'>(</span><span class='st'>"https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>
