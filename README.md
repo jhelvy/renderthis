@@ -1,6 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
 <!-- badges: start -->
 
 [![Lifecycle:
@@ -13,13 +12,13 @@ status](https://travis-ci.com/jhelvy/xaringanBuilder.svg?branch=master)](https:/
 
 Build xaringan slides to multiple output formats:
 
-  - html
-  - pdf
-  - gif
-  - pptx
-  - mp4
-  - png
-  - social (png of first slide sized for sharing on social media)
+-   html
+-   pdf
+-   gif
+-   pptx
+-   mp4
+-   png
+-   social (png of first slide sized for sharing on social media)
 
 ## Installation
 
@@ -114,7 +113,7 @@ xaringan slide. While you won’t be able to edit the xaringan content
 from Powerpoint, you can at least annotate it.
 
 (See the [slidex](https://github.com/datalorax/slidex) package by
-@datalorax to do the opposite: pptx –\> xaringan\!)
+@datalorax to do the opposite: pptx –&gt; xaringan!)
 
 Input can be a Rmd file, html file, pdf file, or url:
 
@@ -136,7 +135,7 @@ Input can be a Rmd file, html file, pdf file, or url:
     build_png("slides.html")
     build_png("slides.pdf")
     build_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
-    
+
     # Build zip file of multiple or all slides
     build_png("slides.pdf", slides = c(1, 3, 5))
     build_png("slides.pdf", slides = "all")
@@ -174,31 +173,28 @@ to include or exclude:
     build_all("slides.Rmd", include = c("html", "pdf", "gif"))
     build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
 
-## “Complex” slides
+## “Complex” slides and partial / incremental slides
 
 “Complex” slides are slides that contain
 [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) or
 other html widgets / advanced features that might not render well as a
-pdf. To render these, set `complex_slides = TRUE` in `build_pdf()`,
-`build_png()`, `build_gif()`, build\_mp4()`,`build\_pptx()`,
-or`build\_all()\`. For example:
-
-    build_pdf("slides_complex.Rmd", complex_slides = TRUE)
-
-**Note**: This option requires the
-[chromote](https://github.com/rstudio/chromote) and
-[pdftools](https://github.com/ropensci/pdftools) packages.
-
-## Partial / incremental slides
+pdf. To render these on each slide, set `complex_slides = TRUE`.
 
 If you want to build a new slide for each increment on [incremental
 slides](https://slides.yihui.org/xaringan/incremental.html#1), set
-`partial_slides = TRUE` in `build_pdf()`, `build_png()`, `build_gif()`,
-`build_mp4()`, `build_pptx()`, or `build_all()`. For example:
+`partial_slides = TRUE`.
 
-    build_pdf("slides.Rmd", partial_slides = TRUE)
+These options are available as options in any of the functions that
+depend on building the pdf:
 
-**Note**: This option requires the
+-   `build_pdf()`
+-   `build_png()`
+-   `build_gif()`
+-   `build_mp4()`
+-   `build_pptx()`
+-   `build_all()`
+
+**Note**: These options require the
 [chromote](https://github.com/rstudio/chromote) and
 [pdftools](https://github.com/ropensci/pdftools) packages.
 
@@ -231,11 +227,11 @@ For example, to build a pptx from a Rmd file without Chrome, you could:
 
 ## Author, Version, and License Information
 
-  - Author: *John Paul Helveston*
+-   Author: *John Paul Helveston*
     [www.jhelvy.com](http://www.jhelvy.com/)
-  - Date First Written: *September 27, 2020*
-  - Most Recent Update: February 27, 2021
-  - License:
+-   Date First Written: *September 27, 2020*
+-   Most Recent Update: February 27, 2021
+-   License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
 ## Citation Information
@@ -253,5 +249,5 @@ A BibTeX entry for LaTeX users is
 
 @Manual{, title = {xaringanBuilder: Functions for building xaringan
 slides to different outputs.}, author = {John Paul Helveston}, year =
-{2021}, note = {R package version 0.0.7}, url =
+{2021}, note = {R package version 0.0.6}, url =
 {<https://jhelvy.github.io/xaringanBuilder/>}, }

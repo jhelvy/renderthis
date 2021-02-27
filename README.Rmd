@@ -196,25 +196,22 @@ build_all("slides.Rmd", include = c("html", "pdf", "gif"))
 build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
 ```
 
-## "Complex" slides
+## "Complex" slides and partial / incremental slides
 
-"Complex" slides are slides that contain [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) or other html widgets / advanced features that might not render well as a pdf. To render these, set `complex_slides = TRUE` in `build_pdf()`, `build_png()`, `build_gif()`, build_mp4()`, `build_pptx()`, or `build_all()`. For example:
+"Complex" slides are slides that contain [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) or other html widgets / advanced features that might not render well as a pdf. To render these on each slide, set `complex_slides = TRUE`. 
 
-```
-build_pdf("slides_complex.Rmd", complex_slides = TRUE)
-```
+If you want to build a new slide for each increment on [incremental slides](https://slides.yihui.org/xaringan/incremental.html#1), set `partial_slides = TRUE`.
 
-**Note**: This option requires the [chromote](https://github.com/rstudio/chromote) and [pdftools](https://github.com/ropensci/pdftools) packages.
+These options are available as options in any of the functions that depend on building the pdf:
 
-## Partial / incremental slides
+- `build_pdf()`
+- `build_png()`
+- `build_gif()`
+- `build_mp4()`
+- `build_pptx()`
+- `build_all()`
 
-If you want to build a new slide for each increment on [incremental slides](https://slides.yihui.org/xaringan/incremental.html#1), set `partial_slides = TRUE` in `build_pdf()`, `build_png()`, `build_gif()`, `build_mp4()`, `build_pptx()`, or `build_all()`. For example:
-
-```
-build_pdf("slides.Rmd", partial_slides = TRUE)
-```
-
-**Note**: This option requires the [chromote](https://github.com/rstudio/chromote) and [pdftools](https://github.com/ropensci/pdftools) packages.
+**Note**: These options require the [chromote](https://github.com/rstudio/chromote) and [pdftools](https://github.com/ropensci/pdftools) packages.
 
 ## Local Chrome installation requirement
 
