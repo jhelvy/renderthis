@@ -9,3 +9,4 @@ addons:
     packages:
       - libmagick++-dev
       - libpoppler-cpp-dev
+      - libavfilter-dev
