@@ -31,6 +31,7 @@ Build xaringan slides to multiple output formats:
 - pdf
 - gif
 - pptx
+- mp4
 - png (convert some or all slides to png files; useful for generating Youtube thumbnails, for example)
 - social: png image of first slide sized for social media sharing (e.g. Twitter)
 
@@ -93,6 +94,17 @@ build_gif("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.htm
 Example:
 
 <img src="man/figures/slides.gif" width=500>
+
+### Build MP4
+
+Input can be a Rmd file, html file, pdf file, or url:
+
+```
+build_mp4("slides.Rmd")
+build_mp4("slides.html")
+build_mp4("slides.pdf")
+build_mp4("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+```
 
 ### Build PPTX
 
@@ -204,6 +216,8 @@ Rmd
              |--> png
                    |
                    |--> gif
+                   |
+                   |--> mp4
                    |
                    |--> pptx
 ```

@@ -1,5 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
 [![Lifecycle:
@@ -12,13 +13,14 @@ status](https://travis-ci.com/jhelvy/xaringanBuilder.svg?branch=master)](https:/
 
 Build xaringan slides to multiple output formats:
 
--   html
--   pdf
--   gif
--   pptx
--   png (convert some or all slides to png files; useful for generating
+  - html
+  - pdf
+  - gif
+  - pptx
+  - mp4
+  - png (convert some or all slides to png files; useful for generating
     Youtube thumbnails, for example)
--   social: png image of first slide sized for social media sharing
+  - social: png image of first slide sized for social media sharing
     (e.g. Twitter)
 
 ## Installation
@@ -45,8 +47,8 @@ slides on the web.
 
 The `output_file` argument is optional. It can be a full or local path
 to the output file, and it must end in an appropriate extension
-(e.g. `slides.gif` for `build_gif()`). If it is not provided, the output
-file name will be determined based on the `input` argument.
+(e.g. `slides.gif` for `build_gif()`). If it is not provided, the
+output file name will be determined based on the `input` argument.
 
 ### Build HTML
 
@@ -78,6 +80,15 @@ Example:
 
 <img src="man/figures/slides.gif" width=500>
 
+### Build MP4
+
+Input can be a Rmd file, html file, pdf file, or url:
+
+    build_mp4("slides.Rmd")
+    build_mp4("slides.html")
+    build_mp4("slides.pdf")
+    build_mp4("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+
 ### Build PPTX
 
 Creates a pptx file where each slide contains a png image of each
@@ -85,7 +96,7 @@ xaringan slide. While you won’t be able to edit the xaringan content
 from Powerpoint, you can at least annotate it.
 
 (See the [slidex](https://github.com/datalorax/slidex) package by
-@datalorax to do the opposite: pptx –&gt; xaringan!)
+@datalorax to do the opposite: pptx –\> xaringan\!)
 
 Input can be a Rmd file, html file, pdf file, or url:
 
@@ -106,7 +117,7 @@ Input can be a Rmd file, html file, pdf file, or url:
     build_png("slides.html")
     build_png("slides.pdf")
     build_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
-
+    
     # Build zip file of multiple or all slides
     build_png("slides.pdf", slides = c(1, 3, 5))
     build_png("slides.pdf", slides = "all")
@@ -196,6 +207,8 @@ diagram of the build hierarchy:
                        |
                        |--> gif
                        |
+                       |--> mp4
+                       |
                        |--> pptx
 
 ## Local Chrome installation requirement
@@ -215,11 +228,11 @@ For example, to build a pptx from a Rmd file without Chrome, you could:
 
 ## Author, Version, and License Information
 
--   Author: *John Paul Helveston*
+  - Author: *John Paul Helveston*
     [www.jhelvy.com](http://www.jhelvy.com/)
--   Date First Written: *September 27, 2020*
--   Most Recent Update: February 25, 2021
--   License:
+  - Date First Written: *September 27, 2020*
+  - Most Recent Update: February 26, 2021
+  - License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
 ## Citation Information
@@ -237,5 +250,5 @@ A BibTeX entry for LaTeX users is
 
 @Manual{, title = {xaringanBuilder: Functions for building xaringan
 slides to different outputs.}, author = {John Paul Helveston}, year =
-{2021}, note = {R package version 0.0.6}, url =
+{2021}, note = {R package version 0.0.7}, url =
 {<https://jhelvy.github.io/xaringanBuilder/>}, }
