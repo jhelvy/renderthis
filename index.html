@@ -209,27 +209,29 @@
 <span id="cb12-3"><a href="#cb12-3"></a><span class="kw">build_all</span>(<span class="st">"slides.Rmd"</span>, <span class="dt">exclude =</span> <span class="kw">c</span>(<span class="st">"social"</span>, <span class="st">"png"</span>, <span class="st">"mp4"</span>, <span class="st">"pptx"</span>))</span></code></pre></div>
 </div>
 </div>
-<div id="complex-slides" class="section level2">
+<div id="complex-slides-and-partial--incremental-slides" class="section level2">
 <h2 class="hasAnchor">
-<a href="#complex-slides" class="anchor"></a>“Complex” slides</h2>
-<p>“Complex” slides are slides that contain <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset">panelsets</a> or other html widgets / advanced features that might not render well as a pdf. To render these, set <code>complex_slides = TRUE</code> in <code><a href="reference/build_pdf.html">build_pdf()</a></code>, <code><a href="reference/build_png.html">build_png()</a></code>, <code><a href="reference/build_gif.html">build_gif()</a></code>, build_mp4()<code>,</code>build_pptx()<code>, or</code>build_all()`. For example:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">build_pdf</span>(<span class="st">"slides_complex.Rmd"</span>, <span class="dt">complex_slides =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<p><strong>Note</strong>: This option requires the <a href="https://github.com/rstudio/chromote">chromote</a> and <a href="https://github.com/ropensci/pdftools">pdftools</a> packages.</p>
-</div>
-<div id="partial--incremental-slides" class="section level2">
-<h2 class="hasAnchor">
-<a href="#partial--incremental-slides" class="anchor"></a>Partial / incremental slides</h2>
-<p>If you want to build a new slide for each increment on <a href="https://slides.yihui.org/xaringan/incremental.html#1">incremental slides</a>, set <code>partial_slides = TRUE</code> in <code><a href="reference/build_pdf.html">build_pdf()</a></code>, <code><a href="reference/build_png.html">build_png()</a></code>, <code><a href="reference/build_gif.html">build_gif()</a></code>, <code><a href="reference/build_mp4.html">build_mp4()</a></code>, <code><a href="reference/build_pptx.html">build_pptx()</a></code>, or <code><a href="reference/build_all.html">build_all()</a></code>. For example:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">build_pdf</span>(<span class="st">"slides.Rmd"</span>, <span class="dt">partial_slides =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<p><strong>Note</strong>: This option requires the <a href="https://github.com/rstudio/chromote">chromote</a> and <a href="https://github.com/ropensci/pdftools">pdftools</a> packages.</p>
+<a href="#complex-slides-and-partial--incremental-slides" class="anchor"></a>“Complex” slides and partial / incremental slides</h2>
+<p>“Complex” slides are slides that contain <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset">panelsets</a> or other html widgets / advanced features that might not render well as a pdf. To render these on each slide, set <code>complex_slides = TRUE</code>.</p>
+<p>If you want to build a new slide for each increment on <a href="https://slides.yihui.org/xaringan/incremental.html#1">incremental slides</a>, set <code>partial_slides = TRUE</code>.</p>
+<p>These options are available as options in any of the functions that depend on building the pdf:</p>
+<ul>
+<li><code><a href="reference/build_pdf.html">build_pdf()</a></code></li>
+<li><code><a href="reference/build_png.html">build_png()</a></code></li>
+<li><code><a href="reference/build_gif.html">build_gif()</a></code></li>
+<li><code><a href="reference/build_mp4.html">build_mp4()</a></code></li>
+<li><code><a href="reference/build_pptx.html">build_pptx()</a></code></li>
+<li><code><a href="reference/build_all.html">build_all()</a></code></li>
+</ul>
+<p><strong>Note</strong>: These options require the <a href="https://github.com/rstudio/chromote">chromote</a> and <a href="https://github.com/ropensci/pdftools">pdftools</a> packages.</p>
 </div>
 <div id="local-chrome-installation-requirement" class="section level2">
 <h2 class="hasAnchor">
 <a href="#local-chrome-installation-requirement" class="anchor"></a>Local Chrome installation requirement</h2>
 <p>Building the PDF requires a local installation of Chrome. If you don’t have Chrome installed, you can use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera. In this case, you will need to set the path to the browser you want to use for the <a href="https://github.com/rstudio/pagedown">pagedown</a> package as well as the <a href="https://github.com/rstudio/chromote">chromote</a> package if you use the <code>complex_slides = TRUE</code> or <code>partial_slides = TRUE</code> arguments.</p>
 <p>After installing the packages, you can set the paths like this:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">Sys.setenv</span>(<span class="dt">PAGEDOWN_CHROME =</span> <span class="st">"/path/to/browser"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">Sys.setenv</span>(<span class="dt">CHROMOTE_CHROME =</span> <span class="st">"/path/to/browser"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">Sys.setenv</span>(<span class="dt">PAGEDOWN_CHROME =</span> <span class="st">"/path/to/browser"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">Sys.setenv</span>(<span class="dt">CHROMOTE_CHROME =</span> <span class="st">"/path/to/browser"</span>)</span></code></pre></div>
 <p>If you are unable to install Chrome (e.g. on a computing cluster), the recommended workflow is to build intermediate output formats and use an alternative method for building the PDF.</p>
 <p>For example, to build a pptx from a Rmd file without Chrome, you could:</p>
 <ol>
@@ -261,7 +263,7 @@
 <p>To cite xaringanBuilder in publications use:</p>
 <p>John Paul Helveston (2021). xaringanBuilder: Functions for building xaringan slides to different outputs.</p>
 <p>A BibTeX entry for LaTeX users is</p>
-<p>@Manual{, title = {xaringanBuilder: Functions for building xaringan slides to different outputs.}, author = {John Paul Helveston}, year = {2021}, note = {R package version 0.0.7}, url = {<a href="https://jhelvy.github.io/xaringanBuilder/" class="uri">https://jhelvy.github.io/xaringanBuilder/</a>}, }</p>
+<p>@Manual{, title = {xaringanBuilder: Functions for building xaringan slides to different outputs.}, author = {John Paul Helveston}, year = {2021}, note = {R package version 0.0.6}, url = {<a href="https://jhelvy.github.io/xaringanBuilder/" class="uri">https://jhelvy.github.io/xaringanBuilder/</a>}, }</p>
 </div>
 
   </div>
