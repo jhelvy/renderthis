@@ -3,6 +3,7 @@
 export(build_all)
 export(build_gif)
 export(build_html)
+export(build_mp4)
 export(build_pdf)
 export(build_png)
 export(build_pptx)

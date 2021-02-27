@@ -37,11 +37,11 @@ build_paths <- function(input, output_file = NULL) {
     if (is_url(input)) {
       input_root <- fs::path_abs(fs::path_file(input))
       input_html <- input
-      input_url <- input
+      input_url  <- input
     } else {
       input_root <- fs::path_abs(input)
       input_html <- fs::path_ext_set(input_root, "html")
-      input_url <- paste0("file://", input_html)
+      input_url  <- paste0("file://", input_html)
     }
     input_rmd <- fs::path_ext_set(input_root, "rmd")
     input_pdf <- fs::path_ext_set(input_root, "pdf")
@@ -57,11 +57,12 @@ build_paths <- function(input, output_file = NULL) {
       output_root <- fs::path_abs(output_file)
     }
     output_html <- fs::path_ext_set(output_root, "html")
-    output_pdf <- fs::path_ext_set(output_root, "pdf")
-    output_gif <- fs::path_ext_set(output_root, "gif")
+    output_pdf  <- fs::path_ext_set(output_root, "pdf")
+    output_gif  <- fs::path_ext_set(output_root, "gif")
     output_pptx <- fs::path_ext_set(output_root, "pptx")
-    output_zip <- fs::path_ext_set(output_root, "zip")
-    output_png <- fs::path_ext_set(output_root, "png")
+    output_mp4  <- fs::path_ext_set(output_root, "mp4")
+    output_zip  <- fs::path_ext_set(output_root, "zip")
+    output_png  <- fs::path_ext_set(output_root, "png")
     output_social <- output_png
     # Append "_social" to png outputs
     if (is.null(output_file)) {
@@ -71,18 +72,19 @@ build_paths <- function(input, output_file = NULL) {
     # Return path list
     return(list(
       input = list(
-        url = input_url,
+        url  = input_url,
         html = input_html,
-        rmd = input_rmd,
-        pdf = input_pdf
+        rmd  = input_rmd,
+        pdf  = input_pdf
       ),
       output = list(
-        html = output_html,
-        pdf = output_pdf,
-        gif = output_gif,
-        pptx = output_pptx,
-        zip = output_zip,
-        png = output_png,
+        html   = output_html,
+        pdf    = output_pdf,
+        gif    = output_gif,
+        pptx   = output_pptx,
+        mp4    = output_mp4,
+        zip    = output_zip,
+        png    = output_png,
         social = output_social
       )
     ))

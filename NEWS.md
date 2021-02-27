@@ -1,9 +1,14 @@
+# xaringanBuilder 0.0.7
+
+* Added `build_mp4()`; closes issue #11
+* Added pptx templates for 4-3 & 16-9 aspect ratios; closes issue #15
+
 # xaringanBuilder 0.0.6
 
-* Depreciated `build_thumbnail()` and added `build_png()` as an improved replacement. 
+* Depreciated `build_thumbnail()` and added `build_png()` as an improved replacement.
 * `build_png()` fixes part of issue #15 so that the png aspect ratio matches that of the xaringan slides.
 * `build_png()` also has options for changing the png density and building more than just the title slide (can build pngs of some or all slides using the `slides` argument).
-* All documentation and examples updated to match new features. 
+* All documentation and examples updated to match new features.
 * New example slides made to demonstrate new features.
 
 # xaringanBuilder 0.0.5
