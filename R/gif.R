@@ -8,7 +8,7 @@
 #' full url ending in ".html".
 #' @param output_file Name of the output gif file.
 #' @param density Resolution of the resulting gif file. Defaults to
-#' `"72x72"`.
+#' `"100x100"`.
 #' @param fps Frames per second of the resulting gif file.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #' other html widgets or advanced features), set `complex_slides = TRUE`.
@@ -33,7 +33,7 @@
 build_gif <- function(
     input,
     output_file = NULL,
-    density = "72x72",
+    density = "100x100",
     fps = 1,
     complex_slides = FALSE,
     partial_slides = FALSE,

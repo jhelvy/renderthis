@@ -9,7 +9,7 @@
 #' @param output_file Name of the output mp4 file.
 #' @param density Resolution of each slide in the video. Defaults to
 #' `"100x100"`.
-#' @param framerate Video framerate in frames per seconds. Defaults to 1
+#' @param fps Frames per second of the resulting mp4 file.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #' other html widgets or advanced features), set `complex_slides = TRUE`.
 #' Defaults to `FALSE`. This will use the {chromote} package to iterate through
@@ -34,7 +34,7 @@ build_mp4 <- function(
     input,
     output_file = NULL,
     density = "100x100",
-    framerate = 1,
+    fps = 1,
     complex_slides = FALSE,
     partial_slides = FALSE,
     delay = 1
@@ -67,7 +67,7 @@ build_mp4 <- function(
     av::av_encode_video(
         input = png_paths,
         output = output_file,
-        framerate = framerate,
+        framerate = fps,
         vfilter = "scale=trunc(iw/2)*2:trunc(ih/2)*2"
     )
     # vfilter argument added to avoid divisible by 2 error, see:

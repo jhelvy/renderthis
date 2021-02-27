@@ -6,7 +6,7 @@
 \usage{
 build_all(
   input,
-  include = c("html", "pdf", "gif", "pptx", "png", "social"),
+  include = c("html", "social", "pdf", "png", "gif", "mp4", "pptx"),
   exclude = NULL,
   complex_slides = FALSE,
   partial_slides = FALSE,
@@ -20,11 +20,11 @@ build_all(
 \item{input}{Path to Rmd file of xaringan slides.}
 
 \item{include}{A vector of the different output types to build. Options are
-`"html"`, `"pdf"`, `"gif"`, `"pptx"`, `"png"`, and `"social"`.
-Defaults to `c("html", "pdf", "gif", "pptx", "png", "social")`.}
+`"html"`, `"social"`, `"pdf"`, `"png"`, `"gif"`, `"mp4"`, and `"pptx"`.
+Defaults to `c("html", "social", "pdf", "png", "gif", "mp4", "pptx")`.}
 
 \item{exclude}{A vector of the different output types to NOT build. Options
-are `"html"`, `"pdf"`, `"gif"`, `"pptx"`, `"png"`, and `"social"`.
+are `"html"`, `"social"`, `"pdf"`, `"png"`, `"gif"`, `"mp4"`, and `"pptx"`.
 Defaults to `NULL`, in which case all all output types are built.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
@@ -48,11 +48,11 @@ and pptx output types file. Defaults to `"72x72"`.}
 Defaults to `1`, returning only the title slide. You can get a zip
 file of all the slides as pngs by setting `slides = "all"`).}
 
-\item{fps}{Frames per second of the gif file.}
+\item{fps}{Frames per second of the gif and mp4 files.}
 }
 \description{
-Build xaringan slides to multiple outputs. Options are `"html"`, `"pdf"`,
-`"gif"`, `"pptx"`, `"png"`, and `"social"`. See each individual
+Build xaringan slides to multiple outputs. Options are `"html"`, `"social"`
+`"pdf"`, `"png"`, `"gif"`, `"mp4"`, and `"pptx"`. See each individual
 build_*() function for details about each output type.
 }
 \examples{
@@ -62,6 +62,6 @@ build_all("slides.Rmd")
 
 # Both of these build html, pdf, and gif outputs
 build_all("slides.Rmd", include = c("html", "pdf", "gif"))
-build_all("slides.Rmd", exclude = c("pptx", "png", "social"))
+build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
 }
 }

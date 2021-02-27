@@ -49,7 +49,7 @@ build_all("slides.Rmd") # Builds every output by default
 # Use the `include` or `exclude` arguments to control which output types to
 # include or exclude. Both of these build html, pdf, and gif outputs
 build_all("slides.Rmd", include = c("html", "pdf", "gif"))
-build_all("slides.Rmd", exclude = c("mp4", "pptx", "png", "social"))
+build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
 
 # "Complex" slides
 

@@ -10,8 +10,8 @@
 #' If the input is a url to xaringan slides on a website, you must provide the
 #' full url ending in ".html".
 #' @param output_file Name of the output png or zip file.
-#' @param density Resolution of the resulting gif file. Defaults to
-#' `"72x72"`.
+#' @param density Resolution of the resulting png file(s). Defaults to
+#' `"100x100"`.
 #' @param slides A vector of the slide number(s) to return. Defaults to `1`,
 #' returning only the title slide. You can also get a zip file of all the
 #' slides as pngs by setting `slides = "all"`).
@@ -42,7 +42,7 @@
 build_png <- function(
     input,
     output_file = NULL,
-    density = "72x72",
+    density = "100x100",
     slides = 1,
     complex_slides = FALSE,
     partial_slides = FALSE,

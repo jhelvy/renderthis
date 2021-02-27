@@ -7,8 +7,8 @@
 #' If the input is a url to xaringan slides on a website, you must provide the
 #' full url ending in ".html".
 #' @param output_file Name of the output pptx file.
-#' @param density Resolution of the resulting gif file. Defaults to
-#' `"72x72"`.
+#' @param density Resolution of the resulting pngs in each slide file.
+#' Defaults to `"100x100"`.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #' other html widgets or advanced features), set `complex_slides = TRUE`.
 #' Defaults to `FALSE`. This will use the {chromote} package to iterate through
@@ -32,7 +32,7 @@
 build_pptx <- function(
     input,
     output_file = NULL,
-    density = "72x72",
+    density = "100x100",
     complex_slides = FALSE,
     partial_slides = FALSE,
     delay = 1

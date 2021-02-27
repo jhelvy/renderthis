@@ -8,7 +8,7 @@ build_mp4(
   input,
   output_file = NULL,
   density = "100x100",
-  framerate = 1,
+  fps = 1,
   complex_slides = FALSE,
   partial_slides = FALSE,
   delay = 1
@@ -24,7 +24,7 @@ full url ending in ".html".}
 \item{density}{Resolution of each slide in the video. Defaults to
 `"100x100"`.}
 
-\item{framerate}{Video framerate in frames per seconds. Defaults to 1}
+\item{fps}{Frames per second of the resulting mp4 file.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set `complex_slides = TRUE`.
