@@ -82,8 +82,8 @@
 <li>gif</li>
 <li>pptx</li>
 <li>mp4</li>
-<li>png (convert some or all slides to png files; useful for generating Youtube thumbnails, for example)</li>
-<li>social: png image of first slide sized for social media sharing (e.g. Twitter)</li>
+<li>png</li>
+<li>social (png of first slide sized for sharing on social media)</li>
 </ul>
 </div>
 <div id="installation" class="section level2">
@@ -93,41 +93,61 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages("remotes")</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"jhelvy/xaringanBuilder"</span>)</span></code></pre></div>
 </div>
+<div id="build-hierarchy" class="section level2">
+<h2 class="hasAnchor">
+<a href="#build-hierarchy" class="anchor"></a>Build hierarchy</h2>
+<p>Some output types depend on intermediate outputs. Here is a diagram of the build hierarchy:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>Rmd</span>
+<span id="cb2-2"><a href="#cb2-2"></a> <span class="op">|</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="st"> </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span><span class="kw">social</span> (png)</span>
+<span id="cb2-4"><a href="#cb2-4"></a> <span class="op">|</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="st"> </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span>html</span>
+<span id="cb2-6"><a href="#cb2-6"></a>       <span class="op">|</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="st">       </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span>pdf</span>
+<span id="cb2-8"><a href="#cb2-8"></a>             <span class="op">|</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="st">             </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span>png</span>
+<span id="cb2-10"><a href="#cb2-10"></a>                   <span class="op">|</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="st">                   </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span>gif</span>
+<span id="cb2-12"><a href="#cb2-12"></a>                   <span class="op">|</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="st">                   </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span>mp4</span>
+<span id="cb2-14"><a href="#cb2-14"></a>                   <span class="op">|</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="st">                   </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span>pptx</span></code></pre></div>
+</div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>The xaringan Rmd files used in all examples below can be found <a href="https://github.com/jhelvy/xaringanBuilder/tree/master/inst/example">here</a></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(xaringanBuilder)</span></code></pre></div>
+<p>You can build all of the examples below from <a href="https://github.com/jhelvy/xaringanBuilder/tree/master/inst/example">here</a></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">library</span>(xaringanBuilder)</span></code></pre></div>
 <div id="input---output" class="section level3">
 <h3 class="hasAnchor">
 <a href="#input---output" class="anchor"></a>Input - Output</h3>
-<p>All <code>build_**()</code> functions use the <code>input</code> and <code>output_file</code> arguments.</p>
-<p>The <code>input</code> argument is required and can be a full or local path to the input file (a Rmd, html, or pdf file), or a url to a set of xaringan slides on the web.</p>
-<p>The <code>output_file</code> argument is optional. It can be a full or local path to the output file, and it must end in an appropriate extension (e.g. <code>slides.gif</code> for <code><a href="reference/build_gif.html">build_gif()</a></code>). If it is not provided, the output file name will be determined based on the <code>input</code> argument.</p>
+<p>All <code>build_*()</code> functions use the <code>input</code> and <code>output_file</code> arguments.</p>
+<p>The <code>input</code> argument is required and can be a full or local path to the input file.</p>
+<p>The <code>output_file</code> argument is optional. If provided, it can be a full or local path to the output file, and it must end in an appropriate extension (e.g. <code>slides.gif</code> for <code><a href="reference/build_gif.html">build_gif()</a></code>). If it is not provided, the output file name will be determined based on the <code>input</code> argument.</p>
 </div>
 <div id="build-html" class="section level3">
 <h3 class="hasAnchor">
 <a href="#build-html" class="anchor"></a>Build HTML</h3>
 <p>Build an html file from a Rmd file:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">build_html</span>(<span class="st">"slides.Rmd"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">build_html</span>(<span class="st">"slides.Rmd"</span>)</span></code></pre></div>
 </div>
 <div id="build-pdf" class="section level3">
 <h3 class="hasAnchor">
 <a href="#build-pdf" class="anchor"></a>Build PDF</h3>
 <p>Input can be a Rmd file, html file, or url:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">build_pdf</span>(<span class="st">"slides.Rmd"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">build_pdf</span>(<span class="st">"slides.html"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">build_pdf</span>(<span class="st">"https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"</span>)</span></code></pre></div>
-<p><strong>Note</strong>: Building the PDF requires a local installation of Google Chrome</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">build_pdf</span>(<span class="st">"slides.Rmd"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">build_pdf</span>(<span class="st">"slides.html"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">build_pdf</span>(<span class="st">"https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"</span>)</span></code></pre></div>
+<p><strong>Note</strong>: Building the PDF requires a <a href="#local-chrome-installation-requirement">local installation of Google Chrome</a></p>
 </div>
 <div id="build-gif" class="section level3">
 <h3 class="hasAnchor">
 <a href="#build-gif" class="anchor"></a>Build GIF</h3>
 <p>Input can be a Rmd file, html file, pdf file, or url:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">build_gif</span>(<span class="st">"slides.Rmd"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">build_gif</span>(<span class="st">"slides.html"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">build_gif</span>(<span class="st">"slides.pdf"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">build_gif</span>(<span class="st">"https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">build_gif</span>(<span class="st">"slides.Rmd"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">build_gif</span>(<span class="st">"slides.html"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">build_gif</span>(<span class="st">"slides.pdf"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">build_gif</span>(<span class="st">"https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"</span>)</span></code></pre></div>
 <p>Example:</p>
 <p><img src="reference/figures/slides.gif" width="500"></p>
 </div>
@@ -135,10 +155,10 @@
 <h3 class="hasAnchor">
 <a href="#build-mp4" class="anchor"></a>Build MP4</h3>
 <p>Input can be a Rmd file, html file, pdf file, or url:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">build_mp4</span>(<span class="st">"slides.Rmd"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">build_mp4</span>(<span class="st">"slides.html"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">build_mp4</span>(<span class="st">"slides.pdf"</span>)</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">build_mp4</span>(<span class="st">"https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">build_mp4</span>(<span class="st">"slides.Rmd"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">build_mp4</span>(<span class="st">"slides.html"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">build_mp4</span>(<span class="st">"slides.pdf"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">build_mp4</span>(<span class="st">"https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"</span>)</span></code></pre></div>
 </div>
 <div id="build-pptx" class="section level3">
 <h3 class="hasAnchor">
@@ -146,25 +166,25 @@
 <p>Creates a pptx file where each slide contains a png image of each xaringan slide. While you won’t be able to edit the xaringan content from Powerpoint, you can at least annotate it.</p>
 <p>(See the <a href="https://github.com/datalorax/slidex">slidex</a> package by @datalorax to do the opposite: pptx –&gt; xaringan!)</p>
 <p>Input can be a Rmd file, html file, pdf file, or url:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">build_pptx</span>(<span class="st">"slides.Rmd"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">build_pptx</span>(<span class="st">"slides.html"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">build_pptx</span>(<span class="st">"slides.pdf"</span>)</span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">build_pptx</span>(<span class="st">"https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">build_pptx</span>(<span class="st">"slides.Rmd"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">build_pptx</span>(<span class="st">"slides.html"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">build_pptx</span>(<span class="st">"slides.pdf"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">build_pptx</span>(<span class="st">"https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"</span>)</span></code></pre></div>
 </div>
 <div id="build-png" class="section level3">
 <h3 class="hasAnchor">
 <a href="#build-png" class="anchor"></a>Build PNG</h3>
-<p>Build png image(s) of some or all slides. Useful for generating Youtube thumbnails, for example.</p>
+<p>Build png image(s) of some or all slides. Use the <code>slides</code> argument to determine which slides to include (defaults to <code>1</code>, returning just the first slide) .</p>
 <p>Input can be a Rmd file, html file, pdf file, or url:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># By default, a png of only the first slide is built</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">build_png</span>(<span class="st">"slides.Rmd"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">build_png</span>(<span class="st">"slides.html"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">build_png</span>(<span class="st">"slides.pdf"</span>)</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">build_png</span>(<span class="st">"https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"</span>)</span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co"># Build zip file of multiple or all slides</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="kw">build_png</span>(<span class="st">"slides.pdf"</span>, <span class="dt">slides =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>))</span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="kw">build_png</span>(<span class="st">"slides.pdf"</span>, <span class="dt">slides =</span> <span class="st">"all"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># By default, creates a png of only the first slide:</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">build_png</span>(<span class="st">"slides.Rmd"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">build_png</span>(<span class="st">"slides.html"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">build_png</span>(<span class="st">"slides.pdf"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="kw">build_png</span>(<span class="st">"https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co"># Build zip file of multiple or all slides</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="kw">build_png</span>(<span class="st">"slides.pdf"</span>, <span class="dt">slides =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>))</span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="kw">build_png</span>(<span class="st">"slides.pdf"</span>, <span class="dt">slides =</span> <span class="st">"all"</span>)</span></code></pre></div>
 <p>Example:</p>
 <p><img src="reference/figures/slides.png" width="500"></p>
 </div>
@@ -172,7 +192,7 @@
 <h3 class="hasAnchor">
 <a href="#build-social" class="anchor"></a>Build Social</h3>
 <p>Build a png of the first slide from a Rmd file. Image is sized for sharing on social media (e.g. Twitter).</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">build_social</span>(<span class="st">"slides.Rmd"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">build_social</span>(<span class="st">"slides.Rmd"</span>)</span></code></pre></div>
 <p><strong>Note</strong>: This option requires the <a href="https://github.com/rstudio/chromote">chromote</a> and <a href="https://github.com/ropensci/pdftools">pdftools</a> packages.</p>
 <p>Example:</p>
 <p><img src="reference/figures/slides_social.png" width="500"></p>
@@ -181,56 +201,36 @@
 <h3 class="hasAnchor">
 <a href="#build-all-output-types" class="anchor"></a>Build All Output Types</h3>
 <p>Use <code><a href="reference/build_all.html">build_all()</a></code> to build all output types from a Rmd file:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Builds every output by default</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">build_all</span>(<span class="st">"slides.Rmd"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Builds every output by default</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">build_all</span>(<span class="st">"slides.Rmd"</span>)</span></code></pre></div>
 <p>Use the <code>include</code> or <code>exclude</code> arguments to control which output types to include or exclude:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Both of these build html, pdf, and gif outputs</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">build_all</span>(<span class="st">"slides.Rmd"</span>, <span class="dt">include =</span> <span class="kw">c</span>(<span class="st">"html"</span>, <span class="st">"pdf"</span>, <span class="st">"gif"</span>))</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">build_all</span>(<span class="st">"slides.Rmd"</span>, <span class="dt">exclude =</span> <span class="kw">c</span>(<span class="st">"social"</span>, <span class="st">"png"</span>, <span class="st">"mp4"</span>, <span class="st">"pptx"</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Both of these build html, pdf, and gif outputs</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">build_all</span>(<span class="st">"slides.Rmd"</span>, <span class="dt">include =</span> <span class="kw">c</span>(<span class="st">"html"</span>, <span class="st">"pdf"</span>, <span class="st">"gif"</span>))</span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">build_all</span>(<span class="st">"slides.Rmd"</span>, <span class="dt">exclude =</span> <span class="kw">c</span>(<span class="st">"social"</span>, <span class="st">"png"</span>, <span class="st">"mp4"</span>, <span class="st">"pptx"</span>))</span></code></pre></div>
 </div>
 </div>
 <div id="complex-slides" class="section level2">
 <h2 class="hasAnchor">
 <a href="#complex-slides" class="anchor"></a>“Complex” slides</h2>
-<p>“Complex” slides are slides that contain <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset">panelsets</a> or other html widgets / advanced features that might not render well as a pdf. To render these, set <code>complex_slides = TRUE</code> in <code><a href="reference/build_pdf.html">build_pdf()</a></code>, <code><a href="reference/build_png.html">build_png()</a></code>, <code><a href="reference/build_gif.html">build_gif()</a></code>, <code><a href="reference/build_pptx.html">build_pptx()</a></code>, or <code><a href="reference/build_all.html">build_all()</a></code>.</p>
-<p>For example:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">build_pdf</span>(<span class="st">"slides_complex.Rmd"</span>, <span class="dt">complex_slides =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">build_pdf</span>(<span class="st">"slides_complex.html"</span>, <span class="dt">complex_slides =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p>“Complex” slides are slides that contain <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset">panelsets</a> or other html widgets / advanced features that might not render well as a pdf. To render these, set <code>complex_slides = TRUE</code> in <code><a href="reference/build_pdf.html">build_pdf()</a></code>, <code><a href="reference/build_png.html">build_png()</a></code>, <code><a href="reference/build_gif.html">build_gif()</a></code>, build_mp4()<code>,</code>build_pptx()<code>, or</code>build_all()`. For example:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">build_pdf</span>(<span class="st">"slides_complex.Rmd"</span>, <span class="dt">complex_slides =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><strong>Note</strong>: This option requires the <a href="https://github.com/rstudio/chromote">chromote</a> and <a href="https://github.com/ropensci/pdftools">pdftools</a> packages.</p>
 </div>
 <div id="partial--incremental-slides" class="section level2">
 <h2 class="hasAnchor">
 <a href="#partial--incremental-slides" class="anchor"></a>Partial / incremental slides</h2>
-<p>For pdf, gif, and pptx output types, if you want to build a new slide for each increment on <a href="https://slides.yihui.org/xaringan/incremental.html#1">incremental slides</a>, set <code>partial_slides = TRUE</code> in <code><a href="reference/build_pdf.html">build_pdf()</a></code>, <code><a href="reference/build_png.html">build_png()</a></code>, <code><a href="reference/build_gif.html">build_gif()</a></code>, <code><a href="reference/build_pptx.html">build_pptx()</a></code>, or <code><a href="reference/build_all.html">build_all()</a></code>.</p>
-<p>For example:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">build_pdf</span>(<span class="st">"slides.Rmd"</span>, <span class="dt">partial_slides =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">build_pdf</span>(<span class="st">"slides.html"</span>, <span class="dt">partial_slides =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p>If you want to build a new slide for each increment on <a href="https://slides.yihui.org/xaringan/incremental.html#1">incremental slides</a>, set <code>partial_slides = TRUE</code> in <code><a href="reference/build_pdf.html">build_pdf()</a></code>, <code><a href="reference/build_png.html">build_png()</a></code>, <code><a href="reference/build_gif.html">build_gif()</a></code>, <code><a href="reference/build_mp4.html">build_mp4()</a></code>, <code><a href="reference/build_pptx.html">build_pptx()</a></code>, or <code><a href="reference/build_all.html">build_all()</a></code>. For example:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">build_pdf</span>(<span class="st">"slides.Rmd"</span>, <span class="dt">partial_slides =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><strong>Note</strong>: This option requires the <a href="https://github.com/rstudio/chromote">chromote</a> and <a href="https://github.com/ropensci/pdftools">pdftools</a> packages.</p>
-</div>
-<div id="build-hierarchy" class="section level2">
-<h2 class="hasAnchor">
-<a href="#build-hierarchy" class="anchor"></a>Build hierarchy</h2>
-<p>Some output types depend on intermediate output types (e.g. to build a pdf from a Rmd file, you first have to build the html file). Here is a diagram of the build hierarchy:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>Rmd</span>
-<span id="cb14-2"><a href="#cb14-2"></a> <span class="op">|</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="st"> </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span><span class="kw">social</span> (png)</span>
-<span id="cb14-4"><a href="#cb14-4"></a> <span class="op">|</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="st"> </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span>html</span>
-<span id="cb14-6"><a href="#cb14-6"></a>       <span class="op">|</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="st">       </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span>pdf</span>
-<span id="cb14-8"><a href="#cb14-8"></a>             <span class="op">|</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="st">             </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span>png</span>
-<span id="cb14-10"><a href="#cb14-10"></a>                   <span class="op">|</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a><span class="st">                   </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span>gif</span>
-<span id="cb14-12"><a href="#cb14-12"></a>                   <span class="op">|</span></span>
-<span id="cb14-13"><a href="#cb14-13"></a><span class="st">                   </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span>mp4</span>
-<span id="cb14-14"><a href="#cb14-14"></a>                   <span class="op">|</span></span>
-<span id="cb14-15"><a href="#cb14-15"></a><span class="st">                   </span><span class="er">|</span><span class="op">-</span>-&gt;<span class="st"> </span>pptx</span></code></pre></div>
 </div>
 <div id="local-chrome-installation-requirement" class="section level2">
 <h2 class="hasAnchor">
 <a href="#local-chrome-installation-requirement" class="anchor"></a>Local Chrome installation requirement</h2>
-<p>Building the PDF requires a local installation on Chrome, which may not be available (e.g. on a computing cluster). If you are unable to install Chrome, the recommended workflow is to build intermediate output formats and use an alternative method for building the PDF.</p>
+<p>Building the PDF requires a local installation of Chrome. If you don’t have Chrome installed, you can use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera. In this case, you will need to set the path to the browser you want to use for the <a href="https://github.com/rstudio/pagedown">pagedown</a> package as well as the <a href="https://github.com/rstudio/chromote">chromote</a> package if you use the <code>complex_slides = TRUE</code> or <code>partial_slides = TRUE</code> arguments.</p>
+<p>After installing the packages, you can set the paths like this:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">Sys.setenv</span>(<span class="dt">PAGEDOWN_CHROME =</span> <span class="st">"/path/to/browser"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">Sys.setenv</span>(<span class="dt">CHROMOTE_CHROME =</span> <span class="st">"/path/to/browser"</span>)</span></code></pre></div>
+<p>If you are unable to install Chrome (e.g. on a computing cluster), the recommended workflow is to build intermediate output formats and use an alternative method for building the PDF.</p>
 <p>For example, to build a pptx from a Rmd file without Chrome, you could:</p>
 <ol>
 <li>Build the html with <code><a href="reference/build_html.html">build_html("slides.Rmd")</a></code>
@@ -249,7 +249,7 @@
 </li>
 <li>Date First Written: <em>September 27, 2020</em>
 </li>
-<li>Most Recent Update: February 26, 2021</li>
+<li>Most Recent Update: February 27, 2021</li>
 <li>License: <a href="https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md">MIT</a>
 </li>
 </ul>
