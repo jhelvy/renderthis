@@ -9,7 +9,7 @@ Authors@R:
              comment = c(ORCID = "0000-0002-2657-9191")),
       person(given = "Garrick",
              family = "Aden-Buie",
-             role = "ctb",
+             role = "aut",
              email = "garrick@adenbuie.com",
              comment = c(ORCID = "0000-0002-7111-0077")),
       person(given = "Bryan",
@@ -34,7 +34,7 @@ Imports:
     xaringan,
     zip
 Suggests:
-    chromote,
+    chromote (>= 0.0.0.9003),
     officer,
     pdftools,
     xaringanExtra,

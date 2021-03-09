@@ -17,6 +17,8 @@ test_path_ext <- function(path, expected_ext) {
 }
 
 assert_chrome_installed <- function() {
+    assert_chromote()
+
     chromePath <- NULL
     error <- paste0(
         "This function requires a local installation of the Chrome ",
@@ -29,6 +31,15 @@ assert_chrome_installed <- function() {
     )
     if (is.null(chromePath)) {
         stop(error)
+    }
+}
+
+assert_chromote <- function() {
+    if (!requireNamespace("chromote", quietly = TRUE)) {
+        stop("`chromote` is required: remotes::install_github('rstudio/chromote')")
+    }
+    if (packageVersion("chromote") < package_version("0.0.0.9003")) {
+        warning("Please upgrade `chromote` to version 0.0.0.9003 or later.")
     }
 }
 
@@ -110,7 +121,8 @@ append_to_file_path <- function(path, s) {
 print_build_status <- function(input, output_file) {
     cli::cli_process_start(
         "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
-        on_exit = "done"
+        on_exit = "done",
+        .envir = parent.frame(n = 2)
     )
 }
 
