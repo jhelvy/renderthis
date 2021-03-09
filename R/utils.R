@@ -25,8 +25,7 @@ assert_chrome_installed <- function() {
         "browser. You can also use other browsers based on Chromium, ",
         "such as Chromium itself, Edge, Vivaldi, Brave, or Opera.")
     tryCatch({
-      find_chrome <- utils::getFromNamespace("find_chrome", "chromote")
-      chromePath <- find_chrome()
+      chromePath <- chromote::find_chrome()
       },
       error = function(e) { message(error) }
     )
@@ -38,6 +37,9 @@ assert_chrome_installed <- function() {
 assert_chromote <- function() {
     if (!requireNamespace("chromote", quietly = TRUE)) {
         stop("`chromote` is required: remotes::install_github('rstudio/chromote')")
+    }
+    if (packageVersion("chromote") < package_version("0.0.0.9003")) {
+        warning("Please upgrade `chromote` to version 0.0.0.9003 or later.")
     }
 }
 

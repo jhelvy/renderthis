@@ -34,7 +34,7 @@ Imports:
     xaringan,
     zip
 Suggests:
-    chromote,
+    chromote (>= 0.0.0.9003),
     officer,
     pdftools,
     xaringanExtra,
