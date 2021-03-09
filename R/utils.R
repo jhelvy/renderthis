@@ -17,18 +17,27 @@ test_path_ext <- function(path, expected_ext) {
 }
 
 assert_chrome_installed <- function() {
+    assert_chromote()
+
     chromePath <- NULL
     error <- paste0(
         "This function requires a local installation of the Chrome ",
         "browser. You can also use other browsers based on Chromium, ",
         "such as Chromium itself, Edge, Vivaldi, Brave, or Opera.")
     tryCatch({
-      chromePath <- chromote::find_chrome()
+      find_chrome <- utils::getFromNamespace("find_chrome", "chromote")
+      chromePath <- find_chrome()
       },
       error = function(e) { message(error) }
     )
     if (is.null(chromePath)) {
         stop(error)
+    }
+}
+
+assert_chromote <- function() {
+    if (!requireNamespace("chromote", quietly = TRUE)) {
+        stop("`chromote` is required: remotes::install_github('rstudio/chromote')")
     }
 }
 
