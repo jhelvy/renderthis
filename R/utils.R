@@ -17,8 +17,6 @@ test_path_ext <- function(path, expected_ext) {
 }
 
 assert_chrome_installed <- function() {
-    assert_chromote()
-
     chromePath <- NULL
     error <- paste0(
         "This function requires a local installation of the Chrome ",

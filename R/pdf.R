@@ -91,9 +91,7 @@ build_pdf_simple <- function(input, output_file = NULL) {
 # https://www.garrickadenbuie.com/blog/print-xaringan-chromote/
 
 build_pdf_complex <- function(input, output_file, partial_slides, delay) {
-  if (!requireNamespace("chromote", quietly = TRUE)) {
-    stop("`chromote` is required: devtools::install_github('rstudio/chromote')")
-  }
+  assert_chromote()
   if (!requireNamespace("pdftools", quietly = TRUE)) {
     stop("`pdftools` is required: install.packages('pdftools')")
   }
