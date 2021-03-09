@@ -119,7 +119,8 @@ append_to_file_path <- function(path, s) {
 print_build_status <- function(input, output_file) {
     cli::cli_process_start(
         "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
-        on_exit = "done"
+        on_exit = "done",
+        .envir = parent.frame(n = 2)
     )
 }
 
