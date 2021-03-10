@@ -33,7 +33,7 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
       - name: Install magick dependencies
-        run: |
+        shell: |
           sudo apt-get install libmagick++-dev
 
       - name: Install dependencies
