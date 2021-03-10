@@ -18,6 +18,8 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v1
 
+      - uses: opencpu/imagemagick
+
       - name: Query dependencies
         run: |
           install.packages('remotes')
