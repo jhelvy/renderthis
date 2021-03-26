@@ -63,15 +63,20 @@ build_png <- function(
     }
 
     # Build png from pdf
-    print_build_status(paths$input$pdf, paths$output$png)
+    input <- paths$input$pdf
+    output_file <- paths$output$png
+    if ((length(slides) > 1) | (slides == "all")) {
+      output_file <- paths$output$zip
+    }
+    print_build_status(input, output_file)
     pngs <- pdf_to_pngs(input, density)
     if (length(slides) > 1) {
-      zip_pngs(pngs, slides, paths$output$zip)
+      zip_pngs(pngs, slides, output_file)
     } else if (slides == "all") {
       slides <- seq(length(pngs))
-      zip_pngs(pngs, slides, paths$output$zip)
+      zip_pngs(pngs, slides, output_file)
     } else {
-      magick::image_write(pngs[slides], paths$output$png)
+      magick::image_write(pngs[slides], output_file)
     }
 }
 
