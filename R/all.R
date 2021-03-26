@@ -22,7 +22,7 @@
 #' a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
 #' TRUE`.
 #' @param density Resolution of the resulting png files used in the png, gif,
-#' and pptx output types file. Defaults to `"72x72"`.
+#' and pptx output types file. Defaults to `100`.
 #' @param slides A vector of the slide number(s) to return for the png output.
 #' Defaults to `1`, returning only the title slide. You can get a zip
 #' file of all the slides as pngs by setting `slides = "all"`).
@@ -44,7 +44,7 @@ build_all <- function(
     complex_slides = FALSE,
     partial_slides = FALSE,
     delay = 1,
-    density = "72x72",
+    density = 100,
     slides = 1,
     fps = 1
     ) {

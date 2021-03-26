@@ -7,8 +7,8 @@
 #' If the input is a url to xaringan slides on a website, you must provide the
 #' full url ending in ".html".
 #' @param output_file Name of the output mp4 file.
-#' @param density Resolution of each slide in the video. Defaults to
-#' `"100x100"`.
+#' @param density Resolution of the resulting pngs in each slide file.
+#' Defaults to `100`.
 #' @param fps Frames per second of the resulting mp4 file.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #' other html widgets or advanced features), set `complex_slides = TRUE`.
@@ -33,7 +33,7 @@
 build_mp4 <- function(
     input,
     output_file = NULL,
-    density = "100x100",
+    density = 100,
     fps = 1,
     complex_slides = FALSE,
     partial_slides = FALSE,

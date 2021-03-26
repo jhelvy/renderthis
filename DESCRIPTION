@@ -1,6 +1,6 @@
 Package: xaringanBuilder
 Title: Functions For Building Xaringan Slides To Different Outputs
-Version: 0.0.7.9001
+Version: 0.0.7.9002
 Authors@R:
     c(person(given = "John",
              family = "Helveston",
@@ -27,8 +27,9 @@ Imports:
     digest,
     fs,
     jsonlite,
-    magick,
+    magick (>= 2.7.1),
     pagedown,
+    pdftools,
     progress,
     rmarkdown,
     xaringan,
@@ -36,7 +37,6 @@ Imports:
 Suggests:
     chromote (>= 0.0.0.9003),
     officer,
-    pdftools,
     xaringanExtra,
     webshot2
 Remotes:

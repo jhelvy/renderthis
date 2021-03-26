@@ -10,8 +10,8 @@
 #' If the input is a url to xaringan slides on a website, you must provide the
 #' full url ending in ".html".
 #' @param output_file Name of the output png or zip file.
-#' @param density Resolution of the resulting png file(s). Defaults to
-#' `"100x100"`.
+#' @param density Resolution of the resulting pngs in each slide file.
+#' Defaults to `100`.
 #' @param slides A vector of the slide number(s) to return. Defaults to `1`,
 #' returning only the title slide. You can also get a zip file of all the
 #' slides as pngs by setting `slides = "all"`).
@@ -42,7 +42,7 @@
 build_png <- function(
     input,
     output_file = NULL,
-    density = "100x100",
+    density = 100,
     slides = 1,
     complex_slides = FALSE,
     partial_slides = FALSE,
@@ -64,8 +64,7 @@ build_png <- function(
 
     # Build png from pdf
     print_build_status(paths$input$pdf, paths$output$png)
-    pdf <- magick::image_read(paths$input$pdf, density = density)
-    pngs <- magick::image_convert(pdf, 'png')
+    pngs <- pdf_to_pngs(input, density)
     if (length(slides) > 1) {
       zip_pngs(pngs, slides, paths$output$zip)
     } else if (slides == "all") {

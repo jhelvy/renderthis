@@ -7,7 +7,7 @@
 build_mp4(
   input,
   output_file = NULL,
-  density = "100x100",
+  density = 100,
   fps = 1,
   complex_slides = FALSE,
   partial_slides = FALSE,
@@ -21,8 +21,8 @@ full url ending in ".html".}
 
 \item{output_file}{Name of the output mp4 file.}
 
-\item{density}{Resolution of each slide in the video. Defaults to
-`"100x100"`.}
+\item{density}{Resolution of the resulting pngs in each slide file.
+Defaults to `100`.}
 
 \item{fps}{Frames per second of the resulting mp4 file.}
 

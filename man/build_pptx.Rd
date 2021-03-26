@@ -7,7 +7,7 @@
 build_pptx(
   input,
   output_file = NULL,
-  density = "100x100",
+  density = 100,
   complex_slides = FALSE,
   partial_slides = FALSE,
   delay = 1
@@ -21,7 +21,7 @@ full url ending in ".html".}
 \item{output_file}{Name of the output pptx file.}
 
 \item{density}{Resolution of the resulting pngs in each slide file.
-Defaults to `"100x100"`.}
+Defaults to `100`.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set `complex_slides = TRUE`.

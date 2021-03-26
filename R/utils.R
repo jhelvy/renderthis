@@ -127,9 +127,7 @@ print_build_status <- function(input, output_file) {
 }
 
 pdf_to_pngs <- function(input, density) {
-    pdf <- magick::image_read(input, density = density)
-    pngs <- magick::image_convert(pdf, 'png')
-    return(pngs)
+    return(magick::image_read_pdf(paths$input$pdf, density = density))
 }
 
 build_to_pdf <- function(
