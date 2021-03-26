@@ -38,7 +38,7 @@ assert_chromote <- function() {
     if (!requireNamespace("chromote", quietly = TRUE)) {
         stop("`chromote` is required: remotes::install_github('rstudio/chromote')")
     }
-    if (packageVersion("chromote") < package_version("0.0.0.9003")) {
+    if (utils::packageVersion("chromote") < package_version("0.0.0.9003")) {
         warning("Please upgrade `chromote` to version 0.0.0.9003 or later.")
     }
 }
@@ -119,8 +119,10 @@ append_to_file_path <- function(path, s) {
 }
 
 print_build_status <- function(input, output_file) {
+    input <- fs::path_file(input)
+    output <- fs::path_file(output_file)
     cli::cli_process_start(
-        "Building {.file {fs::path_file(output_file)}} from {.path {fs::path_file(input)}}",
+        paste0("Building ", output, " from ", input),
         on_exit = "done",
         .envir = parent.frame(n = 2)
     )

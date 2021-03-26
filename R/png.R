@@ -65,7 +65,7 @@ build_png <- function(
     # Build png from pdf
     input <- paths$input$pdf
     output_file <- paths$output$png
-    if ((length(slides) > 1) | (slides == "all")) {
+  if ((length(slides) > 1) | (slides == "all")) {
       output_file <- paths$output$zip
     }
     print_build_status(input, output_file)

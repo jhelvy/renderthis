@@ -1,3 +1,11 @@
+
+# xaringanBuilder 0.0.7.9002
+
+* Added {pdftools} to Imports
+* Added version requirement to {magick}
+* Changed `magick::image_read()` to `magick::image_read_pdf()` inside `pdf_to_png()`
+* Modified the `print_build_status()` to use `paste0()`...was causing a bug using glue syntax.
+
 # xaringanBuilder 0.0.7
 
 * Added `build_mp4()`; closes issue #11
