@@ -8,7 +8,7 @@
 #' full url ending in ".html".
 #' @param output_file Name of the output pptx file.
 #' @param density Resolution of the resulting pngs in each slide file.
-#' Defaults to `"100x100"`.
+#' Defaults to `300`.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #' other html widgets or advanced features), set `complex_slides = TRUE`.
 #' Defaults to `FALSE`. This will use the {chromote} package to iterate through
@@ -32,7 +32,7 @@
 build_pptx <- function(
     input,
     output_file = NULL,
-    density = "100x100",
+    density = 300,
     complex_slides = FALSE,
     partial_slides = FALSE,
     delay = 1
