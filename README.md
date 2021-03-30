@@ -254,7 +254,7 @@ For example, to build a pptx from a Rmd file without Chrome, you could:
 -   Author: *John Paul Helveston*
     [www.jhelvy.com](http://www.jhelvy.com/)
 -   Date First Written: *September 27, 2020*
--   Most Recent Update: mars 30, 2021
+-   Most Recent Update: March 30, 2021
 -   License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
