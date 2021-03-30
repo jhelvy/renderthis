@@ -10,9 +10,9 @@ output:
 knitr::opts_chunk$set(
   collapse = TRUE,
   results = "asis",
-  echo = FALSE,
   comment = "#>",
-  out.width = "100%"
+  out.width = "100%",
+  eval = FALSE
 )
 IS_README <- TRUE
 ```
@@ -39,7 +39,7 @@ Build xaringan slides to multiple output formats:
 
 You can install the current version of xaringanBuilder from GitHub:
 
-```
+```{r}
 # install.packages("remotes")
 remotes::install_github("jhelvy/xaringanBuilder")
 ```
@@ -70,7 +70,7 @@ Rmd
 
 You can build all of the examples below from [here](https://github.com/jhelvy/xaringanBuilder/tree/master/inst/example)
 
-```
+```{r}
 library(xaringanBuilder)
 ```
 
@@ -86,7 +86,7 @@ The `output_file` argument is optional. If provided, it can be a full or local p
 
 Build an html file from a Rmd file:
 
-```
+```{r}
 build_html("slides.Rmd")
 ```
 
@@ -94,7 +94,7 @@ build_html("slides.Rmd")
 
 Input can be a Rmd file, html file, or url:
 
-```
+```{r}
 build_pdf("slides.Rmd")
 build_pdf("slides.html")
 build_pdf("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
@@ -106,7 +106,7 @@ build_pdf("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.htm
 
 Input can be a Rmd file, html file, pdf file, or url:
 
-```
+```{r}
 build_gif("slides.Rmd")
 build_gif("slides.html")
 build_gif("slides.pdf")
@@ -121,7 +121,7 @@ Example:
 
 Input can be a Rmd file, html file, pdf file, or url:
 
-```
+```{r}
 build_mp4("slides.Rmd")
 build_mp4("slides.html")
 build_mp4("slides.pdf")
@@ -136,7 +136,7 @@ Creates a pptx file where each slide contains a png image of each xaringan slide
 
 Input can be a Rmd file, html file, pdf file, or url:
 
-```
+```{r}
 build_pptx("slides.Rmd")
 build_pptx("slides.html")
 build_pptx("slides.pdf")
@@ -149,7 +149,7 @@ Build png image(s) of some or all slides. Use the `slides` argument to determine
 
 Input can be a Rmd file, html file, pdf file, or url:
 
-```
+```{r}
 # By default, creates a png of only the first slide:
 build_png("slides.Rmd")
 build_png("slides.html")
@@ -169,7 +169,7 @@ Example:
 
 Build a png of the first slide from a Rmd file. Image is sized for sharing on social media (e.g. Twitter).
 
-```
+```{r}
 build_social("slides.Rmd")
 ```
 
@@ -183,14 +183,14 @@ Example:
 
 Use `build_all()` to build all output types from a Rmd file:
 
-```
+```{r}
 # Builds every output by default
 build_all("slides.Rmd")
 ```
 
 Use the `include` or `exclude` arguments to control which output types to include or exclude:
 
-```
+```{r}
 # Both of these build html, pdf, and gif outputs
 build_all("slides.Rmd", include = c("html", "pdf", "gif"))
 build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
@@ -219,7 +219,7 @@ Building the PDF requires a local installation of Chrome. If you don't have Chro
 
 After installing the packages, you can set the paths like this:
 
-```
+```{r}
 Sys.setenv(PAGEDOWN_CHROME = "/path/to/browser")
 Sys.setenv(CHROMOTE_CHROME = "/path/to/browser")
 ```
@@ -244,6 +244,6 @@ For example, to build a pptx from a Rmd file without Chrome, you could:
 
 If you use this package in a publication, I would greatly appreciate it if you cited it. You can get the citation information by typing `citation("xaringanBuilder")` into R:
 
-```{r}
+```{r, echo = FALSE, eval = TRUE, results='asis'}
 citation("xaringanBuilder")
 ```

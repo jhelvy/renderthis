@@ -24,8 +24,10 @@ Build xaringan slides to multiple output formats:
 
 You can install the current version of xaringanBuilder from GitHub:
 
-    # install.packages("remotes")
-    remotes::install_github("jhelvy/xaringanBuilder")
+``` r
+# install.packages("remotes")
+remotes::install_github("jhelvy/xaringanBuilder")
+```
 
 ## Build hierarchy
 
@@ -53,7 +55,9 @@ the build hierarchy:
 You can build all of the examples below from
 [here](https://github.com/jhelvy/xaringanBuilder/tree/master/inst/example)
 
-    library(xaringanBuilder)
+``` r
+library(xaringanBuilder)
+```
 
 ### Input - Output
 
@@ -71,15 +75,19 @@ the output file name will be determined based on the `input` argument.
 
 Build an html file from a Rmd file:
 
-    build_html("slides.Rmd")
+``` r
+build_html("slides.Rmd")
+```
 
 ### Build PDF
 
 Input can be a Rmd file, html file, or url:
 
-    build_pdf("slides.Rmd")
-    build_pdf("slides.html")
-    build_pdf("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+``` r
+build_pdf("slides.Rmd")
+build_pdf("slides.html")
+build_pdf("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+```
 
 **Note**: Building the PDF requires a [local installation of Google
 Chrome](#local-chrome-installation-requirement)
@@ -88,10 +96,12 @@ Chrome](#local-chrome-installation-requirement)
 
 Input can be a Rmd file, html file, pdf file, or url:
 
-    build_gif("slides.Rmd")
-    build_gif("slides.html")
-    build_gif("slides.pdf")
-    build_gif("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+``` r
+build_gif("slides.Rmd")
+build_gif("slides.html")
+build_gif("slides.pdf")
+build_gif("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+```
 
 Example:
 
@@ -101,10 +111,12 @@ Example:
 
 Input can be a Rmd file, html file, pdf file, or url:
 
-    build_mp4("slides.Rmd")
-    build_mp4("slides.html")
-    build_mp4("slides.pdf")
-    build_mp4("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+``` r
+build_mp4("slides.Rmd")
+build_mp4("slides.html")
+build_mp4("slides.pdf")
+build_mp4("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+```
 
 ### Build PPTX
 
@@ -117,10 +129,12 @@ from Powerpoint, you can at least annotate it.
 
 Input can be a Rmd file, html file, pdf file, or url:
 
-    build_pptx("slides.Rmd")
-    build_pptx("slides.html")
-    build_pptx("slides.pdf")
-    build_pptx("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+``` r
+build_pptx("slides.Rmd")
+build_pptx("slides.html")
+build_pptx("slides.pdf")
+build_pptx("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+```
 
 ### Build PNG
 
@@ -130,15 +144,17 @@ first slide) .
 
 Input can be a Rmd file, html file, pdf file, or url:
 
-    # By default, creates a png of only the first slide:
-    build_png("slides.Rmd")
-    build_png("slides.html")
-    build_png("slides.pdf")
-    build_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+``` r
+# By default, creates a png of only the first slide:
+build_png("slides.Rmd")
+build_png("slides.html")
+build_png("slides.pdf")
+build_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 
-    # Build zip file of multiple or all slides
-    build_png("slides.pdf", slides = c(1, 3, 5))
-    build_png("slides.pdf", slides = "all")
+# Build zip file of multiple or all slides
+build_png("slides.pdf", slides = c(1, 3, 5))
+build_png("slides.pdf", slides = "all")
+```
 
 Example:
 
@@ -149,7 +165,9 @@ Example:
 Build a png of the first slide from a Rmd file. Image is sized for
 sharing on social media (e.g. Twitter).
 
-    build_social("slides.Rmd")
+``` r
+build_social("slides.Rmd")
+```
 
 **Note**: This option requires the
 [chromote](https://github.com/rstudio/chromote) and
@@ -163,15 +181,19 @@ Example:
 
 Use `build_all()` to build all output types from a Rmd file:
 
-    # Builds every output by default
-    build_all("slides.Rmd")
+``` r
+# Builds every output by default
+build_all("slides.Rmd")
+```
 
 Use the `include` or `exclude` arguments to control which output types
 to include or exclude:
 
-    # Both of these build html, pdf, and gif outputs
-    build_all("slides.Rmd", include = c("html", "pdf", "gif"))
-    build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
+``` r
+# Both of these build html, pdf, and gif outputs
+build_all("slides.Rmd", include = c("html", "pdf", "gif"))
+build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
+```
 
 ## “Complex” slides and partial / incremental slides
 
@@ -210,8 +232,10 @@ you will need to set the path to the browser you want to use for the
 
 After installing the packages, you can set the paths like this:
 
-    Sys.setenv(PAGEDOWN_CHROME = "/path/to/browser")
-    Sys.setenv(CHROMOTE_CHROME = "/path/to/browser")
+``` r
+Sys.setenv(PAGEDOWN_CHROME = "/path/to/browser")
+Sys.setenv(CHROMOTE_CHROME = "/path/to/browser")
+```
 
 If you are unable to install Chrome (e.g. on a computing cluster), the
 recommended workflow is to build intermediate output formats and use an
@@ -230,7 +254,7 @@ For example, to build a pptx from a Rmd file without Chrome, you could:
 -   Author: *John Paul Helveston*
     [www.jhelvy.com](http://www.jhelvy.com/)
 -   Date First Written: *September 27, 2020*
--   Most Recent Update: February 27, 2021
+-   Most Recent Update: mars 30, 2021
 -   License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
@@ -249,5 +273,5 @@ A BibTeX entry for LaTeX users is
 
 @Manual{, title = {xaringanBuilder: Functions for building xaringan
 slides to different outputs.}, author = {John Paul Helveston}, year =
-{2021}, note = {R package version 0.0.6}, url =
+{2021}, note = {R package version 0.0.7}, url =
 {<https://jhelvy.github.io/xaringanBuilder/>}, }
