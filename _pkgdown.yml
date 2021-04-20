@@ -18,18 +18,18 @@ navbar:
       href: reference/index.html
     - text: "Changelog"
       href: news/index.html
-  right:
-   - icon: fa-github
-     href: https://github.com/jhelvy/xaringanBuilder
+    - icon: fa-github
+      href: https://github.com/jhelvy/xaringanBuilder
 
 reference:
 - title: "Build slides"
   desc: "Functions For Building Xaringan Slides To Different Outputs."
   contents:
   - build_all
+  - build_social
   - build_html
   - build_pdf
   - build_png
-  - build_social
   - build_gif
+  - build_mp4
   - build_pptx
