@@ -54,7 +54,7 @@ build_paths <- function(input, output_file = NULL) {
       input_html <- fs::path_ext_set(input_root, "html")
       input_url  <- paste0("file://", input_html)
     }
-    input_rmd <- fs::path_ext_set(input_root, "rmd")
+    input_rmd <- input_root
     input_pdf <- fs::path_ext_set(input_root, "pdf")
 
     # Build output_file paths
