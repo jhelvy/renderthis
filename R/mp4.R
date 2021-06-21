@@ -37,7 +37,8 @@ build_mp4 <- function(
     fps = 1,
     complex_slides = FALSE,
     partial_slides = FALSE,
-    delay = 1
+    delay = 1,
+    which = NULL
 ) {
     # Check input and output files have correct extensions
     assert_io_paths(input, c("rmd", "html", "pdf"), output_file, "mp4")
@@ -55,6 +56,9 @@ build_mp4 <- function(
     output_file <- paths$output$mp4
     print_build_status(input, output_file)
     pngs <- pdf_to_pngs(input, density)
+    
+    if(!is.null(which)){pngs <- pdf_to_pngs(input, density)[which]}
+    
     temp_folder <- tempdir()
     png_root <- fs::path_ext_set(fs::path_file(output_file), "png")
     png_paths <- c()
