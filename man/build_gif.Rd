@@ -8,6 +8,7 @@ build_gif(
   input,
   output_file = NULL,
   density = 100,
+  slides = NULL,
   fps = 1,
   complex_slides = FALSE,
   partial_slides = FALSE,
@@ -23,6 +24,9 @@ full url ending in ".html".}
 
 \item{density}{Resolution of the resulting pngs in each slide file.
 Defaults to `100`.}
+
+\item{slides}{A vector of the slide number(s) to include in the gif.
+Defaults to `NULL`, in which case all slides are included.}
 
 \item{fps}{Frames per second of the resulting gif file.}
 

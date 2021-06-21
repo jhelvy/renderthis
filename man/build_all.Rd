@@ -45,8 +45,8 @@ TRUE`.}
 and pptx output types file. Defaults to `100`.}
 
 \item{slides}{A vector of the slide number(s) to return for the png output.
-Defaults to `1`, returning only the title slide. You can get a zip
-file of all the slides as pngs by setting `slides = "all"`).}
+Defaults to `1`, returning only the title slide. To return a zip
+file of all the slides as pngs, set `slides = NULL`).}
 
 \item{fps}{Frames per second of the gif and mp4 files.}
 }

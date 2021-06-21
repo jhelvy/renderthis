@@ -9,6 +9,8 @@
 #' @param output_file Name of the output pptx file.
 #' @param density Resolution of the resulting pngs in each slide file.
 #' Defaults to `100`.
+#' @param slides A vector of the slide number(s) to include in the pptx.
+#' Defaults to `NULL`, in which case all slides are included.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #' other html widgets or advanced features), set `complex_slides = TRUE`.
 #' Defaults to `FALSE`. This will use the {chromote} package to iterate through
@@ -33,6 +35,7 @@ build_pptx <- function(
     input,
     output_file = NULL,
     density = 100,
+    slides = NULL,
     complex_slides = FALSE,
     partial_slides = FALSE,
     delay = 1
@@ -57,6 +60,13 @@ build_pptx <- function(
     output_file <- paths$output$pptx
     print_build_status(input, output_file)
     pngs <- pdf_to_pngs(input, density)
+
+    # Keep only selected slides by number
+    if (!is.null(slides)) {
+        pngs <- pngs[slides]
+    }
+
+    # Build the pptx
     doc <- get_pptx_template(pngs[1])
     for (i in 1:length(pngs)) {
         png_path <- magick::image_write(

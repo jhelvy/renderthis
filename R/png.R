@@ -12,9 +12,9 @@
 #' @param output_file Name of the output png or zip file.
 #' @param density Resolution of the resulting pngs in each slide file.
 #' Defaults to `100`.
-#' @param slides A vector of the slide number(s) to return. Defaults to `1`,
-#' returning only the title slide. You can also get a zip file of all the
-#' slides as pngs by setting `slides = "all"`).
+#' @param slides A vector of the slide number(s) to return for the png output.
+#' Defaults to `1`, returning only the title slide. To return a zip
+#' file of all the slides as pngs, set `slides = NULL`).
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #' other html widgets or advanced features), set `complex_slides = TRUE`.
 #' Defaults to `FALSE`. This will use the {chromote} package to iterate through
@@ -65,15 +65,14 @@ build_png <- function(
     # Build png from pdf
     input <- paths$input$pdf
     output_file <- paths$output$png
-  if ((length(slides) > 1) | (slides == "all")) {
+    if ((length(slides) > 1) | (slides == "all")) {
       output_file <- paths$output$zip
     }
     print_build_status(input, output_file)
     pngs <- pdf_to_pngs(input, density)
-    if (length(slides) > 1) {
-      zip_pngs(pngs, slides, output_file)
-    } else if (slides == "all") {
-      slides <- seq(length(pngs))
+    if (is.null(slides)) {
+      zip_pngs(pngs, seq_len(length(pngs)), output_file)
+    } else if (length(slides) > 1) {
       zip_pngs(pngs, slides, output_file)
     } else {
       magick::image_write(pngs[slides], output_file)

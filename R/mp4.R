@@ -9,6 +9,8 @@
 #' @param output_file Name of the output mp4 file.
 #' @param density Resolution of the resulting pngs in each slide file.
 #' Defaults to `100`.
+#' @param slides A vector of the slide number(s) to include in the mp4.
+#' Defaults to `NULL`, in which case all slides are included.
 #' @param fps Frames per second of the resulting mp4 file.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #' other html widgets or advanced features), set `complex_slides = TRUE`.
@@ -34,11 +36,11 @@ build_mp4 <- function(
     input,
     output_file = NULL,
     density = 100,
+    slides = NULL,
     fps = 1,
     complex_slides = FALSE,
     partial_slides = FALSE,
-    delay = 1,
-    which = NULL
+    delay = 1
 ) {
     # Check input and output files have correct extensions
     assert_io_paths(input, c("rmd", "html", "pdf"), output_file, "mp4")
@@ -56,9 +58,12 @@ build_mp4 <- function(
     output_file <- paths$output$mp4
     print_build_status(input, output_file)
     pngs <- pdf_to_pngs(input, density)
-    
-    if(!is.null(which)){pngs <- pdf_to_pngs(input, density)[which]}
-    
+
+    # Keep only selected slides by number
+    if (!is.null(slides)) {
+        pngs <- pngs[slides]
+    }
+
     temp_folder <- tempdir()
     png_root <- fs::path_ext_set(fs::path_file(output_file), "png")
     png_paths <- c()
