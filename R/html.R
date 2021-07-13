@@ -22,7 +22,7 @@ build_html <- function(input, output_file = NULL) {
     output_file <- paths$output$html
 
     # Build html from rmd
-    proc <- print_build_status(input, output_file, on_exit = "done")
+    proc <- cli_build_start(input, output_file, on_exit = "done")
     tryCatch(
         rmarkdown::render(
             input = input,
@@ -30,9 +30,6 @@ build_html <- function(input, output_file = NULL) {
             output_format = 'xaringan::moon_reader',
             quiet = TRUE
         ),
-        error = function(err) {
-            cli::cli_process_failed(proc)
-            stop(err)
-        }
+        error = cli_build_failed(proc)
     )
 }

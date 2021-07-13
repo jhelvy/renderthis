@@ -80,15 +80,14 @@ build_pdf <- function(
 }
 
 build_pdf_simple <- function(input, output_file = NULL) {
-    proc <- print_build_status(input, output_file, on_exit = "done")
+    proc <- cli_build_start(input, output_file, on_exit = "done")
     tryCatch({
       pagedown::chrome_print(
         input  = input,
         output = output_file)
-    }, error = function(err) {
-      cli::cli_process_failed(proc)
-      stop(err)
-    })
+    },
+      error = cli_build_failed(proc)
+    )
 }
 
 # build_pdf_complex() was previously xaringan_to_pdf(), added by gadenbuie
@@ -167,7 +166,7 @@ build_pdf_complex <- function(input, output_file, partial_slides, delay) {
     "document.head.appendChild(style)"
   ))
 
-  proc <- print_build_status(input, output_file)
+  proc <- cli_build_start(input, output_file)
 
   pb <- progress::progress_bar$new(
     format = "Slide :slide (:part) [:bar] Eta: :eta",

@@ -56,7 +56,7 @@ build_mp4 <- function(
     # Build mp4 from pdf
     input <- paths$input$pdf
     output_file <- paths$output$mp4
-    proc <- print_build_status(input, output_file)
+    proc <- cli_build_start(input, output_file)
     pngs <- pdf_to_pngs(input, density)
 
     # Keep only selected slides by number
