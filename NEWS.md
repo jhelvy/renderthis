@@ -1,5 +1,12 @@
 
-# xaringanBuilder 0.0.7.9002
+# xaringanBuilder 0.0.8
+
+## Bigger changes
+
+* Added `slides` argument to `build_mp4()`, `build_gif()`, and `build_pptx()` to better control which slides to include in each output format.
+* Updated cli messaging to more accurately track with actually build process, including build errors.
+
+## Smaller change
 
 * Added {pdftools} to Imports
 * Added version requirement to {magick}
