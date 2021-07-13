@@ -56,7 +56,7 @@ build_mp4 <- function(
     # Build mp4 from pdf
     input <- paths$input$pdf
     output_file <- paths$output$mp4
-    print_build_status(input, output_file)
+    proc <- print_build_status(input, output_file)
     pngs <- pdf_to_pngs(input, density)
 
     # Keep only selected slides by number
@@ -73,13 +73,15 @@ build_mp4 <- function(
             pngs[i], fs::path(temp_folder, png_name))
         png_paths <- c(png_paths, png_path)
     }
-    av::av_encode_video(
+
+    res <- av::av_encode_video(
         input = png_paths,
         output = output_file,
         framerate = fps,
+        # vfilter argument added to avoid divisible by 2 error, see:
+        # https://github.com/ropensci/av/issues/2
         vfilter = "scale=trunc(iw/2)*2:trunc(ih/2)*2"
     )
-    # vfilter argument added to avoid divisible by 2 error, see:
-    # https://github.com/ropensci/av/issues/2
-
+    cli::cli_process_done(proc)
+    res
 }

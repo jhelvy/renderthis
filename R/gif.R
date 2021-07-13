@@ -56,7 +56,7 @@ build_gif <- function(
     # Build gif from pdf
     input <- paths$input$pdf
     output_file <- paths$output$gif
-    print_build_status(input, output_file)
+    proc <- print_build_status(input, output_file)
     pngs <- pdf_to_pngs(input, density)
 
     # Keep only selected slides by number
@@ -67,5 +67,8 @@ build_gif <- function(
     # Build the gif
     pngs_joined <- magick::image_join(pngs)
     pngs_animated <- magick::image_animate(pngs_joined, fps = fps)
-    magick::image_write(pngs_animated, output_file)
+    res <- magick::image_write(pngs_animated, output_file)
+
+    cli::cli_process_done(proc)
+    res
 }
