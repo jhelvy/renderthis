@@ -5,6 +5,7 @@
 
 * Added `slides` argument to `build_mp4()`, `build_gif()`, and `build_pptx()` to better control which slides to include in each output format.
 * Updated cli messaging to more accurately track with actually build process, including build errors.
+* Fixed issue where intermediate paths would break if input and output file names were different.
 
 ## Smaller change
 

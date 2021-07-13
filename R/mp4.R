@@ -51,6 +51,7 @@ build_mp4 <- function(
     # Build html and / or pdf (if input is not pdf)
     if (!test_path_ext(input, "pdf")) {
         build_to_pdf(input, paths, complex_slides, partial_slides, delay)
+        paths <- build_paths(input = paths$output$pdf, output_file)
     }
 
     # Build mp4 from pdf

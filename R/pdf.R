@@ -66,6 +66,7 @@ build_pdf <- function(
     # Build html (if input is rmd)
     if (test_path_ext(input, "rmd")) {
         build_html(paths$input$rmd, paths$output$html)
+        paths <- build_paths(input = paths$output$html, output_file)
     }
 
     # Build pdf from html
