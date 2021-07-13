@@ -38,17 +38,20 @@ build_social <- function(input, output_file = NULL) {
     output_file <- paths$output$social
 
     # Build png from rmd
-    print_build_status(input, output_file)
-    webshot2::rmdshot(
-        doc = input,
-        file = output_file,
-        vheight = 600,
-        vwidth = 600 * 191 / 100,
-        rmd_args = list(
-            output_options = list(
-                nature = list(ratio = "191:100"),
-                self_contained = TRUE
+    proc <- cli_build_start(input, output_file, on_exit = "done")
+    tryCatch({
+        webshot2::rmdshot(
+            doc = input,
+            file = output_file,
+            vheight = 600,
+            vwidth = 600 * 191 / 100,
+            rmd_args = list(
+                output_options = list(
+                    nature = list(ratio = "191:100"),
+                    self_contained = TRUE
+                )
             )
-        )
+        )},
+        error = cli_build_failed(proc)
     )
 }

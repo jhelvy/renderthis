@@ -118,14 +118,21 @@ append_to_file_path <- function(path, s) {
     )
 }
 
-print_build_status <- function(input, output_file) {
+cli_build_start <- function(input, output_file, on_exit = "failed") {
     input <- fs::path_file(input)
     output <- fs::path_file(output_file)
     cli::cli_process_start(
         paste0("Building ", output, " from ", input),
-        on_exit = "done",
-        .envir = parent.frame(n = 2)
+        on_exit = on_exit,
+        .envir = parent.frame()
     )
+}
+
+cli_build_failed <- function(id) {
+  function(err) {
+    cli::cli_process_failed(id)
+    stop(err)
+  }
 }
 
 pdf_to_pngs <- function(input, density) {

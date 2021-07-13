@@ -58,7 +58,7 @@ build_pptx <- function(
     # Build pptx from pdf
     input <- paths$input$pdf
     output_file <- paths$output$pptx
-    print_build_status(input, output_file)
+    proc <- cli_build_start(input, output_file)
     pngs <- pdf_to_pngs(input, density)
 
     # Keep only selected slides by number
@@ -83,6 +83,7 @@ build_pptx <- function(
         )
     }
 
+    cli::cli_process_done(proc)
     print(doc, output_file)
 }
 

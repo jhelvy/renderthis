@@ -68,15 +68,19 @@ build_png <- function(
     if ((length(slides) > 1) | (slides == "all")) {
       output_file <- paths$output$zip
     }
-    print_build_status(input, output_file)
+    proc <- cli_build_start(input, output_file, on_exit = "done")
     pngs <- pdf_to_pngs(input, density)
-    if (is.null(slides)) {
-      zip_pngs(pngs, seq_len(length(pngs)), output_file)
-    } else if (length(slides) > 1) {
-      zip_pngs(pngs, slides, output_file)
-    } else {
-      magick::image_write(pngs[slides], output_file)
-    }
+    tryCatch({
+      if (is.null(slides)) {
+        zip_pngs(pngs, seq_len(length(pngs)), output_file)
+      } else if (length(slides) > 1) {
+        zip_pngs(pngs, slides, output_file)
+      } else {
+        magick::image_write(pngs[slides], output_file)
+      }
+    },
+      error = cli_build_failed(proc)
+    )
 }
 
 zip_pngs <- function(pngs, slides, output_file) {
@@ -130,9 +134,11 @@ build_thumbnail <- function(input, output_file = NULL) {
     # Build png from html
     input <- paths$input$html
     output_file <- paths$output$thumbnail
-    print_build_status(input, output_file)
-    pagedown::chrome_print(
+    proc <- cli_build_start(input, output_file, on_exit = "done")
+    tryCatch({
+      pagedown::chrome_print(
         input  = input,
         output = output_file,
         format = "png")
+    }, error = cli_build_failed(proc))
 }
