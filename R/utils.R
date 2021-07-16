@@ -121,11 +121,15 @@ append_to_file_path <- function(path, s) {
 cli_build_start <- function(input, output_file, on_exit = "failed") {
     input <- fs::path_file(input)
     output <- fs::path_file(output_file)
-    cli::cli_process_start(
-        paste0("Building ", output, " from ", input),
-        on_exit = on_exit,
-        .envir = parent.frame()
+
+    # prepare the message right now in this environment, because we'll attach
+    # the cli_process to the parent frame, where input and output don't exist
+    msg <- cli::format_inline(
+        "Building {.field {output}} from {.file {input}}",
+        .envir = environment()
     )
+
+    cli::cli_process_start(msg, on_exit = on_exit, .envir = parent.frame())
 }
 
 cli_build_failed <- function(id) {
