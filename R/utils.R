@@ -119,8 +119,16 @@ append_to_file_path <- function(path, s) {
 }
 
 cli_build_start <- function(input, output_file, on_exit = "failed") {
-    input <- fs::path_file(input)
-    output <- fs::path_file(output_file)
+    common_path <- fs::path_common(fs::path_abs(c(input, output_file)))
+    wd <- fs::path_wd()
+
+    if (identical(common_path, wd) && wd == fs::path_dir(input)) {
+        input <- fs::path_file(input)
+        output <- fs::path_file(output_file)
+    } else {
+        input <- fs::path_rel(input, start = wd)
+        output <- fs::path_rel(output_file, start = wd)
+    }
 
     # prepare the message right now in this environment, because we'll attach
     # the cli_process to the parent frame, where input and output don't exist
