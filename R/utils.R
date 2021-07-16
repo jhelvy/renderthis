@@ -133,7 +133,7 @@ cli_build_start <- function(input, output_file, on_exit = "failed") {
     # prepare the message right now in this environment, because we'll attach
     # the cli_process to the parent frame, where input and output don't exist
     msg <- cli::format_inline(
-        "Building {.field {output}} from {.file {input}}",
+        "Building {.file {input}} into {.field {output}}",
         .envir = environment()
     )
 
