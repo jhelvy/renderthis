@@ -48,11 +48,11 @@
 #'           partial_slides = TRUE)
 #' }
 build_pdf <- function(
-  input,
-  output_file = NULL,
-  complex_slides = FALSE,
-  partial_slides = FALSE,
-  delay = 1
+    input,
+    output_file = NULL,
+    complex_slides = FALSE,
+    partial_slides = FALSE,
+    delay = 1
 ) {
     # Check if Chrome is installed
     assert_chrome_installed()
@@ -61,34 +61,34 @@ build_pdf <- function(
     assert_path_ext(input, c("rmd", "html"))
     assert_path_ext(output_file, "pdf")
 
-    # Build input and output paths
-    paths <- build_paths(input, output_file)
+    if (is.null(output_file)) {
+        output_file <- path_from(input, "pdf")
+    }
 
     # Build html (if input is rmd)
+    step_html <- input
     if (test_path_ext(input, "rmd")) {
-        build_html(paths$input$rmd, paths$output$html)
-        paths <- build_paths(input = paths$output$html, output_file)
+        step_html <- path_from(output_file, "html")
+        build_html(input, step_html)
     }
 
     # Build pdf from html
-    output_file <- paths$output$pdf
     if (complex_slides | partial_slides) {
-        build_pdf_complex(paths$input$url, output_file, partial_slides, delay)
+        build_pdf_complex(path_from(step_html, "url"), output_file, partial_slides, delay)
     } else {
-      input <- paths$input$html
-      if (is_url(input)) { input <- paths$input$url }
-      build_pdf_simple(input, output_file)
+        build_pdf_simple(step_html, output_file)
     }
 }
 
 build_pdf_simple <- function(input, output_file = NULL) {
     proc <- cli_build_start(input, output_file, on_exit = "done")
     tryCatch({
-      pagedown::chrome_print(
-        input  = input,
-        output = output_file)
+        pagedown::chrome_print(
+            input  = input,
+            output = output_file
+        )
     },
-      error = cli_build_failed(proc)
+        error = cli_build_failed(proc)
     )
 }
 
