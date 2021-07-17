@@ -43,6 +43,73 @@ assert_chromote <- function() {
     }
 }
 
+path_from <- function(path, to_ext, temporary = FALSE, dir = NULL) {
+    path_is_url <- is_url(path)
+
+    if (identical(tolower(to_ext), "url")) {
+        if (path_is_url) {
+            return(path)
+        }
+        temporary <- FALSE
+    }
+
+    if (is.null(dir)) {
+        dir <-
+            if (path_is_url) {
+                warning("No `dir` provided, using working directory.")
+                fs::path_wd()
+            } else {
+                fs::path_dir(fs::path_abs(path))
+            }
+    }
+
+    path_abs <- if (!path_is_url) fs::path_abs(path)
+    path_file <-
+        if (isTRUE(temporary)) {
+            fs::path_file(fs::file_temp("xaringanBuilder_"))
+        } else {
+            fs::path_file(path)
+        }
+
+    path_new <- switch(
+        tolower(to_ext),
+        social = fs::path(
+            dir,
+            append_to_file_path(fs::path_ext_set(path_file, "png"), "_social")
+        ),
+        url = fs::path(dir, path_file),
+        html = ,
+        pdf = ,
+        png = ,
+        gif = ,
+        pptx = ,
+        mp4 = ,
+        zip = fs::path(dir, fs::path_ext_set(path_file, to_ext)),
+        stop("Unsupported file type: ", to_ext)
+    )
+
+    path_new <- fs::path_abs(path_new)
+
+    if (to_ext == "url") {
+        path_new <- paste0("file://", path_new)
+    }
+
+    if (isTRUE(temporary)) {
+        # when the calling function exits, delete the temp file
+        path_new_rel <- fs::path_rel(path_new, fs::path_wd())
+        msg <- cli::format_inline(
+            "Removed temporary {.file {path_new_rel}}", .envir = environment()
+        )
+        withr::defer({
+            unlink(path_new)
+            cli::cli_alert_info(msg)
+        }, envir = parent.frame())
+    }
+
+    path_new
+}
+
+
 build_paths <- function(input, output_file = NULL) {
     # Build input paths
     if (is_url(input)) {

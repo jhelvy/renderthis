@@ -31,6 +31,7 @@ Imports:
     pagedown,
     pdftools,
     progress,
+    withr,
     rmarkdown,
     xaringan,
     zip
@@ -38,8 +39,10 @@ Suggests:
     chromote (>= 0.0.0.9003),
     officer,
     xaringanExtra,
-    webshot2
+    webshot2,
+    testthat (>= 3.0.0)
 Remotes:
     rstudio/chromote,
     gadenbuie/xaringanExtra,
     rstudio/webshot2
+Config/testthat/edition: 3
