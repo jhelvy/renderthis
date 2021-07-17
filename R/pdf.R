@@ -20,6 +20,10 @@
 #' @param delay Seconds of delay between advancing to and printing
 #' a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
 #' TRUE`.
+#' @param keep_intermediates Should we keep the intermediate HTML file? Only
+#' relevant if the `input` is an `.Rmd` file. Default is `TRUE` if the
+#' `output_file` is written into the same directory as the `input`, otherwise
+#' the intermediate file isn't kept.
 #' @export
 #' @examples
 #' \dontrun{
@@ -52,7 +56,8 @@ build_pdf <- function(
     output_file = NULL,
     complex_slides = FALSE,
     partial_slides = FALSE,
-    delay = 1
+    delay = 1,
+    keep_intermediates = NULL
 ) {
     # Check if Chrome is installed
     assert_chrome_installed()
@@ -65,10 +70,14 @@ build_pdf <- function(
         output_file <- path_from(input, "pdf")
     }
 
+    if (is.null(keep_intermediates)) {
+        keep_intermediates <- in_same_directory(input, output_file)
+    }
+
     # Build html (if input is rmd)
     step_html <- input
     if (test_path_ext(input, "rmd")) {
-        step_html <- path_from(output_file, "html")
+        step_html <- path_from(output_file, "html", temporary = !keep_intermediates)
         build_html(input, step_html)
     }
 

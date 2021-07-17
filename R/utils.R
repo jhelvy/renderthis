@@ -166,6 +166,15 @@ is_url <- function(input) {
   return(grepl("^(ht|f)tp", tolower(input)))
 }
 
+in_same_directory <- function(x, y) {
+    if (is_url(x) || is_url(y)) {
+        return(FALSE)
+    }
+    paths <- fs::path_abs(c(x, y))
+    common <- fs::path_common(paths)
+    all(common == fs::path_dir(paths))
+}
+
 append_to_file_path <- function(path, s) {
     # Appends s to path before the extension, e.g.
     # path:    "file.png"

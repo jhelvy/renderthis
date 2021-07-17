@@ -126,3 +126,14 @@ test_that("path_from() removes temp files when the calling function exits", {
     expect_true(res$existed)
     expect_false(fs::file_exists(res$file))
 })
+
+test_that("in_same_directory() detects files in the same directory", {
+    expect_true(in_same_directory("slides.html", "slides.pdf"))
+    expect_true(in_same_directory("example/slides.html", "example/slides.pdf"))
+
+    expect_false(in_same_directory("../slides.html", "slides.pdf"))
+    expect_false(in_same_directory("slides.html", "../slides.pdf"))
+    expect_false(in_same_directory("example/slides.html", "slides.pdf"))
+    expect_false(in_same_directory("http://example.com/slides.html", "slides.pdf"))
+    expect_false(in_same_directory("slides.pdf", "http://example.com/slides.html"))
+})

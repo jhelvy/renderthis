@@ -9,7 +9,8 @@ build_pdf(
   output_file = NULL,
   complex_slides = FALSE,
   partial_slides = FALSE,
-  delay = 1
+  delay = 1,
+  keep_intermediates = NULL
 )
 }
 \arguments{
@@ -34,6 +35,11 @@ is included in the PDF.}
 \item{delay}{Seconds of delay between advancing to and printing
 a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
 TRUE`.}
+
+\item{keep_intermediates}{Should we keep the intermediate HTML file? Only
+relevant if the `input` is an `.Rmd` file. Default is `TRUE` if the
+`output_file` is written into the same directory as the `input`, otherwise
+the intermediate file isn't kept.}
 }
 \description{
 Build xaringan slides as a pdf file. Requires a local installation of
