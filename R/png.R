@@ -49,10 +49,8 @@ build_png <- function(
     delay = 1
 ) {
     # Check input and output files have correct extensions
-    assert_io_paths(
-        input, c("rmd", "html", "pdf"),
-        output_file, c("png", "zip")
-    )
+    assert_path_ext(input, c("rmd", "html", "pdf"))
+    assert_path_ext(output_file, c("png", "zip"))
 
     # Build input and output paths
     paths <- build_paths(input, output_file)
@@ -122,7 +120,8 @@ build_thumbnail <- function(input, output_file = NULL) {
     assert_chrome_installed()
 
     # Check input and output files have correct extensions
-    assert_io_paths(input, c("rmd", "html"), output_file, "png")
+    assert_path_ext(input, c("rmd", "html"))
+    assert_path_ext(output_file, "png")
 
     # Build input and output paths
     paths <- build_paths(input, output_file)

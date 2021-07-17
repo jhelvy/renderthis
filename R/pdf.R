@@ -58,7 +58,8 @@ build_pdf <- function(
     assert_chrome_installed()
 
     # Check input and output files have correct extensions
-    assert_io_paths(input, c("rmd", "html"), output_file, "pdf")
+    assert_path_ext(input, c("rmd", "html"))
+    assert_path_ext(output_file, "pdf")
 
     # Build input and output paths
     paths <- build_paths(input, output_file)

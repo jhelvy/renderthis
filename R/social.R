@@ -30,7 +30,8 @@ build_social <- function(input, output_file = NULL) {
     assert_chrome_installed()
 
     # Check input and output files have correct extensions
-    assert_io_paths(input, "rmd", output_file, "png")
+    assert_path_ext(input, "rmd")
+    assert_path_ext(output_file, "png")
 
     # Build input and output paths
     paths <- build_paths(input, output_file)

@@ -1,11 +1,5 @@
-assert_io_paths <- function(input, input_ext, output_file, output_file_ext) {
-    assert_path_ext(input, input_ext, arg = "input")
-    if (!is.null(output_file)) {
-        assert_path_ext(output_file, output_file_ext, arg = "output_file")
-    }
-}
-
-assert_path_ext <- function(path, expected_ext, arg) {
+assert_path_ext <- function(path, expected_ext, arg = NULL) {
+    if (is.null(arg)) arg <- deparse(substitute(path))
     if (!test_path_ext(path, expected_ext)) {
         expected_ext <- paste0(".", expected_ext, collapse = ", ")
         stop("`", arg, "` must have extension: ", expected_ext, call. = FALSE)
@@ -13,7 +7,7 @@ assert_path_ext <- function(path, expected_ext, arg) {
 }
 
 test_path_ext <- function(path, expected_ext) {
-    return(tolower(fs::path_ext(path)) %in% expected_ext)
+    tolower(fs::path_ext(path)) %in% expected_ext
 }
 
 assert_chrome_installed <- function() {

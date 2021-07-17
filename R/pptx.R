@@ -45,7 +45,8 @@ build_pptx <- function(
     }
 
     # Check input and output files have correct extensions
-    assert_io_paths(input, c("rmd", "html", "pdf"), output_file, "pptx")
+    assert_path_ext(input, c("rmd", "html", "pdf"))
+    assert_path_ext(output_file, "pptx")
 
     # Build input and output paths
     paths <- build_paths(input, output_file)

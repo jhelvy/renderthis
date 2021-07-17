@@ -1,3 +1,33 @@
+test_that("assert_path_ext() stops if path has incorrect extension", {
+    input <- "slides.html"
+    output_file <- "slides.mp4"
+    url <- "http://example.com/slides.html"
+
+    expect_error(
+        assert_path_ext(input, "pdf"),
+        "`input`.+[.]pdf"
+    )
+
+    expect_error(
+        assert_path_ext(output_file, "png"),
+        "`output_file`.+[.]png"
+    )
+
+    expect_error(
+        assert_path_ext(output_file, "gif", arg = "something_else"),
+        "`something_else`.+[.]gif"
+    )
+
+    expect_error(
+        assert_path_ext(url, "pptx"),
+        "`url`.+[.]pptx"
+    )
+
+    expect_silent(assert_path_ext(input, "html"))
+    expect_silent(assert_path_ext(output_file, "mp4"))
+    expect_silent(assert_path_ext(url, "html"))
+})
+
 test_that("path_from() in current directory", {
     expect_equal(
         path_from("slides.html", "html"),

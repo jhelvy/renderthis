@@ -14,7 +14,8 @@
 #' }
 build_html <- function(input, output_file = NULL) {
     # Check input and output files have correct extensions
-    assert_io_paths(input, "rmd", output_file, "html")
+    assert_path_ext(input, "rmd")
+    assert_path_ext(output_file, "html")
 
     # Build input and output paths
     paths <- build_paths(input, output_file)

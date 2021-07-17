@@ -43,7 +43,8 @@ build_mp4 <- function(
     delay = 1
 ) {
     # Check input and output files have correct extensions
-    assert_io_paths(input, c("rmd", "html", "pdf"), output_file, "mp4")
+    assert_path_ext(input, c("rmd", "html", "pdf"))
+    assert_path_ext(output_file, "mp4")
 
     # Build input and output paths
     paths <- build_paths(input, output_file)
