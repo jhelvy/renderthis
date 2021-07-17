@@ -39,6 +39,7 @@ assert_chromote <- function() {
 
 path_from <- function(path, to_ext, temporary = FALSE, dir = NULL) {
     path_is_url <- is_url(path)
+    temporary <- isTRUE(temporary)
 
     if (identical(tolower(to_ext), "url")) {
         if (path_is_url) {
@@ -59,7 +60,7 @@ path_from <- function(path, to_ext, temporary = FALSE, dir = NULL) {
 
     path_abs <- if (!path_is_url) fs::path_abs(path)
     path_file <-
-        if (isTRUE(temporary)) {
+        if (temporary) {
             fs::path_file(fs::file_temp("xaringanBuilder_"))
         } else {
             fs::path_file(path)
@@ -88,7 +89,7 @@ path_from <- function(path, to_ext, temporary = FALSE, dir = NULL) {
         path_new <- paste0("file://", path_new)
     }
 
-    if (isTRUE(temporary)) {
+    if (temporary) {
         # when the calling function exits, delete the temp file
         path_new_rel <- fs::path_rel(path_new, fs::path_wd())
         msg <- cli::format_inline(
@@ -96,13 +97,16 @@ path_from <- function(path, to_ext, temporary = FALSE, dir = NULL) {
         )
         withr::defer({
             unlink(path_new)
+            if (tolower(to_ext) == "html" && temporary) {
+                # clean up supporting files for temp HTML
+                fs::dir_delete(paste0(fs::path_ext_remove(path_new), "_files"))
+            }
             cli::cli_alert_info(msg)
         }, envir = parent.frame())
     }
 
     path_new
 }
-
 
 build_paths <- function(input, output_file = NULL) {
     # Build input paths

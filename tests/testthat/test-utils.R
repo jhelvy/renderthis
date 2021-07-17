@@ -103,11 +103,20 @@ test_that("path_from() removes temp files when the calling function exits", {
     tmpdir <- fs::path_abs(withr::local_tempdir())
     withr::local_dir(tmpdir)
 
-    path_from_temp <- function(...) {
+    path_from_temp <- function(path, to_ext, dir = NULL) {
         # temporarily create the file in a function context
-        file <- path_from(..., temporary = TRUE)
+        file <- path_from(path, to_ext, temporary = TRUE, dir = dir)
+        files_dir <- paste0(fs::path_ext_remove(file), "_files")
         fs::file_create(file)
-        list(file = file, existed = unname(fs::file_exists(file)))
+        if (to_ext == "html") {
+            fs::dir_create(files_dir)
+        }
+        list(
+            file = file,
+            existed = unname(fs::file_exists(file)),
+            files_dir = files_dir,
+            dir_existed = unname(fs::dir_exists(files_dir))
+        )
     }
 
     res <- path_from_temp(path = "slides.html", to_ext = "pdf")
@@ -125,6 +134,16 @@ test_that("path_from() removes temp files when the calling function exits", {
     expect_match(res$file, "pdf$")
     expect_true(res$existed)
     expect_false(fs::file_exists(res$file))
+
+    # removes supporting files when producing HTML
+    res <- path_from_temp(path = "slides.rmd", to_ext = "html")
+    expect_match(res$file, tmpdir, fixed = TRUE)
+    expect_match(res$file, "xaringanBuilder_")
+    expect_match(res$file, "html$")
+    expect_true(res$existed)
+    expect_true(res$dir_existed)
+    expect_false(fs::file_exists(res$file))
+    expect_false(fs::file_exists(res$files_dir))
 })
 
 test_that("in_same_directory() detects files in the same directory", {
