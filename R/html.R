@@ -22,7 +22,7 @@ build_html <- function(input, output_file = NULL) {
 
     # Build input and output paths
     if (is.null(output_file)) {
-        output_file <- path_new(input, "html")
+        output_file <- path_from(input, "html")
     }
 
     input <- fs::path_abs(input)
