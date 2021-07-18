@@ -4,6 +4,16 @@ test_that("build_png() output in input directory", {
 
     withr::local_dir(tmpdir)
 
+    # Detect errors
+    expect_error(build_png("foo.Rmd"), "doesn't exist")
+    expect_error(build_png("slides.Rmd", slides = "three"))
+    expect_error(build_png("slides.Rmd", slides = 0), ">= 1")
+    expect_error(build_png("slides.Rmd", slides = -1), ">= 1")
+    expect_error(build_png("slides.Rmd", slides = 1:4 + 0.5), "integer")
+    expect_error(quiet_cli(
+        build_png("slides.Rmd", slides = 4)
+    ), "out of range")
+
     # Normal operation, save a single slide to png
     quiet_cli(
         build_png("slides.Rmd", "title-slide.png", slides = 1)
@@ -57,5 +67,11 @@ test_that("build_png() output in input directory", {
         )$distortion,
         0.0,
         tolerance = 0.1
+    )
+
+    quiet_cli(
+        expect_warning(
+            build_png("pics.pdf", "pics.png", slides = 3:4)
+        )
     )
 })

@@ -63,7 +63,14 @@ build_png <- function(
     if (is.null(slides) || identical(tolower(slides), "all")) {
         slides <- "all"
     } else {
-        stopifnot(is.numeric(slides))
+        stopifnot(
+            "`slides` must be slide numeric slide indices" = is.numeric(slides),
+            "`slides` must be slide indices >= 1" = slides > 0,
+            "`slides` must be integer slide indices" = all.equal(
+                slides, as.integer(slides), tolerance = .Machine$double.eps
+            )
+        )
+        slides <- sort(unique(as.integer(slides)))
     }
     if (length(slides) > 1 || slides == "all") {
         output_file <- path_from(output_file, "zip")
@@ -88,14 +95,29 @@ build_png <- function(
     }
 
     # Build png from pdf
-    proc <- cli_build_start(step_pdf, output_file, on_exit = "done")
     imgs <- pdf_to_imgs(step_pdf, density)
-    # TODO: warn or stop if `slides` doesn't conform to available slides
+    if (identical(slides, "all")) {
+        slides <- seq_along(imgs)
+    }
+    slides_oob <- slides[!slides %in% seq_along(imgs)]
+    if (length(slides_oob)) {
+        slides <- setdiff(slides, slides_oob)
+        if (length(slides)) {
+            warning(
+                "Some values of `slides` were out of range for this presentation: ",
+                paste(slides_oob, collapse = ", ")
+            )
+        } else {
+            stop(
+                "All values of `slides` were out of range for this presentation: ",
+                paste(slides_oob, collapse = ", ")
+            )
+        }
+    }
 
+    proc <- cli_build_start(step_pdf, output_file, on_exit = "done")
     tryCatch({
-        if (identical(slides, "all")) {
-            zip_pngs(imgs, seq_len(length(imgs)), output_file)
-        } else if (length(slides) > 1) {
+        if (length(slides) > 1) {
             zip_pngs(imgs, slides, output_file)
         } else {
             magick::image_write(imgs[slides], output_file)
