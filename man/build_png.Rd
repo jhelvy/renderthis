@@ -11,44 +11,47 @@ build_png(
   slides = 1,
   complex_slides = FALSE,
   partial_slides = FALSE,
-  delay = 1
+  delay = 1,
+  keep_intermediates = FALSE
 )
 }
 \arguments{
-\item{input}{Path to a Rmd file, html file, pdf file, or a url.
-If the input is a url to xaringan slides on a website, you must provide the
-full url ending in ".html".}
+\item{input}{Path to a Rmd file, html file, pdf file, or a url. If the input
+is a url to xaringan slides on a website, you must provide the full url
+ending in ".html".}
 
 \item{output_file}{Name of the output png or zip file.}
 
-\item{density}{Resolution of the resulting pngs in each slide file.
-Defaults to `100`.}
+\item{density}{Resolution of the resulting pngs in each slide file. Defaults
+to `100`.}
 
 \item{slides}{A vector of the slide number(s) to return for the png output.
-Defaults to `1`, returning only the title slide. To return a zip
-file of all the slides as pngs, set `slides = NULL`).}
+Defaults to `1`, returning only the title slide. To return a zip file of
+all the slides as pngs, set `slides = NULL`).}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set `complex_slides = TRUE`.
-Defaults to `FALSE`. This will use the {chromote} package to iterate through
-the slides at a pace set by the `delay` argument. Requires a local
+Defaults to `FALSE`. This will use the {chromote} package to iterate
+through the slides at a pace set by the `delay` argument. Requires a local
 installation of Chrome.}
 
-\item{partial_slides}{Should partial (continuation) slides be
-included in the output? If `FALSE`, the default, only the complete slide
-is included in the PDF.}
+\item{partial_slides}{Should partial (continuation) slides be included in the
+output? If `FALSE`, the default, only the complete slide is included in the
+PDF.}
 
-\item{delay}{Seconds of delay between advancing to and printing
-a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
-TRUE`.}
+\item{delay}{Seconds of delay between advancing to and printing a new slide.
+Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
+
+\item{keep_intermediates}{Should we keep the intermediate files used to build
+the final output? The default is `FALSE`.}
 }
 \description{
 Build png image(s) of xaringan slides. The function builds to the pdf and
-then converts it into png files of each slide. The slide numbers defined
-by the `slides` argument are saved (defaults to `1`, returning only the
-title slide). If `length(slides) > 1`, it will return the png files in a
- zip file. You can also get a zip file of all the slides as pngs by setting
-`slides = "all"`).
+then converts it into png files of each slide. The slide numbers defined by
+the `slides` argument are saved (defaults to `1`, returning only the title
+slide). If `length(slides) > 1`, it will return the png files in a zip file.
+You can also get a zip file of all the slides as pngs by setting `slides =
+"all"`).
 }
 \examples{
 \dontrun{
@@ -62,4 +65,5 @@ build_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.htm
 build_png("slides.pdf", slides = c(1, 3, 5))
 build_png("slides.pdf", slides = "all")
 }
+
 }
