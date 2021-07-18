@@ -64,6 +64,8 @@ build_pdf <- function(
     # Check if Chrome is installed
     assert_chrome_installed()
 
+    assert_path_exists(input)
+
     if (is.null(output_file)) {
         output_file <- path_from(input, "pdf")
     }

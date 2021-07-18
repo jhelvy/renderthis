@@ -16,6 +16,8 @@
 #'
 #' @export
 build_html <- function(input, output_file = NULL) {
+    assert_path_exists(input)
+
     if (is.null(output_file)) {
         output_file <- path_from(input, "html")
     }

@@ -34,6 +34,26 @@ test_that("assert_path_ext() stops if path has incorrect extension", {
     expect_silent(assert_path_ext(url, "html"))
 })
 
+test_that("assert_path_exists() stops if the path doesn't exist", {
+    withr::local_dir(withr::local_tempdir())
+
+    input <- "slides.html"
+    url <- "http://example.com/slides"
+    input_dir <- "slides_dir"
+
+    expect_error(assert_path_exists(input), "doesn't exist")
+    expect_error(assert_path_exists(input_dir), "doesn't exist")
+    expect_error(assert_path_exists(input_dir, dir_ok = TRUE), "doesn't exist")
+    expect_error(assert_path_exists(NULL), "must be a path")
+    expect_silent(assert_path_exists(url))
+
+    fs::file_create(input)
+    fs::dir_create(input_dir)
+    expect_silent(assert_path_exists(input))
+    expect_error(assert_path_exists(input_dir), "doesn't exist")
+    expect_silent(assert_path_exists(input_dir, dir_ok = TRUE))
+})
+
 test_that("path_from() in current directory", {
     expect_equal(
         path_from("slides.html", "html"),

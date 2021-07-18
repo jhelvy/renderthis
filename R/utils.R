@@ -13,6 +13,25 @@ test_path_ext <- function(path, expected_ext) {
     tolower(fs::path_ext(path)) %in% expected_ext
 }
 
+assert_path_exists <- function(path, arg = NULL, dir_ok = FALSE) {
+    if (is.null(arg)) arg <- deparse(substitute(path))
+
+    if (is.null(path)) {
+        stop("`", arg, "` must be a path", call. = FALSE)
+    }
+
+    if (
+        is_url(path) ||
+        (dir_ok && fs::dir_exists(path)) ||
+        # don't count directories if !dir_ok
+        (!fs::is_dir(path) && fs::file_exists(path))
+    ) {
+        return()
+    }
+
+    stop("`", arg, "` doesn't exist: ", path, call. = FALSE)
+}
+
 assert_chrome_installed <- function() {
     assert_chromote()
 
