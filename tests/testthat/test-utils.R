@@ -125,7 +125,10 @@ test_that("path_from() removes temp files when the calling function exits", {
         )
     }
 
-    res <- path_from_temp(path = "slides.html", to_ext = "pdf")
+    res <- suppressMessages(
+        path_from_temp(path = "slides.html", to_ext = "pdf"),
+        "cliMessage"
+    )
     expect_match(res$file, tmpdir, fixed = TRUE)
     expect_match(res$file, "xaringanBuilder_")
     expect_match(res$file, "pdf$")
@@ -134,7 +137,10 @@ test_that("path_from() removes temp files when the calling function exits", {
 
     # even when the dir is somewhere else
     tmpdir2 <- fs::path_abs(withr::local_tempdir())
-    res <- path_from_temp(path = "slides.html", to_ext = "pdf", dir = tmpdir2)
+    res <- suppressMessages(
+        path_from_temp(path = "slides.html", to_ext = "pdf", dir = tmpdir2),
+        "cliMessage"
+    )
     expect_match(res$file, tmpdir2, fixed = TRUE)
     expect_match(res$file, "xaringanBuilder_")
     expect_match(res$file, "pdf$")
@@ -142,7 +148,10 @@ test_that("path_from() removes temp files when the calling function exits", {
     expect_false(fs::file_exists(res$file))
 
     # removes supporting files when producing HTML
-    res <- path_from_temp(path = "slides.rmd", to_ext = "html")
+    res <- suppressMessages(
+        path_from_temp(path = "slides.rmd", to_ext = "html"),
+        "cliMessage"
+    )
     expect_match(res$file, tmpdir, fixed = TRUE)
     expect_match(res$file, "xaringanBuilder_")
     expect_match(res$file, "html$")
