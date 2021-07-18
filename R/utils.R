@@ -1,5 +1,8 @@
 assert_path_ext <- function(path, expected_ext, arg = NULL) {
     if (is.null(arg)) arg <- deparse(substitute(path))
+    if (is.null(path)) {
+        stop("`", arg, "` must be a path with extension ", expected_ext, call. = FALSE)
+    }
     if (!test_path_ext(path, expected_ext)) {
         expected_ext <- paste0(".", expected_ext, collapse = ", ")
         stop("`", arg, "` must have extension: ", expected_ext, call. = FALSE)

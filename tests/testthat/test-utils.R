@@ -23,6 +23,12 @@ test_that("assert_path_ext() stops if path has incorrect extension", {
         "`url`.+[.]pptx"
     )
 
+    shouldnt_be_null <- NULL
+    expect_error(
+        assert_path_ext(shouldnt_be_null, "pdf"),
+        "must be a path with extension pdf"
+    )
+
     expect_silent(assert_path_ext(input, "html"))
     expect_silent(assert_path_ext(output_file, "mp4"))
     expect_silent(assert_path_ext(url, "html"))
