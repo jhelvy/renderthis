@@ -121,7 +121,10 @@ path_from <- function(path, to_ext, temporary = FALSE, dir = NULL) {
             unlink(path_new)
             if (tolower(to_ext) == "html" && temporary) {
                 # clean up supporting files for temp HTML
-                fs::dir_delete(paste0(fs::path_ext_remove(path_new), "_files"))
+                support_dir <- paste0(fs::path_ext_remove(path_new), "_files")
+                if (fs::dir_exists(support_dir)) {
+                    fs::dir_delete(support_dir)
+                }
             }
             cli::cli_alert_info(msg)
         }, envir = parent.frame())

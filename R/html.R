@@ -1,12 +1,20 @@
 #' Build xaringan slides as html file.
 #'
 #' Build xaringan slides as html file. Essentially the same thing as
-#' `rmarkdown::render()` with `output_format = "xaringan::moon_reader"`
+#' [rmarkdown::render()] with `output_format = "xaringan::moon_reader"`,
+#' except that the `self_contained` option is forced to `TRUE` if the HTML file
+#' is built into a directory other than the one containing `input`.
 #'
 #' @param input Path to Rmd file of xaringan slides.
-#' @param output_file The name of the output file. If using NULL then the output
-#'   filename will be based on filename for the input file. If a filename is
-#'   provided, a path to the output file can also be provided.
+#' @param output_file The name of the output file. If using `NULL` then the
+#'   output file name will be based on file name for the input file. If a file
+#'   name is provided, a path to the output file can also be provided.
+#' @param self_contained Should the output file be a self-contained HTML file
+#'   where all images, CSS and JavaScript are included directly in the output
+#'   file? This option, when `TRUE`, provides you with a single HTML file that
+#'   you can share with others, but it may be very large. This feature is
+#'   enabled by default when the `output_file` is written in a directory other
+#'   than the one containing the `input` R Markdown file.
 #'
 #' @examples
 #' \dontrun{
@@ -15,7 +23,7 @@
 #' }
 #'
 #' @export
-build_html <- function(input, output_file = NULL) {
+build_html <- function(input, output_file = NULL, self_contained = FALSE) {
     assert_path_exists(input)
 
     if (is.null(output_file)) {
@@ -28,6 +36,8 @@ build_html <- function(input, output_file = NULL) {
 
     input <- fs::path_abs(input)
     output_file <- fs::path_abs(output_file)
+    self_contained <-
+        isTRUE(self_contained) || self_contained_is_required(input, output_file)
 
     # Build html from rmd
     proc <- cli_build_start(input, output_file, on_exit = "done")
@@ -37,9 +47,24 @@ build_html <- function(input, output_file = NULL) {
             input = fs::path_file(input),
             output_file = fs::path_rel(output_file, fs::path_dir(input)),
             output_format = 'xaringan::moon_reader',
+            output_options = list(self_contained = self_contained),
             quiet = TRUE
         )
     },
         error = cli_build_failed(proc)
     )
+}
+
+self_contained_is_required <- function(input, output_file) {
+    if (in_same_directory(input, output_file)) {
+        return(FALSE)
+    }
+    cli::cli_alert_warning(
+        paste(
+            "Rendering slides with {.code self_contained = TRUE} since",
+            "{.code output_file} is not in the same directory as {.code input}."
+        ),
+        wrap = TRUE
+    )
+    TRUE
 }
