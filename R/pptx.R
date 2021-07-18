@@ -61,7 +61,7 @@ build_pptx <- function(
     input <- paths$input$pdf
     output_file <- paths$output$pptx
     proc <- cli_build_start(input, output_file)
-    pngs <- pdf_to_pngs(input, density)
+    pngs <- pdf_to_imgs(input, density)
 
     # Keep only selected slides by number
     if (!is.null(slides)) {

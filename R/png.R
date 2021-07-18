@@ -68,7 +68,7 @@ build_png <- function(
       output_file <- paths$output$zip
     }
     proc <- cli_build_start(input, output_file, on_exit = "done")
-    pngs <- pdf_to_pngs(input, density)
+    pngs <- pdf_to_imgs(input, density)
     tryCatch({
       if (is.null(slides)) {
         zip_pngs(pngs, seq_len(length(pngs)), output_file)
