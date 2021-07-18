@@ -16,14 +16,13 @@
 #'
 #' @export
 build_html <- function(input, output_file = NULL) {
-    # Check input and output files have correct extensions
-    assert_path_ext(input, "rmd")
-    assert_path_ext(output_file, "html")
-
-    # Build input and output paths
     if (is.null(output_file)) {
         output_file <- path_from(input, "html")
     }
+
+    # Check input and output files have correct extensions
+    assert_path_ext(input, "rmd")
+    assert_path_ext(output_file, "html")
 
     input <- fs::path_abs(input)
     output_file <- fs::path_abs(output_file)

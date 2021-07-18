@@ -64,13 +64,13 @@ build_pdf <- function(
     # Check if Chrome is installed
     assert_chrome_installed()
 
-    # Check input and output files have correct extensions
-    assert_path_ext(input, c("rmd", "html"))
-    assert_path_ext(output_file, "pdf")
-
     if (is.null(output_file)) {
         output_file <- path_from(input, "pdf")
     }
+
+    # Check input and output files have correct extensions
+    assert_path_ext(input, c("rmd", "html"))
+    assert_path_ext(output_file, "pdf")
 
     if (is.null(keep_intermediates)) {
         keep_intermediates <- in_same_directory(input, output_file)
