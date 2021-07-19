@@ -59,15 +59,7 @@ test_that("build_png() output in input directory", {
     expect_true(fs::file_exists("slide-3-pdf.png"))
 
     # Both versions of slide 3 should be the same
-    expect_equal(
-        magick::image_compare_dist(
-            image = magick::image_read("slide-3-pdf.png"),
-            reference_image = magick::image_read("slide-3-html.png"),
-            metric = "AE"
-        )$distortion,
-        0.0,
-        tolerance = 0.1
-    )
+    expect_equal_images("slide-3-pdf.png", "slide-3-html.png")
 
     quiet_cli(
         expect_warning(
