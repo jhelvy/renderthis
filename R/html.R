@@ -15,6 +15,7 @@
 #'   you can share with others, but it may be very large. This feature is
 #'   enabled by default when the `output_file` is written in a directory other
 #'   than the one containing the `input` R Markdown file.
+#' @param rmd_args A list of arguments passed to [rmarkdown::render()].
 #'
 #' @examples
 #' \dontrun{
@@ -23,7 +24,7 @@
 #' }
 #'
 #' @export
-build_html <- function(input, output_file = NULL, self_contained = FALSE) {
+build_html <- function(input, output_file = NULL, self_contained = FALSE, rmd_args = NULL) {
     assert_path_exists(input)
 
     if (is.null(output_file)) {
@@ -36,23 +37,32 @@ build_html <- function(input, output_file = NULL, self_contained = FALSE) {
 
     input <- fs::path_abs(input)
     output_file <- fs::path_abs(output_file)
-    self_contained <-
-        isTRUE(self_contained) || self_contained_is_required(input, output_file)
+
+    rmd_args <- build_html_rmd_args(input, output_file, self_contained, rmd_args)
 
     # Build html from rmd
     proc <- cli_build_start(input, output_file, on_exit = "done")
     tryCatch({
         withr::local_dir(fs::path_dir(input))
-        rmarkdown::render(
-            input = fs::path_file(input),
-            output_file = fs::path_rel(output_file, fs::path_dir(input)),
-            output_format = 'xaringan::moon_reader',
-            output_options = list(self_contained = self_contained),
-            quiet = TRUE
-        )
+        do.call(rmarkdown::render, rmd_args)
     },
         error = cli_build_failed(proc)
     )
+}
+
+build_html_rmd_args <- function(input, output_file, self_contained = FALSE, rmd_args = NULL) {
+    rmd_args <- c(list(), rmd_args)
+    rmd_args$input <- fs::path_file(input)
+    rmd_args$output_file <- fs::path_rel(output_file, fs::path_dir(input))
+    if (is.null(rmd_args$output_options)) {
+        rmd_args$output_options <- list()
+    }
+    rmd_args$output_options$self_contained <-
+        isTRUE(self_contained) || self_contained_is_required(input, output_file)
+    if (is.null(rmd_args$quiet)) {
+        rmd_args$quiet <- TRUE
+    }
+    rmd_args
 }
 
 self_contained_is_required <- function(input, output_file) {

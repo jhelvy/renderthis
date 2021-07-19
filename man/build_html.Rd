@@ -4,7 +4,7 @@
 \alias{build_html}
 \title{Build xaringan slides as html file.}
 \usage{
-build_html(input, output_file = NULL, self_contained = FALSE)
+build_html(input, output_file = NULL, self_contained = FALSE, rmd_args = NULL)
 }
 \arguments{
 \item{input}{Path to Rmd file of xaringan slides.}
@@ -19,6 +19,8 @@ file? This option, when `TRUE`, provides you with a single HTML file that
 you can share with others, but it may be very large. This feature is
 enabled by default when the `output_file` is written in a directory other
 than the one containing the `input` R Markdown file.}
+
+\item{rmd_args}{A list of arguments passed to [rmarkdown::render()].}
 }
 \description{
 Build xaringan slides as html file. Essentially the same thing as
