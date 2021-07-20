@@ -50,7 +50,7 @@ test_that("build_gif() only includes `slides`", {
 
     withr::local_dir(tmpdir)
 
-    fs::dir_create("gif/demo.gif")
+    fs::dir_create("gif")
     quiet_cli(
         build_gif("slides.Rmd", "gif/demo.gif", keep_intermediates = TRUE, slides = c(1, 3))
     )
