@@ -12,37 +12,40 @@ build_mp4(
   fps = 1,
   complex_slides = FALSE,
   partial_slides = FALSE,
-  delay = 1
+  delay = 1,
+  keep_intermediates = FALSE
 )
 }
 \arguments{
-\item{input}{Path to a Rmd file, html file, pdf file, or a url.
-If the input is a url to xaringan slides on a website, you must provide the
-full url ending in ".html".}
+\item{input}{Path to a Rmd file, html file, pdf file, or a url. If the input
+is a url to xaringan slides on a website, you must provide the full url
+ending in ".html".}
 
 \item{output_file}{Name of the output mp4 file.}
 
-\item{density}{Resolution of the resulting pngs in each slide file.
-Defaults to `100`.}
+\item{density}{Resolution of the resulting pngs in each slide file. Defaults
+to `100`.}
 
-\item{slides}{A vector of the slide number(s) to include in the mp4.
-Defaults to `NULL`, in which case all slides are included.}
+\item{slides}{A vector of the slide number(s) to include in the mp4. Defaults
+to `NULL`, in which case all slides are included.}
 
 \item{fps}{Frames per second of the resulting mp4 file.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set `complex_slides = TRUE`.
-Defaults to `FALSE`. This will use the {chromote} package to iterate through
-the slides at a pace set by the `delay` argument. Requires a local
+Defaults to `FALSE`. This will use the {chromote} package to iterate
+through the slides at a pace set by the `delay` argument. Requires a local
 installation of Chrome.}
 
-\item{partial_slides}{Should partial (continuation) slides be
-included in the output? If `FALSE`, the default, only the complete slide
-is included in the PDF.}
+\item{partial_slides}{Should partial (continuation) slides be included in the
+output? If `FALSE`, the default, only the complete slide is included in the
+PDF.}
 
-\item{delay}{Seconds of delay between advancing to and printing
-a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
-TRUE`.}
+\item{delay}{Seconds of delay between advancing to and printing a new slide.
+Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
+
+\item{keep_intermediates}{Should we keep the intermediate files used to build
+the final output? The default is `FALSE`.}
 }
 \description{
 Build xaringan slides as a mp4 video file. The function builds to the pdf,
@@ -57,4 +60,5 @@ build_mp4("slides.html")
 build_mp4("slides.pdf")
 build_mp4("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 }
+
 }
