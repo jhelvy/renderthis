@@ -39,11 +39,29 @@ build_html <- function(input, output_file = NULL, self_contained = FALSE, rmd_ar
     output_file <- fs::path_abs(output_file)
 
     rmd_args <- build_html_rmd_args(input, output_file, self_contained, rmd_args)
+    self_contained <- rmd_args$output_options$self_contained
 
     # Build html from rmd
+    #
+    # If the output isn't in the same directory, we turn on self contained and
+    # render the html file to a temporary file in the source input directory.
+    # Then, we move the temp file to wherever it should be. Otherwise, rmarkdown
+    # and pandoc fight each other over paths (wd/input/output)
     proc <- cli_build_start(input, output_file, on_exit = "done")
     tryCatch({
         withr::local_dir(fs::path_dir(input))
+
+        if (self_contained) {
+            rmd_args$output_file <- path_from(
+                fs::path_file(rmd_args$output_file), "html", temporary = TRUE
+            )
+            withr::defer(
+                fs::file_move(rmd_args$output_file, output_file),
+                priority = "first"
+            )
+        }
+
+
         do.call(rmarkdown::render, rmd_args)
     },
         error = cli_build_failed(proc)
@@ -53,15 +71,19 @@ build_html <- function(input, output_file = NULL, self_contained = FALSE, rmd_ar
 build_html_rmd_args <- function(input, output_file, self_contained = FALSE, rmd_args = NULL) {
     rmd_args <- c(list(), rmd_args)
     rmd_args$input <- fs::path_file(input)
-    rmd_args$output_file <- fs::path_rel(output_file, fs::path_dir(input))
+    rmd_args$output_file <- fs::path_file(output_file)
+
     if (is.null(rmd_args$output_options)) {
         rmd_args$output_options <- list()
     }
+
     rmd_args$output_options$self_contained <-
         isTRUE(self_contained) || self_contained_is_required(input, output_file)
+
     if (is.null(rmd_args$quiet)) {
         rmd_args$quiet <- TRUE
     }
+
     rmd_args
 }
 
