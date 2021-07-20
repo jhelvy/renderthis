@@ -13,3 +13,7 @@ expect_equal_images <- function(x, y) {
         tolerance = 0.1
     )
 }
+
+skip_if_not_chrome_installed <- function() {
+    skip_if_not(check_chrome_installed(), "Chrome is not installed")
+}

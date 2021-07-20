@@ -10,6 +10,9 @@ test_that("build_png() output in input directory", {
     expect_error(build_png("slides.Rmd", slides = 0), ">= 1")
     expect_error(build_png("slides.Rmd", slides = -1), ">= 1")
     expect_error(build_png("slides.Rmd", slides = 1:4 + 0.5), "integer")
+
+    skip_if_not_chrome_installed()
+
     expect_error(quiet_cli(
         build_png("slides.Rmd", slides = 4)
     ), "out of range")

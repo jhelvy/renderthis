@@ -35,19 +35,23 @@ assert_path_exists <- function(path, arg = NULL, dir_ok = FALSE) {
 assert_chrome_installed <- function() {
     assert_chromote()
 
-    chromePath <- NULL
-    error <- paste0(
-        "This function requires a local installation of the Chrome ",
-        "browser. You can also use other browsers based on Chromium, ",
-        "such as Chromium itself, Edge, Vivaldi, Brave, or Opera.")
-    tryCatch({
-      chromePath <- chromote::find_chrome()
-      },
-      error = function(e) { message(error) }
-    )
-    if (is.null(chromePath)) {
-        stop(error)
+    if (!check_chrome_installed()) {
+        stop(
+            "This function requires a local installation of the Chrome ",
+            "browser. You can also use other browsers based on Chromium, ",
+            "such as Chromium itself, Edge, Vivaldi, Brave, or Opera.",
+            call. = FALSE
+        )
     }
+}
+
+check_chrome_installed <- function() {
+    assert_chromote()
+
+    tryCatch(
+        !is.null(chromote::find_chrome()),
+        error = function(e) FALSE
+    )
 }
 
 assert_chromote <- function() {

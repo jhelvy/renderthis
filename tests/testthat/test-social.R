@@ -1,4 +1,7 @@
 test_that("build_html() output in input directory", {
+    skip_if_not_chrome_installed()
+    skip_if_not_installed("webshot2")
+
     tmpdir <- withr::local_tempdir()
     fs::dir_copy(test_path("slides", "basic"), tmpdir, overwrite = TRUE)
 
