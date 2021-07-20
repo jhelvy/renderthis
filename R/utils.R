@@ -265,3 +265,44 @@ build_to_pdf <- function(
           complex_slides, partial_slides, delay)
     }
 }
+
+slides_arg_validate <- function(slides, imgs = NULL) {
+    if (is.null(slides) || identical(tolower(slides), "all")) {
+        slides <- "all"
+    } else {
+        stopifnot(
+            "`slides` must be slide numeric slide indices" = is.numeric(slides),
+            "`slides` must be slide indices >= 1" = slides > 0,
+            "`slides` must be integer slide indices" = all.equal(
+                slides, as.integer(slides), tolerance = .Machine$double.eps
+            )
+        )
+        slides <- sort(unique(as.integer(slides)))
+    }
+
+    if (is.null(imgs)) {
+        return(slides)
+    }
+
+    if (identical(slides, "all")) {
+        return(seq_along(imgs))
+    }
+
+    slides_oob <- slides[!slides %in% seq_along(imgs)]
+    if (length(slides_oob)) {
+        slides <- setdiff(slides, slides_oob)
+        if (length(slides)) {
+            warning(
+                "Some values of `slides` were out of range for this presentation: ",
+                paste(slides_oob, collapse = ", ")
+            )
+        } else {
+            stop(
+                "All values of `slides` were out of range for this presentation: ",
+                paste(slides_oob, collapse = ", ")
+            )
+        }
+    }
+
+    slides
+}
