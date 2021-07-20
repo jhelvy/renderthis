@@ -29,7 +29,6 @@ Imports:
     jsonlite,
     magick (>= 2.7.1),
     pagedown,
-    pdftools,
     progress,
     withr,
     rmarkdown,
@@ -38,6 +37,7 @@ Imports:
 Suggests:
     chromote (>= 0.0.0.9003),
     officer,
+    pdftools,
     xaringanExtra,
     webshot2,
     testthat (>= 3.0.0)
