@@ -1,21 +1,25 @@
-test_that("build_png() output in input directory", {
+test_that("build_png() handles bad inputs", {
+    pdf_slides <- test_path("slides", "basic.pdf")
+
+    # Detect errors
+    expect_error(build_png("foo.Rmd"), "doesn't exist")
+    expect_error(build_png(pdf_slides, slides = "three"))
+    expect_error(build_png(pdf_slides, slides = 0), ">= 1")
+    expect_error(build_png(pdf_slides, slides = -1), ">= 1")
+    expect_error(build_png(pdf_slides, slides = 1:4 + 0.5), "integer")
+
+    expect_error(quiet_cli(
+        build_png(pdf_slides, slides = 4)
+    ), "out of range")
+})
+
+test_that("build_png() from .Rmd doesn't keep intermediates by default", {
+    skip_if_not_chrome_installed()
+
     tmpdir <- withr::local_tempdir()
     fs::dir_copy(test_path("slides", "basic"), tmpdir, overwrite = TRUE)
 
     withr::local_dir(tmpdir)
-
-    # Detect errors
-    expect_error(build_png("foo.Rmd"), "doesn't exist")
-    expect_error(build_png("slides.Rmd", slides = "three"))
-    expect_error(build_png("slides.Rmd", slides = 0), ">= 1")
-    expect_error(build_png("slides.Rmd", slides = -1), ">= 1")
-    expect_error(build_png("slides.Rmd", slides = 1:4 + 0.5), "integer")
-
-    skip_if_not_chrome_installed()
-
-    expect_error(quiet_cli(
-        build_png("slides.Rmd", slides = 4)
-    ), "out of range")
 
     # Normal operation, save a single slide to png
     quiet_cli(
@@ -25,17 +29,34 @@ test_that("build_png() output in input directory", {
     expect_false(fs::file_exists("slides.html"))
     expect_false(fs::dir_exists("slides_files"))
     expect_false(fs::file_exists("slides.pdf"))
+})
+
+test_that("build_png() from basic.pdf", {
+    tmpdir <- withr::local_tempdir()
+    fs::file_copy(
+        test_path("slides", "basic.pdf"),
+        fs::path(tmpdir, "slides.pdf"),
+        overwrite = TRUE
+    )
+
+    withr::local_dir(tmpdir)
 
     # Saving several slides automatically chooses .zip
     quiet_cli(
-        build_png("slides.Rmd", slides = 2:3)
+        build_png("slides.pdf", slides = 2:3)
     )
     expect_true(fs::file_exists("slides.zip"))
     pngs <- zip::zip_list("slides.zip")
     expect_equal(pngs$filename, c("slides_2.png", "slides_3.png"))
-    expect_false(fs::file_exists("slides.html"))
-    expect_false(fs::dir_exists("slides_files"))
-    expect_false(fs::file_exists("slides.pdf"))
+})
+
+test_that("build_png() chooses .zip even if .png is given", {
+    skip_if_not_chrome_installed()
+
+    tmpdir <- withr::local_tempdir()
+    fs::dir_copy(test_path("slides", "basic"), tmpdir, overwrite = TRUE)
+
+    withr::local_dir(tmpdir)
 
     # Saving all slides also chooses .zip even if .png is given
     # Also test keep_intermediates = TRUE (and use in next test)
