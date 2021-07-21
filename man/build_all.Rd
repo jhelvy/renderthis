@@ -12,7 +12,7 @@ build_all(
   partial_slides = FALSE,
   delay = 1,
   density = 100,
-  slides = 1,
+  slides = NULL,
   fps = 1
 )
 }
