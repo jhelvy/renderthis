@@ -1,4 +1,6 @@
-test_that("build_gif() simple", {
+test_that("build_gif() simple from .Rmd", {
+    skip_if_not_chrome_installed()
+
     tmpdir <- withr::local_tempdir()
     fs::dir_copy(test_path("slides", "basic"), tmpdir, overwrite = TRUE)
 
@@ -21,7 +23,30 @@ test_that("build_gif() simple", {
     expect_equal(gif_info$height[[1]] / gif_info$width[[1]], 3/4, tolerance = 0.01)
 })
 
+test_that("build_gif() simple from pdf", {
+    tmpdir <- withr::local_tempdir()
+    fs::file_copy(test_path("slides", "basic.pdf"), tmpdir, overwrite = TRUE)
+
+    withr::local_dir(tmpdir)
+
+    quiet_cli(
+        build_gif("basic.pdf")
+    )
+
+    expect_false(fs::file_exists("basic.html"))
+
+    gif_info <- magick::image_info(magick::image_read("basic.gif"))
+    # three slides, one image each
+    expect_equal(nrow(gif_info), 3)
+    # that are all gifs
+    expect_setequal(gif_info$format, "GIF")
+    # the basic slides are 4:3 plus or minus a few pixels
+    expect_equal(gif_info$height[[1]] / gif_info$width[[1]], 3/4, tolerance = 0.01)
+})
+
 test_that("build_gif() keeps intermediates", {
+    skip_if_not_chrome_installed()
+
     tmpdir <- withr::local_tempdir()
     fs::dir_copy(test_path("slides", "basic"), tmpdir, overwrite = TRUE)
 
@@ -46,18 +71,16 @@ test_that("build_gif() keeps intermediates", {
 
 test_that("build_gif() only includes `slides`", {
     tmpdir <- withr::local_tempdir()
-    fs::dir_copy(test_path("slides", "basic"), tmpdir, overwrite = TRUE)
+    fs::file_copy(test_path("slides", "basic.pdf"), tmpdir, overwrite = TRUE)
 
     withr::local_dir(tmpdir)
 
     fs::dir_create("gif")
     quiet_cli(
-        build_gif("slides.Rmd", "gif/demo.gif", keep_intermediates = TRUE, slides = c(1, 3))
+        build_gif("basic.pdf", "gif/demo.gif", keep_intermediates = TRUE, slides = c(1, 3))
     )
 
     expect_true(fs::file_exists("gif/demo.gif"))
-    expect_true(fs::file_exists("gif/demo.pdf"))
-    expect_true(fs::file_exists("gif/demo.html"))
 
     gif_info <- magick::image_info(magick::image_read("gif/demo.gif"))
     # two slides (not three!), one image each
@@ -66,4 +89,11 @@ test_that("build_gif() only includes `slides`", {
     expect_setequal(gif_info$format, "GIF")
     # the basic slides are 4:3 plus or minus a few pixels
     expect_equal(gif_info$height[[1]] / gif_info$width[[1]], 3/4, tolerance = 0.01)
+
+    expect_error(quiet_cli(
+        build_gif("basic.pdf", slides = FALSE)
+    ))
+    expect_error(quiet_cli(
+        build_gif("basic.pdf", slides = 4)
+    ))
 })
