@@ -271,7 +271,7 @@ slides_arg_validate <- function(slides, imgs = NULL) {
         slides <- "all"
     } else {
         stopifnot(
-            "`slides` must be slide numeric slide indices" = is.numeric(slides),
+            "`slides` must be numeric slide indices" = is.numeric(slides),
             "`slides` must be slide indices >= 1" = slides > 0,
             "`slides` must be integer slide indices" = all.equal(
                 slides, as.integer(slides), tolerance = .Machine$double.eps

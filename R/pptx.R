@@ -73,6 +73,7 @@ build_pptx <- function(
     # Build pptx from pdf
     proc <- cli_build_start(step_pdf, output_file)
     imgs <- pdf_to_imgs(step_pdf, density)
+    slides <- slides_arg_validate(slides, imgs)
 
     # Keep only selected slides by number
     if (!is.null(slides)) {
