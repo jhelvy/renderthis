@@ -29,26 +29,25 @@ Defaults to `NULL`, in which case all all output types are built.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set `complex_slides = TRUE`.
-Defaults to `FALSE`. This will use the {chromote} package to iterate through
-the slides at a pace set by the `delay` argument. Requires a local
+Defaults to `FALSE`. This will use the {chromote} package to iterate
+through the slides at a pace set by the `delay` argument. Requires a local
 installation of Chrome.}
 
-\item{partial_slides}{Should partial (continuation) slides be
-included in the output? If `FALSE`, the default, only the complete slide
-is included in the PDF.}
+\item{partial_slides}{Should partial (continuation) slides be included in the
+output? If `FALSE`, the default, only the complete slide is included in the
+PDF.}
 
-\item{delay}{Seconds of delay between advancing to and printing
-a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
-TRUE`.}
+\item{delay}{Seconds of delay between advancing to and printing a new slide.
+Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
 
-\item{density}{Resolution of the resulting png files used in the png, gif,
-and pptx output types file. Defaults to `100`.}
+\item{density}{Resolution of the resulting pngs in each slide file. Defaults
+to `100`.}
 
 \item{slides}{A vector of the slide number(s) to return for the png output.
-Defaults to `1`, returning only the title slide. To return a zip
-file of all the slides as pngs, set `slides = NULL`).}
+Defaults to `1`, returning only the title slide. To return a zip file of
+all the slides as pngs, set `slides = NULL`).}
 
-\item{fps}{Frames per second of the gif and mp4 files.}
+\item{fps}{Frames per second of the resulting mp4 file.}
 }
 \description{
 Build xaringan slides to multiple outputs. Options are `"html"`, `"social"`
@@ -64,4 +63,5 @@ build_all("slides.Rmd")
 build_all("slides.Rmd", include = c("html", "pdf", "gif"))
 build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
 }
+
 }
