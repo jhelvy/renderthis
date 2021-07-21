@@ -16,16 +16,7 @@
 #' @param slides A vector of the slide number(s) to return for the png output.
 #'   Defaults to `1`, returning only the title slide. To return a zip file of
 #'   all the slides as pngs, set `slides = NULL`).
-#' @param complex_slides For "complex" slides (e.g. slides with panelsets or
-#'   other html widgets or advanced features), set `complex_slides = TRUE`.
-#'   Defaults to `FALSE`. This will use the {chromote} package to iterate
-#'   through the slides at a pace set by the `delay` argument. Requires a local
-#'   installation of Chrome.
-#' @param partial_slides Should partial (continuation) slides be included in the
-#'   output? If `FALSE`, the default, only the complete slide is included in the
-#'   PDF.
-#' @param delay Seconds of delay between advancing to and printing a new slide.
-#'   Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.
+#' @inheritParams build_pdf
 #' @param keep_intermediates Should we keep the intermediate files used to build
 #'   the final output? The default is `FALSE`.
 #'

@@ -8,22 +8,11 @@
 #'   is a url to xaringan slides on a website, you must provide the full url
 #'   ending in ".html".
 #' @param output_file Name of the output mp4 file.
-#' @param density Resolution of the resulting pngs in each slide file. Defaults
-#'   to `100`.
 #' @param slides A vector of the slide number(s) to include in the mp4. Defaults
 #'   to `NULL`, in which case all slides are included.
 #' @param fps Frames per second of the resulting mp4 file.
-#' @param complex_slides For "complex" slides (e.g. slides with panelsets or
-#'   other html widgets or advanced features), set `complex_slides = TRUE`.
-#'   Defaults to `FALSE`. This will use the {chromote} package to iterate
-#'   through the slides at a pace set by the `delay` argument. Requires a local
-#'   installation of Chrome.
-#' @param partial_slides Should partial (continuation) slides be included in the
-#'   output? If `FALSE`, the default, only the complete slide is included in the
-#'   PDF.
-#' @param delay Seconds of delay between advancing to and printing a new slide.
-#'   Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.
 #' @inheritParams build_png
+#' @inheritParams build_pdf
 #'
 #' @examples
 #' \dontrun{
