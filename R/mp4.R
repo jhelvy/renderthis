@@ -35,6 +35,10 @@ build_mp4 <- function(
     delay = 1,
     keep_intermediates = FALSE
 ) {
+    if (!requireNamespace("av", quietly = TRUE)) {
+      stop("`av` is required: install.packages('av')")
+    }
+
     if (is.null(output_file)) {
         output_file <- path_from(input, "mp4")
     }
