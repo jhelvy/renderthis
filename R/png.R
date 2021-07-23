@@ -127,22 +127,23 @@ build_thumbnail <- function(input, output_file = NULL) {
     # Check if Chrome is installed
     assert_chrome_installed()
 
+    if (is.null(output_file)) {
+        output_file <- path_from(input, "png")
+    }
+
     # Check input and output files have correct extensions
     assert_path_ext(input, c("rmd", "html"))
     assert_path_ext(output_file, "png")
 
-    # Build input and output paths
-    paths <- build_paths(input, output_file)
-
     # Build html (if input is rmd)
+    step_html <- input
     if (test_path_ext(input, "rmd")) {
-        build_html(paths$input$rmd, paths$output$html)
+        step_html <- path_from(input, "html", temporary = TRUE)
+        build_html(input, step_html)
     }
 
     # Build png from html
-    input <- paths$input$html
-    output_file <- paths$output$thumbnail
-    proc <- cli_build_start(input, output_file, on_exit = "done")
+    proc <- cli_build_start(step_html, output_file, on_exit = "done")
     tryCatch({
       pagedown::chrome_print(
         input  = input,
