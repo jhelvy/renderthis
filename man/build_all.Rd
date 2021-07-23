@@ -44,8 +44,9 @@ Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
 to `100`.}
 
 \item{slides}{A numeric or integer vector of the slide number(s) to include
-in the png output. Defaults to `1`, returning only the title slide. To
-return a zip file of pngs of all of the slides, set `slides = "all"`).}
+in the mp4, or one of `"all"`, `"first"`, or `"last"`. Defaults to `1`,
+returning only the title slide. To return a zip file of pngs of all of the
+slides, set `slides = "all"`).}
 
 \item{fps}{Frames per second of the resulting mp4 file.}
 }

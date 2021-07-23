@@ -26,8 +26,9 @@ ending in ".html".}
 to `100`.}
 
 \item{slides}{A numeric or integer vector of the slide number(s) to include
-in the png output. Defaults to `1`, returning only the title slide. To
-return a zip file of pngs of all of the slides, set `slides = "all"`).}
+in the mp4, or one of `"all"`, `"first"`, or `"last"`. Defaults to `1`,
+returning only the title slide. To return a zip file of pngs of all of the
+slides, set `slides = "all"`).}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set `complex_slides = TRUE`.

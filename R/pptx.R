@@ -9,7 +9,8 @@
 #'   ending in ".html".
 #' @param output_file Name of the output pptx file.
 #' @param slides A numeric or integer vector of the slide number(s) to include
-#'   in the pptx. Defaults to `"all"`, in which case all slides are included.
+#'   in the pptx, or one of `"all"`, `"first"`, or `"last"`. Defaults to
+#'   `"all"`, in which case all slides are included.
 #' @inheritParams build_png
 #' @inheritParams build_pdf
 #'

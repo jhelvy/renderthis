@@ -27,7 +27,8 @@ ending in ".html".}
 to `100`.}
 
 \item{slides}{A numeric or integer vector of the slide number(s) to include
-in the mp4. Defaults to `"all"`, in which case all slides are included.}
+in the mp4, or one of `"all"`, `"first"`, or `"last"`. Defaults to `"all"`,
+in which case all slides are included.}
 
 \item{fps}{Frames per second of the resulting mp4 file.}
 

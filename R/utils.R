@@ -267,19 +267,34 @@ build_to_pdf <- function(
 }
 
 slides_arg_validate <- function(slides, imgs = NULL) {
-    if (is.null(slides) || identical(tolower(slides), "all")) {
+    if (is.null(slides)) {
         slides <- "all"
+    }
+
+    if (is.character(slides)) {
+        slides <- tryCatch(
+            match.arg(tolower(slides), c("all", "first", "last")),
+            error = function(err) {
+                stop(
+                    '`slides` should be one of "all", "first", "last" ',
+                    "or an intger vector of slide indices"
+                )
+            }
+        )
     } else {
         if (!is.numeric(slides)) {
             stop("`slides` must be numeric slide indices")
         }
-        if (any(slides < 1)) {
-            stop("`slides` must be slide indices >= 1")
+        if (any(slides < 0) && any(slides > 0)) {
+            stop(
+                "`slides` must be negative slide indices to drop ",
+                "or positive indices of slides to keep"
+            )
         }
         if (!isTRUE(all.equal(slides, as.integer(slides), tolerance = .Machine$double.eps))) {
             stop("`slides` must be integer slide indices")
         }
-        slides <- sort(unique(as.integer(slides)))
+        slides <- sort(unique(as.integer(slides)), decreasing = any(slides < 0))
     }
 
     if (is.null(imgs)) {
@@ -288,9 +303,13 @@ slides_arg_validate <- function(slides, imgs = NULL) {
 
     if (identical(slides, "all")) {
         return(seq_along(imgs))
+    } else if (identical(slides, "first")) {
+        return(1L)
+    } else if (identical(slides, "last")) {
+        return(length(imgs))
     }
 
-    slides_oob <- slides[!slides %in% seq_along(imgs)]
+    slides_oob <- slides[!abs(slides) %in% seq_along(imgs)]
     if (length(slides_oob)) {
         slides <- setdiff(slides, slides_oob)
         if (length(slides)) {
@@ -306,5 +325,5 @@ slides_arg_validate <- function(slides, imgs = NULL) {
         }
     }
 
-    slides
+    seq_along(imgs)[slides]
 }

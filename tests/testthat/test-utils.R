@@ -189,14 +189,30 @@ test_that("in_same_directory() detects files in the same directory", {
     expect_false(in_same_directory("slides.pdf", "http://example.com/slides.html"))
 })
 
-test_that("slides_arg_validate()", {
+test_that("slides_arg_validate() with only `slides` argument", {
     expect_equal(slides_arg_validate(NULL), "all")
     expect_equal(slides_arg_validate("all"), "all")
+    expect_equal(slides_arg_validate("first"), "first")
+    expect_equal(slides_arg_validate("last"), "last")
+})
+
+test_that("slides_arg_validate() with `slides` and `imgs` arguments", {
     expect_equal(slides_arg_validate(1), 1)
     expect_equal(slides_arg_validate(1:3), 1:3)
     expect_equal(slides_arg_validate("all", 1:3), 1:3)
+    expect_equal(slides_arg_validate("first", 1:3), 1)
+    expect_equal(slides_arg_validate("last", 1:3), 3)
     expect_equal(slides_arg_validate(NULL, letters[1:8]), 1:8)
-    expect_error(slides_arg_validate(12, 1:4))
-    expect_error(slides_arg_validate("three"))
-    expect_error(slides_arg_validate(1:4 + 0.5))
+
+    expect_equal(slides_arg_validate(-1, 1:4), 2:4)
+    expect_equal(slides_arg_validate(c(2, 4), 1:4), c(2, 4))
+})
+
+test_that("slides_arg_validate() with invalid inputs", {
+    expect_error(slides_arg_validate("three"), "should be one of")
+    expect_error(slides_arg_validate(1:4 + 0.5), "integer")
+    expect_error(slides_arg_validate(c(-1, 2), 1:4), "negative.+positive")
+    expect_error(slides_arg_validate(12, 1:4), "out of range")
+    expect_error(slides_arg_validate(-5, 1:4), "out of range.+ -5")
+    expect_error(slides_arg_validate(-(5:7), 1:4), "out of range.+ -5, -6, -7")
 })
