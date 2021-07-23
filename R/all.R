@@ -36,7 +36,7 @@ build_all <- function(
     density = 100,
     slides = NULL,
     fps = 1
-    ) {
+) {
     # Check that input file has the correct extension
     assert_path_ext(input, "rmd")
 

@@ -13,9 +13,9 @@
 #' @param output_file Name of the output png or zip file.
 #' @param density Resolution of the resulting pngs in each slide file. Defaults
 #'   to `100`.
-#' @param slides A vector of the slide number(s) to return for the png output.
-#'   Defaults to `1`, returning only the title slide. To return a zip file of
-#'   all the slides as pngs, set `slides = NULL`).
+#' @param slides A numeric or integer vector of the slide number(s) to include
+#'   in the png output. Defaults to `1`, returning only the title slide. To
+#'   return a zip file of pngs of all of the slides, set `slides = "all"`).
 #' @inheritParams build_pdf
 #' @param keep_intermediates Should we keep the intermediate files used to build
 #'   the final output? The default is `FALSE`.
@@ -51,8 +51,8 @@ build_png <- function(
         output_file <- path_from(input, "png")
     }
 
+    # If user requested more than one slide, force output to a .zip file
     slides <- slides_arg_validate(slides)
-
     if (length(slides) > 1 || slides == "all") {
         output_file <- path_from(output_file, "zip")
     }
@@ -77,6 +77,7 @@ build_png <- function(
 
     # Build png from pdf
     imgs <- pdf_to_imgs(step_pdf, density)
+    # Check slides arg again to make sure all slides are in range
     slides <- slides_arg_validate(slides, imgs)
 
     proc <- cli_build_start(step_pdf, output_file, on_exit = "done")

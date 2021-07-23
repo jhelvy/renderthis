@@ -188,3 +188,14 @@ test_that("in_same_directory() detects files in the same directory", {
     expect_false(in_same_directory("http://example.com/slides.html", "slides.pdf"))
     expect_false(in_same_directory("slides.pdf", "http://example.com/slides.html"))
 })
+
+test_that("slides_arg_validate()", {
+    expect_equal(slides_arg_validate(NULL), "all")
+    expect_equal(slides_arg_validate("all"), "all")
+    expect_equal(slides_arg_validate(1), 1)
+    expect_equal(slides_arg_validate(1:3), 1:3)
+    expect_equal(slides_arg_validate("all", 1:3), 1:3)
+    expect_equal(slides_arg_validate(NULL, letters[1:8]), 1:8)
+    expect_error(slides_arg_validate(12, 1:4))
+    expect_error(slides_arg_validate("three"))
+})

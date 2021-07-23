@@ -8,8 +8,8 @@
 #'   is a url to xaringan slides on a website, you must provide the full url
 #'   ending in ".html".
 #' @param output_file Name of the output pptx file.
-#' @param slides A vector of the slide number(s) to include in the pptx.
-#'   Defaults to `NULL`, in which case all slides are included.
+#' @param slides A numeric or integer vector of the slide number(s) to include
+#'   in the pptx. Defaults to `"all"`, in which case all slides are included.
 #' @inheritParams build_png
 #' @inheritParams build_pdf
 #'
@@ -27,7 +27,7 @@ build_pptx <- function(
     input,
     output_file = NULL,
     density = 100,
-    slides = NULL,
+    slides = "all",
     complex_slides = FALSE,
     partial_slides = FALSE,
     delay = 1,

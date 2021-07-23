@@ -10,8 +10,8 @@
 #' @param output_file Name of the output gif file.
 #' @param density Resolution of the resulting pngs in each slide file. Defaults
 #'   to `100`.
-#' @param slides A vector of the slide number(s) to include in the gif. Defaults
-#'   to `NULL`, in which case all slides are included.
+#' @param slides A numeric or integer vector of the slide number(s) to include
+#'   in the gif. Defaults to `"all"`, in which case all slides are included.
 #' @param fps Frames per second of the resulting gif file.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #'   other html widgets or advanced features), set `complex_slides = TRUE`.
@@ -39,7 +39,7 @@ build_gif <- function(
     input,
     output_file = NULL,
     density = 100,
-    slides = NULL,
+    slides = "all",
     fps = 1,
     complex_slides = FALSE,
     partial_slides = FALSE,
@@ -74,9 +74,7 @@ build_gif <- function(
     slides <- slides_arg_validate(slides, imgs)
 
     # Keep only selected slides by number
-    if (!is.null(slides)) {
-        imgs <- imgs[slides]
-    }
+    imgs <- imgs[slides]
 
     # Build the gif
     imgs_joined <- magick::image_join(imgs)

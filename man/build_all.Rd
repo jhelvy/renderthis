@@ -43,9 +43,9 @@ Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
 \item{density}{Resolution of the resulting pngs in each slide file. Defaults
 to `100`.}
 
-\item{slides}{A vector of the slide number(s) to return for the png output.
-Defaults to `1`, returning only the title slide. To return a zip file of
-all the slides as pngs, set `slides = NULL`).}
+\item{slides}{A numeric or integer vector of the slide number(s) to include
+in the png output. Defaults to `1`, returning only the title slide. To
+return a zip file of pngs of all of the slides, set `slides = "all"`).}
 
 \item{fps}{Frames per second of the resulting mp4 file.}
 }

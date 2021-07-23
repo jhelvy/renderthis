@@ -8,7 +8,7 @@ build_pptx(
   input,
   output_file = NULL,
   density = 100,
-  slides = NULL,
+  slides = "all",
   complex_slides = FALSE,
   partial_slides = FALSE,
   delay = 1,
@@ -25,8 +25,8 @@ ending in ".html".}
 \item{density}{Resolution of the resulting pngs in each slide file. Defaults
 to `100`.}
 
-\item{slides}{A vector of the slide number(s) to include in the pptx.
-Defaults to `NULL`, in which case all slides are included.}
+\item{slides}{A numeric or integer vector of the slide number(s) to include
+in the pptx. Defaults to `"all"`, in which case all slides are included.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set `complex_slides = TRUE`.

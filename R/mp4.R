@@ -8,8 +8,8 @@
 #'   is a url to xaringan slides on a website, you must provide the full url
 #'   ending in ".html".
 #' @param output_file Name of the output mp4 file.
-#' @param slides A vector of the slide number(s) to include in the mp4. Defaults
-#'   to `NULL`, in which case all slides are included.
+#' @param slides A numeric or integer vector of the slide number(s) to include
+#'   in the mp4. Defaults to `"all"`, in which case all slides are included.
 #' @param fps Frames per second of the resulting mp4 file.
 #' @inheritParams build_png
 #' @inheritParams build_pdf
@@ -28,7 +28,7 @@ build_mp4 <- function(
     input,
     output_file = NULL,
     density = 100,
-    slides = NULL,
+    slides = "all",
     fps = 1,
     complex_slides = FALSE,
     partial_slides = FALSE,
