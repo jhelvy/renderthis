@@ -294,7 +294,17 @@ slides_arg_validate <- function(slides, imgs = NULL) {
         if (!isTRUE(all.equal(slides, as.integer(slides), tolerance = .Machine$double.eps))) {
             stop("`slides` must be integer slide indices")
         }
+
         slides <- sort(unique(as.integer(slides)), decreasing = any(slides < 0))
+
+        if (any(slides == 0)) {
+            warning("Ignoring `slide` number 0, `slides` must be all positive or negative integers")
+            slides <- slides[slides != 0]
+        }
+
+        if (!length(slides)) {
+            stop("No slides were selected")
+        }
     }
 
     if (is.null(imgs)) {

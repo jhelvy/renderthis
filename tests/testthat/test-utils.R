@@ -215,4 +215,13 @@ test_that("slides_arg_validate() with invalid inputs", {
     expect_error(slides_arg_validate(12, 1:4), "out of range")
     expect_error(slides_arg_validate(-5, 1:4), "out of range.+ -5")
     expect_error(slides_arg_validate(-(5:7), 1:4), "out of range.+ -5, -6, -7")
+
+    expect_warning(expect_equal(slides_arg_validate(0:1, 1:4), 1), "Ignoring")
+    expect_error(
+        expect_warning(
+            slides_arg_validate(0),
+            "Ignoring"
+        ),
+        "No slides were selected"
+    )
 })
