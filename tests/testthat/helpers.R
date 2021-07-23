@@ -1,7 +1,3 @@
-quiet_cli <- function(expr) {
-    suppressMessages(expr, "cliMessage")
-}
-
 expect_equal_images <- function(x, y) {
     expect_equal(
         magick::image_compare_dist(

@@ -5,7 +5,7 @@ test_that("build_pdf() simple", {
     fs::dir_copy(test_path("slides", "partial-slides"), tmpdir, overwrite = TRUE)
     withr::local_dir(tmpdir)
 
-    quiet_cli(
+    suppressMessages(
         build_pdf("partial.Rmd")
     )
     expect_true(fs::file_exists("partial.pdf"))
@@ -24,7 +24,7 @@ test_that("build_pdf() simple, other directory", {
     withr::local_dir(tmpdir)
 
     fs::dir_create("pdf")
-    quiet_cli(
+    suppressMessages(
         build_pdf("partial.Rmd", "pdf/out.pdf")
     )
     expect_true(fs::file_exists("pdf/out.pdf"))
@@ -43,7 +43,7 @@ test_that("build_pdf() complex slides", {
     fs::dir_copy(test_path("slides", "partial-slides"), tmpdir, overwrite = TRUE)
     withr::local_dir(tmpdir)
 
-    quiet_cli(
+    suppressMessages(
         build_pdf("partial.Rmd", complex_slides = TRUE)
     )
 
@@ -63,7 +63,7 @@ test_that("build_pdf() partial slides", {
     withr::local_dir(tmpdir)
 
     fs::dir_create("pdf")
-    quiet_cli(
+    suppressMessages(
         build_pdf("partial.Rmd", "pdf/slides.pdf", partial_slides = TRUE)
     )
 

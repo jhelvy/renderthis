@@ -3,7 +3,7 @@ test_that("build_html() output in input directory", {
     fs::dir_copy(test_path("slides", "basic"), tmpdir, overwrite = TRUE)
 
     withr::local_dir(tmpdir)
-    quiet_cli(build_html("slides.Rmd"))
+    suppressMessages(build_html("slides.Rmd"))
 
     expect_true(fs::file_exists("slides.html"))
     expect_true(fs::dir_exists("slides_files"))
@@ -14,7 +14,7 @@ test_that("build_html() self-contained output in input directory", {
     fs::dir_copy(test_path("slides", "basic"), tmpdir, overwrite = TRUE)
 
     withr::local_dir(tmpdir)
-    quiet_cli(build_html("slides.Rmd", self_contained = TRUE))
+    suppressMessages(build_html("slides.Rmd", self_contained = TRUE))
 
     expect_true(fs::file_exists("slides.html"))
     expect_false(fs::dir_exists("slides_files"))
@@ -30,7 +30,7 @@ test_that("build_html() output in sub-directory", {
 
     withr::local_dir(tmpdir)
     fs::dir_create("output")
-    quiet_cli(
+    suppressMessages(
         expect_message(
             build_html("slides/slides.Rmd", "output/slides.html"),
             "self_contained = TRUE"
@@ -51,7 +51,7 @@ test_that("build_html() output in parent directory", {
     )
 
     withr::local_dir(tmpdir)
-    quiet_cli(
+    suppressMessages(
         expect_message(
             build_html("slides/slides.Rmd", "slides.html"),
             "self_contained = TRUE"
@@ -74,7 +74,7 @@ test_that("build_html() output in totally different directory", {
     withr::local_dir(tmpdir)
     tmpdir_out <- withr::local_tempdir()
 
-    quiet_cli(
+    suppressMessages(
         expect_message(
             build_html("slides/slides.Rmd", fs::path(tmpdir_out, "slides.html")),
             "self_contained = TRUE"

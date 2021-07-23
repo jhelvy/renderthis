@@ -8,7 +8,7 @@ test_that("build_png() handles bad inputs", {
     expect_error(build_png(pdf_slides, slides = -1), ">= 1")
     expect_error(build_png(pdf_slides, slides = 1:4 + 0.5), "integer")
 
-    expect_error(quiet_cli(
+    expect_error(suppressMessages(
         build_png(pdf_slides, slides = 4)
     ), "out of range")
 })
@@ -22,7 +22,7 @@ test_that("build_png() from .Rmd doesn't keep intermediates by default", {
     withr::local_dir(tmpdir)
 
     # Normal operation, save a single slide to png
-    quiet_cli(
+    suppressMessages(
         build_png("slides.Rmd", "title-slide.png", slides = 1)
     )
     expect_true(fs::file_exists("title-slide.png"))
@@ -42,7 +42,7 @@ test_that("build_png() from basic.pdf", {
     withr::local_dir(tmpdir)
 
     # Saving several slides automatically chooses .zip
-    quiet_cli(
+    suppressMessages(
         build_png("slides.pdf", slides = 2:3)
     )
     expect_true(fs::file_exists("slides.zip"))
@@ -60,7 +60,7 @@ test_that("build_png() chooses .zip even if .png is given", {
 
     # Saving all slides also chooses .zip even if .png is given
     # Also test keep_intermediates = TRUE (and use in next test)
-    quiet_cli(
+    suppressMessages(
         build_png("slides.Rmd", "pics.png", slides = "all", keep_intermediates = TRUE)
     )
     expect_true(fs::file_exists("pics.zip"))
@@ -71,13 +71,13 @@ test_that("build_png() chooses .zip even if .png is given", {
     expect_true(fs::file_exists("pics.pdf"))
 
     # build slide 3 png from the HTML
-    quiet_cli(
+    suppressMessages(
         build_png("pics.html", "slide-3-html.png", slides = 3)
     )
     expect_true(fs::file_exists("slide-3-html.png"))
 
     # build slide 3 png from the PDF file
-    quiet_cli(
+    suppressMessages(
         build_png("pics.pdf", "slide-3-pdf.png", slides = 3)
     )
     expect_true(fs::file_exists("slide-3-pdf.png"))
@@ -85,7 +85,7 @@ test_that("build_png() chooses .zip even if .png is given", {
     # Both versions of slide 3 should be the same
     expect_equal_images("slide-3-pdf.png", "slide-3-html.png")
 
-    quiet_cli(
+    suppressMessages(
         expect_warning(
             build_png("pics.pdf", "pics.png", slides = 3:4)
         )

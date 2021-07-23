@@ -6,7 +6,7 @@ test_that("build_gif() builds an mp4", {
 
     withr::local_dir(tmpdir)
 
-    quiet_cli(
+    suppressMessages(
         build_mp4("basic.pdf", "basic.mp4", fps = 0.5, slides = 1:2)
     )
 
@@ -29,7 +29,7 @@ test_that("build_gif() builds a widescreen mp4", {
 
     withr::local_dir(tmpdir)
 
-    quiet_cli(
+    suppressMessages(
         build_mp4("basic-wide.pdf")
     )
 

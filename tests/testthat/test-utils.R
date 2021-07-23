@@ -145,7 +145,7 @@ test_that("path_from() removes temp files when the calling function exits", {
         )
     }
 
-    res <- quiet_cli(
+    res <- suppressMessages(
         path_from_temp(path = "slides.html", to_ext = "pdf")
     )
     expect_match(res$file, tmpdir, fixed = TRUE)
@@ -156,7 +156,7 @@ test_that("path_from() removes temp files when the calling function exits", {
 
     # even when the dir is somewhere else
     tmpdir2 <- fs::path_abs(withr::local_tempdir())
-    res <- quiet_cli(
+    res <- suppressMessages(
         path_from_temp(path = "slides.html", to_ext = "pdf", dir = tmpdir2)
     )
     expect_match(res$file, tmpdir2, fixed = TRUE)
@@ -166,7 +166,7 @@ test_that("path_from() removes temp files when the calling function exits", {
     expect_false(fs::file_exists(res$file))
 
     # removes supporting files when producing HTML
-    res <- quiet_cli(
+    res <- suppressMessages(
         path_from_temp(path = "slides.rmd", to_ext = "html")
     )
     expect_match(res$file, tmpdir, fixed = TRUE)

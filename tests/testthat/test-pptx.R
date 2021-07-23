@@ -6,7 +6,7 @@ test_that("build_pptx() simple from pdf", {
 
     withr::local_dir(tmpdir)
 
-    quiet_cli(
+    suppressMessages(
         build_pptx("basic.pdf", "slides.pptx")
     )
 
@@ -30,7 +30,7 @@ test_that("build_pptx() simple from Rmd", {
 
     withr::local_dir(tmpdir)
 
-    quiet_cli(
+    suppressMessages(
         build_pptx("slides.Rmd")
     )
 
@@ -56,7 +56,7 @@ test_that("build_pptx() widescreen", {
 
     withr::local_dir(tmpdir)
 
-    quiet_cli(
+    suppressMessages(
         build_pptx(
             "basic-wide.pdf",
             "widescreen.pptx",

@@ -9,7 +9,7 @@ test_that("build_all() from basic slides.Rmd", {
 
     withr::local_dir(tmpdir)
 
-    quiet_cli(
+    suppressMessages(
         build_all("slides.Rmd", slides = NULL)
     )
 
@@ -32,7 +32,7 @@ test_that("build_all() from basic slides.Rmd with a few excluded formats", {
 
     withr::local_dir(tmpdir)
 
-    quiet_cli(
+    suppressMessages(
         build_all("slides.Rmd", slides = NULL, exclude = c("html", "pdf", "png"))
     )
 

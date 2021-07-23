@@ -6,7 +6,7 @@ test_that("build_gif() simple from .Rmd", {
 
     withr::local_dir(tmpdir)
 
-    quiet_cli(
+    suppressMessages(
         build_gif("slides.Rmd")
     )
 
@@ -29,7 +29,7 @@ test_that("build_gif() simple from pdf", {
 
     withr::local_dir(tmpdir)
 
-    quiet_cli(
+    suppressMessages(
         build_gif("basic.pdf")
     )
 
@@ -52,7 +52,7 @@ test_that("build_gif() keeps intermediates", {
 
     withr::local_dir(tmpdir)
 
-    quiet_cli(
+    suppressMessages(
         build_gif("slides.Rmd", "test.gif", keep_intermediates = TRUE, density = 200)
     )
 
@@ -76,7 +76,7 @@ test_that("build_gif() only includes `slides`", {
     withr::local_dir(tmpdir)
 
     fs::dir_create("gif")
-    quiet_cli(
+    suppressMessages(
         build_gif("basic.pdf", "gif/demo.gif", keep_intermediates = TRUE, slides = c(1, 3))
     )
 
@@ -90,10 +90,10 @@ test_that("build_gif() only includes `slides`", {
     # the basic slides are 4:3 plus or minus a few pixels
     expect_equal(gif_info$height[[1]] / gif_info$width[[1]], 3/4, tolerance = 0.01)
 
-    expect_error(quiet_cli(
+    expect_error(suppressMessages(
         build_gif("basic.pdf", slides = FALSE)
     ))
-    expect_error(quiet_cli(
+    expect_error(suppressMessages(
         build_gif("basic.pdf", slides = 4)
     ))
 })
