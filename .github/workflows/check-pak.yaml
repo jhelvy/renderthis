@@ -69,6 +69,7 @@ jobs:
         run: |
           pak::local_system_requirements(execute = TRUE)
           pak::pkg_system_requirements("rcmdcheck", execute = TRUE)
+          system("sudo apt-get install libavfilter-dev")
         shell: Rscript {0}
 
       - name: Install dependencies
