@@ -137,64 +137,6 @@ path_from <- function(path, to_ext, temporary = FALSE, dir = NULL) {
     path_new
 }
 
-build_paths <- function(input, output_file = NULL) {
-    # Build input paths
-    if (is_url(input)) {
-      input_root <- fs::path_abs(fs::path_file(input))
-      input_html <- input
-      input_url  <- input
-    } else {
-      input_root <- fs::path_abs(input)
-      input_html <- fs::path_ext_set(input_root, "html")
-      input_url  <- paste0("file://", input_html)
-    }
-    input_rmd <- input_root
-    input_pdf <- fs::path_ext_set(input_root, "pdf")
-
-    # Build output_file paths
-    if (is.null(output_file)) {
-      if (is_url(input)) {
-        output_root <- fs::path_abs(fs::path_file(input))
-      } else {
-        output_root <- fs::path_abs(input)
-      }
-    } else {
-      output_root <- fs::path_abs(output_file)
-    }
-    output_html <- fs::path_ext_set(output_root, "html")
-    output_pdf  <- fs::path_ext_set(output_root, "pdf")
-    output_gif  <- fs::path_ext_set(output_root, "gif")
-    output_pptx <- fs::path_ext_set(output_root, "pptx")
-    output_mp4  <- fs::path_ext_set(output_root, "mp4")
-    output_zip  <- fs::path_ext_set(output_root, "zip")
-    output_png  <- fs::path_ext_set(output_root, "png")
-    output_social <- output_png
-    # Append "_social" to png outputs
-    if (is.null(output_file)) {
-      output_social <- append_to_file_path(output_png, "_social")
-    }
-
-    # Return path list
-    return(list(
-      input = list(
-        url  = input_url,
-        html = input_html,
-        rmd  = input_rmd,
-        pdf  = input_pdf
-      ),
-      output = list(
-        html   = output_html,
-        pdf    = output_pdf,
-        gif    = output_gif,
-        pptx   = output_pptx,
-        mp4    = output_mp4,
-        zip    = output_zip,
-        png    = output_png,
-        social = output_social
-      )
-    ))
-}
-
 is_url <- function(input) {
   return(grepl("^(ht|f)tp", tolower(input)))
 }
