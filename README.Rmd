@@ -44,6 +44,13 @@ You can install the current version of xaringanBuilder from GitHub:
 remotes::install_github("jhelvy/xaringanBuilder")
 ```
 
+Some output formats require additional packages, and each format will provide instructions about how to install any missing dependencies. You can also choose to install xaringanBuilder with all of its dependencies:
+
+```{r}
+# install.packages("remotes")
+remotes::install_github("jhelvy/xaringanBuilder", dependencies = TRUE)
+```
+
 ## Build hierarchy
 
 Some output types depend on intermediate outputs. Here is a diagram of the build hierarchy:

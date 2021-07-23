@@ -29,6 +29,15 @@ You can install the current version of xaringanBuilder from GitHub:
 remotes::install_github("jhelvy/xaringanBuilder")
 ```
 
+Some output formats require additional packages, and each format will
+provide instructions about how to install any missing dependencies. You
+can also choose to install xaringanBuilder with all of its dependencies:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("jhelvy/xaringanBuilder", dependencies = TRUE)
+```
+
 ## Build hierarchy
 
 Some output types depend on intermediate outputs. Here is a diagram of
@@ -254,7 +263,7 @@ For example, to build a pptx from a Rmd file without Chrome, you could:
 -   Author: *John Paul Helveston*
     [www.jhelvy.com](http://www.jhelvy.com/)
 -   Date First Written: *September 27, 2020*
--   Most Recent Update: March 30, 2021
+-   Most Recent Update: July 23, 2021
 -   License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
@@ -273,5 +282,5 @@ A BibTeX entry for LaTeX users is
 
 @Manual{, title = {xaringanBuilder: Functions for building xaringan
 slides to different outputs.}, author = {John Paul Helveston}, year =
-{2021}, note = {R package version 0.0.7}, url =
+{2021}, note = {R package version 0.0.8}, url =
 {<https://jhelvy.github.io/xaringanBuilder/>}, }
