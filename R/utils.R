@@ -122,6 +122,7 @@ path_from <- function(path, to_ext, temporary = FALSE, dir = NULL) {
             "Removed temporary {.file {path_new_rel}}", .envir = environment()
         )
         withr::defer({
+            if (!fs::file_exists(path_new)) return()
             unlink(path_new)
             if (tolower(to_ext) == "html" && temporary) {
                 # clean up supporting files for temp HTML
