@@ -1,3 +1,11 @@
+# xaringanBuilder (development version)
+
+* Added a new argument `keep_intermediates` to all `build_*()` functions downstream from `build_html()`. When `FALSE`, intermediate files required to build the final output are removed when the output is produced. (@gadenbuie #33)
+* Improved internal handling of file paths when the input and output files have different base names and directories. (@gadenbuie #33, #30)
+* `build_html()` gains `self_contained` and `rmd_args` arguments that are passed to `rmarkdown::render()` and can be used to override the options in the YAML header of the slides document. (@gadenbuie #33)
+* `build_html()` now sets `self_contained = TRUE` automatically when the output `.html` file won't be saved to the same directory as the input `.Rmd`. (@gadenbuie #29, #33)
+* The `slides` argument now accepts `"all"`, `"first"`, or `"last"` to build the first, last or all slides. `slides` also accepts negative slide indices to exclude slides, e.g. `-1:-3` excludes the first three slides. (@gadenbuie #33)
+* Dependencies that are used for only one type of output were made suggested dependencies to improve the installation experience for the majority of users. Install `xaringanBuilder` with `dependencies = TRUE` for full installation. (@gadenbuie #33)
 
 # xaringanBuilder 0.0.8
 
