@@ -198,4 +198,5 @@ test_that("slides_arg_validate()", {
     expect_equal(slides_arg_validate(NULL, letters[1:8]), 1:8)
     expect_error(slides_arg_validate(12, 1:4))
     expect_error(slides_arg_validate("three"))
+    expect_error(slides_arg_validate(1:4 + 0.5))
 })
