@@ -3,10 +3,6 @@ test_that("build_png() handles bad inputs", {
 
     # Detect errors
     expect_error(build_png("foo.Rmd"), "doesn't exist")
-    expect_error(build_png(pdf_slides, slides = "three"))
-    expect_error(build_png(pdf_slides, slides = 0), ">= 1")
-    expect_error(build_png(pdf_slides, slides = -1), ">= 1")
-    expect_error(build_png(pdf_slides, slides = 1:4 + 0.5), "integer")
 
     expect_error(suppressMessages(
         build_png(pdf_slides, slides = 4)
