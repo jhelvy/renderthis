@@ -13,10 +13,11 @@
 #' @param output_file Name of the output png or zip file.
 #' @param density Resolution of the resulting pngs in each slide file. Defaults
 #'   to `100`.
-#' @param slides A numeric or integer vector of the slide number(s) to include
-#'   in the mp4, or one of `"all"`, `"first"`, or `"last"`. Defaults to `1`,
-#'   returning only the title slide. To return a zip file of pngs of all of the
-#'   slides, set `slides = "all"`).
+#' @param slides A numeric or integer vector of the slide number(s) to build
+#'   as png files , or one of `"all"`, `"first"`, or `"last"`. Negative integers
+#'   select which slides _not_ to include. If more than one slide are included,
+#'   pngs will be returned as a zip file. Defaults to `"all"`, in which case
+#'   all slides are included.
 #' @inheritParams build_pdf
 #' @param keep_intermediates Should we keep the intermediate files used to build
 #'   the final output? The default is `FALSE`.

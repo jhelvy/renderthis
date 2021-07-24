@@ -11,8 +11,9 @@
 #' @param density Resolution of the resulting pngs in each slide file. Defaults
 #'   to `100`.
 #' @param slides A numeric or integer vector of the slide number(s) to include
-#'   in the gif, or one of `"all"`, `"first"`, or `"last"`. Defaults to `"all"`,
-#'   in which case all slides are included.
+#'   in the gif, or one of `"all"`, `"first"`, or `"last"`. Negative integers
+#'   select which slides _not_ to include. Defaults to `"all"`, in which case
+#'   all slides are included.
 #' @param fps Frames per second of the resulting gif file.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #'   other html widgets or advanced features), set `complex_slides = TRUE`.

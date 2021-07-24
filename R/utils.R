@@ -220,7 +220,7 @@ slides_arg_validate <- function(slides, imgs = NULL) {
             error = function(err) {
                 stop(
                     '`slides` should be one of "all", "first", "last" ',
-                    "or an intger vector of slide indices"
+                    "or an integer vector of slide indices"
                 )
             }
         )

@@ -9,8 +9,9 @@
 #'   ending in ".html".
 #' @param output_file Name of the output mp4 file.
 #' @param slides A numeric or integer vector of the slide number(s) to include
-#'   in the mp4, or one of `"all"`, `"first"`, or `"last"`. Defaults to `"all"`,
-#'   in which case all slides are included.
+#'   in the mp4, or one of `"all"`, `"first"`, or `"last"`. Negative integers
+#'   select which slides _not_ to include. Defaults to `"all"`, in which case
+#'   all slides are included.
 #' @param fps Frames per second of the resulting mp4 file.
 #' @inheritParams build_png
 #' @inheritParams build_pdf
