@@ -30,18 +30,21 @@ build_pptx("slides.pdf")
 build_pptx("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 
 # By default, a png of only the first slide is built
-build_png("slides.Rmd")
-build_png("slides.html")
-build_png("slides.pdf")
+build_png("slides.Rmd", output_file = "title_slide.png")
+build_png("slides.html", output_file = "title_slide.png")
+build_png("slides.pdf", output_file = "title_slide.png")
 build_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 
-# Build zip file of multiple or all slides
-build_png("slides.pdf", slides = c(1, 3, 5))
+# Use the `slides` argument to control which slides get build into pngs
+build_png("slides.pdf", output_file = "first_slide.png", slides = "first")
+build_png("slides.pdf", output_file = "last_slide.png", slides = "last")
+build_png("slides.pdf", slides = c(1, 3, 5)) # Choose subsets of slides
+build_png("slides.pdf", slides = -1) # Negative indices remove slides
 build_png("slides.pdf", slides = "all")
 
 # Build png image of first xaringan slide from Rmd file
 # sized for sharing on social media
-build_social("slides.Rmd")
+build_social("slides.Rmd", output_file = "title_social.png")
 
 # Use `build_all()` to build all output types from a Rmd file:
 build_all("slides.Rmd") # Builds every output by default
@@ -57,15 +60,19 @@ build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
 # widgets / advanced features that might not render well as a pdf. To render
 # these, set `complex_slides = TRUE`. **Note**: This option requires the
 # chromote and pdftools packages.
-build_pdf(input = "slides.html",
-          output_file = "slides_complex.pdf",
-          complex_slides = TRUE)
+build_pdf(
+    input = "slides.html",
+    output_file = "slides_complex.pdf",
+    complex_slides = TRUE
+)
 
 # Partial / incremental slides
 
 # For pdf, png, gif, and pptx output types, if you want to build a new slide
 # for each increment on incremental slides set `partial_slides = TRUE`.
 # **Note**: This option requires the chromote and pdftools packages.
-build_pdf(input = "slides.html",
-          output_file = "slides_partial.pdf",
-          partial_slides = TRUE)
+build_pdf(
+    input = "slides.html",
+    output_file = "slides_partial.pdf",
+    partial_slides = TRUE
+)
