@@ -41,7 +41,9 @@
 
 <meta property="og:title" content="Build xaringan slides as html file. — build_html" />
 <meta property="og:description" content="Build xaringan slides as html file. Essentially the same thing as
-`rmarkdown::render()` with `output_format = &quot;xaringan::moon_reader&quot;`" />
+[rmarkdown::render()] with `output_format = &quot;xaringan::moon_reader&quot;`,
+except that the `self_contained` option is forced to `TRUE` if the HTML file
+is built into a directory other than the one containing `input`." />
 
 
 
@@ -73,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">xaringanBuilder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.9</span>
       </span>
     </div>
 
@@ -120,10 +122,12 @@
 
     <div class="ref-description">
     <p>Build xaringan slides as html file. Essentially the same thing as
-`rmarkdown::render()` with `output_format = "xaringan::moon_reader"`</p>
+[rmarkdown::render()] with `output_format = "xaringan::moon_reader"`,
+except that the `self_contained` option is forced to `TRUE` if the HTML file
+is built into a directory other than the one containing `input`.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>build_html</span><span class='op'>(</span><span class='va'>input</span>, output_file <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>build_html</span><span class='op'>(</span><span class='va'>input</span>, output_file <span class='op'>=</span> <span class='cn'>NULL</span>, self_contained <span class='op'>=</span> <span class='cn'>FALSE</span>, rmd_args <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -134,9 +138,22 @@
     </tr>
     <tr>
       <th>output_file</th>
-      <td><p>The name of the output file. If using NULL then
-the output filename will be based on filename for the input file.
-If a filename is provided, a path to the output file can also be provided.</p></td>
+      <td><p>The name of the output file. If using `NULL` then the
+output file name will be based on file name for the input file. If a file
+name is provided, a path to the output file can also be provided.</p></td>
+    </tr>
+    <tr>
+      <th>self_contained</th>
+      <td><p>Should the output file be a self-contained HTML file
+where all images, CSS and JavaScript are included directly in the output
+file? This option, when `TRUE`, provides you with a single HTML file that
+you can share with others, but it may be very large. This feature is
+enabled by default when the `output_file` is written in a directory other
+than the one containing the `input` R Markdown file.</p></td>
+    </tr>
+    <tr>
+      <th>rmd_args</th>
+      <td><p>A list of arguments passed to [rmarkdown::render()].</p></td>
     </tr>
     </table>
 
@@ -146,6 +163,7 @@ If a filename is provided, a path to the output file can also be provided.</p></
 <span class='co'># Build html from Rmd file</span>
 <span class='fu'>build_html</span><span class='op'>(</span><span class='st'>"slides.Rmd"</span><span class='op'>)</span>
 <span class='op'>}</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

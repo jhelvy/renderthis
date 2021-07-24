@@ -74,7 +74,7 @@ pptx file." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">xaringanBuilder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.9</span>
       </span>
     </div>
 
@@ -129,10 +129,11 @@ pptx file.</p>
   <span class='va'>input</span>,
   output_file <span class='op'>=</span> <span class='cn'>NULL</span>,
   density <span class='op'>=</span> <span class='fl'>100</span>,
-  slides <span class='op'>=</span> <span class='cn'>NULL</span>,
+  slides <span class='op'>=</span> <span class='st'>"all"</span>,
   complex_slides <span class='op'>=</span> <span class='cn'>FALSE</span>,
   partial_slides <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  delay <span class='op'>=</span> <span class='fl'>1</span>
+  delay <span class='op'>=</span> <span class='fl'>1</span>,
+  keep_intermediates <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -140,9 +141,9 @@ pptx file.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>Path to a Rmd file, html file, pdf file, or a url.
-If the input is a url to xaringan slides on a website, you must provide the
-full url ending in ".html".</p></td>
+      <td><p>Path to a Rmd file, html file, pdf file, or a url. If the input
+is a url to xaringan slides on a website, you must provide the full url
+ending in ".html".</p></td>
     </tr>
     <tr>
       <th>output_file</th>
@@ -150,33 +151,39 @@ full url ending in ".html".</p></td>
     </tr>
     <tr>
       <th>density</th>
-      <td><p>Resolution of the resulting pngs in each slide file.
-Defaults to `100`.</p></td>
+      <td><p>Resolution of the resulting pngs in each slide file. Defaults
+to `100`.</p></td>
     </tr>
     <tr>
       <th>slides</th>
-      <td><p>A vector of the slide number(s) to include in the pptx.
-Defaults to `NULL`, in which case all slides are included.</p></td>
+      <td><p>A numeric or integer vector of the slide number(s) to include
+in the pptx, or one of `"all"`, `"first"`, or `"last"`. Negative integers
+select which slides _not_ to include. Defaults to `"all"`, in which case
+all slides are included.</p></td>
     </tr>
     <tr>
       <th>complex_slides</th>
       <td><p>For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set `complex_slides = TRUE`.
-Defaults to `FALSE`. This will use the chromote package to iterate through
-the slides at a pace set by the `delay` argument. Requires a local
+Defaults to `FALSE`. This will use the chromote package to iterate
+through the slides at a pace set by the `delay` argument. Requires a local
 installation of Chrome.</p></td>
     </tr>
     <tr>
       <th>partial_slides</th>
-      <td><p>Should partial (continuation) slides be
-included in the output? If `FALSE`, the default, only the complete slide
-is included in the PDF.</p></td>
+      <td><p>Should partial (continuation) slides be included in the
+output? If `FALSE`, the default, only the complete slide is included in the
+PDF.</p></td>
     </tr>
     <tr>
       <th>delay</th>
-      <td><p>Seconds of delay between advancing to and printing
-a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
-TRUE`.</p></td>
+      <td><p>Seconds of delay between advancing to and printing a new slide.
+Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.</p></td>
+    </tr>
+    <tr>
+      <th>keep_intermediates</th>
+      <td><p>Should we keep the intermediate files used to build
+the final output? The default is `FALSE`.</p></td>
     </tr>
     </table>
 
@@ -189,6 +196,7 @@ TRUE`.</p></td>
 <span class='fu'>build_pptx</span><span class='op'>(</span><span class='st'>"slides.pdf"</span><span class='op'>)</span>
 <span class='fu'>build_pptx</span><span class='op'>(</span><span class='st'>"https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"</span><span class='op'>)</span>
 <span class='op'>}</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

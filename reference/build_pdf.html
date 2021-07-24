@@ -40,9 +40,9 @@
 
 
 <meta property="og:title" content="Build xaringan slides as pdf file. — build_pdf" />
-<meta property="og:description" content="Build xaringan slides as a pdf file. Requires a local installation of
-Chrome. If you set `complex_slides = TRUE` or `partial_slides = TRUE`,
-you will also need to install the chromote and pdftools packages." />
+<meta property="og:description" content="Build xaringan slides as a pdf file. Requires a local installation of Chrome.
+If you set `complex_slides = TRUE` or `partial_slides = TRUE`, you will also
+need to install the chromote and pdftools packages." />
 
 
 
@@ -74,7 +74,7 @@ you will also need to install the chromote and pdftools packages." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">xaringanBuilder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.9</span>
       </span>
     </div>
 
@@ -120,9 +120,9 @@ you will also need to install the chromote and pdftools packages." />
     </div>
 
     <div class="ref-description">
-    <p>Build xaringan slides as a pdf file. Requires a local installation of
-Chrome. If you set `complex_slides = TRUE` or `partial_slides = TRUE`,
-you will also need to install the chromote and pdftools packages.</p>
+    <p>Build xaringan slides as a pdf file. Requires a local installation of Chrome.
+If you set `complex_slides = TRUE` or `partial_slides = TRUE`, you will also
+need to install the chromote and pdftools packages.</p>
     </div>
 
     <pre class="usage"><span class='fu'>build_pdf</span><span class='op'>(</span>
@@ -130,7 +130,8 @@ you will also need to install the chromote and pdftools packages.</p>
   output_file <span class='op'>=</span> <span class='cn'>NULL</span>,
   complex_slides <span class='op'>=</span> <span class='cn'>FALSE</span>,
   partial_slides <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  delay <span class='op'>=</span> <span class='fl'>1</span>
+  delay <span class='op'>=</span> <span class='fl'>1</span>,
+  keep_intermediates <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -138,35 +139,41 @@ you will also need to install the chromote and pdftools packages.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>Path to a Rmd file or html file / url of xaringan slides. If
-the input is a url to xaringan slides on a website, you must provide the
-full url ending in ".html".</p></td>
+      <td><p>Path to a Rmd file or html file / url of xaringan slides. If the
+input is a url to xaringan slides on a website, you must provide the full
+url ending in ".html".</p></td>
     </tr>
     <tr>
       <th>output_file</th>
       <td><p>The name of the output file. If `NULL` (the default) then
-the output filename will be based on filename for the input file.
-If a filename is provided, a path to the output file can also be provided.</p></td>
+the output filename will be based on filename for the input file. If a
+filename is provided, a path to the output file can also be provided.</p></td>
     </tr>
     <tr>
       <th>complex_slides</th>
       <td><p>For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set `complex_slides = TRUE`.
-Defaults to `FALSE`. This will use the chromote package to iterate through
-the slides at a pace set by the `delay` argument. Requires a local
+Defaults to `FALSE`. This will use the chromote package to iterate
+through the slides at a pace set by the `delay` argument. Requires a local
 installation of Chrome.</p></td>
     </tr>
     <tr>
       <th>partial_slides</th>
-      <td><p>Should partial (continuation) slides be
-included in the output? If `FALSE`, the default, only the complete slide
-is included in the PDF.</p></td>
+      <td><p>Should partial (continuation) slides be included in the
+output? If `FALSE`, the default, only the complete slide is included in the
+PDF.</p></td>
     </tr>
     <tr>
       <th>delay</th>
-      <td><p>Seconds of delay between advancing to and printing
-a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
-TRUE`.</p></td>
+      <td><p>Seconds of delay between advancing to and printing a new slide.
+Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.</p></td>
+    </tr>
+    <tr>
+      <th>keep_intermediates</th>
+      <td><p>Should we keep the intermediate HTML file? Only
+relevant if the `input` is an `.Rmd` file. Default is `TRUE` if the
+`output_file` is written into the same directory as the `input`, otherwise
+the intermediate file isn't kept.</p></td>
     </tr>
     </table>
 
@@ -197,6 +204,7 @@ TRUE`.</p></td>
           complex_slides <span class='op'>=</span> <span class='cn'>TRUE</span>,
           partial_slides <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='op'>}</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

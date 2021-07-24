@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">xaringanBuilder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.9</span>
       </span>
     </div>
 
@@ -115,21 +115,46 @@
       
     </div>
 
-    <div id="xaringanbuilder-008" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.8">
-<a href="#xaringanbuilder-008" class="anchor"></a>xaringanBuilder 0.0.8</h1>
+    <div id="xaringanbuilder-009" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.9">
+<a href="#xaringanbuilder-009" class="anchor"></a>xaringanBuilder 0.0.9</h1>
 <div id="bigger-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bigger-changes" class="anchor"></a>Bigger changes</h2>
+<ul>
+<li>Added a new argument <code>keep_intermediates</code> to all <code>build_*()</code> functions downstream from <code><a href="../reference/build_html.html">build_html()</a></code>. When <code>FALSE</code>, intermediate files required to build the final output are removed when the output is produced. (@gadenbuie #33)</li>
+<li>Improved internal handling of file paths when the input and output files have different base names and directories, using <code>path_from()</code> (superceding previous <code>build_paths()</code>). (@gadenbuie #33, #30)</li>
+<li>
+<code><a href="../reference/build_html.html">build_html()</a></code> gains <code>self_contained</code> and <code>rmd_args</code> arguments that are passed to <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html">rmarkdown::render()</a></code> and can be used to override the options in the YAML header of the slides document. (@gadenbuie #33)</li>
+<li>
+<code><a href="../reference/build_html.html">build_html()</a></code> now sets <code>self_contained = TRUE</code> automatically when the output <code>.html</code> file won’t be saved to the same directory as the input <code>.Rmd</code>. (@gadenbuie #29, #33)</li>
+<li>The <code>slides</code> argument now accepts <code>"all"</code>, <code>"first"</code>, or <code>"last"</code> to build the first, last or all slides. <code>slides</code> also accepts negative slide indices to exclude slides, e.g. <code>-1:-3</code> excludes the first three slides. (@gadenbuie #33)</li>
+<li>Dependencies that are used for only one type of output were made suggested dependencies to improve the installation experience for the majority of users. Install <code>xaringanBuilder</code> with <code>dependencies = TRUE</code> for full installation. (@gadenbuie #33)</li>
+</ul>
+</div>
+<div id="smaller-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#smaller-changes" class="anchor"></a>Smaller changes</h2>
+<ul>
+<li>Moved {pdftools} back to Suggests (only used for complex PDFs)</li>
+</ul>
+</div>
+</div>
+    <div id="xaringanbuilder-008" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.8">
+<a href="#xaringanbuilder-008" class="anchor"></a>xaringanBuilder 0.0.8</h1>
+<div id="bigger-changes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bigger-changes-1" class="anchor"></a>Bigger changes</h2>
 <ul>
 <li>Added <code>slides</code> argument to <code><a href="../reference/build_mp4.html">build_mp4()</a></code>, <code><a href="../reference/build_gif.html">build_gif()</a></code>, and <code><a href="../reference/build_pptx.html">build_pptx()</a></code> to better control which slides to include in each output format.</li>
 <li>Updated cli messaging to more accurately track with actually build process, including build errors.</li>
 <li>Fixed issue where intermediate paths would break if input and output file names were different.</li>
 </ul>
 </div>
-<div id="smaller-change" class="section level2">
+<div id="smaller-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#smaller-change" class="anchor"></a>Smaller change</h2>
+<a href="#smaller-changes-1" class="anchor"></a>Smaller changes</h2>
 <ul>
 <li>Added {pdftools} to Imports</li>
 <li>Added version requirement to {magick}</li>

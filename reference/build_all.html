@@ -74,7 +74,7 @@ build_*() function for details about each output type." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">xaringanBuilder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.9</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@ build_*() function for details about each output type.</p>
   partial_slides <span class='op'>=</span> <span class='cn'>FALSE</span>,
   delay <span class='op'>=</span> <span class='fl'>1</span>,
   density <span class='op'>=</span> <span class='fl'>100</span>,
-  slides <span class='op'>=</span> <span class='fl'>1</span>,
+  slides <span class='op'>=</span> <span class='st'>"all"</span>,
   fps <span class='op'>=</span> <span class='fl'>1</span>
 <span class='op'>)</span></pre>
 
@@ -160,36 +160,37 @@ Defaults to `NULL`, in which case all all output types are built.</p></td>
       <th>complex_slides</th>
       <td><p>For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set `complex_slides = TRUE`.
-Defaults to `FALSE`. This will use the chromote package to iterate through
-the slides at a pace set by the `delay` argument. Requires a local
+Defaults to `FALSE`. This will use the chromote package to iterate
+through the slides at a pace set by the `delay` argument. Requires a local
 installation of Chrome.</p></td>
     </tr>
     <tr>
       <th>partial_slides</th>
-      <td><p>Should partial (continuation) slides be
-included in the output? If `FALSE`, the default, only the complete slide
-is included in the PDF.</p></td>
+      <td><p>Should partial (continuation) slides be included in the
+output? If `FALSE`, the default, only the complete slide is included in the
+PDF.</p></td>
     </tr>
     <tr>
       <th>delay</th>
-      <td><p>Seconds of delay between advancing to and printing
-a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
-TRUE`.</p></td>
+      <td><p>Seconds of delay between advancing to and printing a new slide.
+Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.</p></td>
     </tr>
     <tr>
       <th>density</th>
-      <td><p>Resolution of the resulting png files used in the png, gif,
-and pptx output types file. Defaults to `100`.</p></td>
+      <td><p>Resolution of the resulting pngs in each slide file. Defaults
+to `100`.</p></td>
     </tr>
     <tr>
       <th>slides</th>
-      <td><p>A vector of the slide number(s) to return for the png output.
-Defaults to `1`, returning only the title slide. To return a zip
-file of all the slides as pngs, set `slides = NULL`).</p></td>
+      <td><p>A numeric or integer vector of the slide number(s) to build
+as png files , or one of `"all"`, `"first"`, or `"last"`. Negative integers
+select which slides _not_ to include. If more than one slide are included,
+pngs will be returned as a zip file. Defaults to `"all"`, in which case
+all slides are included.</p></td>
     </tr>
     <tr>
       <th>fps</th>
-      <td><p>Frames per second of the gif and mp4 files.</p></td>
+      <td><p>Frames per second of the resulting mp4 file.</p></td>
     </tr>
     </table>
 
@@ -203,6 +204,7 @@ file of all the slides as pngs, set `slides = NULL`).</p></td>
 <span class='fu'>build_all</span><span class='op'>(</span><span class='st'>"slides.Rmd"</span>, include <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"html"</span>, <span class='st'>"pdf"</span>, <span class='st'>"gif"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'>build_all</span><span class='op'>(</span><span class='st'>"slides.Rmd"</span>, exclude <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"social"</span>, <span class='st'>"png"</span>, <span class='st'>"mp4"</span>, <span class='st'>"pptx"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
