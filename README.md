@@ -1,5 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# xaringanBuilder <a href='https://jhelvy.github.io/xaringanBuilder/'><img src='man/figures/hex_sticker.png' align="right" height="139" /></a>
+
 <!-- badges: start -->
 
 [![Lifecycle:
@@ -7,8 +10,6 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![Travis build
 status](https://travis-ci.com/jhelvy/xaringanBuilder.svg?branch=master)](https://travis-ci.com/jhelvy/xaringanBuilder)
 <!-- badges: end -->
-
-## xaringanBuilder <img src="man/figures/hex_sticker.png" align="right" width="200"/>
 
 Build xaringan slides to multiple output formats:
 
@@ -149,7 +150,7 @@ build_pptx("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.ht
 
 Build png image(s) of some or all slides. Use the `slides` argument to
 determine which slides to include (defaults to `1`, returning just the
-first slide) .
+first slide).
 
 Input can be a Rmd file, html file, pdf file, or url:
 
@@ -160,9 +161,12 @@ build_png("slides.html")
 build_png("slides.pdf")
 build_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 
-# Build zip file of multiple or all slides
+# Build zip file of different subsets of slides
 build_png("slides.pdf", slides = c(1, 3, 5))
 build_png("slides.pdf", slides = "all")
+build_png("slides.pdf", slides = "first")
+build_png("slides.pdf", slides = "last")
+build_png("slides.pdf", slides = -1) # Negative indexing removes slides
 ```
 
 Example:
@@ -260,10 +264,10 @@ For example, to build a pptx from a Rmd file without Chrome, you could:
 
 ## Author, Version, and License Information
 
--   Author: *John Paul Helveston*
-    [www.jhelvy.com](http://www.jhelvy.com/)
+-   Authors: [John Paul Helveston](http://www.jhelvy.com/) (*aut*,
+    *cre*, *cph*) & [Garrick
+    Aden-Buie](https://www.garrickadenbuie.com/) (*aut*)
 -   Date First Written: *September 27, 2020*
--   Most Recent Update: July 23, 2021
 -   License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 

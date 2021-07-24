@@ -1,6 +1,6 @@
 Package: xaringanBuilder
 Title: Build 'xaringan' Slides To Many Different Outputs
-Version: 0.0.8.9000
+Version: 0.0.9
 Authors@R:
     c(person(given = "John",
              family = "Helveston",
@@ -16,8 +16,8 @@ Authors@R:
              family = "Shalloway",
              role = "ctb"))
 Description: Functions for building 'xaringan' slides to different outputs,
-    including html, pdf, gif, pptx, and a png "thumbnail" of the first
-    slide.
+    html, pdf, png, gif, pptx, and mp4, as well as a 'social' output, a png of
+    the first slide re-sized for sharing on social media.
 License: MIT + file LICENSE
 Depends: 
     R (>= 3.4.0)
