@@ -3,7 +3,8 @@
   <head>
     <title>{xaringanBuilder}</title>
     <meta charset="utf-8" />
-    <meta name="author" content="John Paul Helveston" />
+    <meta name="author" content="John Paul Helveston &amp; Garrick Aden-Buie" />
+    <meta name="date" content="2021-07-24" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
@@ -16,8 +17,8 @@ class: center, middle, inverse, title-slide
 
 # {xaringanBuilder}
 ## Build xaringan slides to different outputs
-### John Paul Helveston
-### z2021-07-24
+### John Paul Helveston &amp; Garrick Aden-Buie
+### 2021-07-24
 
 ---
 
@@ -81,7 +82,6 @@ Rmd
 
 ]
 
-y
 ---
 
 ## Partial / incremental slides
@@ -146,13 +146,37 @@ head(mtcars)
 ]
 
 ---
+
+## Use the `slides` argument to control which slides get built
+
+Examples building from PDF to PNG:
+
+
+```r
+# Build the first or last slide only
+build_png("slides.pdf", output_file = "first_slide.png", slides = "first")
+build_png("slides.pdf", output_file = "last_slide.png", slides = "last")
+
+# Choose subsets of slides
+build_png("slides.pdf", slides = c(1, 3, 5)) 
+build_png("slides.pdf", slides = -1) # Negative indices remove slides
+
+# Build all slides
+build_png("slides.pdf", slides = "all")
+```
+
+---
 class: center, middle, inverse
 
 # Thanks!
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
 
-More at https://jhelvy.github.io/xaringanBuilder
+Package documentation at https://jhelvy.github.io/xaringanBuilder
+
+&lt;a href='https://xaringan.club/'&gt;&lt;img src='https://github.com/dynastyprocess/graphics/raw/main/xaringanclub/xaringanclub.png' align="center" height="142" /&gt;&lt;/a&gt;
+
+Visit [xaringan.club](https://xaringan.club/) for more {xaringan} tools!
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

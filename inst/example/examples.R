@@ -2,38 +2,40 @@
 # remotes::install_github('jhelvy/xaringanBuilder')
 library(xaringanBuilder)
 
+input_url <- "https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html"
+
 # Build an html file from a Rmd file
 build_html("slides.Rmd")
 
-# Build pdf from Rmd, html, or url
+# Build pdf from url, Rmd, or html
+build_pdf(input_url)
 build_pdf("slides.Rmd")
 build_pdf("slides.html")
-build_pdf("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 
-# Build gif from Rmd, html, pdf, or url
+# Build gif from url, Rmd, html, or pdf
+build_gif(input_url)
 build_gif("slides.Rmd")
 build_gif("slides.html")
 build_gif("slides.pdf")
-build_gif("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 
-# Build mp4 from Rmd, html, pdf, or url
+# Build mp4 from url, Rmd, html, or pdf
+build_mp4(input_url)
 build_mp4("slides.Rmd")
 build_mp4("slides.html")
 build_mp4("slides.pdf")
-build_mp4("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 
-# Build pptx from Rmd, html, pdf, or url
+# Build pptx from url Rmd, html, or pdf
 # (pptx contains slides of png images of each rendered xaringan slide)
+build_pptx(input_url)
 build_pptx("slides.Rmd")
 build_pptx("slides.html")
 build_pptx("slides.pdf")
-build_pptx("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 
 # By default, a png of only the first slide is built
+build_png(input_url, output_file = "title_slide.png")
 build_png("slides.Rmd", output_file = "title_slide.png")
 build_png("slides.html", output_file = "title_slide.png")
 build_png("slides.pdf", output_file = "title_slide.png")
-build_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 
 # Use the `slides` argument to control which slides get build into pngs
 build_png("slides.pdf", output_file = "first_slide.png", slides = "first")

@@ -1,8 +1,8 @@
 ---
 title: "{xaringanBuilder}"
 subtitle: "Build xaringan slides to different outputs"
-author: "John Paul Helveston"
-date: "z`r Sys.Date()`"
+author: "John Paul Helveston & Garrick Aden-Buie"
+date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -148,4 +148,8 @@ class: center, middle, inverse
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
 
-More at https://jhelvy.github.io/xaringanBuilder
+Package documentation at https://jhelvy.github.io/xaringanBuilder
+
+<a href='https://xaringan.club/'><img src='https://github.com/dynastyprocess/graphics/raw/main/xaringanclub/xaringanclub.png' align="center" height="142" /></a>
+
+Visit [xaringan.club](https://xaringan.club/) for more {xaringan} tools!
