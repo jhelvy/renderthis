@@ -12,7 +12,7 @@ build_all(
   partial_slides = FALSE,
   delay = 1,
   density = 100,
-  slides = NULL,
+  slides = "all",
   fps = 1
 )
 }
@@ -43,10 +43,11 @@ Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
 \item{density}{Resolution of the resulting pngs in each slide file. Defaults
 to `100`.}
 
-\item{slides}{A numeric or integer vector of the slide number(s) to include
-in the mp4, or one of `"all"`, `"first"`, or `"last"`. Defaults to `1`,
-returning only the title slide. To return a zip file of pngs of all of the
-slides, set `slides = "all"`).}
+\item{slides}{A numeric or integer vector of the slide number(s) to build
+as png files , or one of `"all"`, `"first"`, or `"last"`. Negative integers
+select which slides _not_ to include. If more than one slide are included,
+pngs will be returned as a zip file. Defaults to `"all"`, in which case
+all slides are included.}
 
 \item{fps}{Frames per second of the resulting mp4 file.}
 }

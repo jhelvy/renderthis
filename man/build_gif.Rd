@@ -27,8 +27,9 @@ ending in ".html".}
 to `100`.}
 
 \item{slides}{A numeric or integer vector of the slide number(s) to include
-in the gif, or one of `"all"`, `"first"`, or `"last"`. Defaults to `"all"`,
-in which case all slides are included.}
+in the gif, or one of `"all"`, `"first"`, or `"last"`. Negative integers
+select which slides _not_ to include. Defaults to `"all"`, in which case
+all slides are included.}
 
 \item{fps}{Frames per second of the resulting gif file.}
 
