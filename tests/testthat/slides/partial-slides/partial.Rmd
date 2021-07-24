@@ -1,0 +1,23 @@
+---
+title: Test build_html() paths
+output:
+    xaringan::moon_reader:
+        css: [default-fonts, default, test.css]
+---
+
+![](placekitten.jpg)
+
+---
+
+```{r histplot}
+hist(faithful$eruptions)
+```
+
+---
+class: center middle
+
+# First
+
+--
+
+# Second

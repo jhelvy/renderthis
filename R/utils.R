@@ -1,11 +1,8 @@
-assert_io_paths <- function(input, input_ext, output_file, output_file_ext) {
-    assert_path_ext(input, input_ext, arg = "input")
-    if (!is.null(output_file)) {
-        assert_path_ext(output_file, output_file_ext, arg = "output_file")
+assert_path_ext <- function(path, expected_ext, arg = NULL) {
+    if (is.null(arg)) arg <- deparse(substitute(path))
+    if (is.null(path)) {
+        stop("`", arg, "` must be a path with extension ", expected_ext, call. = FALSE)
     }
-}
-
-assert_path_ext <- function(path, expected_ext, arg) {
     if (!test_path_ext(path, expected_ext)) {
         expected_ext <- paste0(".", expected_ext, collapse = ", ")
         stop("`", arg, "` must have extension: ", expected_ext, call. = FALSE)
@@ -13,25 +10,48 @@ assert_path_ext <- function(path, expected_ext, arg) {
 }
 
 test_path_ext <- function(path, expected_ext) {
-    return(tolower(fs::path_ext(path)) %in% expected_ext)
+    tolower(fs::path_ext(path)) %in% expected_ext
+}
+
+assert_path_exists <- function(path, arg = NULL, dir_ok = FALSE) {
+    if (is.null(arg)) arg <- deparse(substitute(path))
+
+    if (is.null(path)) {
+        stop("`", arg, "` must be a path", call. = FALSE)
+    }
+
+    if (
+        is_url(path) ||
+        (dir_ok && fs::dir_exists(path)) ||
+        # don't count directories if !dir_ok
+        (!fs::is_dir(path) && fs::file_exists(path))
+    ) {
+        return()
+    }
+
+    stop("`", arg, "` doesn't exist: ", path, call. = FALSE)
 }
 
 assert_chrome_installed <- function() {
     assert_chromote()
 
-    chromePath <- NULL
-    error <- paste0(
-        "This function requires a local installation of the Chrome ",
-        "browser. You can also use other browsers based on Chromium, ",
-        "such as Chromium itself, Edge, Vivaldi, Brave, or Opera.")
-    tryCatch({
-      chromePath <- chromote::find_chrome()
-      },
-      error = function(e) { message(error) }
-    )
-    if (is.null(chromePath)) {
-        stop(error)
+    if (!check_chrome_installed()) {
+        stop(
+            "This function requires a local installation of the Chrome ",
+            "browser. You can also use other browsers based on Chromium, ",
+            "such as Chromium itself, Edge, Vivaldi, Brave, or Opera.",
+            call. = FALSE
+        )
     }
+}
+
+check_chrome_installed <- function() {
+    assert_chromote()
+
+    tryCatch(
+        !is.null(chromote::find_chrome()),
+        error = function(e) FALSE
+    )
 }
 
 assert_chromote <- function() {
@@ -43,66 +63,92 @@ assert_chromote <- function() {
     }
 }
 
-build_paths <- function(input, output_file = NULL) {
-    # Build input paths
-    if (is_url(input)) {
-      input_root <- fs::path_abs(fs::path_file(input))
-      input_html <- input
-      input_url  <- input
-    } else {
-      input_root <- fs::path_abs(input)
-      input_html <- fs::path_ext_set(input_root, "html")
-      input_url  <- paste0("file://", input_html)
-    }
-    input_rmd <- input_root
-    input_pdf <- fs::path_ext_set(input_root, "pdf")
+path_from <- function(path, to_ext, temporary = FALSE, dir = NULL) {
+    path_is_url <- is_url(path)
+    temporary <- isTRUE(temporary)
 
-    # Build output_file paths
-    if (is.null(output_file)) {
-      if (is_url(input)) {
-        output_root <- fs::path_abs(fs::path_file(input))
-      } else {
-        output_root <- fs::path_abs(input)
-      }
-    } else {
-      output_root <- fs::path_abs(output_file)
-    }
-    output_html <- fs::path_ext_set(output_root, "html")
-    output_pdf  <- fs::path_ext_set(output_root, "pdf")
-    output_gif  <- fs::path_ext_set(output_root, "gif")
-    output_pptx <- fs::path_ext_set(output_root, "pptx")
-    output_mp4  <- fs::path_ext_set(output_root, "mp4")
-    output_zip  <- fs::path_ext_set(output_root, "zip")
-    output_png  <- fs::path_ext_set(output_root, "png")
-    output_social <- output_png
-    # Append "_social" to png outputs
-    if (is.null(output_file)) {
-      output_social <- append_to_file_path(output_png, "_social")
+    if (identical(tolower(to_ext), "url")) {
+        if (path_is_url) {
+            return(path)
+        }
+        temporary <- FALSE
     }
 
-    # Return path list
-    return(list(
-      input = list(
-        url  = input_url,
-        html = input_html,
-        rmd  = input_rmd,
-        pdf  = input_pdf
-      ),
-      output = list(
-        html   = output_html,
-        pdf    = output_pdf,
-        gif    = output_gif,
-        pptx   = output_pptx,
-        mp4    = output_mp4,
-        zip    = output_zip,
-        png    = output_png,
-        social = output_social
-      )
-    ))
+    if (is.null(dir)) {
+        dir <-
+            if (path_is_url) {
+                warning("No `dir` provided, using working directory.")
+                fs::path_wd()
+            } else {
+                fs::path_dir(fs::path_abs(path))
+            }
+    }
+
+    path_abs <- if (!path_is_url) fs::path_abs(path)
+    path_file <-
+        if (temporary) {
+            fs::path_file(fs::file_temp("xaringanBuilder_"))
+        } else {
+            fs::path_file(path)
+        }
+
+    path_new <- switch(
+        tolower(to_ext),
+        social = fs::path(
+            dir,
+            append_to_file_path(fs::path_ext_set(path_file, "png"), "_social")
+        ),
+        url = fs::path(dir, path_file),
+        html = ,
+        pdf = ,
+        png = ,
+        gif = ,
+        pptx = ,
+        mp4 = ,
+        zip = fs::path(dir, fs::path_ext_set(path_file, to_ext)),
+        stop("Unsupported file type: ", to_ext)
+    )
+
+    path_new <- fs::path_abs(path_new)
+
+    if (to_ext == "url") {
+        path_new <- paste0("file://", path_new)
+    }
+
+    if (temporary) {
+        # when the calling function exits, delete the temp file
+        path_new_rel <- fs::path_rel(path_new, fs::path_wd())
+        msg <- cli::format_inline(
+            "Removed temporary {.file {path_new_rel}}", .envir = environment()
+        )
+        withr::defer({
+            if (!fs::file_exists(path_new)) return()
+            unlink(path_new)
+            if (tolower(to_ext) == "html" && temporary) {
+                # clean up supporting files for temp HTML
+                support_dir <- paste0(fs::path_ext_remove(path_new), "_files")
+                if (fs::dir_exists(support_dir)) {
+                    fs::dir_delete(support_dir)
+                }
+            }
+            cli::cli_alert_info(msg)
+        }, envir = parent.frame())
+    }
+
+    path_new
 }
 
 is_url <- function(input) {
   return(grepl("^(ht|f)tp", tolower(input)))
+}
+
+in_same_directory <- function(x, y) {
+    if (is_url(x) || is_url(y)) {
+        return(FALSE)
+    }
+    paths <- fs::path_abs(c(x, y))
+    common <- fs::path_common(paths)
+    all(common == fs::path_dir(paths))
 }
 
 append_to_file_path <- function(path, s) {
@@ -139,21 +185,21 @@ cli_build_failed <- function(id) {
   }
 }
 
-pdf_to_pngs <- function(input, density) {
-    return(magick::image_read_pdf(input, density = density))
+pdf_to_imgs <- function(input, density) {
+    magick::image_read_pdf(input, density = density)
 }
 
 build_to_pdf <- function(
-  input,
-  paths,
-  complex_slides,
-  partial_slides,
-  delay
+    input,
+    paths,
+    complex_slides,
+    partial_slides,
+    delay
 ) {
     if (test_path_ext(input, "rmd")) {
         build_pdf(
-          input = paths$input$rmd,
-          output_file = paths$output$pdf,
+            input = paths$input$rmd,
+            output_file = paths$output$pdf,
           complex_slides, partial_slides, delay)
     } else if (test_path_ext(input, "html")) {
         build_pdf(
@@ -161,4 +207,76 @@ build_to_pdf <- function(
           output_file = paths$output$pdf,
           complex_slides, partial_slides, delay)
     }
+}
+
+slides_arg_validate <- function(slides, imgs = NULL) {
+    if (is.null(slides)) {
+        slides <- "all"
+    }
+
+    if (is.character(slides)) {
+        slides <- tryCatch(
+            match.arg(tolower(slides), c("all", "first", "last")),
+            error = function(err) {
+                stop(
+                    '`slides` should be one of "all", "first", "last" ',
+                    "or an integer vector of slide indices"
+                )
+            }
+        )
+    } else {
+        if (!is.numeric(slides)) {
+            stop("`slides` must be numeric slide indices")
+        }
+        if (any(slides < 0) && any(slides > 0)) {
+            stop(
+                "`slides` must be negative slide indices to drop ",
+                "or positive indices of slides to keep"
+            )
+        }
+        if (!isTRUE(all.equal(slides, as.integer(slides), tolerance = .Machine$double.eps))) {
+            stop("`slides` must be integer slide indices")
+        }
+
+        slides <- sort(unique(as.integer(slides)), decreasing = any(slides < 0))
+
+        if (any(slides == 0)) {
+            warning("Ignoring `slide` number 0, `slides` must be all positive or negative integers")
+            slides <- slides[slides != 0]
+        }
+
+        if (!length(slides)) {
+            stop("No slides were selected")
+        }
+    }
+
+    if (is.null(imgs)) {
+        return(slides)
+    }
+
+    if (identical(slides, "all")) {
+        return(seq_along(imgs))
+    } else if (identical(slides, "first")) {
+        return(1L)
+    } else if (identical(slides, "last")) {
+        return(length(imgs))
+    }
+
+    slides_oob <- slides[!abs(slides) %in% seq_along(imgs)]
+    if (length(slides_oob)) {
+        slides <- setdiff(slides, slides_oob)
+        if (length(slides)) {
+            warning(
+                "Some values of `slides` were out of range for this presentation: ",
+                paste(slides_oob, collapse = ", ")
+            )
+        } else {
+            stop(
+                "All values of `slides` were out of range for this presentation: ",
+                paste(slides_oob, collapse = ", ")
+            )
+        }
+    }
+
+    seq_along(imgs)[slides]
 }

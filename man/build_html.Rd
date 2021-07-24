@@ -4,22 +4,34 @@
 \alias{build_html}
 \title{Build xaringan slides as html file.}
 \usage{
-build_html(input, output_file = NULL)
+build_html(input, output_file = NULL, self_contained = FALSE, rmd_args = NULL)
 }
 \arguments{
 \item{input}{Path to Rmd file of xaringan slides.}
 
-\item{output_file}{The name of the output file. If using NULL then
-the output filename will be based on filename for the input file.
-If a filename is provided, a path to the output file can also be provided.}
+\item{output_file}{The name of the output file. If using `NULL` then the
+output file name will be based on file name for the input file. If a file
+name is provided, a path to the output file can also be provided.}
+
+\item{self_contained}{Should the output file be a self-contained HTML file
+where all images, CSS and JavaScript are included directly in the output
+file? This option, when `TRUE`, provides you with a single HTML file that
+you can share with others, but it may be very large. This feature is
+enabled by default when the `output_file` is written in a directory other
+than the one containing the `input` R Markdown file.}
+
+\item{rmd_args}{A list of arguments passed to [rmarkdown::render()].}
 }
 \description{
 Build xaringan slides as html file. Essentially the same thing as
-`rmarkdown::render()` with `output_format = "xaringan::moon_reader"`
+[rmarkdown::render()] with `output_format = "xaringan::moon_reader"`,
+except that the `self_contained` option is forced to `TRUE` if the HTML file
+is built into a directory other than the one containing `input`.
 }
 \examples{
 \dontrun{
 # Build html from Rmd file
 build_html("slides.Rmd")
 }
+
 }

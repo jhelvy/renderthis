@@ -29,28 +29,35 @@ build_social <- function(input, output_file = NULL) {
     # Check if Chrome is installed
     assert_chrome_installed()
 
-    # Check input and output files have correct extensions
-    assert_io_paths(input, "rmd", output_file, "png")
+    if (is.null(output_file)) {
+        output_file <- path_from(input, "social")
+    }
 
-    # Build input and output paths
-    paths <- build_paths(input, output_file)
-    input <- paths$input$rmd
-    output_file <- paths$output$social
+    # Check input and output files have correct extensions
+    assert_path_ext(input, "rmd")
+    assert_path_ext(output_file, "png")
+
+    # Build a temporary html file for the slide snapshot
+    # We used to use `webshot2::rmdshot()` but this way we have more control
+    step_html <- path_from(input, "html", temporary = TRUE)
+    cli::cli_alert_info("Building a temporary html for social image")
+    build_html(
+        input = input,
+        output_file = step_html,
+        self_contained = TRUE,
+        rmd_args = list(
+            output_options = list(nature = list(ratio = "191:100"))
+        )
+    )
 
     # Build png from rmd
-    proc <- cli_build_start(input, output_file, on_exit = "done")
+    proc <- cli_build_start(step_html, output_file, on_exit = "done")
     tryCatch({
-        webshot2::rmdshot(
-            doc = input,
+        webshot2::webshot(
+            url = path_from(step_html, "url"),
             file = output_file,
             vheight = 600,
-            vwidth = 600 * 191 / 100,
-            rmd_args = list(
-                output_options = list(
-                    nature = list(ratio = "191:100"),
-                    self_contained = TRUE
-                )
-            )
+            vwidth = 600 * 191 / 100
         )},
         error = cli_build_failed(proc)
     )

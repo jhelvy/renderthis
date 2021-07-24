@@ -3,7 +3,8 @@
   <head>
     <title>{xaringanBuilder}</title>
     <meta charset="utf-8" />
-    <meta name="author" content="John Paul Helveston" />
+    <meta name="author" content="John Paul Helveston &amp; Garrick Aden-Buie" />
+    <meta name="date" content="2021-07-24" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
@@ -16,8 +17,8 @@ class: center, middle, inverse, title-slide
 
 # {xaringanBuilder}
 ## Build xaringan slides to different outputs
-### John Paul Helveston
-### 2016/12/12 (updated: 2021-02-25)
+### John Paul Helveston &amp; Garrick Aden-Buie
+### 2021-07-24
 
 ---
 
@@ -41,20 +42,25 @@ You can install the current version of xaringanBuilder from GitHub:
 remotes::install_github("jhelvy/xaringanBuilder")
 ```
 
+--
+
 .pull-left[
-## Supported output types: 
+#### Supported output types: 
 
 - html
 - pdf
 - gif
+- mp4
 - pptx
 - png 
 - social: png image of first slide sized for social media sharing (e.g. Twitter)
 
 ]
 
+--
+
 .pull-right[
-## Build hierarchy:
+#### Build hierarchy:
 
 ```
 Rmd
@@ -69,6 +75,8 @@ Rmd
                    |
                    |--&gt; gif
                    |
+                   |--&gt; mp4
+                   |
                    |--&gt; pptx
 ```
 
@@ -78,12 +86,13 @@ Rmd
 
 ## Partial / incremental slides
 
-For `pdf`, `png`, `gif`, and `pptx` output types, if you want to build a new slide for each increment on [incremental slides](https://slides.yihui.org/xaringan/incremental.html#1), set `partial_slides = TRUE` in any of the following build functions:
+For `pdf`, `png`, `gif`, `mp4`, and `pptx` output types, if you want to build a new slide for each increment on [incremental slides](https://slides.yihui.org/xaringan/incremental.html#1), set `partial_slides = TRUE` in any of the following build functions:
 
 ```
 build_pdf()
 build_png()
 build_gif()
+build_mp4()
 build_pptx()
 build_all()
 ```
@@ -103,7 +112,7 @@ build_pdf("slides.html", partial_slides = TRUE)
 
 ## Complex slides
 
-"Complex" slides are slides that contain [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) (like the one on this slide) or other html widgets / advanced features that might not render well as a pdf. To render these on separate slides, set `complex_slides = TRUE` in `build_pdf()`, `build_png()`, `build_gif()`, `build_pptx()`, or `build_all()`.
+"Complex" slides are slides that contain [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) (like the one on this slide) or other html widgets / advanced features that might not render well as a pdf. To render these on separate slides, set `complex_slides = TRUE` in `build_pdf()`, `build_png()`, `build_gif()`, `build_mp4()`, `build_pptx()`, or `build_all()`.
 
 .panelset[
 .panel[.panel-name[Chunk]
@@ -118,23 +127,43 @@ head(mtcars)
 
 
 ```
-##                    mpg cyl disp  hp drat    wt  qsec
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02
-## Valiant           18.1   6  225 105 2.76 3.460 20.22
-##                   vs am gear carb
-## Mazda RX4          0  1    4    4
-## Mazda RX4 Wag      0  1    4    4
-## Datsun 710         1  1    4    1
-## Hornet 4 Drive     1  0    3    1
-## Hornet Sportabout  0  0    3    2
-## Valiant            1  0    3    1
+##                    mpg cyl disp  hp drat    wt  qsec vs am
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0
+##                   gear carb
+## Mazda RX4            4    4
+## Mazda RX4 Wag        4    4
+## Datsun 710           4    1
+## Hornet 4 Drive       3    1
+## Hornet Sportabout    3    2
+## Valiant              3    1
 ```
 ]
 ]
+
+---
+
+## Use the `slides` argument to control which slides get built
+
+Examples building from PDF to PNG:
+
+
+```r
+# Build the first or last slide only
+build_png("slides.pdf", output_file = "first_slide.png", slides = "first")
+build_png("slides.pdf", output_file = "last_slide.png", slides = "last")
+
+# Choose subsets of slides
+build_png("slides.pdf", slides = c(1, 3, 5)) 
+build_png("slides.pdf", slides = -1) # Negative indices remove slides
+
+# Build all slides
+build_png("slides.pdf", slides = "all")
+```
 
 ---
 class: center, middle, inverse
@@ -143,7 +172,11 @@ class: center, middle, inverse
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
 
-More at https://jhelvy.github.io/xaringanBuilder
+Package documentation at https://jhelvy.github.io/xaringanBuilder
+
+&lt;a href='https://xaringan.club/'&gt;&lt;img src='https://github.com/dynastyprocess/graphics/raw/main/xaringanclub/xaringanclub.png' align="center" height="142" /&gt;&lt;/a&gt;
+
+Visit [xaringan.club](https://xaringan.club/) for more {xaringan} tools!
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

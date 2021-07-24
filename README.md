@@ -1,5 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# xaringanBuilder <a href='https://jhelvy.github.io/xaringanBuilder/'><img src='man/figures/hex_sticker.png' align="right" height="139" /></a>
+
 <!-- badges: start -->
 
 [![Lifecycle:
@@ -7,8 +10,6 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![Travis build
 status](https://travis-ci.com/jhelvy/xaringanBuilder.svg?branch=master)](https://travis-ci.com/jhelvy/xaringanBuilder)
 <!-- badges: end -->
-
-## xaringanBuilder <img src="man/figures/hex_sticker.png" align="right" width="200"/>
 
 Build xaringan slides to multiple output formats:
 
@@ -27,6 +28,15 @@ You can install the current version of xaringanBuilder from GitHub:
 ``` r
 # install.packages("remotes")
 remotes::install_github("jhelvy/xaringanBuilder")
+```
+
+Some output formats require additional packages, and each format will
+provide instructions about how to install any missing dependencies. You
+can also choose to install xaringanBuilder with all of its dependencies:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("jhelvy/xaringanBuilder", dependencies = TRUE)
 ```
 
 ## Build hierarchy
@@ -140,25 +150,31 @@ build_pptx("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.ht
 
 Build png image(s) of some or all slides. Use the `slides` argument to
 determine which slides to include (defaults to `1`, returning just the
-first slide) .
+first slide).
 
 Input can be a Rmd file, html file, pdf file, or url:
 
 ``` r
-# By default, creates a png of only the first slide:
-build_png("slides.Rmd")
-build_png("slides.html")
-build_png("slides.pdf")
-build_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+# By default, a png of only the first slide is built
+build_png("slides.Rmd", output_file = "title_slide.png")
+build_png("slides.html", output_file = "title_slide.png")
+build_png("slides.pdf", output_file = "title_slide.png")
+build_png(
+  "https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html",
+  output_file = "title_slide.png"
+)
 
-# Build zip file of multiple or all slides
-build_png("slides.pdf", slides = c(1, 3, 5))
+# Use the `slides` argument to control which slides get build into pngs
+build_png("slides.pdf", output_file = "first_slide.png", slides = "first")
+build_png("slides.pdf", output_file = "last_slide.png", slides = "last")
+build_png("slides.pdf", slides = c(1, 3, 5)) # Choose subsets of slides
+build_png("slides.pdf", slides = -1) # Negative indices remove slides
 build_png("slides.pdf", slides = "all")
 ```
 
 Example:
 
-<img src="man/figures/slides.png" width=500>
+<img src="man/figures/title_slide.png" width=500>
 
 ### Build Social
 
@@ -251,10 +267,10 @@ For example, to build a pptx from a Rmd file without Chrome, you could:
 
 ## Author, Version, and License Information
 
--   Author: *John Paul Helveston*
-    [www.jhelvy.com](http://www.jhelvy.com/)
+-   Authors: [John Paul Helveston](http://www.jhelvy.com/) (*aut*,
+    *cre*, *cph*) & [Garrick
+    Aden-Buie](https://www.garrickadenbuie.com/) (*aut*)
 -   Date First Written: *September 27, 2020*
--   Most Recent Update: March 30, 2021
 -   License:
     [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
 
@@ -266,12 +282,12 @@ if you cited it. You can get the citation information by typing
 
 To cite xaringanBuilder in publications use:
 
-John Paul Helveston (2021). xaringanBuilder: Functions for building
-xaringan slides to different outputs.
+Helveston, John Paul and Aden-Buie, Garrick (2021). xaringanBuilder:
+Functions for building ‘xaringan’ slides to different outputs.
 
 A BibTeX entry for LaTeX users is
 
 @Manual{, title = {xaringanBuilder: Functions for building xaringan
-slides to different outputs.}, author = {John Paul Helveston}, year =
-{2021}, note = {R package version 0.0.7}, url =
-{<https://jhelvy.github.io/xaringanBuilder/>}, }
+slides to different outputs.}, author = {{Helveston} and John Paul and
+{Aden-Buie} and {Garrick}}, year = {2021}, note = {R package version
+0.0.9}, url = {<https://jhelvy.github.io/xaringanBuilder/>}, }

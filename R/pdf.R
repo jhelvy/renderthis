@@ -1,26 +1,30 @@
 #' Build xaringan slides as pdf file.
 #'
-#' Build xaringan slides as a pdf file. Requires a local installation of
-#' Chrome. If you set `complex_slides = TRUE` or `partial_slides = TRUE`,
-#' you will also need to install the {chromote} and {pdftools} packages.
-#' @param input Path to a Rmd file or html file / url of xaringan slides. If
-#' the input is a url to xaringan slides on a website, you must provide the
-#' full url ending in ".html".
+#' Build xaringan slides as a pdf file. Requires a local installation of Chrome.
+#' If you set `complex_slides = TRUE` or `partial_slides = TRUE`, you will also
+#' need to install the {chromote} and {pdftools} packages.
+#'
+#' @param input Path to a Rmd file or html file / url of xaringan slides. If the
+#'   input is a url to xaringan slides on a website, you must provide the full
+#'   url ending in ".html".
 #' @param output_file The name of the output file. If `NULL` (the default) then
-#' the output filename will be based on filename for the input file.
-#' If a filename is provided, a path to the output file can also be provided.
+#'   the output filename will be based on filename for the input file. If a
+#'   filename is provided, a path to the output file can also be provided.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
-#' other html widgets or advanced features), set `complex_slides = TRUE`.
-#' Defaults to `FALSE`. This will use the {chromote} package to iterate through
-#' the slides at a pace set by the `delay` argument. Requires a local
-#' installation of Chrome.
-#' @param partial_slides Should partial (continuation) slides be
-#' included in the output? If `FALSE`, the default, only the complete slide
-#' is included in the PDF.
-#' @param delay Seconds of delay between advancing to and printing
-#' a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
-#' TRUE`.
-#' @export
+#'   other html widgets or advanced features), set `complex_slides = TRUE`.
+#'   Defaults to `FALSE`. This will use the {chromote} package to iterate
+#'   through the slides at a pace set by the `delay` argument. Requires a local
+#'   installation of Chrome.
+#' @param partial_slides Should partial (continuation) slides be included in the
+#'   output? If `FALSE`, the default, only the complete slide is included in the
+#'   PDF.
+#' @param delay Seconds of delay between advancing to and printing a new slide.
+#'   Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.
+#' @param keep_intermediates Should we keep the intermediate HTML file? Only
+#'   relevant if the `input` is an `.Rmd` file. Default is `TRUE` if the
+#'   `output_file` is written into the same directory as the `input`, otherwise
+#'   the intermediate file isn't kept.
+#'
 #' @examples
 #' \dontrun{
 #' # Build pdf from Rmd, html, or url
@@ -47,47 +51,57 @@
 #'           complex_slides = TRUE,
 #'           partial_slides = TRUE)
 #' }
+#'
+#' @export
 build_pdf <- function(
-  input,
-  output_file = NULL,
-  complex_slides = FALSE,
-  partial_slides = FALSE,
-  delay = 1
+    input,
+    output_file = NULL,
+    complex_slides = FALSE,
+    partial_slides = FALSE,
+    delay = 1,
+    keep_intermediates = NULL
 ) {
     # Check if Chrome is installed
     assert_chrome_installed()
 
-    # Check input and output files have correct extensions
-    assert_io_paths(input, c("rmd", "html"), output_file, "pdf")
+    assert_path_exists(input)
 
-    # Build input and output paths
-    paths <- build_paths(input, output_file)
+    if (is.null(output_file)) {
+        output_file <- path_from(input, "pdf")
+    }
+
+    # Check input and output files have correct extensions
+    assert_path_ext(input, c("rmd", "html"))
+    assert_path_ext(output_file, "pdf")
+
+    if (is.null(keep_intermediates)) {
+        keep_intermediates <- in_same_directory(input, output_file)
+    }
 
     # Build html (if input is rmd)
+    step_html <- input
     if (test_path_ext(input, "rmd")) {
-        build_html(paths$input$rmd, paths$output$html)
-        paths <- build_paths(input = paths$output$html, output_file)
+        step_html <- path_from(output_file, "html", temporary = !keep_intermediates)
+        build_html(input, step_html)
     }
 
     # Build pdf from html
-    output_file <- paths$output$pdf
     if (complex_slides | partial_slides) {
-        build_pdf_complex(paths$input$url, output_file, partial_slides, delay)
+        build_pdf_complex(path_from(step_html, "url"), output_file, partial_slides, delay)
     } else {
-      input <- paths$input$html
-      if (is_url(input)) { input <- paths$input$url }
-      build_pdf_simple(input, output_file)
+        build_pdf_simple(step_html, output_file)
     }
 }
 
 build_pdf_simple <- function(input, output_file = NULL) {
     proc <- cli_build_start(input, output_file, on_exit = "done")
     tryCatch({
-      pagedown::chrome_print(
-        input  = input,
-        output = output_file)
+        pagedown::chrome_print(
+            input  = input,
+            output = output_file
+        )
     },
-      error = cli_build_failed(proc)
+        error = cli_build_failed(proc)
     )
 }
 

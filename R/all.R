@@ -3,31 +3,18 @@
 #' Build xaringan slides to multiple outputs. Options are `"html"`, `"social"`
 #' `"pdf"`, `"png"`, `"gif"`, `"mp4"`, and `"pptx"`. See each individual
 #' build_*() function for details about each output type.
+#'
 #' @param input Path to Rmd file of xaringan slides.
 #' @param include A vector of the different output types to build. Options are
-#' `"html"`, `"social"`, `"pdf"`, `"png"`, `"gif"`, `"mp4"`, and `"pptx"`.
-#' Defaults to `c("html", "social", "pdf", "png", "gif", "mp4", "pptx")`.
+#'   `"html"`, `"social"`, `"pdf"`, `"png"`, `"gif"`, `"mp4"`, and `"pptx"`.
+#'   Defaults to `c("html", "social", "pdf", "png", "gif", "mp4", "pptx")`.
 #' @param exclude A vector of the different output types to NOT build. Options
-#' are `"html"`, `"social"`, `"pdf"`, `"png"`, `"gif"`, `"mp4"`, and `"pptx"`.
-#' Defaults to `NULL`, in which case all all output types are built.
-#' @param complex_slides For "complex" slides (e.g. slides with panelsets or
-#' other html widgets or advanced features), set `complex_slides = TRUE`.
-#' Defaults to `FALSE`. This will use the {chromote} package to iterate through
-#' the slides at a pace set by the `delay` argument. Requires a local
-#' installation of Chrome.
-#' @param partial_slides Should partial (continuation) slides be
-#' included in the output? If `FALSE`, the default, only the complete slide
-#' is included in the PDF.
-#' @param delay Seconds of delay between advancing to and printing
-#' a new slide. Only used if `complex_slides = TRUE` or `partial_slides =
-#' TRUE`.
-#' @param density Resolution of the resulting png files used in the png, gif,
-#' and pptx output types file. Defaults to `100`.
-#' @param slides A vector of the slide number(s) to return for the png output.
-#' Defaults to `1`, returning only the title slide. To return a zip
-#' file of all the slides as pngs, set `slides = NULL`).
-#' @param fps Frames per second of the gif and mp4 files.
-#' @export
+#'   are `"html"`, `"social"`, `"pdf"`, `"png"`, `"gif"`, `"mp4"`, and `"pptx"`.
+#'   Defaults to `NULL`, in which case all all output types are built.
+#' @inheritParams build_png
+#' @inheritParams build_pdf
+#' @inheritParams build_mp4
+#'
 #' @examples
 #' \dontrun{
 #' # Builds every output by default
@@ -37,6 +24,8 @@
 #' build_all("slides.Rmd", include = c("html", "pdf", "gif"))
 #' build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
 #' }
+#'
+#' @export
 build_all <- function(
     input,
     include = c("html", "social", "pdf", "png", "gif", "mp4", "pptx"),
@@ -45,14 +34,11 @@ build_all <- function(
     partial_slides = FALSE,
     delay = 1,
     density = 100,
-    slides = 1,
+    slides = "all",
     fps = 1
-    ) {
+) {
     # Check that input file has the correct extension
     assert_path_ext(input, "rmd")
-
-    # Build input and output paths
-    paths <- build_paths(input, output_file = NULL)
 
     # Build hierarchy:
     #
@@ -76,76 +62,70 @@ build_all <- function(
     # if at some point intermediate files are removed if not requested, the
     # logic here will need to be changed.
 
-    include <- match.arg(include, several.ok = TRUE)
-    do_soc <- ("social" %in% include) && (! "social" %in% exclude)
-    do_htm <- ("html" %in% include) && (! "html" %in% exclude)
-    do_pdf <- ("pdf" %in% include) && (! "pdf" %in% exclude)
-    do_png <- ("png" %in% include) && (! "png" %in% exclude)
-    do_gif <- ("gif" %in% include) && (! "gif" %in% exclude)
-    do_mp4 <- ("mp4" %in% include) && (! "mp4" %in% exclude)
-    do_ppt <- ("pptx" %in% include) && (! "pptx" %in% exclude)
+    # Excluded outputs beat included outputs (since it's a stronger signal)
+    include <- setdiff(match.arg(include, several.ok = TRUE), exclude)
 
-    if (!fs::file_exists(paths$input$pdf) || do_htm) {
-        # If the PDF doesn't exist or we're updating the html file,
-        # then we need to also update the PDF if we are going to
-        # built to png, gif, mp4, or pptx outputs
-        if (do_png | do_gif | do_mp4 | do_ppt) {
-            do_pdf <- TRUE
-        }
-    }
+    # If the user didn't specifically ask for html or pdf, then they're temp
+    step_html <- path_from(input, "html", temporary = !"html" %in% include)
+    step_pdf <- path_from(input, "pdf", temporary = !"pdf" %in% include)
 
-    if (do_pdf && !fs::file_exists(paths$input$html)) {
-        # to make a PDF, we need the html file
-        do_htm <- TRUE
-    }
+    deriv_from_html <- c("pdf", "png", "gif", "mp4", "pptx")
+    req_html <- length(intersect(include, deriv_from_html)) > 0
+    req_pdf <- length(intersect(include, deriv_from_html[-1])) > 0
 
     # Do each step in order to ensure updates propagate
     # (or we use the current version of the required build step)
-    if (do_soc) {
+    if ("social" %in% include) {
         build_social(
-            input = paths$input$rmd,
-            output_file = paths$output$social)
+            input = input,
+            output_file = path_from(input, "social")
+        )
+        if (identical("social", include)) {
+            return()
+        }
     }
-    if (do_htm) {
-        build_html(
-            input = paths$input$rmd,
-            output_file = paths$output$html)
+    if ("html" %in% include || req_html) {
+        build_html(input = input, output_file = step_html)
     }
-    if (do_pdf) {
+    if ("pdf" %in% include || req_pdf) {
         build_pdf(
-            input = paths$input$html,
-            output_file = paths$output$pdf,
+            input = step_html,
+            output_file = step_pdf,
             complex_slides = complex_slides,
             partial_slides = partial_slides,
-            delay = delay)
+            delay = delay
+        )
     }
-    if (do_png) {
+    if ("png" %in% include) {
         build_png(
-            input = paths$input$pdf,
-            output_file = paths$output$png,
+            input = step_pdf,
+            output_file = path_from(input, "png"),
             density = density,
             slides = slides
         )
     }
-    if (do_gif) {
+    if ("gif" %in% include) {
         build_gif(
-            input = paths$input$pdf,
-            output_file = paths$output$gif,
+            input = step_pdf,
+            output_file = path_from(input, "gif"),
             density = density,
-            fps = fps)
+            fps = fps
+        )
     }
-    if (do_mp4) {
+    if ("mp4" %in% include) {
         build_mp4(
-            input = paths$input$pdf,
-            output_file = paths$output$mp4,
+            input = step_pdf,
+            output_file = path_from(input, "mp4"),
             density = density,
-            fps = fps)
+            fps = fps
+        )
     }
-    if (do_ppt) {
+    if ("pptx" %in% include) {
         build_pptx(
-            input = paths$input$pdf,
-            output_file = paths$output$pptx,
-            density = density)
+            input = step_pdf,
+            output_file = path_from(input, "pptx"),
+            density = density
+        )
     }
 
     invisible(input)

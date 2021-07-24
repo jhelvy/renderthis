@@ -1,8 +1,8 @@
 ---
 title: "{xaringanBuilder}"
 subtitle: "Build xaringan slides to different outputs"
-author: "John Paul Helveston"
-date: "2020/09/27 (updated: `r Sys.Date()`)"
+author: "John Paul Helveston & Garrick Aden-Buie"
+date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -123,10 +123,33 @@ head(mtcars)
 ]
 
 ---
+
+## Use the `slides` argument to control which slides get built
+
+Examples building from PDF to PNG:
+
+```{r, eval=FALSE}
+# Build the first or last slide only
+build_png("slides.pdf", output_file = "first_slide.png", slides = "first")
+build_png("slides.pdf", output_file = "last_slide.png", slides = "last")
+
+# Choose subsets of slides
+build_png("slides.pdf", slides = c(1, 3, 5)) 
+build_png("slides.pdf", slides = -1) # Negative indices remove slides
+
+# Build all slides
+build_png("slides.pdf", slides = "all")
+```
+
+---
 class: center, middle, inverse
 
 # Thanks!
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
 
-More at https://jhelvy.github.io/xaringanBuilder
+Package documentation at https://jhelvy.github.io/xaringanBuilder
+
+<a href='https://xaringan.club/'><img src='https://github.com/dynastyprocess/graphics/raw/main/xaringanclub/xaringanclub.png' align="center" height="142" /></a>
+
+Visit [xaringan.club](https://xaringan.club/) for more {xaringan} tools!
