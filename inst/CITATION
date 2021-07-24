@@ -3,9 +3,9 @@ citHeader("To cite xaringanBuilder in publications use:")
 citEntry(
   entry    = "Manual",
   title    = "xaringanBuilder: Functions for building xaringan slides to different outputs.",
-  author   = "John Paul Helveston",
+  author   = "Helveston, John Paul and Aden-Buie, Garrick",
   year     = "2021",
-  note     = "R package version 0.0.8",
+  note     = "R package version 0.0.9",
   url      = "https://jhelvy.github.io/xaringanBuilder/",
-  textVersion = "John Paul Helveston (2021). xaringanBuilder: Functions for building xaringan slides to different outputs."
+  textVersion = "Helveston, John Paul and Aden-Buie, Garrick (2021). xaringanBuilder: Functions for building 'xaringan' slides to different outputs."
 )
