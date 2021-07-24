@@ -53,11 +53,8 @@ build_png <- function(
         output_file <- path_from(input, "png")
     }
 
-    # If user requested more than one slide, force output to a .zip file
+    # Check if slides argument is valid before proceeding
     slides <- slides_arg_validate(slides)
-    if (length(slides) > 1 || slides == "all") {
-        output_file <- path_from(output_file, "zip")
-    }
 
     # Check input and output files have correct extensions
     assert_path_ext(input, c("rmd", "html", "pdf"))
@@ -79,8 +76,14 @@ build_png <- function(
 
     # Build png from pdf
     imgs <- pdf_to_imgs(step_pdf, density)
+
     # Check slides arg again to make sure all slides are in range
     slides <- slides_arg_validate(slides, imgs)
+
+    # If user requested more than one slide, force output to a .zip file
+    if (length(slides) > 1 || slides == "all") {
+        output_file <- path_from(output_file, "zip")
+    }
 
     proc <- cli_build_start(step_pdf, output_file, on_exit = "done")
     tryCatch({
