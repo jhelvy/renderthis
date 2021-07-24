@@ -155,23 +155,26 @@ first slide).
 Input can be a Rmd file, html file, pdf file, or url:
 
 ``` r
-# By default, creates a png of only the first slide:
-build_png("slides.Rmd")
-build_png("slides.html")
-build_png("slides.pdf")
-build_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+# By default, a png of only the first slide is built
+build_png("slides.Rmd", output_file = "title_slide.png")
+build_png("slides.html", output_file = "title_slide.png")
+build_png("slides.pdf", output_file = "title_slide.png")
+build_png(
+  "https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html",
+  output_file = "title_slide.png"
+)
 
-# Build zip file of different subsets of slides
-build_png("slides.pdf", slides = c(1, 3, 5))
+# Use the `slides` argument to control which slides get build into pngs
+build_png("slides.pdf", output_file = "first_slide.png", slides = "first")
+build_png("slides.pdf", output_file = "last_slide.png", slides = "last")
+build_png("slides.pdf", slides = c(1, 3, 5)) # Choose subsets of slides
+build_png("slides.pdf", slides = -1) # Negative indices remove slides
 build_png("slides.pdf", slides = "all")
-build_png("slides.pdf", slides = "first")
-build_png("slides.pdf", slides = "last")
-build_png("slides.pdf", slides = -1) # Negative indexing removes slides
 ```
 
 Example:
 
-<img src="man/figures/slides.png" width=500>
+<img src="man/figures/title_slide.png" width=500>
 
 ### Build Social
 
@@ -279,12 +282,12 @@ if you cited it. You can get the citation information by typing
 
 To cite xaringanBuilder in publications use:
 
-John Paul Helveston (2021). xaringanBuilder: Functions for building
-xaringan slides to different outputs.
+Helveston, John Paul and Aden-Buie, Garrick (2021). xaringanBuilder:
+Functions for building ‘xaringan’ slides to different outputs.
 
 A BibTeX entry for LaTeX users is
 
 @Manual{, title = {xaringanBuilder: Functions for building xaringan
-slides to different outputs.}, author = {John Paul Helveston}, year =
-{2021}, note = {R package version 0.0.8}, url =
-{<https://jhelvy.github.io/xaringanBuilder/>}, }
+slides to different outputs.}, author = {{Helveston} and John Paul and
+{Aden-Buie} and {Garrick}}, year = {2021}, note = {R package version
+0.0.9}, url = {<https://jhelvy.github.io/xaringanBuilder/>}, }
