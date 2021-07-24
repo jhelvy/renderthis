@@ -7,8 +7,7 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Travis build
-status](https://travis-ci.com/jhelvy/xaringanBuilder.svg?branch=master)](https://travis-ci.com/jhelvy/xaringanBuilder)
+[![R-CMD-check](https://github.com/jhelvy/xaringanBuilder/workflows/R-CMD-check/badge.svg)](https://github.com/jhelvy/xaringanBuilder/actions)
 <!-- badges: end -->
 
 Build xaringan slides to multiple output formats:
