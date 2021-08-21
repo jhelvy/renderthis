@@ -112,12 +112,24 @@ to_pdf_simple <- function(input, output_file = NULL) {
 # in v0.0.2. He also posted it on his blog here:
 # https://www.garrickadenbuie.com/blog/print-xaringan-chromote/
 
-to_pdf_complex <- function(input, output_file, partial_slides, delay) {
+to_pdf_complex <- function(
+    input,
+    output_file,
+    partial_slides = FALSE,
+    delay = 1,
+    bundle_pdf_slides = TRUE
+) {
   if (!requireNamespace("chromote", quietly = TRUE)) {
     stop("`chromote` is required: devtools::install_github('rstudio/chromote')")
   }
   if (!requireNamespace("pdftools", quietly = TRUE)) {
     stop("`pdftools` is required: install.packages('pdftools')")
+  }
+
+  if (bundle_pdf_slides) {
+    output_slides_dir <- tempfile()
+  } else {
+    output_slides_dir <- output_file
   }
 
   b <- chromote::ChromoteSession$new()
@@ -195,6 +207,7 @@ to_pdf_complex <- function(input, output_file, partial_slides, delay) {
   last_hash <- ""
   idx_part <- 0L
   pdf_files <- c()
+  fs::dir_create(output_slides_dir)
   for (i in seq_len(max_slides)) {
     if (i > 1) {
       b$Input$dispatchKeyEvent(
@@ -236,11 +249,19 @@ to_pdf_complex <- function(input, output_file, partial_slides, delay) {
       preferCSSPageSize = TRUE,
       wait_ = FALSE
     )$then(function(value) {
-      filename <- tempfile(fileext = ".pdf")
+      filename <- fs::path(
+          output_slides_dir,
+          sprintf("slide-%04d-%02d.pdf", idx_slide, idx_part)
+      )
       writeBin(jsonlite::base64_dec(value$data), filename)
       filename
     })
     pdf_files <- c(pdf_files, b$wait_for(pdf_file_promise))
+  }
+
+  if (!bundle_pdf_slides) {
+    cli::cli_process_done(proc)
+    return(pdf_files)
   }
 
   pdftools::pdf_combine(pdf_files, output = output_file)
