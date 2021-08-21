@@ -1,0 +1,168 @@
+---
+output:
+  html_document: 
+    self_contained: true
+    theme:
+        version: 4
+  pagedown::html_paged:
+    self_contained: true
+    number_sections: false
+    css: default
+links-to-footnotes: true
+paged-footnotes: true
+params:
+  content: NULL
+  meta: NULL
+  title: Slides Title
+  url: NULL
+# uncomment this line to produce HTML and PDF in RStudio:
+# knit: pagedown::chrome_print
+---
+
+```{css echo=FALSE}
+:root {
+  --pagedjs-margin-top: 0.33in;
+  --pagedjs-margin-right: 0.33in;
+  --pagedjs-margin-bottom: 0.33in;
+  --pagedjs-margin-left: 0.33in;
+  --slide-image-width: 40%;
+  --slide-image-border: 2px solid lightgray;
+  --slide-notes-color: inherit;
+  --slides-text-color: #999;
+}
+html {
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+}
+pre, code {
+  font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+}
+.slide {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  break-inside: avoid;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  padding-bottom: 2rem;
+}
+
+.slide-image {
+  margin-right: 1em;
+  width: calc(var(--slide-image-width) - 2em);
+  border: var(--slide-image-border);
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: flex-start;
+  align-self: flex-start;
+}
+
+.slide-text {
+  margin-left: 1em;
+  width: calc(100% - var(--slide-image-width));
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex: 2 1 auto;
+  -ms-flex: 2 1 auto;
+  flex: 2 1 auto;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.slide-text > :first-child > :first-child {
+  margin-top: 0;
+}
+
+.slide-content {
+  color: gray
+}
+
+.slide-notes {
+  border-top: 1px solid #ddd;
+  padding-top: 1rem;
+}
+
+@media screen and (max-width: 720px) {
+  .slide-text {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 1em;
+  }
+}
+```
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+# params <- readRDS("params.rds")
+authors <- vapply(
+    Filter(x = params$meta, function(x) identical(x$name, "author")), 
+    `[[`, character(1), "content"
+)
+
+tag <- function(tag = "div", ..., attr = list()) {
+    attr <- if (length(attr)) {
+        paste(
+            lapply(names(attr), function(nm) paste0(nm, '="', attr[[nm]], '"')),
+            collapse = " "
+        )
+    } else ""
+    x <- paste0(..., collapse = "")
+    ret <- paste0('<', tag, if (nzchar(attr)) " ", attr, ">", x, "</", tag, ">")
+    class(ret) <- c("html", "character")
+    ret
+}
+```
+
+---
+title: `r params$title`
+author: [`r paste(authors, collapse = ", ")`]
+---
+
+<div class="presenter-notes">
+
+```{r slides, echo=FALSE, results="asis"}
+for (i in seq_len(nrow(params$content))) {
+    img <- tag(
+        "div",
+        attr = list(class = "slide-image"), 
+        tag("img", attr = list(
+            src = params$content$slide_path[i],
+            alt = paste("Slide", params$content$id_slide[i], "preview")
+        ))
+    )
+    slide_content <- if (params$content$content[i] != "") {
+        tag("div", attr = list(class = "slide-content"), params$content$content[i])
+    }
+    slide_notes <- if (params$content$notes[i] != "") {
+        tag("div", attr = list(class = "slide-notes"), params$content$notes[i])
+    }
+    slide_text <- tag("div", slide_content, slide_notes, attr = list(class = "slide-text", "data-external" = "1"))
+    slide <- tag("div", attr = list(class = "slide"), img, slide_text)
+    if (!is.null(slide_notes) || !is.null(slide_content)) {
+        print(slide)
+    }
+}
+```
+
+</div>
