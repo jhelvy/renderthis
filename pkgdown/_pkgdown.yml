@@ -4,6 +4,8 @@ home:
   title: Functions For Building Xaringan Slides To Different Outputs.
 
 template:
+  params:
+    bootswatch: simplex
   opengraph:
     image:
       src: https://jhelvy.github.io/xaringanBuilder/reference/figures/logo.png
