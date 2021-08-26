@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://jhelvy.github.io/xaringanBuilder//index.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_all.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_gif.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_html.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_mp4.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_pdf.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_png.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_pptx.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_social.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_thumbnail.html</loc>
+  </url>
+</urlset>
