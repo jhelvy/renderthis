@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# xaringanBuilder <a href='https://jhelvy.github.io/xaringanBuilder/'><img src='man/figures/hex_sticker.png' align="right" height="139" /></a>
+# xaringanBuilder <a href='https://jhelvy.github.io/xaringanBuilder/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
