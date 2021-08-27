@@ -49,12 +49,13 @@ build_handout <- function(
 
         slides_imgs <- pdf_slides_to_images("slides/", !keep_intermediates)
 
-        slides_meta <- get_presenter_notes(
+        slides_meta <- get_slide_meta(
             input = step_html,
+            slides_imgs = slides_imgs,
             partial_slides = partial_slides,
             include_images = include_images
         )
-        slides_meta$content <- merge(slides_meta$content, slides_imgs, by = "id_slide")
+
         saveRDS(slides_meta, "meta.rds")
 
         if (!isTRUE(partial_slides)) {
@@ -112,9 +113,33 @@ pdf_slides_to_images <- function(dir, clean_pdfs = TRUE) {
     slides_imgs
 }
 
+get_slide_meta <- function(
+    input,
+    slides_imgs = NULL,
+    partial_slides = FALSE,
+    include_images = FALSE
+) {
+    meta <- get_presenter_notes(
+        input = input,
+        partial_slides = partial_slides,
+        include_images = include_images
+    )
+    if (!is.null(slides_imgs)) {
+        meta$content <- merge(meta$content, slides_imgs, by = "id_slide")
+    }
+    meta$url <- input
+    meta$authors <- vapply(
+        Filter(x = meta$meta, function(x) identical(x$name, "author")),
+        `[[`, character(1), "content"
+    )
+
+    meta
+}
 
 get_presenter_notes <- function(input, partial_slides = FALSE, include_images = FALSE) {
     assert_chromote()
+
+    input <- path_from(input, "url")
 
     cli::cli_process_start("Getting slide content and presenter notes")
 

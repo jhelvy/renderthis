@@ -11,9 +11,10 @@ output:
 links-to-footnotes: true
 paged-footnotes: true
 params:
+  title: Slides Title
   content: NULL
   meta: NULL
-  title: Slides Title
+  authors: NULL
   url: NULL
 # uncomment this line to produce HTML and PDF in RStudio:
 # knit: pagedown::chrome_print
@@ -114,11 +115,6 @@ pre, code {
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
-# params <- readRDS("params.rds")
-authors <- vapply(
-    Filter(x = params$meta, function(x) identical(x$name, "author")), 
-    `[[`, character(1), "content"
-)
 
 tag <- function(tag = "div", ..., attr = list()) {
     attr <- if (length(attr)) {
@@ -136,7 +132,7 @@ tag <- function(tag = "div", ..., attr = list()) {
 
 ---
 title: `r params$title`
-author: [`r paste(authors, collapse = ", ")`]
+author: [`r paste(params$authors, collapse = ", ")`]
 ---
 
 <div class="presenter-notes">
