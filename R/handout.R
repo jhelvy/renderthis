@@ -56,7 +56,7 @@ build_handout <- function(
             include_images = include_images
         )
 
-        saveRDS(slides_meta, "meta.rds")
+        saveRDS(slides_meta, "slides.rds")
 
         if (!isTRUE(partial_slides)) {
             slides_meta$content <- slides_meta$content[!slides_meta$content$continued, ]
@@ -66,12 +66,10 @@ build_handout <- function(
             rmarkdown::render(
                 "handout.Rmd",
                 output_file = basename(handout_html),
-                params = slides_meta,
                 quiet = TRUE
             ),
             error = cli_build_failed(proc)
         )
-        fs::file_delete("handout.Rmd")
     })
 
     if (fs::dir_exists(output_dir)) {

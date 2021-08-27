@@ -11,11 +11,7 @@ output:
 links-to-footnotes: true
 paged-footnotes: true
 params:
-  title: Slides Title
-  content: NULL
-  meta: NULL
-  authors: NULL
-  url: NULL
+  slides_data: "slides.rds"
 # uncomment this line to produce HTML and PDF in RStudio:
 # knit: pagedown::chrome_print
 ---
@@ -115,6 +111,7 @@ pre, code {
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+slides <- readRDS(params$slides_data %||% "slides.rds")
 
 tag <- function(tag = "div", ..., attr = list()) {
     attr <- if (length(attr)) {
@@ -131,27 +128,27 @@ tag <- function(tag = "div", ..., attr = list()) {
 ```
 
 ---
-title: `r params$title`
-author: [`r paste(params$authors, collapse = ", ")`]
+title: `r slides$title`
+author: [`r paste(slides$authors, collapse = ", ")`]
 ---
 
 <div class="presenter-notes">
 
 ```{r slides, echo=FALSE, results="asis"}
-for (i in seq_len(nrow(params$content))) {
+for (i in seq_len(nrow(slides$content))) {
     img <- tag(
         "div",
         attr = list(class = "slide-image"), 
         tag("img", attr = list(
-            src = params$content$slide_path[i],
-            alt = paste("Slide", params$content$id_slide[i], "preview")
+            src = slides$content$slide_path[i],
+            alt = paste("Slide", slides$content$id_slide[i], "preview")
         ))
     )
-    slide_content <- if (params$content$content[i] != "") {
-        tag("div", attr = list(class = "slide-content"), params$content$content[i])
+    slide_content <- if (slides$content$content[i] != "") {
+        tag("div", attr = list(class = "slide-content"), slides$content$content[i])
     }
-    slide_notes <- if (params$content$notes[i] != "") {
-        tag("div", attr = list(class = "slide-notes"), params$content$notes[i])
+    slide_notes <- if (slides$content$notes[i] != "") {
+        tag("div", attr = list(class = "slide-notes"), slides$content$notes[i])
     }
     slide_text <- tag("div", slide_content, slide_notes, attr = list(class = "slide-text", "data-external" = "1"))
     slide <- tag("div", attr = list(class = "slide"), img, slide_text)
