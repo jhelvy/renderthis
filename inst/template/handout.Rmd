@@ -1,4 +1,6 @@
 ---
+title: {{title}}
+author: [{{author}}]
 output:
   html_document: 
     self_contained: true
@@ -11,7 +13,7 @@ output:
 links-to-footnotes: true
 paged-footnotes: true
 params:
-  slides_data: "slides.rds"
+  slide_data: "slides.rds"
 # uncomment this line to produce HTML and PDF in RStudio:
 # knit: pagedown::chrome_print
 ---
@@ -111,51 +113,10 @@ pre, code {
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
-slides <- readRDS(params$slides_data %||% "slides.rds")
-
-tag <- function(tag = "div", ..., attr = list()) {
-    attr <- if (length(attr)) {
-        paste(
-            lapply(names(attr), function(nm) paste0(nm, '="', attr[[nm]], '"')),
-            collapse = " "
-        )
-    } else ""
-    x <- paste0(..., collapse = "")
-    ret <- paste0('<', tag, if (nzchar(attr)) " ", attr, ">", x, "</", tag, ">")
-    class(ret) <- c("html", "character")
-    ret
-}
 ```
 
----
-title: `r slides$title`
-author: [`r paste(slides$authors, collapse = ", ")`]
----
+:::::: presenter-notes
 
-<div class="presenter-notes">
+{{{content}}}
 
-```{r slides, echo=FALSE, results="asis"}
-for (i in seq_len(nrow(slides$content))) {
-    img <- tag(
-        "div",
-        attr = list(class = "slide-image"), 
-        tag("img", attr = list(
-            src = slides$content$slide_path[i],
-            alt = paste("Slide", slides$content$id_slide[i], "preview")
-        ))
-    )
-    slide_content <- if (slides$content$content[i] != "") {
-        tag("div", attr = list(class = "slide-content"), slides$content$content[i])
-    }
-    slide_notes <- if (slides$content$notes[i] != "") {
-        tag("div", attr = list(class = "slide-notes"), slides$content$notes[i])
-    }
-    slide_text <- tag("div", slide_content, slide_notes, attr = list(class = "slide-text", "data-external" = "1"))
-    slide <- tag("div", attr = list(class = "slide"), img, slide_text)
-    if (!is.null(slide_notes) || !is.null(slide_content)) {
-        print(slide)
-    }
-}
-```
-
-</div>
+::::::

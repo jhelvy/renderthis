@@ -30,14 +30,13 @@ build_handout <- function(
         step_html <- path_from(output_dir, "html", temporary = !keep_intermediates)
         build_html(input, step_html)
     }
-    proc <- cli_build_start("handout.Rmd", output_dir, on_exit = "done")
 
     # Render handout in temp directory... there are lots of files!
     handout_dir <- withr::local_tempdir()
-
-    handout_rmd_tmpl <- system.file("template", "handout.Rmd", package = "xaringanBuilder")
+    handout_tmpl <- system.file("template", "handout.Rmd", package = "xaringanBuilder")
     handout_html <- path_from(input, "html", dir = handout_dir)
-    fs::file_copy(handout_rmd_tmpl, fs::path(handout_dir, "handout.Rmd"))
+    handout_rmd <- fs::path_ext_set(handout_html, "Rmd")
+    proc <- cli_build_start(basename(handout_rmd), output_dir, on_exit = "done")
 
     withr::with_dir(handout_dir, {
         slides_imgs <- build_pdf_complex(
@@ -62,9 +61,28 @@ build_handout <- function(
             slides_meta$content <- slides_meta$content[!slides_meta$content$continued, ]
         }
 
+        slide_content <- mapply(
+            handout_slide_md,
+            content = slides_meta$content$content_md,
+            notes = slides_meta$content$notes,
+            preview_image = slides_meta$content$slide_path,
+            index = slides_meta$content$id_slide,
+            SIMPLIFY = TRUE,
+            USE.NAMES = FALSE
+        )
+        slide_content <- paste0("\n:", trimws(slide_content, "right"), ":\n", collapse = "\n\n")
+
+        handout_tmpl <- readLines(handout_tmpl)
+        handout_tmpl <- whisker::whisker.render(handout_tmpl, list(
+            title = slides_meta$title,
+            authors = paste(slides_meta$authors, collapse = ", "),
+            content = slide_content
+        ))
+        writeLines(handout_tmpl, handout_rmd)
+
         tryCatch(
             rmarkdown::render(
-                "handout.Rmd",
+                basename(handout_rmd),
                 output_file = basename(handout_html),
                 quiet = TRUE
             ),
@@ -301,4 +319,42 @@ md2html <- function(x) {
 
 html2md <- function(x) {
     pandoc_convert(x, "html", "markdown")
+}
+
+md_fenced_div <- function(text, attr = NULL) {
+    text <- trimws(paste(text, collapse = "\n"))
+    attr <- if (!is.null(attr)) {
+        paste0(" {", paste(attr, collapse = " "), "}")
+    } else ""
+    sprintf(":::%s\n%s\n:::\n", attr, text)
+}
+
+handout_slide_md <- function(content, notes, preview_image, index) {
+    preview_image <- if (is.null(preview_image)) "" else {
+        md_fenced_div(
+            attr = ".slide-image",
+            sprintf('<img src="%s" alt="Slide %s preview">', preview_image, index)
+        )
+    }
+
+    content <- if (is.null(content)) "" else {
+        md_fenced_div(content, ".slide-content")
+    }
+
+    notes <- if(is.null(notes)) "" else {
+        md_fenced_div(notes, ".slide-notes")
+    }
+
+    text <- paste0(content, notes)
+
+    md_fenced_div(
+        attr = ".slide",
+        paste0(
+            preview_image,
+            "\n",
+            if (nzchar(text)) {
+                md_fenced_div(text, c(".slide-text", 'data-external="1"'))
+            }
+        )
+    )
 }

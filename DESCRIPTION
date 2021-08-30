@@ -30,6 +30,7 @@ Imports:
     pagedown,
     progress,
     rmarkdown,
+    whisker,
     withr,
     xaringan,
     zip
