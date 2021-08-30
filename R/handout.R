@@ -125,7 +125,12 @@ get_slide_meta <- function(
     if (!is.null(slides_imgs)) {
         meta$content <- merge(meta$content, slides_imgs, by = "id_slide")
     }
+
+    meta$content$content_md <- vapply(meta$content$content, html2md, character(1))
+    meta$content$notes_html <- vapply(meta$content$notes, md2html, character(1))
+
     meta$url <- input
+
     meta$authors <- vapply(
         Filter(x = meta$meta, function(x) identical(x$name, "author")),
         `[[`, character(1), "content"
@@ -277,4 +282,23 @@ make_urls_absolute <- function(x, attr = "href", url) {
     x_attr_value <- xml2::url_absolute(xml2::xml_attr(x_attr, attr), url)
     xml2::xml_set_attr(x_attr, attr, x_attr_value)
     x
+}
+
+pandoc_convert <- function(x, from = "markdown", to = "html5") {
+    if (!rmarkdown::pandoc_available() || is.na(x) || all(!nzchar(x))) {
+        return(x)
+    }
+    withr::with_tempfile("txt", fileext = ".txt", {
+        writeLines(x, txt)
+        rmarkdown::pandoc_convert(txt, from = from, to = to, output = txt)
+        paste(readLines(txt, warn = FALSE), collapse = "\n")
+    })
+}
+
+md2html <- function(x) {
+    pandoc_convert(x, "markdown", "html5")
+}
+
+html2md <- function(x) {
+    pandoc_convert(x, "html", "markdown")
 }
