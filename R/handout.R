@@ -1,3 +1,31 @@
+
+#' Build handout from xaringan slides
+#'
+#' Builds a presentation handout as an `.Rmd` and `.html` file from a set of
+#' xaringan slides. The handout extracts a thumbnail preview for each slide in
+#' the input, as well as the slide content and presenter notes. The final output
+#' is an `.html` file that's suitable for publishing or printing. The output
+#' also includes the `.Rmd` file used to create the handout so that you can
+#' edit the content as needed and can re-render the handout without having to
+#' call `build_handout()` again.
+#'
+#' @param output_dir The directory where the slide handout, preview images and
+#'   other slide data will be stored. Because many files are included in the
+#'   `build_handout()` output, a directory is required. If the directory exists
+#'   it will be overwritten.
+#' @param include A character vector of sections to include in the handout:
+#'
+#'   - `"preview"`: a preview image of the slide
+#'   - `"content"`: the content extracted from the slide, discarding most
+#'     problematic content types, but including images if `include_images` is
+#'     `TRUE`.
+#'   - `"notes"`: the presenter notes from the slide
+#'   - `"lines"`: a lined notes area
+#' @param include_images Should images be included in the slide `content`
+#'   section? The default is `FALSE` to keep mostly the text content of each
+#'   slide.
+#' @inheritParams build_pdf
+#'
 #' @export
 build_handout <- function(
     input,
