@@ -33,10 +33,8 @@ build_handout <- function(
 
     # Render handout in temp directory... there are lots of files!
     handout_dir <- withr::local_tempdir()
-    handout_tmpl <- system.file("template", "handout.Rmd", package = "xaringanBuilder")
     handout_html <- path_from(input, "html", dir = handout_dir)
-    handout_rmd <- fs::path_ext_set(handout_html, "Rmd")
-    proc <- cli_build_start(basename(handout_rmd), output_dir, on_exit = "done")
+    proc <- cli_build_start(basename(handout_html), output_dir, on_exit = "done")
 
     withr::with_dir(handout_dir, {
         slides_imgs <- build_pdf_complex(
@@ -57,35 +55,8 @@ build_handout <- function(
 
         saveRDS(slides_meta, "slides.rds")
 
-        if (!isTRUE(partial_slides)) {
-            slides_meta$content <- slides_meta$content[!slides_meta$content$continued, ]
-        }
-
-        slide_content <- mapply(
-            handout_slide_md,
-            content = slides_meta$content$content_md,
-            notes = slides_meta$content$notes,
-            preview_image = slides_meta$content$slide_path,
-            index = slides_meta$content$id_slide,
-            SIMPLIFY = TRUE,
-            USE.NAMES = FALSE
-        )
-        slide_content <- paste0("\n:", trimws(slide_content, "right"), ":\n", collapse = "\n\n")
-
-        handout_tmpl <- readLines(handout_tmpl)
-        handout_tmpl <- whisker::whisker.render(handout_tmpl, list(
-            title = slides_meta$title,
-            authors = paste(slides_meta$authors, collapse = ", "),
-            content = slide_content
-        ))
-        writeLines(handout_tmpl, handout_rmd)
-
         tryCatch(
-            rmarkdown::render(
-                basename(handout_rmd),
-                output_file = basename(handout_html),
-                quiet = TRUE
-            ),
+            handout_render_template(slides_meta, handout_html, partial_slides = partial_slides),
             error = cli_build_failed(proc)
         )
     })
@@ -95,6 +66,44 @@ build_handout <- function(
     }
     fs::dir_copy(handout_dir, output_dir)
     output_dir
+}
+
+handout_render_template <- function(slides_meta, output_file, partial_slides = FALSE) {
+    handout_tmpl <- system.file("template", "handout.Rmd", package = "xaringanBuilder")
+    assert_path_ext(output_file, "html")
+    handout_rmd <- fs::path_ext_set(output_file, "Rmd")
+
+    if (!isTRUE(partial_slides)) {
+        slides_meta$content <- slides_meta$content[!slides_meta$content$continued, ]
+    }
+
+    # process the slides into markdown content
+    slide_content <- mapply(
+        handout_slide_md,
+        content = slides_meta$content$content_md,
+        notes = slides_meta$content$notes,
+        preview_image = slides_meta$content$preview_image,
+        index = slides_meta$content$id_slide,
+        SIMPLIFY = TRUE,
+        USE.NAMES = FALSE
+    )
+    slide_content <- paste0("\n:", trimws(slide_content, "right"), ":\n", collapse = "\n\n")
+
+    # write the slide content into the handout template Rmd file
+    handout_tmpl <- readLines(handout_tmpl)
+    handout_tmpl <- whisker::whisker.render(handout_tmpl, list(
+        title = slides_meta$title,
+        authors = paste(slides_meta$authors, collapse = ", "),
+        content = slide_content
+    ))
+    writeLines(handout_tmpl, handout_rmd)
+
+    # render the handout into html
+    rmarkdown::render(
+        basename(handout_rmd),
+        output_file = basename(output_file),
+        quiet = TRUE
+    )
 }
 
 pdf_slides_to_images <- function(dir, clean_pdfs = TRUE) {
@@ -110,7 +119,7 @@ pdf_slides_to_images <- function(dir, clean_pdfs = TRUE) {
 
     pb <- cli::cli_progress_bar("Building slide images", total = nrow(slides_imgs), )
 
-    slides_imgs$slide_path <- slides_imgs$slide_pdf
+    slides_imgs$preview_image <- slides_imgs$slide_pdf
 
     for (idx in seq_along(slides_imgs$slide_pdf)) {
         pdf <- slides_imgs$slide_pdf[idx]
@@ -121,7 +130,7 @@ pdf_slides_to_images <- function(dir, clean_pdfs = TRUE) {
             fs::file_delete(pdf)
         }
         cli::cli_progress_update(id = pb)
-        slides_imgs$slide_path[idx] <- path
+        slides_imgs$preview_image[idx] <- path
     }
 
     cli::cli_progress_done(pb)
