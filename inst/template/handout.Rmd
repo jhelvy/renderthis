@@ -19,21 +19,22 @@ params:
 ---
 
 ```{css echo=FALSE}
+/* ---- HANDOUT STYLE OPTIONS ---- */
 :root {
-  --pagedjs-margin-top: 0.33in;
+  --slide-image-width: 40%;                  /* size of slide preview image */
+  --slide-image-border: 2px solid lightgray; /* border style around preview image */
+  --slide-text-size-scale: 1;                /* text size factor */
+  --slide-content-color: #999;               /* color of text from slide content (use `unset` for default) */
+  --slide-notes-color: unset;                /* color of text from slide's presenter notes */
+  --slide-notes-border-top: 1px solid #ddd;  /* border style above presenter notes */
+  --slide-lined-notes-lines: 5;              /* number of lines in lined notes area */
+  --slide-lined-notes-line-height: 2em;      /* height of lines in lined notes */
+  --slide-lined-notes-line-color: #bbb;      /* color of lines in lined notes */
+  --slide-lined-notes-line-width: 1px;       /* width of the lines in lined notes */
+  --pagedjs-margin-top: 0.33in;              /* page margins, {pagedown::html_paged only} */
   --pagedjs-margin-right: 0.33in;
   --pagedjs-margin-bottom: 0.33in;
   --pagedjs-margin-left: 0.33in;
-  --slide-image-width: 40%;
-  --slide-image-border: 2px solid lightgray;
-  --slide-text-size-scale: 1; /* text size factor */
-  --slide-content-color: #999;
-  --slide-notes-color: inherit;
-  --slide-notes-border-top: 1px solid #ddd;
-  --slide-lined-notes-lines: 5;
-  --slide-lined-notes-line-height: 2em;
-  --slide-lined-notes-line-color: #bbb;
-  --slide-lined-notes-line-width: 1px;
 }
 ```
 
