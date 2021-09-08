@@ -26,6 +26,7 @@ params:
   --pagedjs-margin-left: 0.33in;
   --slide-image-width: 40%;
   --slide-image-border: 2px solid lightgray;
+  --slide-text-size-scale: 1; /* text size factor */
   --slide-content-color: #999;
   --slide-notes-color: inherit;
   --slide-notes-border-top: 1px solid #ddd;
@@ -34,96 +35,10 @@ params:
   --slide-lined-notes-line-color: #bbb;
   --slide-lined-notes-line-width: 1px;
 }
-
-.slide {
-  margin-top: 2em;
-  margin-bottom: 2em;
-  break-inside: avoid;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-align-content: stretch;
-  -ms-flex-line-pack: stretch;
-  align-content: stretch;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  padding-bottom: 2rem;
-}
-
-.slide-image {
-  margin-right: 1em;
-  width: calc(var(--slide-image-width) - 2em);
-  -webkit-order: 0;
-  -ms-flex-order: 0;
-  order: 0;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
-  -webkit-align-self: flex-start;
-  -ms-flex-item-align: flex-start;
-  align-self: flex-start;
-}
-
-.slide-image img {
-  border: var(--slide-image-border);
-}
-
-.slide-text {
-  margin-left: 1em;
-  width: calc(100% - var(--slide-image-width));
-  -webkit-order: 0;
-  -ms-flex-order: 0;
-  order: 0;
-  -webkit-flex: 2 1 auto;
-  -ms-flex: 2 1 auto;
-  flex: 2 1 auto;
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-}
-
-.slide-text > :first-child > :first-child {
-  margin-top: 0;
-}
-
-.slide-content {
-  color: var(--slide-content-color);
-}
-
-.slide-content + .slide-notes {
-  border-top: var(--slide-notes-border-top);
-  padding-top: 1rem;
-}
-
-.slide-lined-notes {
-  background-image: linear-gradient(var(--slide-lined-notes-line-color) var(--slide-lined-notes-line-width), transparent 0px);
-  background-size: 100% var(--slide-lined-notes-line-height);
-  background-position-y: calc(var(--slide-lined-notes-line-height) - var(--slide-lined-notes-line-width));
-  line-height: var(--slide-lined-notes-line-height);
-  height: calc(var(--slide-lined-notes-lines) * var(--slide-lined-notes-line-height));
-}
-
-@media screen and (max-width: 720px) {
-  .slide-text {
-    width: 100%;
-    margin-left: 0;
-    margin-top: 1em;
-  }
-}
 ```
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```{r handout-css, echo=FALSE}
+xaringanBuilder:::handout_css()
 ```
 
 :::::: presenter-notes

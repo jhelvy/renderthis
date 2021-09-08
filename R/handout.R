@@ -411,3 +411,20 @@ handout_slide_md <- function(content, notes, preview_image, index, lined_notes_a
         )
     )
 }
+
+handout_css <- function() {
+    handout_css_file <- fs::path_package("xaringanBuilder", "template", "handout.css")
+    handout_css <- paste(readLines(handout_css_file), collapse = "\n")
+    meta <- list(head = sprintf("<style>%s</style>", handout_css))
+
+    htmltools::tagList(
+        htmltools::htmlDependency(
+          name = "xaringanBuilder-handout",
+          version = "0.0.1",
+          package = "xaringanBuilder",
+          src = "template",
+          stylesheet = "handout.css",
+          all_files = FALSE
+        )
+    )
+}
