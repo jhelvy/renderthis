@@ -130,11 +130,18 @@ handout_render_template <- function(
     writeLines(handout_tmpl, handout_rmd)
 
     # render the handout into html
-    rmarkdown::render(
+    res <- rmarkdown::render(
         basename(handout_rmd),
         output_file = basename(output_file),
-        quiet = TRUE
+        quiet = TRUE,
+        envir = new.env(parent = globalenv())
     )
+
+    if (identical(parent.frame(), globalenv())) {
+        utils::browseURL(output_file)
+    }
+
+    invisible(res)
 }
 
 pdf_slides_to_images <- function(dir, clean_pdfs = TRUE) {
