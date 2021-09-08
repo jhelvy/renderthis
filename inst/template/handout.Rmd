@@ -26,8 +26,9 @@ params:
   --pagedjs-margin-left: 0.33in;
   --slide-image-width: 40%;
   --slide-image-border: 2px solid lightgray;
+  --slide-content-color: #999;
   --slide-notes-color: inherit;
-  --slides-text-color: #999;
+  --slide-notes-border-top: 1px solid #ddd;
 }
 html {
   font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
@@ -94,11 +95,11 @@ pre, code {
 }
 
 .slide-content {
-  color: gray
+  color: var(--slide-content-color);
 }
 
-.slide-notes {
-  border-top: 1px solid #ddd;
+.slide-content + .slide-notes {
+  border-top: var(--slide-notes-border-top);
   padding-top: 1rem;
 }
 
