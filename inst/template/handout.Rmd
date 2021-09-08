@@ -29,13 +29,12 @@ params:
   --slide-content-color: #999;
   --slide-notes-color: inherit;
   --slide-notes-border-top: 1px solid #ddd;
+  --slide-lined-notes-lines: 5;
+  --slide-lined-notes-line-height: 2em;
+  --slide-lined-notes-line-color: #bbb;
+  --slide-lined-notes-line-width: 1px;
 }
-html {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
-}
-pre, code {
-  font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
-}
+
 .slide {
   margin-top: 2em;
   margin-bottom: 2em;
@@ -101,6 +100,14 @@ pre, code {
 .slide-content + .slide-notes {
   border-top: var(--slide-notes-border-top);
   padding-top: 1rem;
+}
+
+.slide-lined-notes {
+  background-image: linear-gradient(var(--slide-lined-notes-line-color) var(--slide-lined-notes-line-width), transparent 0px);
+  background-size: 100% var(--slide-lined-notes-line-height);
+  background-position-y: calc(var(--slide-lined-notes-line-height) - var(--slide-lined-notes-line-width));
+  line-height: var(--slide-lined-notes-line-height);
+  height: calc(var(--slide-lined-notes-lines) * var(--slide-lined-notes-line-height));
 }
 
 @media screen and (max-width: 720px) {

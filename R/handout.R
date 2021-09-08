@@ -68,7 +68,7 @@ build_handout <- function(
     output_dir
 }
 
-handout_render_template <- function(slides_meta, output_file, partial_slides = FALSE) {
+handout_render_template <- function(slides_meta, output_file, lined_notes_area = FALSE, partial_slides = FALSE) {
     handout_tmpl <- system.file("template", "handout.Rmd", package = "xaringanBuilder")
     assert_path_ext(output_file, "html")
     handout_rmd <- fs::path_ext_set(output_file, "Rmd")
@@ -84,6 +84,7 @@ handout_render_template <- function(slides_meta, output_file, partial_slides = F
         notes = slides_meta$content$notes,
         preview_image = slides_meta$content$preview_image,
         index = slides_meta$content$id_slide,
+        lined_notes_area = lined_notes_area,
         SIMPLIFY = TRUE,
         USE.NAMES = FALSE
     )
@@ -338,7 +339,7 @@ md_fenced_div <- function(text, attr = NULL) {
     sprintf(":::%s\n%s\n:::\n", attr, text)
 }
 
-handout_slide_md <- function(content, notes, preview_image, index) {
+handout_slide_md <- function(content, notes, preview_image, index, lined_notes_area = FALSE) {
     is_not_used <- function(x) is.null(x) || identical(x, FALSE)
 
     preview_image <- if (is_not_used(preview_image)) "" else {
@@ -357,6 +358,10 @@ handout_slide_md <- function(content, notes, preview_image, index) {
     }
 
     text <- paste0(content, notes)
+
+    if (isTRUE(lined_notes_area)) {
+        text <- paste0(text, '\n\n<div class="slide-lined-notes"></div>')
+    }
 
     md_fenced_div(
         attr = ".slide",
