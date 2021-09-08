@@ -2,10 +2,13 @@
 build_handout <- function(
     input,
     output_dir = NULL,
+    include = c("preview", "content", "notes"),
     keep_intermediates = FALSE,
     partial_slides = FALSE,
     include_images = FALSE
 ) {
+    include <- match.arg(include, c("preview", "content", "notes", "lines"), TRUE)
+
     # Check if Chrome is installed
     assert_chrome_installed()
 
@@ -56,7 +59,12 @@ build_handout <- function(
         saveRDS(slides_meta, "slides.rds")
 
         tryCatch(
-            handout_render_template(slides_meta, handout_html, partial_slides = partial_slides),
+            handout_render_template(
+                slides_meta = slides_meta,
+                output_file = handout_html,
+                include = include,
+                partial_slides = partial_slides
+            ),
             error = cli_build_failed(proc)
         )
     })
@@ -68,13 +76,32 @@ build_handout <- function(
     output_dir
 }
 
-handout_render_template <- function(slides_meta, output_file, lined_notes_area = FALSE, partial_slides = FALSE) {
+handout_render_template <- function(
+    slides_meta,
+    output_file,
+    include = c("preview", "content", "notes"),
+    partial_slides = FALSE
+) {
+    include <- match.arg(include, c("preview", "content", "notes", "lines"), TRUE)
+
     handout_tmpl <- system.file("template", "handout.Rmd", package = "xaringanBuilder")
     assert_path_ext(output_file, "html")
     handout_rmd <- fs::path_ext_set(output_file, "Rmd")
 
     if (!isTRUE(partial_slides)) {
         slides_meta$content <- slides_meta$content[!slides_meta$content$continued, ]
+    }
+
+    if (!"preview" %in% include) {
+        slides_meta$content$preview_image <- FALSE
+    }
+
+    if (!"content" %in% include) {
+        slides_meta$content$content_md <- FALSE
+    }
+
+    if (!"notes" %in% include) {
+        slides_meta$content$notes <- FALSE
     }
 
     # process the slides into markdown content
@@ -84,7 +111,7 @@ handout_render_template <- function(slides_meta, output_file, lined_notes_area =
         notes = slides_meta$content$notes,
         preview_image = slides_meta$content$preview_image,
         index = slides_meta$content$id_slide,
-        lined_notes_area = lined_notes_area,
+        lined_notes_area = "lines" %in% include,
         SIMPLIFY = TRUE,
         USE.NAMES = FALSE
     )
@@ -92,11 +119,14 @@ handout_render_template <- function(slides_meta, output_file, lined_notes_area =
 
     # write the slide content into the handout template Rmd file
     handout_tmpl <- readLines(handout_tmpl)
-    handout_tmpl <- whisker::whisker.render(handout_tmpl, list(
-        title = slides_meta$title,
-        authors = paste(slides_meta$authors, collapse = ", "),
-        content = slide_content
-    ))
+    handout_tmpl <- whisker::whisker.render(
+        handout_tmpl,
+        list(
+            title = slides_meta$title,
+            authors = paste(slides_meta$authors, collapse = ", "),
+            content = slide_content
+        )
+    )
     writeLines(handout_tmpl, handout_rmd)
 
     # render the handout into html
