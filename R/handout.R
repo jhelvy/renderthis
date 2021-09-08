@@ -339,18 +339,20 @@ md_fenced_div <- function(text, attr = NULL) {
 }
 
 handout_slide_md <- function(content, notes, preview_image, index) {
-    preview_image <- if (is.null(preview_image)) "" else {
+    is_not_used <- function(x) is.null(x) || identical(x, FALSE)
+
+    preview_image <- if (is_not_used(preview_image)) "" else {
         md_fenced_div(
             attr = ".slide-image",
             sprintf('<img src="%s" alt="Slide %s preview">', preview_image, index)
         )
     }
 
-    content <- if (is.null(content)) "" else {
+    content <- if (is_not_used(content)) "" else {
         md_fenced_div(content, ".slide-content")
     }
 
-    notes <- if(is.null(notes)) "" else {
+    notes <- if(is_not_used(notes)) "" else {
         md_fenced_div(notes, ".slide-notes")
     }
 
