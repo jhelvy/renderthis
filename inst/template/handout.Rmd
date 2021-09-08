@@ -63,7 +63,6 @@ params:
 .slide-image {
   margin-right: 1em;
   width: calc(var(--slide-image-width) - 2em);
-  border: var(--slide-image-border);
   -webkit-order: 0;
   -ms-flex-order: 0;
   order: 0;
@@ -73,6 +72,10 @@ params:
   -webkit-align-self: flex-start;
   -ms-flex-item-align: flex-start;
   align-self: flex-start;
+}
+
+.slide-image img {
+  border: var(--slide-image-border);
 }
 
 .slide-text {
