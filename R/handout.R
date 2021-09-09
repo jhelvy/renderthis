@@ -421,6 +421,8 @@ md_fenced_div <- function(text, attr = NULL) {
 handout_slide_md <- function(content, notes, preview_image, index, lined_notes_area = FALSE) {
     is_not_used <- function(x) is.null(x) || identical(x, FALSE)
 
+    div_lined_notes <- '\n\n<div class="slide-lined-notes"></div>'
+
     preview_image <- if (is_not_used(preview_image)) "" else {
         md_fenced_div(
             attr = ".slide-image",
@@ -433,13 +435,19 @@ handout_slide_md <- function(content, notes, preview_image, index, lined_notes_a
     }
 
     notes <- if(is_not_used(notes)) "" else {
+        if (isTRUE(lined_notes_area) && !nzchar(preview_image) && nzchar(content)) {
+            # If content but no preview image, nest lined notes area in with notes
+            notes <- paste0(notes, div_lined_notes)
+            # but then don't add the lined notes area again later
+            lined_notes_area <- FALSE
+        }
         md_fenced_div(notes, ".slide-notes")
     }
 
     text <- paste0(content, notes)
 
     if (isTRUE(lined_notes_area)) {
-        text <- paste0(text, '\n\n<div class="slide-lined-notes"></div>')
+        text <- paste0(text, div_lined_notes)
     }
 
     md_fenced_div(
