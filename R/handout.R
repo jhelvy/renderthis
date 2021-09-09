@@ -119,7 +119,7 @@ handout_render_template <- function(
 
     handout_tmpl <- system.file("template", "handout.Rmd", package = "xaringanBuilder")
     assert_path_ext(output_file, "html")
-    handout_rmd <- fs::path_ext_set(output_file, "Rmd")
+    handout_rmd <- fs::path_ext_set(fs::path_file(output_file), "Rmd")
 
     if (!isTRUE(partial_slides)) {
         slides_meta$content <- slides_meta$content[!slides_meta$content$continued, ]
@@ -150,6 +150,10 @@ handout_render_template <- function(
     )
     slide_content <- paste0("\n:", trimws(slide_content, "right"), ":\n", collapse = "\n\n")
 
+    output_dir <- fs::path_abs(fs::path_dir(output_file))
+    fs::dir_create(output_dir)
+    withr::local_dir(output_dir)
+
     # write the slide content into the handout template Rmd file
     handout_tmpl <- readLines(handout_tmpl)
     handout_tmpl <- whisker::whisker.render(
@@ -171,7 +175,7 @@ handout_render_template <- function(
     )
 
     if (identical(parent.frame(), globalenv())) {
-        utils::browseURL(output_file)
+        withr::defer(utils::browseURL(output_file), priority = "last")
     }
 
     invisible(res)
