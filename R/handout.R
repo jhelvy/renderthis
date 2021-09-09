@@ -291,7 +291,12 @@ get_presenter_notes <- function(input, partial_slides = FALSE, include_images = 
     res <- do.call("rbind", res)
     class(res) <- c("tbl_df", "tbl", "data.frame")
 
+    # remark puts `continued: true` on slides that _continue_ the previous slide
+    # but we'd rather have `continued` indicate that a slide _is continued_ on
+    # the *next* slide, so we are going to reverse the meaning by `lead(1)`.
     res$continued <- res$continued == "true"
+    res$continued <- c(res$continued[-1], FALSE)
+
     res$id_slide <- seq_len(nrow(res))
     if (isTRUE(partial_slides)) {
         # try to get notes down to the notes that are particular to each partial slide
