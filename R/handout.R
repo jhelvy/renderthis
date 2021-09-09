@@ -110,6 +110,11 @@ handout_render_template <- function(
     include = c("preview", "content", "notes"),
     partial_slides = FALSE
 ) {
+    if (is.character(slides_meta)) {
+        stopifnot(fs::file_exists(slides_meta))
+        slides_meta <- readRDS(slides_meta)
+    }
+
     include <- match.arg(include, c("preview", "content", "notes", "lines"), TRUE)
 
     handout_tmpl <- system.file("template", "handout.Rmd", package = "xaringanBuilder")
