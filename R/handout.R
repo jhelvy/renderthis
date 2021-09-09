@@ -160,7 +160,7 @@ handout_render_template <- function(
         handout_tmpl,
         list(
             title = slides_meta$title,
-            authors = paste(slides_meta$authors, collapse = ", "),
+            authors = paste0('"', slides_meta$authors, '"', collapse = ", "),
             content = slide_content
         )
     )

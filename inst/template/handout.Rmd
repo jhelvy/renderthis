@@ -1,6 +1,6 @@
 ---
-title: {{title}}
-author: [{{author}}]
+title: {{{title}}}
+author: [{{{authors}}}]
 output:
   html_document: 
     self_contained: true
