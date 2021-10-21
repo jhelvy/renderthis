@@ -22,7 +22,7 @@ License: MIT + file LICENSE
 Depends: 
     R (>= 3.4.0)
 Imports:
-    cli,
+    cli (>= 3.0.0),
     digest,
     fs,
     jsonlite,
