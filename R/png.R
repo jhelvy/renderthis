@@ -7,10 +7,10 @@
 #' You can also get a zip file of all the slides as pngs by setting `slides =
 #' "all"`).
 #'
-#' @param input Path to a Rmd file, html file, pdf file, or a url. If the input
+#' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
 #'   is a url to xaringan slides on a website, you must provide the full url
-#'   ending in ".html".
-#' @param output_file Name of the output png or zip file.
+#'   ending in `".html"`.
+#' @param to Name of the output png or zip file.
 #' @param density Resolution of the resulting pngs in each slide file. Defaults
 #'   to `100`.
 #' @param slides A numeric or integer vector of the slide number(s) to build
@@ -37,8 +37,8 @@
 #'
 #' @export
 to_png <- function(
-    input,
-    output_file = NULL,
+    from,
+    to = NULL,
     density = 100,
     slides = 1,
     complex_slides = FALSE,
@@ -46,6 +46,10 @@ to_png <- function(
     delay = 1,
     keep_intermediates = FALSE
 ) {
+
+    input <- from
+    output_file <- to
+
     assert_path_exists(input)
     keep_intermediates <- isTRUE(keep_intermediates)
 

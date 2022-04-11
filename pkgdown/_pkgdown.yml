@@ -1,7 +1,7 @@
 url: https://jhelvy.github.io/renderthis/
 
 home:
-  title: Render media to different outputs
+  title: Render media to different formats
 
 template:
   params:
@@ -29,7 +29,7 @@ navbar:
 
 reference:
 - title: "Render media"
-  desc: "Render media to different outputs."
+  desc: "Render media to different formats."
   contents:
   - to_html
   - to_pdf

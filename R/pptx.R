@@ -4,10 +4,10 @@
 #' then converts it into png images that are inserted on each slide in the
 #' pptx file.
 #'
-#' @param input Path to a Rmd file, html file, pdf file, or a url. If the input
+#' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
 #'   is a url to xaringan slides on a website, you must provide the full url
-#'   ending in ".html".
-#' @param output_file Name of the output pptx file.
+#'   ending in `".html"`.
+#' @param to Name of the output pptx file.
 #' @param slides A numeric or integer vector of the slide number(s) to include
 #'   in the pptx, or one of `"all"`, `"first"`, or `"last"`. Negative integers
 #'   select which slides _not_ to include. Defaults to `"all"`, in which case
@@ -26,8 +26,8 @@
 #'
 #' @export
 to_pptx <- function(
-    input,
-    output_file = NULL,
+    from,
+    to = NULL,
     density = 100,
     slides = "all",
     complex_slides = FALSE,
@@ -38,6 +38,9 @@ to_pptx <- function(
     if (!requireNamespace("officer", quietly = TRUE)) {
         stop("`officer` is required: install.packages('officer')")
     }
+
+    input <- from
+    output_file <- to
 
     if (is.null(output_file)) {
         output_file <- path_from(input, "pptx")

@@ -2,37 +2,37 @@
 # remotes::install_github('jhelvy/renderthis')
 library(renderthis)
 
-input_url <- "https://jhelvy.github.io/renderthis/reference/figures/slides.html"
+url <- "https://jhelvy.github.io/renderthis/reference/figures/slides.html"
 
 # Render an html file from a Rmd file
 to_html("slides.Rmd")
 
 # Render pdf from url, Rmd, or html
-to_pdf(input_url)
+to_pdf(url)
 to_pdf("slides.Rmd")
 to_pdf("slides.html")
 
 # Render gif from url, Rmd, html, or pdf
-to_gif(input_url)
+to_gif(url)
 to_gif("slides.Rmd")
 to_gif("slides.html")
 to_gif("slides.pdf")
 
 # Render mp4 from url, Rmd, html, or pdf
-to_mp4(input_url)
+to_mp4(url)
 to_mp4("slides.Rmd")
 to_mp4("slides.html")
 to_mp4("slides.pdf")
 
 # Render pptx from url Rmd, html, or pdf
 # (pptx contains slides of png images of each rendered xaringan slide)
-to_pptx(input_url)
+to_pptx(url)
 to_pptx("slides.Rmd")
 to_pptx("slides.html")
 to_pptx("slides.pdf")
 
 # By default, a png of only the first slide is built
-to_png(input_url, output_file = "title_slide.png")
+to_png(url, output_file = "title_slide.png")
 to_png("slides.Rmd", output_file = "title_slide.png")
 to_png("slides.html", output_file = "title_slide.png")
 to_png("slides.pdf", output_file = "title_slide.png")

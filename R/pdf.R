@@ -4,11 +4,11 @@
 #' If you set `complex_slides = TRUE` or `partial_slides = TRUE`, you will also
 #' need to install the {chromote} and {pdftools} packages.
 #'
-#' @param input Path to a Rmd file or html file / url of xaringan slides. If the
-#'   input is a url to xaringan slides on a website, you must provide the full
-#'   url ending in ".html".
-#' @param output_file The name of the output file. If `NULL` (the default) then
-#'   the output filename will be based on filename for the input file. If a
+#' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
+#'   is a url to xaringan slides on a website, you must provide the full url
+#'   ending in `".html"`.
+#' @param to The name of the output file. If `NULL` (the default) then
+#'   the output filename will be based on filename for the `from` file. If a
 #'   filename is provided, a path to the output file can also be provided.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #'   other html widgets or advanced features), set `complex_slides = TRUE`.
@@ -21,9 +21,9 @@
 #' @param delay Seconds of delay between advancing to and printing a new slide.
 #'   Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.
 #' @param keep_intermediates Should we keep the intermediate HTML file? Only
-#'   relevant if the `input` is an `.Rmd` file. Default is `TRUE` if the
-#'   `output_file` is written into the same directory as the `input`, otherwise
-#'   the intermediate file isn't kept.
+#'   relevant if the `from` file is an `.Rmd` or `.qmd` file. Default is `TRUE`
+#'   if the `to` file is written into the same directory as the `input`,
+#'   otherwise the intermediate file isn't kept.
 #'
 #' @examples
 #' \dontrun{
@@ -42,20 +42,20 @@
 #'
 #' # Build a pdf of "complex" xaringan slides and include partial
 #' # (continuation) slides
-#' to_pdf(input = "slides_complex.Rmd",
-#'           output_file = "slides_complex_partial.pdf",
-#'           complex_slides = TRUE,
-#'           partial_slides = TRUE)
-#' to_pdf(input = "slides_complex.html",
-#'           output_file = "slides_complex_partial.pdf",
-#'           complex_slides = TRUE,
-#'           partial_slides = TRUE)
+#' to_pdf(from = "slides_complex.Rmd",
+#'        to = "slides_complex_partial.pdf",
+#'        complex_slides = TRUE,
+#'        partial_slides = TRUE)
+#' to_pdf(from = "slides_complex.html",
+#'        to = "slides_complex_partial.pdf",
+#'        complex_slides = TRUE,
+#'        partial_slides = TRUE)
 #' }
 #'
 #' @export
 to_pdf <- function(
-    input,
-    output_file = NULL,
+    from,
+    to = NULL,
     complex_slides = FALSE,
     partial_slides = FALSE,
     delay = 1,
@@ -63,6 +63,9 @@ to_pdf <- function(
 ) {
     # Check if Chrome is installed
     assert_chrome_installed()
+
+    input <- from
+    output_file <- to
 
     assert_path_exists(input)
 

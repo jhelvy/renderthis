@@ -6,9 +6,9 @@
 #' Build png image of first xaringan slide for sharing on social media.
 #' Requires a local installation of Chrome as well as the {webshot2} package:
 #' `remotes::install_github("rstudio/webshot2")`.
-#' @param input Path to Rmd file of xaringan slides.
-#' @param output_file The name of the output file. If using NULL then
-#' the output filename will be based on filename for the input file.
+#' @param from Path to Rmd file of input media (e.g., xaringan slides).
+#' @param to The name of the output file. If using NULL then
+#' the output filename will be based on filename for the `from` file.
 #' If a filename is provided, a path to the output file can also be provided.
 #' @export
 #' @examples
@@ -18,7 +18,11 @@
 #' to_social("slides.Rmd")
 #' }
 #'
-to_social <- function(input, output_file = NULL) {
+to_social <- function(from, to = NULL) {
+
+    input <- from
+    output_file <- to
+
     if (!requireNamespace("webshot2", quietly = TRUE)) {
         stop(
             "`webshot2` is required: ",
