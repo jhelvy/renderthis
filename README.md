@@ -1,13 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# xaringanBuilder <a href='https://jhelvy.github.io/xaringanBuilder/'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# renderthis <a href='https://jhelvy.github.io/renderthis/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![R-CMD-check](https://github.com/jhelvy/xaringanBuilder/workflows/R-CMD-check/badge.svg)](https://github.com/jhelvy/xaringanBuilder/actions)
+[![R-CMD-check](https://github.com/jhelvy/renderthis/workflows/R-CMD-check/badge.svg)](https://github.com/jhelvy/renderthis/actions)
 <!-- badges: end -->
 
 Build xaringan slides to multiple output formats:
@@ -22,20 +22,20 @@ Build xaringan slides to multiple output formats:
 
 ## Installation
 
-You can install the current version of xaringanBuilder from GitHub:
+You can install the current version of renderthis from GitHub:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("jhelvy/xaringanBuilder")
+remotes::install_github("jhelvy/renderthis")
 ```
 
 Some output formats require additional packages, and each format will
 provide instructions about how to install any missing dependencies. You
-can also choose to install xaringanBuilder with all of its dependencies:
+can also choose to install renderthis with all of its dependencies:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("jhelvy/xaringanBuilder", dependencies = TRUE)
+remotes::install_github("jhelvy/renderthis", dependencies = TRUE)
 ```
 
 ## Build hierarchy
@@ -62,30 +62,30 @@ the build hierarchy:
 ## Usage
 
 You can build all of the examples below from
-[here](https://github.com/jhelvy/xaringanBuilder/tree/master/inst/example)
+[here](https://github.com/jhelvy/renderthis/tree/master/inst/example)
 
 ``` r
-library(xaringanBuilder)
+library(renderthis)
 ```
 
 ### Input - Output
 
-All `build_*()` functions use the `input` and `output_file` arguments.
+All `to_*()` functions use the `input` and `output_file` arguments.
 
 The `input` argument is required and can be a full or local path to the
 input file.
 
 The `output_file` argument is optional. If provided, it can be a full or
 local path to the output file, and it must end in an appropriate
-extension (e.g. `slides.gif` for `build_gif()`). If it is not provided,
-the output file name will be determined based on the `input` argument.
+extension (e.g. `slides.gif` for `to_gif()`). If it is not provided, the
+output file name will be determined based on the `input` argument.
 
 ### Build HTML
 
 Build an html file from a Rmd file:
 
 ``` r
-build_html("slides.Rmd")
+to_html("slides.Rmd")
 ```
 
 ### Build PDF
@@ -93,9 +93,9 @@ build_html("slides.Rmd")
 Input can be a Rmd file, html file, or url:
 
 ``` r
-build_pdf("slides.Rmd")
-build_pdf("slides.html")
-build_pdf("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+to_pdf("slides.Rmd")
+to_pdf("slides.html")
+to_pdf("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 ```
 
 **Note**: Building the PDF requires a [local installation of Google
@@ -106,10 +106,10 @@ Chrome](#local-chrome-installation-requirement)
 Input can be a Rmd file, html file, pdf file, or url:
 
 ``` r
-build_gif("slides.Rmd")
-build_gif("slides.html")
-build_gif("slides.pdf")
-build_gif("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+to_gif("slides.Rmd")
+to_gif("slides.html")
+to_gif("slides.pdf")
+to_gif("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 ```
 
 Example:
@@ -121,10 +121,10 @@ Example:
 Input can be a Rmd file, html file, pdf file, or url:
 
 ``` r
-build_mp4("slides.Rmd")
-build_mp4("slides.html")
-build_mp4("slides.pdf")
-build_mp4("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+to_mp4("slides.Rmd")
+to_mp4("slides.html")
+to_mp4("slides.pdf")
+to_mp4("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 ```
 
 ### Build PPTX
@@ -134,15 +134,15 @@ xaringan slide. While you won’t be able to edit the xaringan content
 from Powerpoint, you can at least annotate it.
 
 (See the [slidex](https://github.com/datalorax/slidex) package by
-@datalorax to do the opposite: pptx –&gt; xaringan!)
+@datalorax to do the opposite: pptx –\> xaringan!)
 
 Input can be a Rmd file, html file, pdf file, or url:
 
 ``` r
-build_pptx("slides.Rmd")
-build_pptx("slides.html")
-build_pptx("slides.pdf")
-build_pptx("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+to_pptx("slides.Rmd")
+to_pptx("slides.html")
+to_pptx("slides.pdf")
+to_pptx("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 ```
 
 ### Build PNG
@@ -155,20 +155,20 @@ Input can be a Rmd file, html file, pdf file, or url:
 
 ``` r
 # By default, a png of only the first slide is built
-build_png("slides.Rmd", output_file = "title_slide.png")
-build_png("slides.html", output_file = "title_slide.png")
-build_png("slides.pdf", output_file = "title_slide.png")
-build_png(
-  "https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html",
+to_png("slides.Rmd", output_file = "title_slide.png")
+to_png("slides.html", output_file = "title_slide.png")
+to_png("slides.pdf", output_file = "title_slide.png")
+to_png(
+  "https://jhelvy.github.io/renderthis/reference/figures/slides.html",
   output_file = "title_slide.png"
 )
 
 # Use the `slides` argument to control which slides get build into pngs
-build_png("slides.pdf", output_file = "first_slide.png", slides = "first")
-build_png("slides.pdf", output_file = "last_slide.png", slides = "last")
-build_png("slides.pdf", slides = c(1, 3, 5)) # Choose subsets of slides
-build_png("slides.pdf", slides = -1) # Negative indices remove slides
-build_png("slides.pdf", slides = "all")
+to_png("slides.pdf", output_file = "first_slide.png", slides = "first")
+to_png("slides.pdf", output_file = "last_slide.png", slides = "last")
+to_png("slides.pdf", slides = c(1, 3, 5)) # Choose subsets of slides
+to_png("slides.pdf", slides = -1) # Negative indices remove slides
+to_png("slides.pdf", slides = "all")
 ```
 
 Example:
@@ -181,7 +181,7 @@ Build a png of the first slide from a Rmd file. Image is sized for
 sharing on social media (e.g. Twitter).
 
 ``` r
-build_social("slides.Rmd")
+to_social("slides.Rmd")
 ```
 
 **Note**: This option requires the
@@ -191,24 +191,6 @@ build_social("slides.Rmd")
 Example:
 
 <img src="man/figures/slides_social.png" width=500>
-
-### Build All Output Types
-
-Use `build_all()` to build all output types from a Rmd file:
-
-``` r
-# Builds every output by default
-build_all("slides.Rmd")
-```
-
-Use the `include` or `exclude` arguments to control which output types
-to include or exclude:
-
-``` r
-# Both of these build html, pdf, and gif outputs
-build_all("slides.Rmd", include = c("html", "pdf", "gif"))
-build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
-```
 
 ## “Complex” slides and partial / incremental slides
 
@@ -224,12 +206,11 @@ slides](https://slides.yihui.org/xaringan/incremental.html#1), set
 These options are available as options in any of the functions that
 depend on building the pdf:
 
--   `build_pdf()`
--   `build_png()`
--   `build_gif()`
--   `build_mp4()`
--   `build_pptx()`
--   `build_all()`
+-   `to_pdf()`
+-   `to_png()`
+-   `to_gif()`
+-   `to_mp4()`
+-   `to_pptx()`
 
 **Note**: These options require the
 [chromote](https://github.com/rstudio/chromote) and
@@ -258,35 +239,35 @@ alternative method for building the PDF.
 
 For example, to build a pptx from a Rmd file without Chrome, you could:
 
-1.  Build the html with `build_html("slides.Rmd")`
+1.  Build the html with `to_html("slides.Rmd")`
 2.  Use vscode remote and vscode-preview-server extension to open the
     html on a local machine (preferrably with Chrome installed)
 3.  Save to pdf on Chrome
-4.  Build the pptx with `build_pptx("slides.pdf")`
+4.  Build the pptx with `to_pptx("slides.pdf")`
 
 ## Author, Version, and License Information
 
 -   Authors: [John Paul Helveston](http://www.jhelvy.com/) (*aut*,
     *cre*, *cph*) & [Garrick
     Aden-Buie](https://www.garrickadenbuie.com/) (*aut*)
--   Date First Written: *September 27, 2020*
+-   Date First Written: as xaringanBuilder on *September 27, 2020*
 -   License:
-    [MIT](https://github.com/jhelvy/xaringanBuilder/blob/master/LICENSE.md)
+    [MIT](https://github.com/jhelvy/renderthis/blob/master/LICENSE.md)
 
 ## Citation Information
 
 If you use this package in a publication, I would greatly appreciate it
 if you cited it. You can get the citation information by typing
-`citation("xaringanBuilder")` into R:
+`citation("renderthis")` into R:
 
-To cite xaringanBuilder in publications use:
+To cite renderthis in publications use:
 
-Helveston, John Paul and Aden-Buie, Garrick (2021). xaringanBuilder:
-Functions for building ‘xaringan’ slides to different outputs.
+Helveston, John Paul and Aden-Buie, Garrick (2021). renderthis: Render
+media to different outputs.
 
 A BibTeX entry for LaTeX users is
 
-@Manual{, title = {xaringanBuilder: Functions for building xaringan
-slides to different outputs.}, author = {{Helveston} and John Paul and
-{Aden-Buie} and {Garrick}}, year = {2021}, note = {R package version
-0.0.9}, url = {<https://jhelvy.github.io/xaringanBuilder/>}, }
+@Manual{, title = {renderthis: Render media to different outputs.},
+author = {{Helveston} and John Paul and {Aden-Buie} and {Garrick}}, year
+= {2021}, note = {R package version 0.0.1}, url =
+{<https://jhelvy.github.io/renderthis/>}, }
