@@ -1,11 +1,11 @@
-citHeader("To cite xaringanBuilder in publications use:")
+citHeader("To cite renderthis in publications use:")
 
 citEntry(
   entry    = "Manual",
-  title    = "xaringanBuilder: Functions for building xaringan slides to different outputs.",
+  title    = "renderthis: Render media to different outputs.",
   author   = "Helveston, John Paul and Aden-Buie, Garrick",
   year     = "2021",
-  note     = "R package version 0.0.9",
-  url      = "https://jhelvy.github.io/xaringanBuilder/",
-  textVersion = "Helveston, John Paul and Aden-Buie, Garrick (2021). xaringanBuilder: Functions for building 'xaringan' slides to different outputs."
+  note     = "R package version 0.0.1",
+  url      = "https://jhelvy.github.io/renderthis/",
+  textVersion = "Helveston, John Paul and Aden-Buie, Garrick (2021). renderthis: Render media to different outputs."
 )

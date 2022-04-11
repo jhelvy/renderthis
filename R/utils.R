@@ -197,12 +197,12 @@ build_to_pdf <- function(
     delay
 ) {
     if (test_path_ext(input, "rmd")) {
-        build_pdf(
+        to_pdf(
             input = paths$input$rmd,
             output_file = paths$output$pdf,
           complex_slides, partial_slides, delay)
     } else if (test_path_ext(input, "html")) {
-        build_pdf(
+        to_pdf(
           input = input,
           output_file = paths$output$pdf,
           complex_slides, partial_slides, delay)

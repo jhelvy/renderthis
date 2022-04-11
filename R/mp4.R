@@ -13,20 +13,20 @@
 #'   select which slides _not_ to include. Defaults to `"all"`, in which case
 #'   all slides are included.
 #' @param fps Frames per second of the resulting mp4 file.
-#' @inheritParams build_png
-#' @inheritParams build_pdf
+#' @inheritParams to_png
+#' @inheritParams to_pdf
 #'
 #' @examples
 #' \dontrun{
 #' # Build mp4 from Rmd, html, pdf, or url
-#' build_mp4("slides.Rmd")
-#' build_mp4("slides.html")
-#' build_mp4("slides.pdf")
-#' build_mp4("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+#' to_mp4("slides.Rmd")
+#' to_mp4("slides.html")
+#' to_mp4("slides.pdf")
+#' to_mp4("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 #' }
 #'
 #' @export
-build_mp4 <- function(
+to_mp4 <- function(
     input,
     output_file = NULL,
     density = 100,
@@ -53,7 +53,7 @@ build_mp4 <- function(
     step_pdf <- input
     if (!test_path_ext(input, "pdf")) {
         step_pdf <- path_from(output_file, "pdf", temporary = !keep_intermediates)
-        build_pdf(
+        to_pdf(
             input,
             step_pdf,
             complex_slides = complex_slides,

@@ -17,11 +17,11 @@ devtools::check_win_devel()
 devtools::check_rhub()
 
 # Install from github
-remotes::install_github('jhelvy/xaringanBuilder')
+remotes::install_github('jhelvy/renderthis')
 
 # Load the package and view the summary
-library(xaringanBuilder)
-help(package='xaringanBuilder')
+library(renderthis)
+help(package='renderthis')
 
 # Submit to CRAN
 devtools::release(check = TRUE)

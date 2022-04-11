@@ -1,4 +1,4 @@
-test_that("build_pdf() simple", {
+test_that("to_pdf() simple", {
     skip_if_not_chrome_installed()
 
     tmpdir <- withr::local_tempdir()
@@ -6,7 +6,7 @@ test_that("build_pdf() simple", {
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_pdf("partial.Rmd")
+        to_pdf("partial.Rmd")
     )
     expect_true(fs::file_exists("partial.pdf"))
     expect_true(fs::file_exists("partial.html"))
@@ -16,7 +16,7 @@ test_that("build_pdf() simple", {
     expect_equal(pdf_info$pages, 4)
 })
 
-test_that("build_pdf() simple, other directory", {
+test_that("to_pdf() simple, other directory", {
     skip_if_not_chrome_installed()
 
     tmpdir <- withr::local_tempdir()
@@ -25,7 +25,7 @@ test_that("build_pdf() simple, other directory", {
 
     fs::dir_create("pdf")
     suppressMessages(
-        build_pdf("partial.Rmd", "pdf/out.pdf")
+        to_pdf("partial.Rmd", "pdf/out.pdf")
     )
     expect_true(fs::file_exists("pdf/out.pdf"))
     expect_false(fs::file_exists("partial.html"))
@@ -35,7 +35,7 @@ test_that("build_pdf() simple, other directory", {
     expect_equal(pdf_info$pages, 4)
 })
 
-test_that("build_pdf() complex slides", {
+test_that("to_pdf() complex slides", {
     skip_if_not_chrome_installed()
     skip_if_not_installed("pdftools")
 
@@ -44,7 +44,7 @@ test_that("build_pdf() complex slides", {
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_pdf("partial.Rmd", complex_slides = TRUE)
+        to_pdf("partial.Rmd", complex_slides = TRUE)
     )
 
     expect_true(fs::file_exists("partial.pdf"))
@@ -54,7 +54,7 @@ test_that("build_pdf() complex slides", {
     expect_equal(pdf_info$pages, 4)
 })
 
-test_that("build_pdf() partial slides", {
+test_that("to_pdf() partial slides", {
     skip_if_not_chrome_installed()
     skip_if_not_installed("pdftools")
 
@@ -64,7 +64,7 @@ test_that("build_pdf() partial slides", {
 
     fs::dir_create("pdf")
     suppressMessages(
-        build_pdf("partial.Rmd", "pdf/slides.pdf", partial_slides = TRUE)
+        to_pdf("partial.Rmd", "pdf/slides.pdf", partial_slides = TRUE)
     )
 
     expect_true(fs::file_exists("pdf/slides.pdf"))

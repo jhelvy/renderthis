@@ -1,4 +1,4 @@
-test_that("build_pptx() simple from pdf", {
+test_that("to_pptx() simple from pdf", {
     skip_if_not_installed("officer")
 
     tmpdir <- withr::local_tempdir()
@@ -7,7 +7,7 @@ test_that("build_pptx() simple from pdf", {
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_pptx("basic.pdf", "slides.pptx")
+        to_pptx("basic.pdf", "slides.pptx")
     )
 
     expect_true(fs::file_exists("slides.pptx"))
@@ -21,7 +21,7 @@ test_that("build_pptx() simple from pdf", {
     expect_equal(slide_size$width / slide_size$height, 4/3)
 })
 
-test_that("build_pptx() simple from Rmd", {
+test_that("to_pptx() simple from Rmd", {
     skip_if_not_installed("officer")
     skip_if_not_chrome_installed()
 
@@ -31,7 +31,7 @@ test_that("build_pptx() simple from Rmd", {
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_pptx("slides.Rmd")
+        to_pptx("slides.Rmd")
     )
 
     expect_true(fs::file_exists("slides.pptx"))
@@ -48,7 +48,7 @@ test_that("build_pptx() simple from Rmd", {
 })
 
 
-test_that("build_pptx() widescreen", {
+test_that("to_pptx() widescreen", {
     skip_if_not_installed("officer")
 
     tmpdir <- withr::local_tempdir()
@@ -57,7 +57,7 @@ test_that("build_pptx() widescreen", {
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_pptx(
+        to_pptx(
             "basic-wide.pdf",
             "widescreen.pptx",
             slides = 1:2,

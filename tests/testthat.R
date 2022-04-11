@@ -1,4 +1,4 @@
 library(testthat)
-library(xaringanBuilder)
+library(renderthis)
 
-test_check("xaringanBuilder")
+test_check("renderthis")

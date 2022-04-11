@@ -1,5 +1,5 @@
 ---
-title: "{xaringanBuilder}"
+title: "{renderthis}"
 subtitle: "Build xaringan slides to different outputs"
 author: "John Paul Helveston & Garrick Aden-Buie"
 date: "`r Sys.Date()`"
@@ -27,11 +27,11 @@ Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharin
 
 ## Installation
 
-You can install the current version of xaringanBuilder from GitHub:
+You can install the current version of renderthis from GitHub:
 
 ```
 # install.packages("remotes")
-remotes::install_github("jhelvy/xaringanBuilder")
+remotes::install_github("jhelvy/renderthis")
 ```
 
 --
@@ -81,12 +81,11 @@ Rmd
 For `pdf`, `png`, `gif`, `mp4`, and `pptx` output types, if you want to build a new slide for each increment on [incremental slides](https://slides.yihui.org/xaringan/incremental.html#1), set `partial_slides = TRUE` in any of the following build functions:
 
 ```
-build_pdf()
-build_png()
-build_gif()
-build_mp4()
-build_pptx()
-build_all()
+to_pdf()
+to_png()
+to_gif()
+to_mp4()
+to_pptx()
 ```
 
 --
@@ -94,8 +93,8 @@ build_all()
 For example, the following code would render this slide as two slides in a pdf instead of one:
 
 ```
-build_pdf("slides.Rmd", partial_slides = TRUE)
-build_pdf("slides.html", partial_slides = TRUE)
+to_pdf("slides.Rmd", partial_slides = TRUE)
+to_pdf("slides.html", partial_slides = TRUE)
 ```
 
 > **Note**: This option requires the [chromote](https://github.com/rstudio/chromote) and [pdftools](https://github.com/ropensci/pdftools) packages.
@@ -104,7 +103,7 @@ build_pdf("slides.html", partial_slides = TRUE)
 
 ## Complex slides
 
-"Complex" slides are slides that contain [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) (like the one on this slide) or other html widgets / advanced features that might not render well as a pdf. To render these on separate slides, set `complex_slides = TRUE` in `build_pdf()`, `build_png()`, `build_gif()`, `build_mp4()`, `build_pptx()`, or `build_all()`.
+"Complex" slides are slides that contain [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) (like the one on this slide) or other html widgets / advanced features that might not render well as a pdf. To render these on separate slides, set `complex_slides = TRUE` in `to_pdf()`, `to_png()`, `to_gif()`, `to_mp4()`, or `to_pptx()`.
 
 .panelset[
 .panel[.panel-name[Chunk]
@@ -130,15 +129,15 @@ Examples building from PDF to PNG:
 
 ```{r, eval=FALSE}
 # Build the first or last slide only
-build_png("slides.pdf", output_file = "first_slide.png", slides = "first")
-build_png("slides.pdf", output_file = "last_slide.png", slides = "last")
+to_png("slides.pdf", output_file = "first_slide.png", slides = "first")
+to_png("slides.pdf", output_file = "last_slide.png", slides = "last")
 
 # Choose subsets of slides
-build_png("slides.pdf", slides = c(1, 3, 5)) 
-build_png("slides.pdf", slides = -1) # Negative indices remove slides
+to_png("slides.pdf", slides = c(1, 3, 5))
+to_png("slides.pdf", slides = -1) # Negative indices remove slides
 
 # Build all slides
-build_png("slides.pdf", slides = "all")
+to_png("slides.pdf", slides = "all")
 ```
 
 ---
@@ -148,7 +147,7 @@ class: center, middle, inverse
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
 
-Package documentation at https://jhelvy.github.io/xaringanBuilder
+Package documentation at https://jhelvy.github.io/renderthis
 
 <a href='https://xaringan.club/'><img src='https://github.com/dynastyprocess/graphics/raw/main/xaringanclub/xaringanclub.png' align="center" height="142" /></a>
 

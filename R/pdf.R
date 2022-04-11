@@ -28,32 +28,32 @@
 #' @examples
 #' \dontrun{
 #' # Build pdf from Rmd, html, or url
-#' build_pdf("slides.Rmd")
-#' build_pdf("slides.html")
-#' build_pdf("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+#' to_pdf("slides.Rmd")
+#' to_pdf("slides.html")
+#' to_pdf("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 #'
 #' # Build a pdf with partial (continuation) slides
-#' build_pdf("slides.Rmd", partial_slides = TRUE)
-#' build_pdf("slides.html", partial_slides = TRUE)
+#' to_pdf("slides.Rmd", partial_slides = TRUE)
+#' to_pdf("slides.html", partial_slides = TRUE)
 #'
 #' # Build a pdf of "complex" xaringan slides
-#' build_pdf("slides_complex.Rmd", complex_slides = TRUE)
-#' build_pdf("slides_complex.html", complex_slides = TRUE)
+#' to_pdf("slides_complex.Rmd", complex_slides = TRUE)
+#' to_pdf("slides_complex.html", complex_slides = TRUE)
 #'
 #' # Build a pdf of "complex" xaringan slides and include partial
 #' # (continuation) slides
-#' build_pdf(input = "slides_complex.Rmd",
+#' to_pdf(input = "slides_complex.Rmd",
 #'           output_file = "slides_complex_partial.pdf",
 #'           complex_slides = TRUE,
 #'           partial_slides = TRUE)
-#' build_pdf(input = "slides_complex.html",
+#' to_pdf(input = "slides_complex.html",
 #'           output_file = "slides_complex_partial.pdf",
 #'           complex_slides = TRUE,
 #'           partial_slides = TRUE)
 #' }
 #'
 #' @export
-build_pdf <- function(
+to_pdf <- function(
     input,
     output_file = NULL,
     complex_slides = FALSE,
@@ -82,18 +82,18 @@ build_pdf <- function(
     step_html <- input
     if (test_path_ext(input, "rmd")) {
         step_html <- path_from(output_file, "html", temporary = !keep_intermediates)
-        build_html(input, step_html)
+        to_html(input, step_html)
     }
 
     # Build pdf from html
     if (complex_slides | partial_slides) {
-        build_pdf_complex(path_from(step_html, "url"), output_file, partial_slides, delay)
+        to_pdf_complex(path_from(step_html, "url"), output_file, partial_slides, delay)
     } else {
-        build_pdf_simple(step_html, output_file)
+        to_pdf_simple(step_html, output_file)
     }
 }
 
-build_pdf_simple <- function(input, output_file = NULL) {
+to_pdf_simple <- function(input, output_file = NULL) {
     proc <- cli_build_start(input, output_file, on_exit = "done")
     tryCatch({
         pagedown::chrome_print(
@@ -105,11 +105,11 @@ build_pdf_simple <- function(input, output_file = NULL) {
     )
 }
 
-# build_pdf_complex() was previously xaringan_to_pdf(), added by gadenbuie
+# to_pdf_complex() was previously xaringan_to_pdf(), added by gadenbuie
 # in v0.0.2. He also posted it on his blog here:
 # https://www.garrickadenbuie.com/blog/print-xaringan-chromote/
 
-build_pdf_complex <- function(input, output_file, partial_slides, delay) {
+to_pdf_complex <- function(input, output_file, partial_slides, delay) {
   if (!requireNamespace("chromote", quietly = TRUE)) {
     stop("`chromote` is required: devtools::install_github('rstudio/chromote')")
   }

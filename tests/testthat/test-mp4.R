@@ -1,4 +1,4 @@
-test_that("build_gif() builds an mp4", {
+test_that("to_gif() builds an mp4", {
     skip_if_not_installed("av")
 
     tmpdir <- withr::local_tempdir()
@@ -7,7 +7,7 @@ test_that("build_gif() builds an mp4", {
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_mp4("basic.pdf", "basic.mp4", fps = 0.5, slides = 1:2)
+        to_mp4("basic.pdf", "basic.mp4", fps = 0.5, slides = 1:2)
     )
 
     expect_true(fs::file_exists("basic.mp4"))
@@ -21,7 +21,7 @@ test_that("build_gif() builds an mp4", {
     expect_equal(nrow(frames), 2)
 })
 
-test_that("build_gif() builds a widescreen mp4", {
+test_that("to_gif() builds a widescreen mp4", {
     skip_if_not_installed("av")
 
     tmpdir <- withr::local_tempdir()
@@ -30,7 +30,7 @@ test_that("build_gif() builds a widescreen mp4", {
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_mp4("basic-wide.pdf")
+        to_mp4("basic-wide.pdf")
     )
 
     expect_true(fs::file_exists("basic-wide.mp4"))

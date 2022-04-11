@@ -12,20 +12,20 @@
 #'   in the pptx, or one of `"all"`, `"first"`, or `"last"`. Negative integers
 #'   select which slides _not_ to include. Defaults to `"all"`, in which case
 #'   all slides are included.
-#' @inheritParams build_png
-#' @inheritParams build_pdf
+#' @inheritParams to_png
+#' @inheritParams to_pdf
 #'
 #' @examples
 #' \dontrun{
 #' # Build pptx from Rmd, html, pdf, or url
-#' build_pptx("slides.Rmd")
-#' build_pptx("slides.html")
-#' build_pptx("slides.pdf")
-#' build_pptx("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+#' to_pptx("slides.Rmd")
+#' to_pptx("slides.html")
+#' to_pptx("slides.pdf")
+#' to_pptx("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 #' }
 #'
 #' @export
-build_pptx <- function(
+to_pptx <- function(
     input,
     output_file = NULL,
     density = 100,
@@ -51,7 +51,7 @@ build_pptx <- function(
     step_pdf <- input
     if (!test_path_ext(input, "pdf")) {
         step_pdf <- path_from(output_file, "pdf", temporary = !keep_intermediates)
-        build_pdf(
+        to_pdf(
             input,
             step_pdf,
             complex_slides = complex_slides,

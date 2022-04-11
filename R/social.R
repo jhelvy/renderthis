@@ -1,4 +1,4 @@
-# build_social() was inspired by this function from gadenbuie's blog:
+# to_social() was inspired by this function from gadenbuie's blog:
 # https://www.garrickadenbuie.com/blog/sharing-xaringan-slides/#the-perfect-share-image-ratio
 
 #' Build png image of first slide sized for social media sharing.
@@ -15,10 +15,10 @@
 #' \dontrun{
 #' # Build png image of first xaringan slide from Rmd file
 #' # sized for sharing on social media
-#' build_social("slides.Rmd")
+#' to_social("slides.Rmd")
 #' }
 #'
-build_social <- function(input, output_file = NULL) {
+to_social <- function(input, output_file = NULL) {
     if (!requireNamespace("webshot2", quietly = TRUE)) {
         stop(
             "`webshot2` is required: ",
@@ -41,7 +41,7 @@ build_social <- function(input, output_file = NULL) {
     # We used to use `webshot2::rmdshot()` but this way we have more control
     step_html <- path_from(input, "html", temporary = TRUE)
     cli::cli_alert_info("Building a temporary html for social image")
-    build_html(
+    to_html(
         input = input,
         output_file = step_html,
         self_contained = TRUE,

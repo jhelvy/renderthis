@@ -20,11 +20,11 @@
 #' @examples
 #' \dontrun{
 #' # Build html from Rmd file
-#' build_html("slides.Rmd")
+#' to_html("slides.Rmd")
 #' }
 #'
 #' @export
-build_html <- function(input, output_file = NULL, self_contained = FALSE, rmd_args = NULL) {
+to_html <- function(input, output_file = NULL, self_contained = FALSE, rmd_args = NULL) {
     assert_path_exists(input)
 
     if (is.null(output_file)) {

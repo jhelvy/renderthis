@@ -1,4 +1,4 @@
-test_that("build_gif() simple from .Rmd", {
+test_that("to_gif() simple from .Rmd", {
     skip_if_not_chrome_installed()
 
     tmpdir <- withr::local_tempdir()
@@ -7,7 +7,7 @@ test_that("build_gif() simple from .Rmd", {
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_gif("slides.Rmd")
+        to_gif("slides.Rmd")
     )
 
     expect_true(fs::file_exists("slides.gif"))
@@ -23,14 +23,14 @@ test_that("build_gif() simple from .Rmd", {
     expect_equal(gif_info$height[[1]] / gif_info$width[[1]], 3/4, tolerance = 0.01)
 })
 
-test_that("build_gif() simple from pdf", {
+test_that("to_gif() simple from pdf", {
     tmpdir <- withr::local_tempdir()
     fs::file_copy(test_path("slides", "basic.pdf"), tmpdir, overwrite = TRUE)
 
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_gif("basic.pdf")
+        to_gif("basic.pdf")
     )
 
     expect_false(fs::file_exists("basic.html"))
@@ -44,7 +44,7 @@ test_that("build_gif() simple from pdf", {
     expect_equal(gif_info$height[[1]] / gif_info$width[[1]], 3/4, tolerance = 0.01)
 })
 
-test_that("build_gif() keeps intermediates", {
+test_that("to_gif() keeps intermediates", {
     skip_if_not_chrome_installed()
 
     tmpdir <- withr::local_tempdir()
@@ -53,7 +53,7 @@ test_that("build_gif() keeps intermediates", {
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_gif("slides.Rmd", "test.gif", keep_intermediates = TRUE, density = 200)
+        to_gif("slides.Rmd", "test.gif", keep_intermediates = TRUE, density = 200)
     )
 
     expect_true(fs::file_exists("test.gif"))
@@ -69,7 +69,7 @@ test_that("build_gif() keeps intermediates", {
     expect_equal(gif_info$height[[1]] / gif_info$width[[1]], 3/4, tolerance = 0.01)
 })
 
-test_that("build_gif() only includes `slides`", {
+test_that("to_gif() only includes `slides`", {
     tmpdir <- withr::local_tempdir()
     fs::file_copy(test_path("slides", "basic.pdf"), tmpdir, overwrite = TRUE)
 
@@ -77,7 +77,7 @@ test_that("build_gif() only includes `slides`", {
 
     fs::dir_create("gif")
     suppressMessages(
-        build_gif("basic.pdf", "gif/demo.gif", keep_intermediates = TRUE, slides = c(1, 3))
+        to_gif("basic.pdf", "gif/demo.gif", keep_intermediates = TRUE, slides = c(1, 3))
     )
 
     expect_true(fs::file_exists("gif/demo.gif"))
@@ -91,9 +91,9 @@ test_that("build_gif() only includes `slides`", {
     expect_equal(gif_info$height[[1]] / gif_info$width[[1]], 3/4, tolerance = 0.01)
 
     expect_error(suppressMessages(
-        build_gif("basic.pdf", slides = FALSE)
+        to_gif("basic.pdf", slides = FALSE)
     ))
     expect_error(suppressMessages(
-        build_gif("basic.pdf", slides = 4)
+        to_gif("basic.pdf", slides = 4)
     ))
 })

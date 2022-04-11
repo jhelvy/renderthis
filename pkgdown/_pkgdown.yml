@@ -1,21 +1,21 @@
-url: https://jhelvy.github.io/xaringanBuilder/
+url: https://jhelvy.github.io/renderthis/
 
 home:
-  title: Functions For Building Xaringan Slides To Different Outputs.
+  title: Render media to different outputs
 
 template:
   params:
     bootswatch: simplex
   opengraph:
     image:
-      src: https://jhelvy.github.io/xaringanBuilder/reference/figures/logo.png
-      alt: "Logo for the xaringanBuilder package"
+      src: https://jhelvy.github.io/renderthis/reference/figures/logo.png
+      alt: "Logo for the renderthis package"
     twitter:
       creator: "@JohnHelveston"
       card: summary
 
 navbar:
-  title: "xaringanBuilder"
+  title: "renderthis"
   type: inverse
   left:
     - icon: fa-home fa-lg
@@ -25,17 +25,16 @@ navbar:
     - text: "Changelog"
       href: news/index.html
     - icon: fa-github
-      href: https://github.com/jhelvy/xaringanBuilder
+      href: https://github.com/jhelvy/renderthis
 
 reference:
-- title: "Build slides"
-  desc: "Functions For Building Xaringan Slides To Different Outputs."
+- title: "Render media"
+  desc: "Render media to different outputs."
   contents:
-  - build_all
-  - build_social
-  - build_html
-  - build_pdf
-  - build_png
-  - build_gif
-  - build_mp4
-  - build_pptx
+  - to_html
+  - to_pdf
+  - to_png
+  - to_social
+  - to_gif
+  - to_mp4
+  - to_pptx

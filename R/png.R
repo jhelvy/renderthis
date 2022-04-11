@@ -18,25 +18,25 @@
 #'   select which slides _not_ to include. If more than one slide are included,
 #'   pngs will be returned as a zip file. Defaults to `"all"`, in which case
 #'   all slides are included.
-#' @inheritParams build_pdf
+#' @inheritParams to_pdf
 #' @param keep_intermediates Should we keep the intermediate files used to build
 #'   the final output? The default is `FALSE`.
 #'
 #' @examples
 #' \dontrun{
 #' # By default, a png of only the first slide is built
-#' build_png("slides.Rmd")
-#' build_png("slides.html")
-#' build_png("slides.pdf")
-#' build_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+#' to_png("slides.Rmd")
+#' to_png("slides.html")
+#' to_png("slides.pdf")
+#' to_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 #'
 #' # Build zip file of multiple or all slides
-#' build_png("slides.pdf", slides = c(1, 3, 5))
-#' build_png("slides.pdf", slides = "all")
+#' to_png("slides.pdf", slides = c(1, 3, 5))
+#' to_png("slides.pdf", slides = "all")
 #' }
 #'
 #' @export
-build_png <- function(
+to_png <- function(
     input,
     output_file = NULL,
     density = 100,
@@ -64,7 +64,7 @@ build_png <- function(
     step_pdf <- input
     if (!test_path_ext(input, "pdf")) {
         step_pdf <- path_from(output_file, "pdf", temporary = !keep_intermediates)
-        build_pdf(
+        to_pdf(
             input = input,
             output_file = step_pdf,
             complex_slides = complex_slides,
@@ -107,51 +107,4 @@ zip_pngs <- function(imgs, slides, output_file) {
     }
 
     zip::zip(output_file, files = fs::path_file(png_paths), root = tmpdir)
-}
-
-#' Build png thumbnail image of first slide.
-#'
-#' Build png thumbnail image of first xaringan slide. Requires a local
-#' installation of Chrome.
-#' @param input Path to a Rmd file or html file / url of xaringan slides. If
-#'  the input is a url to xaringan slides on a website, you must provide the
-#'  full url ending in ".html".
-#' @param output_file Name of the output png file.
-#' @export
-#' @examples
-#' \dontrun{
-#' # Build first slide thumbnail from Rmd or html file
-#' build_thumbnail("slides.Rmd")
-#' build_thumbnail("slides.html")
-#' }
-build_thumbnail <- function(input, output_file = NULL) {
-    # v0.0.5
-    .Deprecated("build_png")
-
-    # Check if Chrome is installed
-    assert_chrome_installed()
-
-    if (is.null(output_file)) {
-        output_file <- path_from(input, "png")
-    }
-
-    # Check input and output files have correct extensions
-    assert_path_ext(input, c("rmd", "html"))
-    assert_path_ext(output_file, "png")
-
-    # Build html (if input is rmd)
-    step_html <- input
-    if (test_path_ext(input, "rmd")) {
-        step_html <- path_from(input, "html", temporary = TRUE)
-        build_html(input, step_html)
-    }
-
-    # Build png from html
-    proc <- cli_build_start(step_html, output_file, on_exit = "done")
-    tryCatch({
-      pagedown::chrome_print(
-        input  = input,
-        output = output_file,
-        format = "png")
-    }, error = cli_build_failed(proc))
 }

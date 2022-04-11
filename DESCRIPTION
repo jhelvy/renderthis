@@ -1,6 +1,6 @@
-Package: xaringanBuilder
-Title: Build 'xaringan' Slides To Many Different Outputs
-Version: 0.0.9
+Package: renderthis
+Title: Render Media To Different Outputs
+Version: 0.0.1
 Authors@R:
     c(person(given = "John",
              family = "Helveston",
@@ -15,7 +15,7 @@ Authors@R:
       person(given = "Bryan",
              family = "Shalloway",
              role = "ctb"))
-Description: Functions for building 'xaringan' slides to different outputs,
+Description: Functions for rendering media to different outputs, including
     html, pdf, png, gif, pptx, and mp4, as well as a 'social' output, a png of
     the first slide re-sized for sharing on social media.
 License: MIT + file LICENSE
@@ -47,4 +47,4 @@ Remotes:
     rstudio/webshot2
 Config/testthat/edition: 3
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

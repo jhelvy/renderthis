@@ -25,19 +25,19 @@
 #'   PDF.
 #' @param delay Seconds of delay between advancing to and printing a new slide.
 #'   Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.
-#' @inheritParams build_png
+#' @inheritParams to_png
 #'
 #' @examples
 #' \dontrun{
 #' # Build gif from Rmd, html, pdf, or url
-#' build_gif("slides.Rmd")
-#' build_gif("slides.html")
-#' build_gif("slides.pdf")
-#' build_gif("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+#' to_gif("slides.Rmd")
+#' to_gif("slides.html")
+#' to_gif("slides.pdf")
+#' to_gif("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
 #' }
 #'
 #' @export
-build_gif <- function(
+to_gif <- function(
     input,
     output_file = NULL,
     density = 100,
@@ -60,7 +60,7 @@ build_gif <- function(
     step_pdf <- input
     if (!test_path_ext(input, "pdf")) {
         step_pdf <- path_from(output_file, "pdf", temporary = !keep_intermediates)
-        build_pdf(
+        to_pdf(
             input,
             step_pdf,
             complex_slides = complex_slides,
