@@ -51,7 +51,7 @@ remotes::install_github("jhelvy/renderthis", dependencies = TRUE)
 Some output types depend on intermediate outputs. Here is a diagram of
 the build hierarchy:
 
-    Rmd
+    Rmd / qmd
      |
      |--> social (png)
      |
@@ -137,9 +137,9 @@ to_mp4("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 
 ### Build PPTX
 
-Creates a pptx file where each slide contains a png image of each
-xaringan slide. While you won’t be able to edit the xaringan content
-from Powerpoint, you can at least annotate it.
+Creates a pptx file where each slide contains a png image of each slide.
+While you won’t be able to edit the content from Powerpoint, you can at
+least annotate it.
 
 (See the [slidex](https://github.com/datalorax/slidex) package by
 @datalorax to do the opposite: pptx –\> xaringan!)
@@ -258,7 +258,8 @@ For example, to build a pptx from a Rmd file without Chrome, you could:
 -   Authors: [John Paul Helveston](http://www.jhelvy.com/) (*aut*,
     *cre*, *cph*) & [Garrick
     Aden-Buie](https://www.garrickadenbuie.com/) (*aut*)
--   Date First Written: as xaringanBuilder on *September 27, 2020*
+-   Date First Written: Originally as {xaringanBuilder} on *September
+    27, 2020*
 -   License:
     [MIT](https://github.com/jhelvy/renderthis/blob/master/LICENSE.md)
 
