@@ -10,15 +10,23 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![R-CMD-check](https://github.com/jhelvy/renderthis/workflows/R-CMD-check/badge.svg)](https://github.com/jhelvy/renderthis/actions)
 <!-- badges: end -->
 
-Build xaringan slides to multiple output formats:
+Render media to different formats:
+
+FROM:
+
+-   Rmd / qmd
+-   html
+-   pdf
+-   pptx
+
+TO:
 
 -   html
 -   pdf
+-   png
 -   gif
 -   pptx
 -   mp4
--   png
--   social (png of first slide sized for sharing on social media)
 
 ## Installation
 
@@ -263,11 +271,11 @@ if you cited it. You can get the citation information by typing
 To cite renderthis in publications use:
 
 Helveston, John Paul and Aden-Buie, Garrick (2021). renderthis: Render
-media to different outputs.
+media to different formats.
 
 A BibTeX entry for LaTeX users is
 
-@Manual{, title = {renderthis: Render media to different outputs.},
+@Manual{, title = {renderthis: Render media to different formats.},
 author = {{Helveston} and John Paul and {Aden-Buie} and {Garrick}}, year
 = {2021}, note = {R package version 0.0.1}, url =
 {<https://jhelvy.github.io/renderthis/>}, }

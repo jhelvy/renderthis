@@ -25,15 +25,23 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![R-CMD-check](https://github.com/jhelvy/renderthis/workflows/R-CMD-check/badge.svg)](https://github.com/jhelvy/renderthis/actions)
 <!-- badges: end -->
 
-Build xaringan slides to multiple output formats:
+Render media to different formats:
+
+FROM:
+
+- Rmd / qmd
+- html
+- pdf
+- pptx
+
+TO:
 
 - html
 - pdf
+- png
 - gif
 - pptx
 - mp4
-- png
-- social (png of first slide sized for sharing on social media)
 
 ## Installation
 
