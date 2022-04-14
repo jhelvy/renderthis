@@ -1,0 +1,48 @@
+---
+title: "renderthis setup"
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+To get the most out of renderthis, we recommend installing the package **with dependencies** and making sure that you have a local installation of Chrome.
+
+# Installation
+
+You can install the current version of renderthis from GitHub:
+
+```{r, eval=FALSE}
+# install.packages("remotes")
+remotes::install_github("jhelvy/renderthis")
+```
+
+Some output formats require additional packages, and each format will provide instructions about how to install any missing dependencies. You can also choose to install renderthis with all of its dependencies:
+
+```{r, eval=FALSE}
+# install.packages("remotes")
+remotes::install_github("jhelvy/renderthis", dependencies = TRUE)
+```
+
+# Local Chrome Installation
+
+Rendering the PDF requires a local installation of Chrome. If you don't have Chrome installed, you can use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera. In this case, you will need to set the path to the browser you want to use for the [pagedown](https://github.com/rstudio/pagedown) package as well as the [chromote](https://github.com/rstudio/chromote) package if you use the `complex_slides = TRUE` or `partial_slides = TRUE` arguments.
+
+After installing the packages, you can set the paths like this:
+
+```{r, eval=FALSE}
+Sys.setenv(PAGEDOWN_CHROME = "/path/to/browser")
+Sys.setenv(CHROMOTE_CHROME = "/path/to/browser")
+```
+
+If you are unable to install Chrome (e.g. on a computing cluster), the recommended workflow is to render intermediate output formats and use an alternative method for rendering the PDF.
+
+For example, to render a pptx from a Rmd file without Chrome, you could:
+
+1. Render the html with `to_html(from = "slides.Rmd")`
+2. Use vscode remote and vscode-preview-server extension to open the html on a local machine (preferrably with Chrome installed)
+3. Save to pdf on Chrome
+4. Render the pptx with `to_pptx(from = "slides.pdf")`

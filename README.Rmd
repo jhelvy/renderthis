@@ -20,28 +20,11 @@ IS_README <- TRUE
 # renderthis <a href='https://jhelvy.github.io/renderthis/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/jhelvy/renderthis/workflows/R-CMD-check/badge.svg)](https://github.com/jhelvy/renderthis/actions)
+[![CRAN status](https://www.r-pkg.org/badges/version/usethis)](https://CRAN.R-project.org/package=usethis)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![R-CMD-check](https://github.com/jhelvy/renderthis/workflows/R-CMD-check/badge.svg)](https://github.com/jhelvy/renderthis/actions)
 <!-- badges: end -->
-
-Render media to different formats:
-
-FROM:
-
-- Rmd / qmd
-- html
-- pdf
-- pptx
-
-TO:
-
-- html
-- pdf
-- png
-- gif
-- pptx
-- mp4
 
 ## Installation
 
@@ -59,9 +42,11 @@ Some output formats require additional packages, and each format will provide in
 remotes::install_github("jhelvy/renderthis", dependencies = TRUE)
 ```
 
-## Render hierarchy
+**Note**: To get the most out of renderthis, we recommend installing the package **with dependencies** and making sure that you have a [local installation of Google Chrome](https://jhelvy.github.io/renderthis/articles/renderthis-setup.html#local-chrome-installation).
 
-Some output types depend on intermediate outputs. Here is a diagram of the render hierarchy:
+## Usage
+
+Use renderthis to render media to different formats. Here is a diagram of the render hierarchy:
 
 ```
 Rmd / qmd
@@ -81,21 +66,19 @@ Rmd / qmd
                       |--> pptx
 ```
 
-## Usage
-
-You can render all of the examples below from [here](https://github.com/jhelvy/renderthis/tree/master/inst/example)
+To use renderthis, first load the package: 
 
 ```{r}
 library(renderthis)
 ```
 
-### Input - Output
+All of the package functions follow a common pattern:
 
-All `to_*()` functions use the `from` and `to` arguments.
+- All functions use `to_*()` to render media to a desired format (e.g., `to_pdf()`). - All functions use the `from` and `to` arguments:
+    - The `from` argument is required and can be a full or local path to the input file.
+    - The `to` argument is optional. If provided, it can be a full or local path to the output file, and it must end in an appropriate extension (e.g. `slides.gif` for `to_gif()`).  If it is not provided, the output file name will be determined based on the `from` argument.
 
-The `from` argument is required and can be a full or local path to the input file.
-
-The `to` argument is optional. If provided, it can be a full or local path to the output file, and it must end in an appropriate extension (e.g. `slides.gif` for `to_gif()`).  If it is not provided, the output file name will be determined based on the `from` argument.
+You can render all of the examples below from [here](https://github.com/jhelvy/renderthis/tree/master/inst/example)
 
 ### Render HTML
 
@@ -115,7 +98,7 @@ to_pdf(from = "slides.html")
 to_pdf(from = "https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 ```
 
-**Note**: Rendering the PDF requires a [local installation of Google Chrome](#local-chrome-installation-requirement)
+**Note**: Rendering the PDF requires a [local installation of Google Chrome](https://jhelvy.github.io/renderthis/articles/renderthis-setup.html#local-chrome-installation)
 
 ### Render GIF
 
@@ -215,26 +198,6 @@ These options are available as options in any of the functions that depend on re
 - `to_pptx()`
 
 **Note**: These options require the [chromote](https://github.com/rstudio/chromote) and [pdftools](https://github.com/ropensci/pdftools) packages.
-
-## Local Chrome installation requirement
-
-Rendering the PDF requires a local installation of Chrome. If you don't have Chrome installed, you can use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera. In this case, you will need to set the path to the browser you want to use for the [pagedown](https://github.com/rstudio/pagedown) package as well as the [chromote](https://github.com/rstudio/chromote) package if you use the `complex_slides = TRUE` or `partial_slides = TRUE` arguments.
-
-After installing the packages, you can set the paths like this:
-
-```{r}
-Sys.setenv(PAGEDOWN_CHROME = "/path/to/browser")
-Sys.setenv(CHROMOTE_CHROME = "/path/to/browser")
-```
-
-If you are unable to install Chrome (e.g. on a computing cluster), the recommended workflow is to render intermediate output formats and use an alternative method for rendering the PDF.
-
-For example, to render a pptx from a Rmd file without Chrome, you could:
-
-1. Render the html with `to_html(from = "slides.Rmd")`
-2. Use vscode remote and vscode-preview-server extension to open the html on a local machine (preferrably with Chrome installed)
-3. Save to pdf on Chrome
-4. Render the pptx with `to_pptx(from = "slides.pdf")`
 
 ## Author, Version, and License Information
 

@@ -4,8 +4,8 @@ home:
   title: Render media to different formats
 
 template:
-  params:
-    bootswatch: simplex
+  bootstrap: 5
+  bootswatch: materia
   opengraph:
     image:
       src: https://jhelvy.github.io/renderthis/reference/figures/logo.png
@@ -15,17 +15,13 @@ template:
       card: summary
 
 navbar:
-  title: "renderthis"
-  type: inverse
-  left:
-    - icon: fa-home fa-lg
-      href: index.html
-    - text: "Reference"
-      href: reference/index.html
-    - text: "Changelog"
-      href: news/index.html
-    - icon: fa-github
-      href: https://github.com/jhelvy/renderthis
+  structure:
+    left: [setup, reference, articles, news]
+    right: [search, github]
+  components:
+    setup:
+      text: Setup
+      href: articles/renderthis-setup.html
 
 reference:
 - title: "Render media"
