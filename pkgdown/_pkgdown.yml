@@ -5,7 +5,7 @@ home:
 
 template:
   bootstrap: 5
-  bootswatch: materia
+  bootswatch: lumen
   opengraph:
     image:
       src: https://jhelvy.github.io/renderthis/reference/figures/logo.png
@@ -17,11 +17,19 @@ template:
 navbar:
   structure:
     left: [setup, reference, articles, news]
-    right: [search, github]
+    right: [search, twitter, github]
   components:
     setup:
       text: Setup
       href: articles/renderthis-setup.html
+    twitter:
+      icon: fa-twitter
+      href: http://twitter.com/JohnHelveston
+      aria-label: Twitter
+    github:
+      icon: fa-github
+      href: https://github.com/jhelvy/renderthis
+      aria-label: GitHub
 
 reference:
 - title: "Render media"
