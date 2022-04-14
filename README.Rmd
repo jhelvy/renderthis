@@ -91,107 +91,107 @@ library(renderthis)
 
 ### Input - Output
 
-All `to_*()` functions use the `input` and `output_file` arguments.
+All `to_*()` functions use the `from` and `to` arguments.
 
-The `input` argument is required and can be a full or local path to the input file.
+The `from` argument is required and can be a full or local path to the input file.
 
-The `output_file` argument is optional. If provided, it can be a full or local path to the output file, and it must end in an appropriate extension (e.g. `slides.gif` for `to_gif()`).  If it is not provided, the output file name will be determined based on the `input` argument.
+The `to` argument is optional. If provided, it can be a full or local path to the output file, and it must end in an appropriate extension (e.g. `slides.gif` for `to_gif()`).  If it is not provided, the output file name will be determined based on the `from` argument.
 
-### Build HTML
+### Render HTML
 
-Build an html file from a Rmd file:
+Render an html file from a Rmd file:
 
 ```{r}
-to_html("slides.Rmd")
+to_html(from = "slides.Rmd")
 ```
 
-### Build PDF
+### Render PDF
 
-Input can be a Rmd file, html file, or url:
+Input can be a Rmd / qmd file, html file, or url:
 
 ```{r}
-to_pdf("slides.Rmd")
-to_pdf("slides.html")
-to_pdf("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
+to_pdf(from = "slides.Rmd")
+to_pdf(from = "slides.html")
+to_pdf(from = "https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 ```
 
-**Note**: Building the PDF requires a [local installation of Google Chrome](#local-chrome-installation-requirement)
+**Note**: Rendering the PDF requires a [local installation of Google Chrome](#local-chrome-installation-requirement)
 
-### Build GIF
+### Render GIF
 
-Input can be a Rmd file, html file, pdf file, or url:
+Input can be a Rmd / qmd file, html file, pdf file, or url:
 
 ```{r}
-to_gif("slides.Rmd")
-to_gif("slides.html")
-to_gif("slides.pdf")
-to_gif("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
+to_gif(from = "slides.Rmd")
+to_gif(from = "slides.html")
+to_gif(from = "slides.pdf")
+to_gif(from = "https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 ```
 
 Example:
 
 <img src="man/figures/slides.gif" width=500>
 
-### Build MP4
+### Render MP4
 
-Input can be a Rmd file, html file, pdf file, or url:
+Input can be a Rmd /qmd file, html file, pdf file, or url:
 
 ```{r}
-to_mp4("slides.Rmd")
-to_mp4("slides.html")
-to_mp4("slides.pdf")
-to_mp4("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
+to_mp4(from = "slides.Rmd")
+to_mp4from = ("slides.html")
+to_mp4(from = "slides.pdf")
+to_mp4(from = "https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 ```
 
-### Build PPTX
+### Render PPTX
 
 Creates a pptx file where each slide contains a png image of each slide. While you won't be able to edit the content from Powerpoint, you can at least annotate it.
 
 (See the [slidex](https://github.com/datalorax/slidex) package by @datalorax to do the opposite: pptx --> xaringan!)
 
-Input can be a Rmd file, html file, pdf file, or url:
+Input can be a Rmd / qmd file, html file, pdf file, or url:
 
 ```{r}
-to_pptx("slides.Rmd")
-to_pptx("slides.html")
-to_pptx("slides.pdf")
-to_pptx("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
+to_pptx(from = "slides.Rmd")
+to_pptx(from = "slides.html")
+to_pptx(from = "slides.pdf")
+to_pptx(from = "https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 ```
 
-### Build PNG
+### Render PNG
 
 Build png image(s) of some or all slides. Use the `slides` argument to determine which slides to include (defaults to `1`, returning just the first slide).
 
-Input can be a Rmd file, html file, pdf file, or url:
+Input can be a Rmd / qmd file, html file, pdf file, or url:
 
 ```{r}
 # By default, a png of only the first slide is built
-to_png("slides.Rmd", output_file = "title_slide.png")
-to_png("slides.html", output_file = "title_slide.png")
-to_png("slides.pdf", output_file = "title_slide.png")
-to_png(
+to_png(from = "slides.Rmd", to = "title_slide.png")
+to_png(from = "slides.html", to = "title_slide.png")
+to_png(from = "slides.pdf", to = "title_slide.png")
+to_png(from = 
   "https://jhelvy.github.io/renderthis/reference/figures/slides.html",
-  output_file = "title_slide.png"
+  to = "title_slide.png"
 )
 
 # Use the `slides` argument to control which slides get build into pngs
-to_png("slides.pdf", output_file = "first_slide.png", slides = "first")
-to_png("slides.pdf", output_file = "last_slide.png", slides = "last")
-to_png("slides.pdf", slides = c(1, 3, 5)) # Choose subsets of slides
-to_png("slides.pdf", slides = -1) # Negative indices remove slides
-to_png("slides.pdf", slides = "all")
+to_png(from = "slides.pdf", to = "first_slide.png", slides = "first")
+to_png(from = "slides.pdf", to = "last_slide.png", slides = "last")
+to_png(from = "slides.pdf", slides = c(1, 3, 5)) # Choose subsets of slides
+to_png(from = "slides.pdf", slides = -1) # Negative indices remove slides
+to_png(from = "slides.pdf", slides = "all")
 ```
 
 Example:
 
 <img src="man/figures/title_slide.png" width=500>
 
-### Build Social
+### Render Social
 
-Build a png of the first slide from a Rmd file. Image is sized for sharing on social media (e.g. Twitter).
+Render a png of the first slide from an Rmd file. Image is sized for sharing on social media (e.g. Twitter).
 
 ```{r}
-to_social("slides.Rmd")
+to_social(from = "slides.Rmd")
 ```
 
 **Note**: This option requires the [chromote](https://github.com/rstudio/chromote) and [pdftools](https://github.com/ropensci/pdftools) packages.
@@ -204,7 +204,7 @@ Example:
 
 "Complex" slides are slides that contain [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) or other html widgets / advanced features that might not render well as a pdf. To render these on each slide, set `complex_slides = TRUE`. 
 
-If you want to build a new slide for each increment on [incremental slides](https://slides.yihui.org/xaringan/incremental.html#1), set `partial_slides = TRUE`.
+If you want to render a new slide for each increment on [incremental slides](https://slides.yihui.org/xaringan/incremental.html#1), set `partial_slides = TRUE`.
 
 These options are available as options in any of the functions that depend on building the pdf:
 
@@ -218,7 +218,7 @@ These options are available as options in any of the functions that depend on bu
 
 ## Local Chrome installation requirement
 
-Building the PDF requires a local installation of Chrome. If you don't have Chrome installed, you can use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera. In this case, you will need to set the path to the browser you want to use for the [pagedown](https://github.com/rstudio/pagedown) package as well as the [chromote](https://github.com/rstudio/chromote) package if you use the `complex_slides = TRUE` or `partial_slides = TRUE` arguments.
+Rendering the PDF requires a local installation of Chrome. If you don't have Chrome installed, you can use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera. In this case, you will need to set the path to the browser you want to use for the [pagedown](https://github.com/rstudio/pagedown) package as well as the [chromote](https://github.com/rstudio/chromote) package if you use the `complex_slides = TRUE` or `partial_slides = TRUE` arguments.
 
 After installing the packages, you can set the paths like this:
 
@@ -229,17 +229,17 @@ Sys.setenv(CHROMOTE_CHROME = "/path/to/browser")
 
 If you are unable to install Chrome (e.g. on a computing cluster), the recommended workflow is to build intermediate output formats and use an alternative method for building the PDF.
 
-For example, to build a pptx from a Rmd file without Chrome, you could:
+For example, to render a pptx from a Rmd file without Chrome, you could:
 
-1. Build the html with `to_html("slides.Rmd")`
+1. Render the html with `to_html(from = "slides.Rmd")`
 2. Use vscode remote and vscode-preview-server extension to open the html on a local machine (preferrably with Chrome installed)
 3. Save to pdf on Chrome
-4. Build the pptx with `to_pptx("slides.pdf")`
+4. Render the pptx with `to_pptx(from = "slides.pdf")`
 
 ## Author, Version, and License Information
 
 - Authors: [John Paul Helveston](http://www.jhelvy.com/) (_aut_, _cre_, _cph_) & [Garrick Aden-Buie](https://www.garrickadenbuie.com/) (_aut_)
-- Date First Written: Originally as {xaringanBuilder} on *September 27, 2020*
+- Date First Written: Originally as [{xaringanBuilder}](https://github.com/jhelvy/xaringanBuilder) on *September 27, 2020*
 - License: [MIT](https://github.com/jhelvy/renderthis/blob/master/LICENSE.md)
 
 ## Citation Information
