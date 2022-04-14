@@ -69,8 +69,8 @@ to_png <- function(
     if (!test_path_ext(input, "pdf")) {
         step_pdf <- path_from(output_file, "pdf", temporary = !keep_intermediates)
         to_pdf(
-            input = input,
-            output_file = step_pdf,
+            from = input,
+            to = step_pdf,
             complex_slides = complex_slides,
             partial_slides = partial_slides,
             delay = delay,

@@ -5,8 +5,8 @@
 \title{Build xaringan slides as png file(s).}
 \usage{
 to_png(
-  input,
-  output_file = NULL,
+  from,
+  to = NULL,
   density = 100,
   slides = 1,
   complex_slides = FALSE,
@@ -16,11 +16,11 @@ to_png(
 )
 }
 \arguments{
-\item{input}{Path to a Rmd file, html file, pdf file, or a url. If the input
+\item{from}{Path to a Rmd file, html file, pdf file, or a url. If `from`
 is a url to xaringan slides on a website, you must provide the full url
-ending in ".html".}
+ending in `".html"`.}
 
-\item{output_file}{Name of the output png or zip file.}
+\item{to}{Name of the output png or zip file.}
 
 \item{density}{Resolution of the resulting pngs in each slide file. Defaults
 to `100`.}

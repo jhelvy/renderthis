@@ -5,8 +5,8 @@
 \title{Build xaringan slides as pptx file.}
 \usage{
 to_pptx(
-  input,
-  output_file = NULL,
+  from,
+  to = NULL,
   density = 100,
   slides = "all",
   complex_slides = FALSE,
@@ -16,11 +16,11 @@ to_pptx(
 )
 }
 \arguments{
-\item{input}{Path to a Rmd file, html file, pdf file, or a url. If the input
+\item{from}{Path to a Rmd file, html file, pdf file, or a url. If `from`
 is a url to xaringan slides on a website, you must provide the full url
-ending in ".html".}
+ending in `".html"`.}
 
-\item{output_file}{Name of the output pptx file.}
+\item{to}{Name of the output pptx file.}
 
 \item{density}{Resolution of the resulting pngs in each slide file. Defaults
 to `100`.}

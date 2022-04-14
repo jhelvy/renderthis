@@ -4,13 +4,13 @@
 \alias{to_social}
 \title{Build png image of first slide sized for social media sharing.}
 \usage{
-to_social(input, output_file = NULL)
+to_social(from, to = NULL)
 }
 \arguments{
-\item{input}{Path to Rmd file of xaringan slides.}
+\item{from}{Path to Rmd file of input media (e.g., xaringan slides).}
 
-\item{output_file}{The name of the output file. If using NULL then
-the output filename will be based on filename for the input file.
+\item{to}{The name of the output file. If using NULL then
+the output filename will be based on filename for the `from` file.
 If a filename is provided, a path to the output file can also be provided.}
 }
 \description{

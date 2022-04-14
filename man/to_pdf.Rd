@@ -5,8 +5,8 @@
 \title{Build xaringan slides as pdf file.}
 \usage{
 to_pdf(
-  input,
-  output_file = NULL,
+  from,
+  to = NULL,
   complex_slides = FALSE,
   partial_slides = FALSE,
   delay = 1,
@@ -14,12 +14,12 @@ to_pdf(
 )
 }
 \arguments{
-\item{input}{Path to a Rmd file or html file / url of xaringan slides. If the
-input is a url to xaringan slides on a website, you must provide the full
-url ending in ".html".}
+\item{from}{Path to a Rmd file, html file, pdf file, or a url. If `from`
+is a url to xaringan slides on a website, you must provide the full url
+ending in `".html"`.}
 
-\item{output_file}{The name of the output file. If `NULL` (the default) then
-the output filename will be based on filename for the input file. If a
+\item{to}{The name of the output file. If `NULL` (the default) then
+the output filename will be based on filename for the `from` file. If a
 filename is provided, a path to the output file can also be provided.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
@@ -36,9 +36,9 @@ PDF.}
 Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
 
 \item{keep_intermediates}{Should we keep the intermediate HTML file? Only
-relevant if the `input` is an `.Rmd` file. Default is `TRUE` if the
-`output_file` is written into the same directory as the `input`, otherwise
-the intermediate file isn't kept.}
+relevant if the `from` file is an `.Rmd` or `.qmd` file. Default is `TRUE`
+if the `to` file is written into the same directory as the `from` argument,
+otherwise the intermediate file isn't kept.}
 }
 \description{
 Build xaringan slides as a pdf file. Requires a local installation of Chrome.
@@ -62,14 +62,14 @@ to_pdf("slides_complex.html", complex_slides = TRUE)
 
 # Build a pdf of "complex" xaringan slides and include partial
 # (continuation) slides
-to_pdf(input = "slides_complex.Rmd",
-          output_file = "slides_complex_partial.pdf",
-          complex_slides = TRUE,
-          partial_slides = TRUE)
-to_pdf(input = "slides_complex.html",
-          output_file = "slides_complex_partial.pdf",
-          complex_slides = TRUE,
-          partial_slides = TRUE)
+to_pdf(from = "slides_complex.Rmd",
+       to = "slides_complex_partial.pdf",
+       complex_slides = TRUE,
+       partial_slides = TRUE)
+to_pdf(from = "slides_complex.html",
+       to = "slides_complex_partial.pdf",
+       complex_slides = TRUE,
+       partial_slides = TRUE)
 }
 
 }

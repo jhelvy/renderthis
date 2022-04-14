@@ -46,8 +46,8 @@ to_social <- function(from, to = NULL) {
     step_html <- path_from(input, "html", temporary = TRUE)
     cli::cli_alert_info("Building a temporary html for social image")
     to_html(
-        input = input,
-        output_file = step_html,
+        from = input,
+        to = step_html,
         self_contained = TRUE,
         rmd_args = list(
             output_options = list(nature = list(ratio = "191:100"))

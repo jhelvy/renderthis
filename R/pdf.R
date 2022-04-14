@@ -22,7 +22,7 @@
 #'   Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.
 #' @param keep_intermediates Should we keep the intermediate HTML file? Only
 #'   relevant if the `from` file is an `.Rmd` or `.qmd` file. Default is `TRUE`
-#'   if the `to` file is written into the same directory as the `input`,
+#'   if the `to` file is written into the same directory as the `from` argument,
 #'   otherwise the intermediate file isn't kept.
 #'
 #' @examples
@@ -85,7 +85,7 @@ to_pdf <- function(
     step_html <- input
     if (test_path_ext(input, "rmd")) {
         step_html <- path_from(output_file, "html", temporary = !keep_intermediates)
-        to_html(input, step_html)
+        to_html(from = input, to = step_html)
     }
 
     # Build pdf from html

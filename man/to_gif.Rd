@@ -5,8 +5,8 @@
 \title{Build xaringan slides as a gif file.}
 \usage{
 to_gif(
-  input,
-  output_file = NULL,
+  from,
+  to = NULL,
   density = 100,
   slides = "all",
   fps = 1,
@@ -17,11 +17,11 @@ to_gif(
 )
 }
 \arguments{
-\item{input}{Path to a Rmd file, html file, pdf file, or a url. If the input
+\item{from}{Path to a Rmd file, html file, pdf file, or a url. If `from`
 is a url to xaringan slides on a website, you must provide the full url
-ending in ".html".}
+ending in `".html"`.}
 
-\item{output_file}{Name of the output gif file.}
+\item{to}{Name of the output gif file.}
 
 \item{density}{Resolution of the resulting pngs in each slide file. Defaults
 to `100`.}

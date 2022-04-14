@@ -189,26 +189,6 @@ pdf_to_imgs <- function(input, density) {
     magick::image_read_pdf(input, density = density)
 }
 
-build_to_pdf <- function(
-    input,
-    paths,
-    complex_slides,
-    partial_slides,
-    delay
-) {
-    if (test_path_ext(input, "rmd")) {
-        to_pdf(
-            input = paths$input$rmd,
-            output_file = paths$output$pdf,
-          complex_slides, partial_slides, delay)
-    } else if (test_path_ext(input, "html")) {
-        to_pdf(
-          input = input,
-          output_file = paths$output$pdf,
-          complex_slides, partial_slides, delay)
-    }
-}
-
 slides_arg_validate <- function(slides, imgs = NULL) {
     if (is.null(slides)) {
         slides <- "all"
