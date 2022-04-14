@@ -59,31 +59,31 @@ Some output formats require additional packages, and each format will provide in
 remotes::install_github("jhelvy/renderthis", dependencies = TRUE)
 ```
 
-## Build hierarchy
+## Render hierarchy
 
-Some output types depend on intermediate outputs. Here is a diagram of the build hierarchy:
+Some output types depend on intermediate outputs. Here is a diagram of the render hierarchy:
 
 ```
 Rmd / qmd
- |
- |--> social (png)
- |
- |--> html
-       |
-       |--> pdf
-             |
-             |--> png
-                   |
-                   |--> gif
-                   |
-                   |--> mp4
-                   |
-                   |--> pptx
+    |
+    |--> social (png)
+    |
+    |--> html
+          |
+          |--> pdf
+                |
+                |--> png
+                      |
+                      |--> gif
+                      |
+                      |--> mp4
+                      |
+                      |--> pptx
 ```
 
 ## Usage
 
-You can build all of the examples below from [here](https://github.com/jhelvy/renderthis/tree/master/inst/example)
+You can render all of the examples below from [here](https://github.com/jhelvy/renderthis/tree/master/inst/example)
 
 ```{r}
 library(renderthis)
@@ -160,7 +160,7 @@ to_pptx(from = "https://jhelvy.github.io/renderthis/reference/figures/slides.htm
 
 ### Render PNG
 
-Build png image(s) of some or all slides. Use the `slides` argument to determine which slides to include (defaults to `1`, returning just the first slide).
+Render png image(s) of some or all slides. Use the `slides` argument to determine which slides to include (defaults to `1`, returning just the first slide).
 
 Input can be a Rmd / qmd file, html file, pdf file, or url:
 
@@ -174,7 +174,7 @@ to_png(from =
   to = "title_slide.png"
 )
 
-# Use the `slides` argument to control which slides get build into pngs
+# Use the `slides` argument to control which slides get rendered into pngs
 to_png(from = "slides.pdf", to = "first_slide.png", slides = "first")
 to_png(from = "slides.pdf", to = "last_slide.png", slides = "last")
 to_png(from = "slides.pdf", slides = c(1, 3, 5)) # Choose subsets of slides
@@ -206,7 +206,7 @@ Example:
 
 If you want to render a new slide for each increment on [incremental slides](https://slides.yihui.org/xaringan/incremental.html#1), set `partial_slides = TRUE`.
 
-These options are available as options in any of the functions that depend on building the pdf:
+These options are available as options in any of the functions that depend on rendering the pdf:
 
 - `to_pdf()`
 - `to_png()`
@@ -227,7 +227,7 @@ Sys.setenv(PAGEDOWN_CHROME = "/path/to/browser")
 Sys.setenv(CHROMOTE_CHROME = "/path/to/browser")
 ```
 
-If you are unable to install Chrome (e.g. on a computing cluster), the recommended workflow is to build intermediate output formats and use an alternative method for building the PDF.
+If you are unable to install Chrome (e.g. on a computing cluster), the recommended workflow is to render intermediate output formats and use an alternative method for rendering the PDF.
 
 For example, to render a pptx from a Rmd file without Chrome, you could:
 
