@@ -1,6 +1,6 @@
 ---
 title: "{renderthis}"
-subtitle: "Render media to different formats"
+subtitle: "Render slides to different formats"
 author: "John Paul Helveston & Garrick Aden-Buie"
 date: "`r Sys.Date()`"
 output:
@@ -55,7 +55,7 @@ remotes::install_github("jhelvy/renderthis")
 #### Render hierarchy:
 
 ```
-Rmd / qmd
+Rmd
     |
     |--> social (png)
     |
@@ -73,6 +73,14 @@ Rmd / qmd
 ```
 
 ]
+
+???
+
+Some example speaker notes 
+
+These will render in the handouts if you use
+
+`include = "notes"` in `to_handout()`
 
 ---
 
@@ -141,6 +149,7 @@ to_png(from = "slides.pdf", slides = "all")
 ```
 
 ---
+
 class: center, middle, inverse
 
 # Thanks!

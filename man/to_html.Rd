@@ -7,7 +7,7 @@
 to_html(from, to = NULL, self_contained = FALSE, rmd_args = NULL)
 }
 \arguments{
-\item{from}{Path to an Rmd file of xaringan slides or qmd of Quarto slides.}
+\item{from}{Path to an Rmd file of xaringan slides.}
 
 \item{to}{The name of the output file. If using `NULL` then the
 output file name will be based on file name for the `from` file. If a file
@@ -23,7 +23,7 @@ than the one containing the `from` R Markdown file.}
 \item{rmd_args}{A list of arguments passed to [rmarkdown::render()].}
 }
 \description{
-Render xaringan or quarto slides as an html file. For xaringan slides, it
+Render xaringan or slides as an html file. For xaringan slides, it
 is the same thing as [rmarkdown::render()] with
 `output_format = "xaringan::moon_reader"` except that the `self_contained`
 option is forced to `TRUE` if the HTML file is built into a directory other

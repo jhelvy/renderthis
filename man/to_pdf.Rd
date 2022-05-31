@@ -36,7 +36,7 @@ PDF.}
 Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
 
 \item{keep_intermediates}{Should we keep the intermediate HTML file? Only
-relevant if the `from` file is an `.Rmd` or `.qmd` file. Default is `TRUE`
+relevant if the `from` file is an `.Rmd` file. Default is `TRUE`
 if the `to` file is written into the same directory as the `from` argument,
 otherwise the intermediate file isn't kept.}
 }

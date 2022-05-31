@@ -48,7 +48,7 @@ PDF.}
 Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
 
 \item{keep_intermediates}{Should we keep the intermediate HTML file? Only
-relevant if the `from` file is an `.Rmd` or `.qmd` file. Default is `TRUE`
+relevant if the `from` file is an `.Rmd` file. Default is `TRUE`
 if the `to` file is written into the same directory as the `from` argument,
 otherwise the intermediate file isn't kept.}
 
@@ -57,10 +57,10 @@ section? The default is `FALSE` to keep mostly the text content of each
 slide.}
 }
 \description{
-Renders a presentation handout as an `.Rmd` and `.html` file from a set of
-xaringan slides. The handout extracts a thumbnail preview for each slide in
+Renders a presentation handout as an `.Rmd` and `.html` file from a
+set of slides. The handout extracts a thumbnail preview for each slide in
 the input, as well as the slide content and presenter notes. The final output
-is an `.html` file that's suitable for publishing or printing. The output
+is a `.html` file that is suitable for publishing or printing. The output
 also includes the `.Rmd` file used to create the handout so that you can
 edit the content as needed and can re-render the handout without having to
 call `to_handout()` again.

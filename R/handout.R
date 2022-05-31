@@ -1,12 +1,12 @@
 #' Render handout from slides
 #'
-#' Renders a presentation handout as `.Rmd`, `.html`, and `.pdf` files from a
+#' Renders a presentation handout as an `.Rmd` and `.html` file from a
 #' set of slides. The handout extracts a thumbnail preview for each slide in
 #' the input, as well as the slide content and presenter notes. The final output
-#' is a `.html` file that is suitable for publishing or printing as well as a
-#' `.pdf`. The output also includes the `.Rmd` file used to create the handout
-#' so that you can edit the content as needed and can re-render the handout
-#' without having to call `to_handout()` again.
+#' is a `.html` file that is suitable for publishing or printing. The output
+#' also includes the `.Rmd` file used to create the handout so that you can
+#' edit the content as needed and can re-render the handout without having to
+#' call `to_handout()` again.
 #' @param to The directory where the slide handout, preview images, and
 #'   other slide data will be stored. Because many files are included in the
 #'   `to_handout()` output, a directory is required. If the directory
@@ -23,6 +23,24 @@
 #'   section? The default is `FALSE` to keep mostly the text content of each
 #'   slide.
 #' @inheritParams to_pdf
+#'
+#' @examples
+#' \dontrun{
+#'
+#' # Render handouts with image previews and lines
+#' to_handout(
+#'     from = "https://jhelvy.github.io/renderthis/reference/figures/slides.html",
+#'     to = "handouts",
+#'     include = c("preview", "lines"),
+#' )
+#'
+#' # Render handouts with image previews, content, and speaker notes
+#' to_handout(
+#'     from = "https://jhelvy.github.io/renderthis/reference/figures/slides.html",
+#'     to = "handouts",
+#'     include = c("preview", "content", "notes")
+#' )
+#' }
 #'
 #' @export
 to_handout <- function(
