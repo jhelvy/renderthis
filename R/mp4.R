@@ -1,11 +1,11 @@
-#' Build xaringan slides as a mp4 video file.
+#' Render slides as a mp4 video file.
 #'
-#' Build xaringan slides as a mp4 video file. The function builds to the pdf,
+#' Render slides as a mp4 video file. The function renders to the pdf,
 #' converts each slide in the pdf to a png, and then converts the deck of
 #' png files to a mp4 video file.
 #'
 #' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
-#'   is a url to xaringan slides on a website, you must provide the full url
+#'   is a url to slides on a website, you must provide the full url
 #'   ending in `".html"`.
 #' @param to Name of the output mp4 file.
 #' @param slides A numeric or integer vector of the slide number(s) to include
@@ -18,11 +18,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Build mp4 from Rmd, html, pdf, or url
+#' # Render mp4 from Rmd, html, pdf, or url
 #' to_mp4("slides.Rmd")
 #' to_mp4("slides.html")
 #' to_mp4("slides.pdf")
-#' to_mp4("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+#' to_mp4("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 #' }
 #'
 #' @export
@@ -52,7 +52,7 @@ to_mp4 <- function(
     assert_path_ext(input, c("rmd", "html", "pdf"))
     assert_path_ext(output_file, "mp4")
 
-    # Build html and / or pdf (if input is not pdf)
+    # Render html and / or pdf (if input is not pdf)
     step_pdf <- input
     if (!test_path_ext(input, "pdf")) {
         step_pdf <- path_from(output_file, "pdf", temporary = !keep_intermediates)
@@ -66,7 +66,7 @@ to_mp4 <- function(
         )
     }
 
-    # Build mp4 from pdf
+    # Render mp4 from pdf
     proc <- cli_build_start(step_pdf, output_file)
     imgs <- pdf_to_imgs(step_pdf, density)
     slides <- slides_arg_validate(slides, imgs)

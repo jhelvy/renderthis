@@ -2,7 +2,7 @@
 % Please edit documentation in R/social.R
 \name{to_social}
 \alias{to_social}
-\title{Build png image of first slide sized for social media sharing.}
+\title{Render png image of first slide sized for social media sharing.}
 \usage{
 to_social(from, to = NULL)
 }
@@ -14,13 +14,13 @@ the output filename will be based on filename for the `from` file.
 If a filename is provided, a path to the output file can also be provided.}
 }
 \description{
-Build png image of first xaringan slide for sharing on social media.
+Render png image of first slide for sharing on social media.
 Requires a local installation of Chrome as well as the {webshot2} package:
 `remotes::install_github("rstudio/webshot2")`.
 }
 \examples{
 \dontrun{
-# Build png image of first xaringan slide from Rmd file
+# Render png image of first slide from Rmd file
 # sized for sharing on social media
 to_social("slides.Rmd")
 }

@@ -1,9 +1,9 @@
 # to_social() was inspired by this function from gadenbuie's blog:
 # https://www.garrickadenbuie.com/blog/sharing-xaringan-slides/#the-perfect-share-image-ratio
 
-#' Build png image of first slide sized for social media sharing.
+#' Render png image of first slide sized for social media sharing.
 #'
-#' Build png image of first xaringan slide for sharing on social media.
+#' Render png image of first slide for sharing on social media.
 #' Requires a local installation of Chrome as well as the {webshot2} package:
 #' `remotes::install_github("rstudio/webshot2")`.
 #' @param from Path to Rmd file of input media (e.g., xaringan slides).
@@ -13,7 +13,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Build png image of first xaringan slide from Rmd file
+#' # Render png image of first slide from Rmd file
 #' # sized for sharing on social media
 #' to_social("slides.Rmd")
 #' }
@@ -41,10 +41,10 @@ to_social <- function(from, to = NULL) {
     assert_path_ext(input, "rmd")
     assert_path_ext(output_file, "png")
 
-    # Build a temporary html file for the slide snapshot
+    # Render a temporary html file for the slide snapshot
     # We used to use `webshot2::rmdshot()` but this way we have more control
     step_html <- path_from(input, "html", temporary = TRUE)
-    cli::cli_alert_info("Building a temporary html for social image")
+    cli::cli_alert_info("Rendering a temporary html for social image")
     to_html(
         from = input,
         to = step_html,
@@ -54,7 +54,7 @@ to_social <- function(from, to = NULL) {
         )
     )
 
-    # Build png from rmd
+    # Render png from rmd
     proc <- cli_build_start(step_html, output_file, on_exit = "done")
     tryCatch({
         webshot2::webshot(

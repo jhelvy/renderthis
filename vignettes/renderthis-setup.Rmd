@@ -1,5 +1,10 @@
 ---
 title: "renderthis setup"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basic Usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include = FALSE}

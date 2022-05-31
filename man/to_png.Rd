@@ -2,7 +2,7 @@
 % Please edit documentation in R/png.R
 \name{to_png}
 \alias{to_png}
-\title{Build xaringan slides as png file(s).}
+\title{Render slides as png file(s).}
 \usage{
 to_png(
   from,
@@ -17,7 +17,7 @@ to_png(
 }
 \arguments{
 \item{from}{Path to a Rmd file, html file, pdf file, or a url. If `from`
-is a url to xaringan slides on a website, you must provide the full url
+is a url to slides on a website, you must provide the full url
 ending in `".html"`.}
 
 \item{to}{Name of the output png or zip file.}
@@ -25,7 +25,7 @@ ending in `".html"`.}
 \item{density}{Resolution of the resulting pngs in each slide file. Defaults
 to `100`.}
 
-\item{slides}{A numeric or integer vector of the slide number(s) to build
+\item{slides}{A numeric or integer vector of the slide number(s) to render
 as png files , or one of `"all"`, `"first"`, or `"last"`. Negative integers
 select which slides _not_ to include. If more than one slide are included,
 pngs will be returned as a zip file. Defaults to `"all"`, in which case
@@ -44,11 +44,11 @@ PDF.}
 \item{delay}{Seconds of delay between advancing to and printing a new slide.
 Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
 
-\item{keep_intermediates}{Should we keep the intermediate files used to build
-the final output? The default is `FALSE`.}
+\item{keep_intermediates}{Should we keep the intermediate files used to
+render the final output? The default is `FALSE`.}
 }
 \description{
-Build png image(s) of xaringan slides. The function builds to the pdf and
+Render png image(s) of slides. The function renders to the pdf and
 then converts it into png files of each slide. The slide numbers defined by
 the `slides` argument are saved (defaults to `1`, returning only the title
 slide). If `length(slides) > 1`, it will return the png files in a zip file.
@@ -61,9 +61,9 @@ You can also get a zip file of all the slides as pngs by setting `slides =
 to_png("slides.Rmd")
 to_png("slides.html")
 to_png("slides.pdf")
-to_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+to_png("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 
-# Build zip file of multiple or all slides
+# Render zip file of multiple or all slides
 to_png("slides.pdf", slides = c(1, 3, 5))
 to_png("slides.pdf", slides = "all")
 }

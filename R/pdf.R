@@ -1,11 +1,11 @@
-#' Build xaringan slides as pdf file.
+#' Render slides as pdf file.
 #'
-#' Build xaringan slides as a pdf file. Requires a local installation of Chrome.
+#' Render slides as a pdf file. Requires a local installation of Chrome.
 #' If you set `complex_slides = TRUE` or `partial_slides = TRUE`, you will also
 #' need to install the {chromote} and {pdftools} packages.
 #'
 #' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
-#'   is a url to xaringan slides on a website, you must provide the full url
+#'   is a url to slides on a website, you must provide the full url
 #'   ending in `".html"`.
 #' @param to The name of the output file. If `NULL` (the default) then
 #'   the output filename will be based on filename for the `from` file. If a
@@ -27,20 +27,20 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Build pdf from Rmd, html, or url
+#' # Render pdf from Rmd, html, or url
 #' to_pdf("slides.Rmd")
 #' to_pdf("slides.html")
-#' to_pdf("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+#' to_pdf("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 #'
-#' # Build a pdf with partial (continuation) slides
+#' # Render a pdf with partial (continuation) slides
 #' to_pdf("slides.Rmd", partial_slides = TRUE)
 #' to_pdf("slides.html", partial_slides = TRUE)
 #'
-#' # Build a pdf of "complex" xaringan slides
+#' # Render a pdf of "complex" slides
 #' to_pdf("slides_complex.Rmd", complex_slides = TRUE)
 #' to_pdf("slides_complex.html", complex_slides = TRUE)
 #'
-#' # Build a pdf of "complex" xaringan slides and include partial
+#' # Render a pdf of "complex" slides and include partial
 #' # (continuation) slides
 #' to_pdf(from = "slides_complex.Rmd",
 #'        to = "slides_complex_partial.pdf",
@@ -81,14 +81,14 @@ to_pdf <- function(
         keep_intermediates <- in_same_directory(input, output_file)
     }
 
-    # Build html (if input is rmd)
+    # Render html (if input is rmd)
     step_html <- input
     if (test_path_ext(input, "rmd")) {
         step_html <- path_from(output_file, "html", temporary = !keep_intermediates)
         to_html(from = input, to = step_html)
     }
 
-    # Build pdf from html
+    # Render pdf from html
     if (complex_slides | partial_slides) {
         to_pdf_complex(path_from(step_html, "url"), output_file, partial_slides, delay)
     } else {
@@ -128,7 +128,7 @@ to_pdf_complex <- function(input, output_file, partial_slides, delay) {
 
   has_remark <- b$Runtime$evaluate("typeof slideshow !== 'undefined'")$result$value
   if (!has_remark) {
-    stop("Input does not appear to be xaringan slides: ", input)
+    stop("Input does not appear to be xaringan or quarto slides: ", input)
   }
 
   current_slide <- function() {

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gif.R
 \name{to_gif}
 \alias{to_gif}
-\title{Build xaringan slides as a gif file.}
+\title{Render slides as a gif file.}
 \usage{
 to_gif(
   from,
@@ -18,7 +18,7 @@ to_gif(
 }
 \arguments{
 \item{from}{Path to a Rmd file, html file, pdf file, or a url. If `from`
-is a url to xaringan slides on a website, you must provide the full url
+is a url to slides on a website, you must provide the full url
 ending in `".html"`.}
 
 \item{to}{Name of the output gif file.}
@@ -46,21 +46,21 @@ PDF.}
 \item{delay}{Seconds of delay between advancing to and printing a new slide.
 Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
 
-\item{keep_intermediates}{Should we keep the intermediate files used to build
-the final output? The default is `FALSE`.}
+\item{keep_intermediates}{Should we keep the intermediate files used to
+render the final output? The default is `FALSE`.}
 }
 \description{
-Build xaringan slides as a gif video file. The function builds to the pdf,
+Render slides as a gif video file. The function renders to the pdf,
 converts each slide in the pdf to a png, and then converts the deck of
 png files to a gif file.
 }
 \examples{
 \dontrun{
-# Build gif from Rmd, html, pdf, or url
+# Render gif from Rmd, html, pdf, or url
 to_gif("slides.Rmd")
 to_gif("slides.html")
 to_gif("slides.pdf")
-to_gif("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+to_gif("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 }
 
 }

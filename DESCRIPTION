@@ -1,5 +1,5 @@
 Package: renderthis
-Title: Render Media To Different Formats
+Title: Render Slides To Different Formats
 Version: 0.0.1
 Authors@R:
     c(person(given = "John",
@@ -15,9 +15,9 @@ Authors@R:
       person(given = "Bryan",
              family = "Shalloway",
              role = "ctb"))
-Description: Functions for rendering media to different formats, including
-    html, pdf, png, gif, pptx, and mp4, as well as a 'social' output, a png of
-    the first slide re-sized for sharing on social media.
+Description: Functions for rendering slides to different formats, including
+    html, pdf, png, gif, pptx, and mp4, as well as a 'social' output, a png
+    of the first slide re-sized for sharing on social media.
 License: MIT + file LICENSE
 Depends: 
     R (>= 3.4.0)

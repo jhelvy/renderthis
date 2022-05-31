@@ -26,6 +26,8 @@ IS_README <- TRUE
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
+This package contains functions for rendering slides to different formats, including html, pdf, png, gif, pptx, and mp4, as well as a 'social' output, a png of the first slide re-sized for sharing on social media.
+
 ## Installation
 
 You can install the current version of renderthis from GitHub:
@@ -46,7 +48,7 @@ remotes::install_github("jhelvy/renderthis", dependencies = TRUE)
 
 ## Usage
 
-Use renderthis to render media to different formats. Here is a diagram of the render hierarchy:
+Use renderthis to render slides to different formats. Here is a diagram of the render hierarchy:
 
 ```
 Rmd / qmd
@@ -74,7 +76,8 @@ library(renderthis)
 
 All of the package functions follow a common pattern:
 
-- All functions use `to_*()` to render media to a desired format (e.g., `to_pdf()`). - All functions use the `from` and `to` arguments:
+- All functions use `to_*()` to render slides to a desired format (e.g., `to_pdf()`).
+- All functions use the `from` and `to` arguments:
     - The `from` argument is required and can be a full or local path to the input file.
     - The `to` argument is optional. If provided, it can be a full or local path to the output file, and it must end in an appropriate extension (e.g. `slides.gif` for `to_gif()`).  If it is not provided, the output file name will be determined based on the `from` argument.
 
@@ -82,7 +85,7 @@ You can render all of the examples below from [here](https://github.com/jhelvy/r
 
 ### Render HTML
 
-Render an html file from a Rmd file:
+Render an html file from a Rmd file (xaringan slides) or a qmd file (Quarto slides):
 
 ```{r}
 to_html(from = "slides.Rmd")

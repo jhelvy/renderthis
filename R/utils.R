@@ -87,7 +87,7 @@ path_from <- function(path, to_ext, temporary = FALSE, dir = NULL) {
     path_abs <- if (!path_is_url) fs::path_abs(path)
     path_file <-
         if (temporary) {
-            fs::path_file(fs::file_temp("xaringanBuilder_"))
+            fs::path_file(fs::file_temp("renderthis_"))
         } else {
             fs::path_file(path)
         }
@@ -171,7 +171,7 @@ cli_build_start <- function(input, output_file, on_exit = "failed") {
     # prepare the message right now in this environment, because we'll attach
     # the cli_process to the parent frame, where input and output don't exist
     msg <- cli::format_inline(
-        "Building {.file {input}} into {.field {output}}",
+        "Rendering {.file {input}} into {.field {output}}",
         .envir = environment()
     )
 

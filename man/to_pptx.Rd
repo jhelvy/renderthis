@@ -2,7 +2,7 @@
 % Please edit documentation in R/pptx.R
 \name{to_pptx}
 \alias{to_pptx}
-\title{Build xaringan slides as pptx file.}
+\title{Render slides as pptx file.}
 \usage{
 to_pptx(
   from,
@@ -17,7 +17,7 @@ to_pptx(
 }
 \arguments{
 \item{from}{Path to a Rmd file, html file, pdf file, or a url. If `from`
-is a url to xaringan slides on a website, you must provide the full url
+is a url to slides on a website, you must provide the full url
 ending in `".html"`.}
 
 \item{to}{Name of the output pptx file.}
@@ -43,21 +43,21 @@ PDF.}
 \item{delay}{Seconds of delay between advancing to and printing a new slide.
 Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
 
-\item{keep_intermediates}{Should we keep the intermediate files used to build
-the final output? The default is `FALSE`.}
+\item{keep_intermediates}{Should we keep the intermediate files used to
+render the final output? The default is `FALSE`.}
 }
 \description{
-Build xaringan slides as a pptx file. The function builds to the pdf and
+Render slides as a pptx file. The function renders to the pdf and
 then converts it into png images that are inserted on each slide in the
 pptx file.
 }
 \examples{
 \dontrun{
-# Build pptx from Rmd, html, pdf, or url
+# Render pptx from Rmd, html, pdf, or url
 to_pptx("slides.Rmd")
 to_pptx("slides.html")
 to_pptx("slides.pdf")
-to_pptx("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+to_pptx("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 }
 
 }

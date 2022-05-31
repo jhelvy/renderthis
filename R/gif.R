@@ -1,11 +1,11 @@
-#' Build xaringan slides as a gif file.
+#' Render slides as a gif file.
 #'
-#' Build xaringan slides as a gif video file. The function builds to the pdf,
+#' Render slides as a gif video file. The function renders to the pdf,
 #' converts each slide in the pdf to a png, and then converts the deck of
 #' png files to a gif file.
 #'
 #' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
-#'   is a url to xaringan slides on a website, you must provide the full url
+#'   is a url to slides on a website, you must provide the full url
 #'   ending in `".html"`.
 #' @param to Name of the output gif file.
 #' @param density Resolution of the resulting pngs in each slide file. Defaults
@@ -29,11 +29,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Build gif from Rmd, html, pdf, or url
+#' # Render gif from Rmd, html, pdf, or url
 #' to_gif("slides.Rmd")
 #' to_gif("slides.html")
 #' to_gif("slides.pdf")
-#' to_gif("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+#' to_gif("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 #' }
 #'
 #' @export
@@ -60,7 +60,7 @@ to_gif <- function(
     assert_path_ext(input, c("rmd", "html", "pdf"))
     assert_path_ext(output_file, "gif")
 
-    # Build html and / or pdf (if input is not pdf)
+    # Render html and / or pdf (if input is not pdf)
     step_pdf <- input
     if (!test_path_ext(input, "pdf")) {
         step_pdf <- path_from(output_file, "pdf", temporary = !keep_intermediates)
@@ -74,7 +74,7 @@ to_gif <- function(
         )
     }
 
-    # Build gif from pdf
+    # Render gif from pdf
     proc <- cli_build_start(step_pdf, output_file)
     imgs <- pdf_to_imgs(step_pdf, density)
     slides <- slides_arg_validate(slides, imgs)
@@ -82,7 +82,7 @@ to_gif <- function(
     # Keep only selected slides by number
     imgs <- imgs[slides]
 
-    # Build the gif
+    # Render the gif
     imgs_joined <- magick::image_join(imgs)
     imgs_animated <- magick::image_animate(imgs_joined, fps = fps)
     res <- magick::image_write(imgs_animated, output_file)

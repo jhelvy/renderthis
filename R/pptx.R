@@ -1,11 +1,11 @@
-#' Build xaringan slides as pptx file.
+#' Render slides as pptx file.
 #'
-#' Build xaringan slides as a pptx file. The function builds to the pdf and
+#' Render slides as a pptx file. The function renders to the pdf and
 #' then converts it into png images that are inserted on each slide in the
 #' pptx file.
 #'
 #' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
-#'   is a url to xaringan slides on a website, you must provide the full url
+#'   is a url to slides on a website, you must provide the full url
 #'   ending in `".html"`.
 #' @param to Name of the output pptx file.
 #' @param slides A numeric or integer vector of the slide number(s) to include
@@ -17,11 +17,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Build pptx from Rmd, html, pdf, or url
+#' # Render pptx from Rmd, html, pdf, or url
 #' to_pptx("slides.Rmd")
 #' to_pptx("slides.html")
 #' to_pptx("slides.pdf")
-#' to_pptx("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+#' to_pptx("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 #' }
 #'
 #' @export
@@ -50,7 +50,7 @@ to_pptx <- function(
     assert_path_ext(input, c("rmd", "html", "pdf"))
     assert_path_ext(output_file, "pptx")
 
-    # Build html and / or pdf (if input is not pdf)
+    # Render html and / or pdf (if input is not pdf)
     step_pdf <- input
     if (!test_path_ext(input, "pdf")) {
         step_pdf <- path_from(output_file, "pdf", temporary = !keep_intermediates)
@@ -64,7 +64,7 @@ to_pptx <- function(
         )
     }
 
-    # Build pptx from pdf
+    # Render pptx from pdf
     proc <- cli_build_start(step_pdf, output_file)
     imgs <- pdf_to_imgs(step_pdf, density)
     slides <- slides_arg_validate(slides, imgs)
@@ -74,7 +74,7 @@ to_pptx <- function(
         imgs <- imgs[slides]
     }
 
-    # Build the pptx
+    # Render the pptx
     doc <- get_pptx_template(imgs[1])
     for (i in 1:length(imgs)) {
         png_path <- magick::image_write(imgs[i], tempfile(fileext = ".png"))
@@ -103,6 +103,6 @@ get_pptx_template <- function(png) {
         file <- "4-3.pptx"
     }
     template <- system.file(
-        "extdata", file, package = "xaringanBuilder", mustWork = TRUE)
+        "extdata", file, package = "renderthis", mustWork = TRUE)
     officer::read_pptx(template)
 }

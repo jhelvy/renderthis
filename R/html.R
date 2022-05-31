@@ -1,11 +1,12 @@
-#' Build xaringan slides as html file.
+#' Render slides as html file.
 #'
-#' Build xaringan slides as html file. Essentially the same thing as
-#' [rmarkdown::render()] with `output_format = "xaringan::moon_reader"`,
-#' except that the `self_contained` option is forced to `TRUE` if the HTML file
-#' is built into a directory other than the one containing `from`.
+#' Render xaringan or quarto slides as an html file. For xaringan slides, it
+#' is the same thing as [rmarkdown::render()] with
+#' `output_format = "xaringan::moon_reader"` except that the `self_contained`
+#' option is forced to `TRUE` if the HTML file is built into a directory other
+#'  than the one containing `from`.
 #'
-#' @param from Path to an Rmd file of xaringan slides or qmd of revealjs slides.
+#' @param from Path to an Rmd file of xaringan slides or qmd of Quarto slides.
 #' @param to The name of the output file. If using `NULL` then the
 #'   output file name will be based on file name for the `from` file. If a file
 #'   name is provided, a path to the output file can also be provided.
@@ -19,7 +20,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Build html from Rmd file
+#' # Render html from Rmd file
 #' to_html("slides.Rmd")
 #' }
 #'
@@ -45,7 +46,7 @@ to_html <- function(from, to = NULL, self_contained = FALSE, rmd_args = NULL) {
     rmd_args <- build_html_rmd_args(input, output_file, self_contained, rmd_args)
     self_contained <- rmd_args$output_options$self_contained
 
-    # Build html from rmd
+    # Render html from rmd
     #
     # If the output isn't in the same directory, we turn on self contained and
     # render the html file to a temporary file in the source input directory.

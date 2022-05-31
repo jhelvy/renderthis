@@ -7,7 +7,7 @@ devtools::document()
 # Install the package
 devtools::install(force = TRUE)
 
-# Build the pkgdown site
+# Build the pkgdown site1
 pkgdown::build_site()
 
 # Check package
@@ -21,7 +21,7 @@ remotes::install_github('jhelvy/renderthis')
 
 # Load the package and view the summary
 library(renderthis)
-help(package='renderthis')
+help(package = 'renderthis')
 
 # Submit to CRAN
 devtools::release(check = TRUE)

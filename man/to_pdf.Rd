@@ -2,7 +2,7 @@
 % Please edit documentation in R/pdf.R
 \name{to_pdf}
 \alias{to_pdf}
-\title{Build xaringan slides as pdf file.}
+\title{Render slides as pdf file.}
 \usage{
 to_pdf(
   from,
@@ -15,7 +15,7 @@ to_pdf(
 }
 \arguments{
 \item{from}{Path to a Rmd file, html file, pdf file, or a url. If `from`
-is a url to xaringan slides on a website, you must provide the full url
+is a url to slides on a website, you must provide the full url
 ending in `".html"`.}
 
 \item{to}{The name of the output file. If `NULL` (the default) then
@@ -41,26 +41,26 @@ if the `to` file is written into the same directory as the `from` argument,
 otherwise the intermediate file isn't kept.}
 }
 \description{
-Build xaringan slides as a pdf file. Requires a local installation of Chrome.
+Render slides as a pdf file. Requires a local installation of Chrome.
 If you set `complex_slides = TRUE` or `partial_slides = TRUE`, you will also
 need to install the {chromote} and {pdftools} packages.
 }
 \examples{
 \dontrun{
-# Build pdf from Rmd, html, or url
+# Render pdf from Rmd, html, or url
 to_pdf("slides.Rmd")
 to_pdf("slides.html")
-to_pdf("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+to_pdf("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 
-# Build a pdf with partial (continuation) slides
+# Render a pdf with partial (continuation) slides
 to_pdf("slides.Rmd", partial_slides = TRUE)
 to_pdf("slides.html", partial_slides = TRUE)
 
-# Build a pdf of "complex" xaringan slides
+# Render a pdf of "complex" slides
 to_pdf("slides_complex.Rmd", complex_slides = TRUE)
 to_pdf("slides_complex.html", complex_slides = TRUE)
 
-# Build a pdf of "complex" xaringan slides and include partial
+# Render a pdf of "complex" slides and include partial
 # (continuation) slides
 to_pdf(from = "slides_complex.Rmd",
        to = "slides_complex_partial.pdf",

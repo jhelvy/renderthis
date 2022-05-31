@@ -2,7 +2,7 @@
 % Please edit documentation in R/mp4.R
 \name{to_mp4}
 \alias{to_mp4}
-\title{Build xaringan slides as a mp4 video file.}
+\title{Render slides as a mp4 video file.}
 \usage{
 to_mp4(
   from,
@@ -18,7 +18,7 @@ to_mp4(
 }
 \arguments{
 \item{from}{Path to a Rmd file, html file, pdf file, or a url. If `from`
-is a url to xaringan slides on a website, you must provide the full url
+is a url to slides on a website, you must provide the full url
 ending in `".html"`.}
 
 \item{to}{Name of the output mp4 file.}
@@ -46,21 +46,21 @@ PDF.}
 \item{delay}{Seconds of delay between advancing to and printing a new slide.
 Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
 
-\item{keep_intermediates}{Should we keep the intermediate files used to build
-the final output? The default is `FALSE`.}
+\item{keep_intermediates}{Should we keep the intermediate files used to
+render the final output? The default is `FALSE`.}
 }
 \description{
-Build xaringan slides as a mp4 video file. The function builds to the pdf,
+Render slides as a mp4 video file. The function renders to the pdf,
 converts each slide in the pdf to a png, and then converts the deck of
 png files to a mp4 video file.
 }
 \examples{
 \dontrun{
-# Build mp4 from Rmd, html, pdf, or url
+# Render mp4 from Rmd, html, pdf, or url
 to_mp4("slides.Rmd")
 to_mp4("slides.html")
 to_mp4("slides.pdf")
-to_mp4("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+to_mp4("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 }
 
 }

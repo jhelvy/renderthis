@@ -1,6 +1,6 @@
-#' Build xaringan slides as png file(s).
+#' Render slides as png file(s).
 #'
-#' Build png image(s) of xaringan slides. The function builds to the pdf and
+#' Render png image(s) of slides. The function renders to the pdf and
 #' then converts it into png files of each slide. The slide numbers defined by
 #' the `slides` argument are saved (defaults to `1`, returning only the title
 #' slide). If `length(slides) > 1`, it will return the png files in a zip file.
@@ -8,19 +8,19 @@
 #' "all"`).
 #'
 #' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
-#'   is a url to xaringan slides on a website, you must provide the full url
+#'   is a url to slides on a website, you must provide the full url
 #'   ending in `".html"`.
 #' @param to Name of the output png or zip file.
 #' @param density Resolution of the resulting pngs in each slide file. Defaults
 #'   to `100`.
-#' @param slides A numeric or integer vector of the slide number(s) to build
+#' @param slides A numeric or integer vector of the slide number(s) to render
 #'   as png files , or one of `"all"`, `"first"`, or `"last"`. Negative integers
 #'   select which slides _not_ to include. If more than one slide are included,
 #'   pngs will be returned as a zip file. Defaults to `"all"`, in which case
 #'   all slides are included.
 #' @inheritParams to_pdf
-#' @param keep_intermediates Should we keep the intermediate files used to build
-#'   the final output? The default is `FALSE`.
+#' @param keep_intermediates Should we keep the intermediate files used to
+#'   render the final output? The default is `FALSE`.
 #'
 #' @examples
 #' \dontrun{
@@ -28,9 +28,9 @@
 #' to_png("slides.Rmd")
 #' to_png("slides.html")
 #' to_png("slides.pdf")
-#' to_png("https://jhelvy.github.io/xaringanBuilder/reference/figures/slides.html")
+#' to_png("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 #'
-#' # Build zip file of multiple or all slides
+#' # Render zip file of multiple or all slides
 #' to_png("slides.pdf", slides = c(1, 3, 5))
 #' to_png("slides.pdf", slides = "all")
 #' }
@@ -64,7 +64,7 @@ to_png <- function(
     assert_path_ext(input, c("rmd", "html", "pdf"))
     assert_path_ext(output_file, c("png", "zip"))
 
-    # Build html and / or pdf (if input is not pdf)
+    # Render html and / or pdf (if input is not pdf)
     step_pdf <- input
     if (!test_path_ext(input, "pdf")) {
         step_pdf <- path_from(output_file, "pdf", temporary = !keep_intermediates)
@@ -78,7 +78,7 @@ to_png <- function(
         )
     }
 
-    # Build png from pdf
+    # Render png from pdf
     imgs <- pdf_to_imgs(step_pdf, density)
 
     # Check slides arg again to make sure all slides are in range
