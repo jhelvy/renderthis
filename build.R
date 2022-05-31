@@ -28,3 +28,5 @@ help(package = 'renderthis')
 
 # Submit to CRAN
 devtools::release(check = TRUE)
+
+to_handout("https://matt-dray.github.io/targets-dsfest/", "test/")
