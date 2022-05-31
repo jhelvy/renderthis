@@ -1,40 +1,44 @@
-
-#' Build handout from xaringan slides
+#' Render handout from slides
 #'
-#' Builds a presentation handout as an `.Rmd` and `.html` file from a set of
+#' Renders a presentation handout as an `.Rmd` and `.html` file from a set of
 #' xaringan slides. The handout extracts a thumbnail preview for each slide in
 #' the input, as well as the slide content and presenter notes. The final output
 #' is an `.html` file that's suitable for publishing or printing. The output
 #' also includes the `.Rmd` file used to create the handout so that you can
 #' edit the content as needed and can re-render the handout without having to
-#' call `build_handout()` again.
-#'
-#' @param output_dir The directory where the slide handout, preview images and
+#' call `to_handout()` again.
+#' @param to The directory where the slide handout, preview images, and
 #'   other slide data will be stored. Because many files are included in the
-#'   `build_handout()` output, a directory is required. If the directory exists
-#'   it will be overwritten.
+#'   `to_handout()` output, a directory is required. If the directory
+#'   already exists it will be overwritten.
 #' @param include A character vector of sections to include in the handout:
 #'
-#'   - `"preview"`: a preview image of the slide
+#'   - `"preview"`: a preview image of the slide.
 #'   - `"content"`: the content extracted from the slide, discarding most
 #'     problematic content types, but including images if `include_images` is
 #'     `TRUE`.
-#'   - `"notes"`: the presenter notes from the slide
-#'   - `"lines"`: a lined notes area
+#'   - `"notes"`: the presenter notes from the slide.
+#'   - `"lines"`: a lined notes area.
 #' @param include_images Should images be included in the slide `content`
 #'   section? The default is `FALSE` to keep mostly the text content of each
 #'   slide.
-#' @inheritParams build_pdf
+#' @inheritParams to_pdf
 #'
 #' @export
-build_handout <- function(
-    input,
-    output_dir = NULL,
+to_handout <- function(
+    from,
+    to = NULL,
     include = c("preview", "content", "notes"),
-    keep_intermediates = FALSE,
+    to = NULL,
+    complex_slides = FALSE,
     partial_slides = FALSE,
+    delay = 1,
+    keep_intermediates = NULL,
     include_images = FALSE
 ) {
+    input <- from
+    output_dir <- to
+
     include <- match.arg(include, c("preview", "content", "notes", "lines"), TRUE)
 
     # Check if Chrome is installed
@@ -55,20 +59,20 @@ build_handout <- function(
         keep_intermediates <- in_same_directory(input, output_dir)
     }
 
-    # Build html (if input is rmd)
+    # Render html (if input is rmd)
     step_html <- input
     if (test_path_ext(input, "rmd")) {
         step_html <- path_from(output_dir, "html", temporary = !keep_intermediates)
-        build_html(input, step_html)
+        to_html(from = input, to = step_html)
     }
 
-    # Render handout in temp directory... there are lots of files!
+    # Render handout in temp directory...there are lots of files!
     handout_dir <- withr::local_tempdir()
     handout_html <- path_from(input, "html", dir = handout_dir)
     proc <- cli_build_start(basename(handout_html), output_dir, on_exit = "done")
 
     withr::with_dir(handout_dir, {
-        slides_imgs <- build_pdf_complex(
+        slides_imgs <- to_pdf_complex(
             input = step_html,
             output_file = "slides",
             partial_slides = TRUE, # always get images of partials, filter later
@@ -117,7 +121,7 @@ handout_render_template <- function(
 
     include <- match.arg(include, c("preview", "content", "notes", "lines"), TRUE)
 
-    handout_tmpl <- system.file("template", "handout.Rmd", package = "xaringanBuilder")
+    handout_tmpl <- system.file("template", "handout.Rmd", package = "renderthis")
     assert_path_ext(output_file, "html")
     handout_rmd <- fs::path_ext_set(fs::path_file(output_file), "Rmd")
 
@@ -192,7 +196,7 @@ pdf_slides_to_images <- function(dir, clean_pdfs = TRUE) {
         sub("slide-(\\d+)-\\d+[.]pdf", "\\1", basename(slides_imgs$slide_pdf))
     )
 
-    pb <- cli::cli_progress_bar("Building slide images", total = nrow(slides_imgs), )
+    pb <- cli::cli_progress_bar("Rendering slide images", total = nrow(slides_imgs), )
 
     slides_imgs$preview_image <- slides_imgs$slide_pdf
 
@@ -463,15 +467,15 @@ handout_slide_md <- function(content, notes, preview_image, index, lined_notes_a
 }
 
 handout_css <- function() {
-    handout_css_file <- fs::path_package("xaringanBuilder", "template", "handout.css")
+    handout_css_file <- fs::path_package("renderthis", "template", "handout.css")
     handout_css <- paste(readLines(handout_css_file), collapse = "\n")
     meta <- list(head = sprintf("<style>%s</style>", handout_css))
 
     htmltools::tagList(
         htmltools::htmlDependency(
-          name = "xaringanBuilder-handout",
+          name = "renderthis-handout",
           version = "0.0.1",
-          package = "xaringanBuilder",
+          package = "renderthis",
           src = "template",
           stylesheet = "handout.css",
           all_files = FALSE

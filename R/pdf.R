@@ -4,7 +4,7 @@
 #' If you set `complex_slides = TRUE` or `partial_slides = TRUE`, you will also
 #' need to install the {chromote} and {pdftools} packages.
 #'
-#' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
+#' @param from Path to a Rmd file, html file, or a url. If `from`
 #'   is a url to slides on a website, you must provide the full url
 #'   ending in `".html"`.
 #' @param to The name of the output file. If `NULL` (the default) then
