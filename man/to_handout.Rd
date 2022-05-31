@@ -16,52 +16,72 @@ to_handout(
 )
 }
 \arguments{
-\item{from}{Path to a Rmd file, html file, or a url. If `from`
+\item{from}{Path to a Rmd file, html file, or a url. If \code{from}
 is a url to slides on a website, you must provide the full url
-ending in `".html"`.}
+ending in \code{".html"}.}
 
 \item{to}{The directory where the slide handout, preview images, and
 other slide data will be stored. Because many files are included in the
-`to_handout()` output, a directory is required. If the directory
+\code{to_handout()} output, a directory is required. If the directory
 already exists it will be overwritten.}
 
 \item{include}{A character vector of sections to include in the handout:
-
-  - `"preview"`: a preview image of the slide.
-  - `"content"`: the content extracted from the slide, discarding most
-    problematic content types, but including images if `include_images` is
-    `TRUE`.
-  - `"notes"`: the presenter notes from the slide.
-  - `"lines"`: a lined notes area.}
+\itemize{
+\item \code{"preview"}: a preview image of the slide.
+\item \code{"content"}: the content extracted from the slide, discarding most
+problematic content types, but including images if \code{include_images} is
+\code{TRUE}.
+\item \code{"notes"}: the presenter notes from the slide.
+\item \code{"lines"}: a lined notes area.
+}}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
-other html widgets or advanced features), set `complex_slides = TRUE`.
-Defaults to `FALSE`. This will use the {chromote} package to iterate
-through the slides at a pace set by the `delay` argument. Requires a local
+other html widgets or advanced features), set \code{complex_slides = TRUE}.
+Defaults to \code{FALSE}. This will use the {chromote} package to iterate
+through the slides at a pace set by the \code{delay} argument. Requires a local
 installation of Chrome.}
 
 \item{partial_slides}{Should partial (continuation) slides be included in the
-output? If `FALSE`, the default, only the complete slide is included in the
+output? If \code{FALSE}, the default, only the complete slide is included in the
 PDF.}
 
 \item{delay}{Seconds of delay between advancing to and printing a new slide.
-Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
+Only used if \code{complex_slides = TRUE} or \code{partial_slides = TRUE}.}
 
 \item{keep_intermediates}{Should we keep the intermediate HTML file? Only
-relevant if the `from` file is an `.Rmd` file. Default is `TRUE`
-if the `to` file is written into the same directory as the `from` argument,
+relevant if the \code{from} file is an \code{.Rmd} file. Default is \code{TRUE}
+if the \code{to} file is written into the same directory as the \code{from} argument,
 otherwise the intermediate file isn't kept.}
 
-\item{include_images}{Should images be included in the slide `content`
-section? The default is `FALSE` to keep mostly the text content of each
+\item{include_images}{Should images be included in the slide \code{content}
+section? The default is \code{FALSE} to keep mostly the text content of each
 slide.}
 }
 \description{
-Renders a presentation handout as an `.Rmd` and `.html` file from a
+Renders a presentation handout as an \code{.Rmd} and \code{.html} file from a
 set of slides. The handout extracts a thumbnail preview for each slide in
 the input, as well as the slide content and presenter notes. The final output
-is a `.html` file that is suitable for publishing or printing. The output
-also includes the `.Rmd` file used to create the handout so that you can
+is a \code{.html} file that is suitable for publishing or printing. The output
+also includes the \code{.Rmd} file used to create the handout so that you can
 edit the content as needed and can re-render the handout without having to
-call `to_handout()` again.
+call \code{to_handout()} again.
+}
+\examples{
+\dontrun{
+
+# Render handouts with image previews and lines
+to_handout(
+    from = "https://jhelvy.github.io/renderthis/reference/figures/slides.html",
+    to = "handouts",
+    include = c("preview", "lines"),
+)
+
+# Render handouts with image previews, content, and speaker notes
+to_handout(
+    from = "https://jhelvy.github.io/renderthis/reference/figures/slides.html",
+    to = "handouts",
+    include = c("preview", "content", "notes")
+)
+}
+
 }

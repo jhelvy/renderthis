@@ -9,25 +9,25 @@ to_html(from, to = NULL, self_contained = FALSE, rmd_args = NULL)
 \arguments{
 \item{from}{Path to an Rmd file of xaringan slides.}
 
-\item{to}{The name of the output file. If using `NULL` then the
-output file name will be based on file name for the `from` file. If a file
+\item{to}{The name of the output file. If using \code{NULL} then the
+output file name will be based on file name for the \code{from} file. If a file
 name is provided, a path to the output file can also be provided.}
 
 \item{self_contained}{Should the output file be a self-contained HTML file
 where all images, CSS and JavaScript are included directly in the output
-file? This option, when `TRUE`, provides you with a single HTML file that
+file? This option, when \code{TRUE}, provides you with a single HTML file that
 you can share with others, but it may be very large. This feature is
-enabled by default when the `to` file is written in a directory other
-than the one containing the `from` R Markdown file.}
+enabled by default when the \code{to} file is written in a directory other
+than the one containing the \code{from} R Markdown file.}
 
-\item{rmd_args}{A list of arguments passed to [rmarkdown::render()].}
+\item{rmd_args}{A list of arguments passed to \code{\link[rmarkdown:render]{rmarkdown::render()}}.}
 }
 \description{
 Render xaringan or slides as an html file. For xaringan slides, it
-is the same thing as [rmarkdown::render()] with
-`output_format = "xaringan::moon_reader"` except that the `self_contained`
-option is forced to `TRUE` if the HTML file is built into a directory other
- than the one containing `from`.
+is the same thing as \code{\link[rmarkdown:render]{rmarkdown::render()}} with
+\code{output_format = "xaringan::moon_reader"} except that the \code{self_contained}
+option is forced to \code{TRUE} if the HTML file is built into a directory other
+than the one containing \code{from}.
 }
 \examples{
 \dontrun{
