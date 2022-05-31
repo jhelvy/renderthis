@@ -1,12 +1,12 @@
 #' Render handout from slides
 #'
-#' Renders a presentation handout as an `.Rmd` and `.html` file from a set of
-#' xaringan slides. The handout extracts a thumbnail preview for each slide in
+#' Renders a presentation handout as `.Rmd`, `.html`, and `.pdf` files from a
+#' set of slides. The handout extracts a thumbnail preview for each slide in
 #' the input, as well as the slide content and presenter notes. The final output
-#' is an `.html` file that's suitable for publishing or printing. The output
-#' also includes the `.Rmd` file used to create the handout so that you can
-#' edit the content as needed and can re-render the handout without having to
-#' call `to_handout()` again.
+#' is a `.html` file that is suitable for publishing or printing as well as a
+#' `.pdf`. The output also includes the `.Rmd` file used to create the handout
+#' so that you can edit the content as needed and can re-render the handout
+#' without having to call `to_handout()` again.
 #' @param to The directory where the slide handout, preview images, and
 #'   other slide data will be stored. Because many files are included in the
 #'   `to_handout()` output, a directory is required. If the directory

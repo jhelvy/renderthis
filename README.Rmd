@@ -51,7 +51,7 @@ remotes::install_github("jhelvy/renderthis", dependencies = TRUE)
 Use renderthis to render slides to different formats. Here is a diagram of the render hierarchy:
 
 ```
-Rmd / qmd
+Rmd
     |
     |--> social (png)
     |
@@ -85,7 +85,7 @@ You can render all of the examples below from [here](https://github.com/jhelvy/r
 
 ### Render HTML
 
-Render an html file from a Rmd file (xaringan slides) or a qmd file (Quarto slides):
+Render an html file from a Rmd file of xaringan slides:
 
 ```{r}
 to_html(from = "slides.Rmd")
@@ -93,7 +93,7 @@ to_html(from = "slides.Rmd")
 
 ### Render PDF
 
-Input can be a Rmd / qmd file, html file, or url:
+Input can be a Rmd file, html file, or url:
 
 ```{r}
 to_pdf(from = "slides.Rmd")
@@ -105,7 +105,7 @@ to_pdf(from = "https://jhelvy.github.io/renderthis/reference/figures/slides.html
 
 ### Render GIF
 
-Input can be a Rmd / qmd file, html file, pdf file, or url:
+Input can be a Rmd file, html file, pdf file, or url:
 
 ```{r}
 to_gif(from = "slides.Rmd")
@@ -120,7 +120,7 @@ Example:
 
 ### Render MP4
 
-Input can be a Rmd /qmd file, html file, pdf file, or url:
+Input can be a Rmd file, html file, pdf file, or url:
 
 ```{r}
 to_mp4(from = "slides.Rmd")
@@ -135,7 +135,7 @@ Creates a pptx file where each slide contains a png image of each slide. While y
 
 (See the [slidex](https://github.com/datalorax/slidex) package by @datalorax to do the opposite: pptx --> xaringan!)
 
-Input can be a Rmd / qmd file, html file, pdf file, or url:
+Input can be a Rmd file, html file, pdf file, or url:
 
 ```{r}
 to_pptx(from = "slides.Rmd")
@@ -148,7 +148,7 @@ to_pptx(from = "https://jhelvy.github.io/renderthis/reference/figures/slides.htm
 
 Render png image(s) of some or all slides. Use the `slides` argument to determine which slides to include (defaults to `1`, returning just the first slide).
 
-Input can be a Rmd / qmd file, html file, pdf file, or url:
+Input can be a Rmd file, html file, pdf file, or url:
 
 ```{r}
 # By default, a png of only the first slide is built

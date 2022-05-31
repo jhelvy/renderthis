@@ -1,12 +1,12 @@
 #' Render slides as html file.
 #'
-#' Render xaringan or quarto slides as an html file. For xaringan slides, it
+#' Render xaringan or slides as an html file. For xaringan slides, it
 #' is the same thing as [rmarkdown::render()] with
 #' `output_format = "xaringan::moon_reader"` except that the `self_contained`
 #' option is forced to `TRUE` if the HTML file is built into a directory other
 #'  than the one containing `from`.
 #'
-#' @param from Path to an Rmd file of xaringan slides or qmd of Quarto slides.
+#' @param from Path to an Rmd file of xaringan slides.
 #' @param to The name of the output file. If using `NULL` then the
 #'   output file name will be based on file name for the `from` file. If a file
 #'   name is provided, a path to the output file can also be provided.
