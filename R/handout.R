@@ -29,7 +29,6 @@ to_handout <- function(
     from,
     to = NULL,
     include = c("preview", "content", "notes"),
-    to = NULL,
     complex_slides = FALSE,
     partial_slides = FALSE,
     delay = 1,

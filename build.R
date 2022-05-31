@@ -1,6 +1,9 @@
 rm(list = ls())
 .rs.restartR()
 
+# Load package
+devtools::load_all()
+
 # Create the documentation for the package
 devtools::document()
 

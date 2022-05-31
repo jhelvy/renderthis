@@ -14,7 +14,7 @@ to_pdf(
 )
 }
 \arguments{
-\item{from}{Path to a Rmd file, html file, pdf file, or a url. If `from`
+\item{from}{Path to a Rmd file, html file, or a url. If `from`
 is a url to slides on a website, you must provide the full url
 ending in `".html"`.}
 
