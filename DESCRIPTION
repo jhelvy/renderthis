@@ -36,6 +36,7 @@ Imports:
 Suggests:
     av,
     chromote (>= 0.0.0.9003),
+    knitr,
     lifecycle,
     officer,
     pdftools,
@@ -50,3 +51,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 RoxygenNote: 7.2.0
 Roxygen: list(markdown = TRUE)
+VignetteBuilder: knitr
