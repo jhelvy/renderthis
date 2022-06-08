@@ -52,6 +52,8 @@ all slides are included.}
 \item{from}{Path to Rmd file of xaringan slides.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 Build xaringan slides to multiple outputs. Options are \code{"html"}, \code{"social"}
 \code{"pdf"}, \code{"png"}, \code{"gif"}, \code{"mp4"}, and \code{"pptx"}. See each individual
 build_*() function for details about each output type.
