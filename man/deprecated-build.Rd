@@ -9,7 +9,6 @@
 \alias{build_mp4}
 \alias{build_pptx}
 \alias{build_social}
-\alias{build_all}
 \title{Deprecated Build Functions}
 \usage{
 build_html(...)
@@ -25,8 +24,6 @@ build_mp4(...)
 build_pptx(...)
 
 build_social(...)
-
-build_all(...)
 }
 \arguments{
 \item{...}{Parameters passed to the new \verb{to_*()} function}
