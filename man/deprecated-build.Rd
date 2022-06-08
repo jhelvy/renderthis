@@ -46,5 +46,8 @@ new package name, these function names have also been changed.
 \item \code{build_pptx()} is now \code{\link[=to_pptx]{to_pptx()}}
 \item \code{build_social()} is now \code{\link[=to_social]{to_social()}}
 }
+
+\strong{Argument names.} Note that the \code{input} and \code{output_file} arguments of
+these functions have also been renamed. They are now named \code{from} and \code{to}.
 }
 \keyword{internal}
