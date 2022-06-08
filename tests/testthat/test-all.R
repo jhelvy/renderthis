@@ -1,4 +1,4 @@
-test_that("build_all() from basic slides.Rmd", {
+test_that("to_all() from basic slides.Rmd", {
     skip_if_not_chrome_installed()
     skip_if_not_installed("av")
     skip_if_not_installed("officer")
@@ -10,7 +10,7 @@ test_that("build_all() from basic slides.Rmd", {
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_all("slides.Rmd", slides = NULL)
+        to_all("slides.Rmd", slides = NULL)
     )
 
     expect_true(fs::file_exists("slides.html"))
@@ -21,7 +21,7 @@ test_that("build_all() from basic slides.Rmd", {
     expect_true(fs::file_exists("slides.pptx"))
 })
 
-test_that("build_all() from basic slides.Rmd with a few excluded formats", {
+test_that("to_all() from basic slides.Rmd with a few excluded formats", {
     skip_if_not_chrome_installed()
     skip_if_not_installed("av")
     skip_if_not_installed("officer")
@@ -33,7 +33,7 @@ test_that("build_all() from basic slides.Rmd with a few excluded formats", {
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_all("slides.Rmd", slides = NULL, exclude = c("html", "pdf", "png"))
+        to_all("slides.Rmd", slides = NULL, exclude = c("html", "pdf", "png"))
     )
 
     expect_false(fs::file_exists("slides.html"))

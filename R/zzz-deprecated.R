@@ -82,3 +82,7 @@ build_pptx <- deprecate_function("build_pptx", "to_pptx")
 #' @rdname deprecated-build
 #' @export
 build_social <- deprecate_function("build_social", "to_social")
+
+#' @rdname deprecated-build
+#' @export
+build_all <- deprecate_function("build_all", "to_all")
