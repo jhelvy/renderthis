@@ -12,6 +12,16 @@ status](https://www.r-pkg.org/badges/version/renderthis)](https://CRAN.R-project
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
+This package contains functions for rendering slides to different
+formats, including html, pdf, png, gif, pptx, and mp4, as well as a
+‘social’ output, a png of the first slide re-sized for sharing on social
+media.
+
+**Looking for xaringanBuilder?** The package formerly known as
+xaringanBuilder is now **renderthis**. If you need to install
+xaringanBuilder under the previous package name, [see the instructions
+below](#installing-xaringanbuilder).
+
 ## Installation
 
 You can install the current version of renderthis from GitHub:
@@ -37,7 +47,7 @@ Chrome](https://jhelvy.github.io/renderthis/articles/renderthis-setup.html#local
 
 ## Usage
 
-Use renderthis to render media to different formats. Here is a diagram
+Use renderthis to render slides to different formats. Here is a diagram
 of the render hierarchy:
 
     Rmd / qmd
@@ -64,9 +74,9 @@ library(renderthis)
 
 All of the package functions follow a common pattern:
 
--   All functions use `to_*()` to render media to a desired format
-    (e.g., `to_pdf()`). - All functions use the `from` and `to`
-    arguments:
+-   All functions use `to_*()` to render slides to a desired format
+    (e.g., `to_pdf()`).
+-   All functions use the `from` and `to` arguments:
     -   The `from` argument is required and can be a full or local path
         to the input file.
     -   The `to` argument is optional. If provided, it can be a full or
@@ -80,7 +90,8 @@ You can render all of the examples below from
 
 ### Render HTML
 
-Render an html file from a Rmd file:
+Render an html file from a Rmd file (xaringan slides) or a qmd file
+(Quarto slides):
 
 ``` r
 to_html(from = "slides.Rmd")
@@ -234,11 +245,23 @@ if you cited it. You can get the citation information by typing
 To cite renderthis in publications use:
 
 Helveston, John Paul and Aden-Buie, Garrick (2021). renderthis: Render
-media to different formats.
+slides to different formats.
 
 A BibTeX entry for LaTeX users is
 
-@Manual{, title = {renderthis: Render media to different formats.},
+@Manual{, title = {renderthis: Render slides to different formats.},
 author = {{Helveston} and John Paul and {Aden-Buie} and {Garrick}}, year
 = {2021}, note = {R package version 0.0.1}, url =
 {<https://jhelvy.github.io/renderthis/>}, }
+
+## Installing xaringanBuilder
+
+You can install the xaringanBuilder package as it was just prior to the
+name change with:
+
+``` r
+remotes::install_github("jhelvy/renderthis@v0.0.9")
+```
+
+Even though the install command mentions `renderthis`, the package will
+be installed as xaringanBuilder.
