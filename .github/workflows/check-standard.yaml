@@ -33,7 +33,7 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
 
-      - if: runner.os == 'ubuntu-latest'
+      - if: runner.os == 'Linux'
         run: |
           sudo add-apt-repository -y ppa:cran/ffmpeg-3
           sudo apt-get update
