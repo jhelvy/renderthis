@@ -17,6 +17,8 @@ build_all(
 )
 }
 \arguments{
+\item{input}{Path to Rmd file of xaringan slides.}
+
 \item{include}{A vector of the different output types to build. Options are
 \code{"html"}, \code{"social"}, \code{"pdf"}, \code{"png"}, \code{"gif"}, \code{"mp4"}, and \code{"pptx"}.
 Defaults to \code{c("html", "social", "pdf", "png", "gif", "mp4", "pptx")}.}
@@ -48,8 +50,6 @@ pngs will be returned as a zip file. Defaults to \code{"all"}, in which case
 all slides are included.}
 
 \item{fps}{Frames per second of the resulting mp4 file.}
-
-\item{from}{Path to Rmd file of xaringan slides.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
