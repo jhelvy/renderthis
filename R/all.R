@@ -11,9 +11,9 @@
 #' @param exclude A vector of the different output types to NOT build. Options
 #'   are `"html"`, `"social"`, `"pdf"`, `"png"`, `"gif"`, `"mp4"`, and `"pptx"`.
 #'   Defaults to `NULL`, in which case all all output types are built.
-#' @inheritParams build_png
-#' @inheritParams build_pdf
-#' @inheritParams build_mp4
+#' @inheritParams to_png
+#' @inheritParams to_pdf
+#' @inheritParams to_mp4
 #'
 #' @examples
 #' \dontrun{

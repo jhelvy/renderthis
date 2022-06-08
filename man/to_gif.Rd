@@ -17,37 +17,37 @@ to_gif(
 )
 }
 \arguments{
-\item{from}{Path to a Rmd file, html file, pdf file, or a url. If `from`
+\item{from}{Path to a Rmd file, html file, pdf file, or a url. If \code{from}
 is a url to slides on a website, you must provide the full url
-ending in `".html"`.}
+ending in \code{".html"}.}
 
 \item{to}{Name of the output gif file.}
 
 \item{density}{Resolution of the resulting pngs in each slide file. Defaults
-to `100`.}
+to \code{100}.}
 
 \item{slides}{A numeric or integer vector of the slide number(s) to include
-in the gif, or one of `"all"`, `"first"`, or `"last"`. Negative integers
-select which slides _not_ to include. Defaults to `"all"`, in which case
+in the gif, or one of \code{"all"}, \code{"first"}, or \code{"last"}. Negative integers
+select which slides \emph{not} to include. Defaults to \code{"all"}, in which case
 all slides are included.}
 
 \item{fps}{Frames per second of the resulting gif file.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
-other html widgets or advanced features), set `complex_slides = TRUE`.
-Defaults to `FALSE`. This will use the {chromote} package to iterate
-through the slides at a pace set by the `delay` argument. Requires a local
+other html widgets or advanced features), set \code{complex_slides = TRUE}.
+Defaults to \code{FALSE}. This will use the {chromote} package to iterate
+through the slides at a pace set by the \code{delay} argument. Requires a local
 installation of Chrome.}
 
 \item{partial_slides}{Should partial (continuation) slides be included in the
-output? If `FALSE`, the default, only the complete slide is included in the
+output? If \code{FALSE}, the default, only the complete slide is included in the
 PDF.}
 
 \item{delay}{Seconds of delay between advancing to and printing a new slide.
-Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.}
+Only used if \code{complex_slides = TRUE} or \code{partial_slides = TRUE}.}
 
 \item{keep_intermediates}{Should we keep the intermediate files used to
-render the final output? The default is `FALSE`.}
+render the final output? The default is \code{FALSE}.}
 }
 \description{
 Render slides as a gif video file. The function renders to the pdf,
