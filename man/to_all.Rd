@@ -17,9 +17,7 @@ to_all(
 )
 }
 \arguments{
-\item{from}{Path to a Rmd file, html file, pdf file, or a url. If \code{from}
-is a url to slides on a website, you must provide the full url
-ending in \code{".html"}.}
+\item{from}{Path to Rmd file of xaringan slides.}
 
 \item{include}{A vector of the different output types to build. Options are
 \code{"html"}, \code{"social"}, \code{"pdf"}, \code{"png"}, \code{"gif"}, \code{"mp4"}, and \code{"pptx"}.
@@ -52,8 +50,6 @@ pngs will be returned as a zip file. Defaults to \code{"all"}, in which case
 all slides are included.}
 
 \item{fps}{Frames per second of the resulting mp4 file.}
-
-\item{input}{Path to Rmd file of xaringan slides.}
 }
 \description{
 Build xaringan slides to multiple outputs. Options are \code{"html"}

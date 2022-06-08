@@ -5,7 +5,7 @@
 #' ([to_png()]), `"gif"` ([to_gif()]), `"mp4"` ([to_mp4()]), and `"pptx"`
 #' ([to_pptx()]).
 #'
-#' @param input Path to Rmd file of xaringan slides.
+#' @param from Path to Rmd file of xaringan slides.
 #' @param include A vector of the different output types to build. Options are
 #'   `"html"`, `"social"`, `"pdf"`, `"png"`, `"gif"`, `"mp4"`, and `"pptx"`.
 #'   Defaults to `c("html", "social", "pdf", "png", "gif", "mp4", "pptx")`.
