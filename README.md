@@ -17,6 +17,11 @@ different formats, including html, pdf, png, gif, pptx, and mp4, as well
 as a ‘social’ output, a png of the first slide re-sized for sharing on
 social media.
 
+**Looking for xaringanBuilder?** The package formerly known as
+xaringanBuilder is now **renderthis**. If you need to install
+xaringanBuilder under the previous package name, [see the instructions
+below](#installing-xaringanbuilder).
+
 ## Installation
 
 You can install the current version of renderthis from GitHub:
@@ -246,3 +251,15 @@ A BibTeX entry for LaTeX users is
 author = {{Helveston} and John Paul and {Aden-Buie} and {Garrick}}, year
 = {2021}, note = {R package version 0.0.1}, url =
 {<https://jhelvy.github.io/renderthis/>}, }
+
+## Installing xaringanBuilder
+
+You can install the xaringanBuilder package as it was just prior to the
+name change with:
+
+``` r
+remotes::install_github("jhelvy/renderthis@v0.0.9")
+```
+
+Even though the install command mentions `renderthis`, the package will
+be installed as xaringanBuilder.

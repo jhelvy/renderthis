@@ -28,6 +28,10 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 This package contains functions for rendering xaringan slides to different formats, including html, pdf, png, gif, pptx, and mp4, as well as a 'social' output, a png of the first slide re-sized for sharing on social media.
 
+**Looking for xaringanBuilder?**
+The package formerly known as xaringanBuilder is now **renderthis**.
+If you need to install xaringanBuilder under the previous package name, [see the instructions below](#installing-xaringanbuilder).
+
 ## Installation
 
 You can install the current version of renderthis from GitHub:
@@ -214,3 +218,13 @@ If you use this package in a publication, I would greatly appreciate it if you c
 ```{r, echo = FALSE, eval = TRUE, results='asis'}
 citation("renderthis")
 ```
+
+## Installing xaringanBuilder
+
+You can install the xaringanBuilder package as it was just prior to the name change with:
+
+```r
+remotes::install_github("jhelvy/renderthis@v0.0.9")
+```
+
+Even though the install command mentions `renderthis`, the package will be installed as xaringanBuilder.
