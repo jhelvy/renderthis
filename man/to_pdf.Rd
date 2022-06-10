@@ -36,7 +36,7 @@ PDF.}
 Only used if \code{complex_slides = TRUE} or \code{partial_slides = TRUE}.}
 
 \item{keep_intermediates}{Should we keep the intermediate HTML file? Only
-relevant if the \code{from} file is an \code{.Rmd} or \code{.qmd} file. Default is \code{TRUE}
+relevant if the \code{from} file is an \code{.Rmd} file. Default is \code{TRUE}
 if the \code{to} file is written into the same directory as the \code{from} argument,
 otherwise the intermediate file isn't kept.}
 }

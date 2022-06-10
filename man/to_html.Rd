@@ -7,7 +7,7 @@
 to_html(from, to = NULL, self_contained = FALSE, rmd_args = NULL)
 }
 \arguments{
-\item{from}{Path to an Rmd file of xaringan slides or qmd of Quarto slides.}
+\item{from}{Path to an Rmd file of xaringan slides.}
 
 \item{to}{The name of the output file. If using \code{NULL} then the
 output file name will be based on file name for the \code{from} file. If a file
