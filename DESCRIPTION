@@ -1,6 +1,6 @@
 Package: renderthis
 Title: Render Slides To Different Formats
-Version: 0.1.0
+Version: 0.0.9.9000
 Authors@R:
     c(person(given = "John",
              family = "Helveston",
