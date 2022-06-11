@@ -6,7 +6,7 @@
 #' option is forced to `TRUE` if the HTML file is built into a directory other
 #'  than the one containing `from`.
 #'
-#' @param from Path to an Rmd file of xaringan slides or qmd of Quarto slides.
+#' @param from Path to an Rmd file of xaringan slides.
 #' @param to The name of the output file. If using `NULL` then the
 #'   output file name will be based on file name for the `from` file. If a file
 #'   name is provided, a path to the output file can also be provided.

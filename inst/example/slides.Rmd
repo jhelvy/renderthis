@@ -55,24 +55,28 @@ remotes::install_github("jhelvy/renderthis")
 #### Render hierarchy:
 
 ```
-Rmd / qmd
-    |
-    |--> social (png)
-    |
-    |--> html
-          |
-          |--> pdf
-                |
-                |--> png
-                      |
-                      |--> gif
-                      |
-                      |--> mp4
-                      |
-                      |--> pptx
+Rmd
+ |
+ |--> social (png)
+ |
+ |--> html
+       |
+       |--> pdf
+             |
+             |--> png
+                   |
+                   |--> gif
+                   |
+                   |--> mp4
+                   |
+                   |--> pptx
 ```
 
 ]
+
+???
+
+- This is a speaker note
 
 ---
 

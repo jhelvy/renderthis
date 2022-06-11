@@ -12,10 +12,10 @@ status](https://www.r-pkg.org/badges/version/renderthis)](https://CRAN.R-project
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-This package contains functions for rendering slides to different
-formats, including html, pdf, png, gif, pptx, and mp4, as well as a
-‘social’ output, a png of the first slide re-sized for sharing on social
-media.
+This package contains functions for rendering xaringan slides to
+different formats, including html, pdf, png, gif, pptx, and mp4, as well
+as a ‘social’ output, a png of the first slide re-sized for sharing on
+social media.
 
 **Looking for xaringanBuilder?** The package formerly known as
 xaringanBuilder is now **renderthis**. If you need to install
@@ -50,21 +50,21 @@ Chrome](https://jhelvy.github.io/renderthis/articles/renderthis-setup.html#local
 Use renderthis to render slides to different formats. Here is a diagram
 of the render hierarchy:
 
-    Rmd / qmd
-        |
-        |--> social (png)
-        |
-        |--> html
-              |
-              |--> pdf
-                    |
-                    |--> png
-                          |
-                          |--> gif
-                          |
-                          |--> mp4
-                          |
-                          |--> pptx
+    Rmd
+     |
+     |--> social (png)
+     |
+     |--> html
+           |
+           |--> pdf
+                 |
+                 |--> png
+                       |
+                       |--> gif
+                       |
+                       |--> mp4
+                       |
+                       |--> pptx
 
 To use renderthis, first load the package:
 
@@ -74,24 +74,22 @@ library(renderthis)
 
 All of the package functions follow a common pattern:
 
--   All functions use `to_*()` to render slides to a desired format
-    (e.g., `to_pdf()`).
--   All functions use the `from` and `to` arguments:
-    -   The `from` argument is required and can be a full or local path
-        to the input file.
-    -   The `to` argument is optional. If provided, it can be a full or
-        local path to the output file, and it must end in an appropriate
-        extension (e.g. `slides.gif` for `to_gif()`). If it is not
-        provided, the output file name will be determined based on the
-        `from` argument.
+-   All functions start with `to_*()` to render slides to a desired
+    format (e.g., `to_pdf()`).
+-   All functions have a required `from` argument which should be set to
+    the full or local path to the input file.
+-   All functions have an optional `to` argument. If provided, it can be
+    a full or local path to the output file, and it must end in an
+    appropriate extension (e.g. `slides.gif` for `to_gif()`). If it is
+    not provided, the output file name will be determined based on the
+    `from` argument.
 
 You can render all of the examples below from
 [here](https://github.com/jhelvy/renderthis/tree/master/inst/example)
 
 ### Render HTML
 
-Render an html file from a Rmd file (xaringan slides) or a qmd file
-(Quarto slides):
+Render an html file from an Rmd file of xaringan slides:
 
 ``` r
 to_html(from = "slides.Rmd")
@@ -99,7 +97,7 @@ to_html(from = "slides.Rmd")
 
 ### Render PDF
 
-Input can be a Rmd / qmd file, html file, or url:
+Input can be an Rmd file, html file, or url:
 
 ``` r
 to_pdf(from = "slides.Rmd")
@@ -112,7 +110,7 @@ Chrome](https://jhelvy.github.io/renderthis/articles/renderthis-setup.html#local
 
 ### Render GIF
 
-Input can be a Rmd / qmd file, html file, pdf file, or url:
+Input can be an Rmd file, html file, pdf file, or url:
 
 ``` r
 to_gif(from = "slides.Rmd")
@@ -127,11 +125,11 @@ Example:
 
 ### Render MP4
 
-Input can be a Rmd /qmd file, html file, pdf file, or url:
+Input can be an Rmd file, html file, pdf file, or url:
 
 ``` r
 to_mp4(from = "slides.Rmd")
-to_mp4from = ("slides.html")
+to_mp4(from = ("slides.html")
 to_mp4(from = "slides.pdf")
 to_mp4(from = "https://jhelvy.github.io/renderthis/reference/figures/slides.html")
 ```
@@ -139,13 +137,13 @@ to_mp4(from = "https://jhelvy.github.io/renderthis/reference/figures/slides.html
 ### Render PPTX
 
 Creates a pptx file where each slide contains a png image of each slide.
-While you won’t be able to edit the content from Powerpoint, you can at
-least annotate it.
+While you won’t be able to edit the content in the png(s) from
+Powerpoint, you can at least annotate it.
 
 (See the [slidex](https://github.com/datalorax/slidex) package by
 @datalorax to do the opposite: pptx –\> xaringan!)
 
-Input can be a Rmd / qmd file, html file, pdf file, or url:
+Input can be an Rmd file, html file, pdf file, or url:
 
 ``` r
 to_pptx(from = "slides.Rmd")
@@ -160,7 +158,7 @@ Render png image(s) of some or all slides. Use the `slides` argument to
 determine which slides to include (defaults to `1`, returning just the
 first slide).
 
-Input can be a Rmd / qmd file, html file, pdf file, or url:
+Input can be an Rmd file, html file, pdf file, or url:
 
 ``` r
 # By default, a png of only the first slide is built
@@ -225,7 +223,7 @@ depend on rendering the pdf:
 [chromote](https://github.com/rstudio/chromote) and
 [pdftools](https://github.com/ropensci/pdftools) packages.
 
-## Author, Version, and License Information
+## Author and License Information
 
 -   Authors: [John Paul Helveston](http://www.jhelvy.com/) (*aut*,
     *cre*, *cph*) & [Garrick

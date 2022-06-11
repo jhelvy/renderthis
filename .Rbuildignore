@@ -6,7 +6,7 @@
 ^README\.Rmd$
 ^LICENSE\.md$
 ^xaringanBuilder\.Rproj$
-build.R
+^build\.R$
 ^\.travis\.yml$
 ^CRAN-RELEASE$
 next_release.md

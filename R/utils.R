@@ -260,3 +260,9 @@ slides_arg_validate <- function(slides, imgs = NULL) {
 
     seq_along(imgs)[slides]
 }
+
+watch <- function(from, wd = getwd(), ...) {
+  # This is mostly here to convince rcmdcheck
+  # that our dependency on xaringan is legit
+  xaringan::infinite_moon_reader(moon = from, cast_from = wd, ...)
+}
