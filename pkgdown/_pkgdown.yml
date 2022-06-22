@@ -42,3 +42,14 @@ reference:
   - to_gif
   - to_mp4
   - to_pptx
+- title: "Depreciated"
+  desc: "Depreciated functions from earlier package version (as {xaringanBuilder})"
+  contents:
+  - build_all
+  - build_html
+  - build_pdf
+  - build_png
+  - build_gif
+  - build_mp4
+  - build_pptx
+  - build_social
