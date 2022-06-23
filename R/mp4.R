@@ -16,6 +16,8 @@
 #' @inheritParams to_png
 #' @inheritParams to_pdf
 #'
+#' @return Slides are rendered as an mp4 file.
+#'
 #' @examples
 #' \dontrun{
 #' # Render mp4 from Rmd, html, pdf, or url

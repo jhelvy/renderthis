@@ -27,6 +27,8 @@
 #'   Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.
 #' @inheritParams to_png
 #'
+#' @return Slides are rendered as a gif file.
+#'
 #' @examples
 #' \dontrun{
 #' # Render gif from Rmd, html, pdf, or url

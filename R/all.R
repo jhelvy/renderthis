@@ -18,6 +18,8 @@
 #' @inheritParams to_pdf
 #' @inheritParams to_mp4
 #'
+#' @return Builds slides to multiple output formats.
+#'
 #' @examples
 #' \dontrun{
 #' # Builds every output by default

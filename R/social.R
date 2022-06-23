@@ -11,13 +11,13 @@
 #' the output filename will be based on filename for the `from` file.
 #' If a filename is provided, a path to the output file can also be provided.
 #' @export
+#' @return Slides are rendered as a png file.
 #' @examples
 #' \dontrun{
 #' # Render png image of first slide from Rmd file
 #' # sized for sharing on social media
 #' to_social("slides.Rmd")
 #' }
-#'
 to_social <- function(from, to = NULL) {
 
     input <- from

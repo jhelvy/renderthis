@@ -22,6 +22,9 @@
 #' @param keep_intermediates Should we keep the intermediate files used to
 #'   render the final output? The default is `FALSE`.
 #'
+#' @return Slides are rendered as a png file (single) or zip file of multiple
+#' png files.
+#'
 #' @examples
 #' \dontrun{
 #' # By default, a png of only the first slide is built

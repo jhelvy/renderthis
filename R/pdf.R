@@ -25,6 +25,8 @@
 #'   if the `to` file is written into the same directory as the `from` argument,
 #'   otherwise the intermediate file isn't kept.
 #'
+#' @return Slides are rendered as a pdf file.
+#'
 #' @examples
 #' \dontrun{
 #' # Render pdf from Rmd, html, or url

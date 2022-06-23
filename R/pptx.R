@@ -15,6 +15,8 @@
 #' @inheritParams to_png
 #' @inheritParams to_pdf
 #'
+#' @return Slides are rendered as a pptx file.
+#'
 #' @examples
 #' \dontrun{
 #' # Render pptx from Rmd, html, pdf, or url

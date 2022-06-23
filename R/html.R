@@ -18,6 +18,8 @@
 #'   than the one containing the `from` R Markdown file.
 #' @param rmd_args A list of arguments passed to [rmarkdown::render()].
 #'
+#' @return Slides are rendered as an html file.
+#'
 #' @examples
 #' \dontrun{
 #' # Render html from Rmd file
