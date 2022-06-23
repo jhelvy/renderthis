@@ -10,3 +10,4 @@
 ^\.travis\.yml$
 ^CRAN-RELEASE$
 next_release.md
+^cran-comments\.md$
