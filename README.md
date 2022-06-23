@@ -9,7 +9,7 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/renderthis)](https://CRAN.R-project.org/package=renderthis)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 This package contains functions for rendering xaringan slides to
@@ -225,12 +225,11 @@ depend on rendering the pdf:
 
 ## Author and License Information
 
--   Authors: [John Paul Helveston](http://www.jhelvy.com/) (*aut*,
+-   Authors: [John Paul Helveston](https://www.jhelvy.com/) (*aut*,
     *cre*, *cph*) & [Garrick
     Aden-Buie](https://www.garrickadenbuie.com/) (*aut*)
--   Date First Written: Originally as
-    [{xaringanBuilder}](https://github.com/jhelvy/xaringanBuilder) on
-    *September 27, 2020*
+-   Date First Written: Originally as {xaringanBuilder} on *September
+    27, 2020*
 -   License:
     [MIT](https://github.com/jhelvy/renderthis/blob/master/LICENSE.md)
 

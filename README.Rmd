@@ -23,7 +23,7 @@ IS_README <- TRUE
 [![R-CMD-check](https://github.com/jhelvy/renderthis/workflows/R-CMD-check/badge.svg)](https://github.com/jhelvy/renderthis/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/renderthis)](https://CRAN.R-project.org/package=renderthis)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 This package contains functions for rendering xaringan slides to different formats, including html, pdf, png, gif, pptx, and mp4, as well as a 'social' output, a png of the first slide re-sized for sharing on social media.
@@ -207,8 +207,8 @@ These options are available as options in any of the functions that depend on re
 
 ## Author and License Information
 
-- Authors: [John Paul Helveston](http://www.jhelvy.com/) (_aut_, _cre_, _cph_) & [Garrick Aden-Buie](https://www.garrickadenbuie.com/) (_aut_)
-- Date First Written: Originally as [{xaringanBuilder}](https://github.com/jhelvy/xaringanBuilder) on *September 27, 2020*
+- Authors: [John Paul Helveston](https://www.jhelvy.com/) (_aut_, _cre_, _cph_) & [Garrick Aden-Buie](https://www.garrickadenbuie.com/) (_aut_)
+- Date First Written: Originally as {xaringanBuilder} on *September 27, 2020*
 - License: [MIT](https://github.com/jhelvy/renderthis/blob/master/LICENSE.md)
 
 ## Citation Information
