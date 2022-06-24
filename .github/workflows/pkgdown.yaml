@@ -38,8 +38,10 @@ jobs:
         shell: Rscript {0}
 
       - name: Build examples
-        working-directory: docs/example
-        run: Rscript examples.R
+        working-directory: pkgdown/assets/example
+        run: |
+          rm .gitignore
+          Rscript examples.R
 
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'

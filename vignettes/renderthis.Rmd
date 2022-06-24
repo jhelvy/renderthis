@@ -1,0 +1,151 @@
+---
+title: "renderthis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{renderthis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+pkgdown_url <- function(path) {
+  paste0(
+    if (!identical(Sys.getenv("IN_PKGDOWN"), "true")) {
+      "https://jhelvy.github.io/renderthis/"
+    } else {
+      "//renderthis/"
+    },
+    path
+  )
+}
+```
+
+## Overview
+
+```{r child="../man/fragments/usage.Rmd"}
+
+```
+
+## Render HTML
+
+Render an html file from an Rmd file of xaringan slides:
+
+```{r}
+to_html(from = "slides.Rmd")
+```
+
+## Render PDF
+
+Input can be an Rmd file, html file, or url:
+
+```{r}
+to_pdf(from = "slides.Rmd")
+to_pdf(from = "slides.html")
+to_pdf(from = "https://jhelvy.github.io/renderthis/example/slides.html")
+```
+
+**Note**: Rendering the PDF requires a [local installation of Google Chrome](https://jhelvy.github.io/renderthis/articles/renderthis-setup.html#local-chrome-installation)
+
+## Render GIF
+
+Input can be an Rmd file, html file, pdf file, or url:
+
+```{r}
+to_gif(from = "slides.Rmd")
+to_gif(from = "slides.html")
+to_gif(from = "slides.pdf")
+to_gif(from = "https://jhelvy.github.io/renderthis/example/slides.html")
+```
+
+Example:
+
+<img src="`r pkgdown_url("example/slides.gif")`" width=500>
+
+## Render MP4
+
+Input can be an Rmd file, html file, pdf file, or url:
+
+```{r}
+to_mp4(from = "slides.Rmd")
+to_mp4(from = "slides.html")
+to_mp4(from = "slides.pdf")
+to_mp4(from = "https://jhelvy.github.io/renderthis/example/slides.html")
+```
+
+## Render PPTX
+
+Creates a pptx file where each slide contains a png image of each slide. While you won't be able to edit the content in the png(s) from Powerpoint, you can at least annotate it.
+
+(See the [slidex](https://github.com/datalorax/slidex) package by @datalorax to do the opposite: pptx --> xaringan!)
+
+Input can be an Rmd file, html file, pdf file, or url:
+
+```{r}
+to_pptx(from = "slides.Rmd")
+to_pptx(from = "slides.html")
+to_pptx(from = "slides.pdf")
+to_pptx(from = "https://jhelvy.github.io/renderthis/example/slides.html")
+```
+
+## Render PNG
+
+Render png image(s) of some or all slides. Use the `slides` argument to determine which slides to include (defaults to `1`, returning just the first slide).
+
+Input can be an Rmd file, html file, pdf file, or url:
+
+```{r}
+# By default, a png of only the first slide is built
+to_png(from = "slides.Rmd", to = "title_slide.png")
+to_png(from = "slides.html", to = "title_slide.png")
+to_png(from = "slides.pdf", to = "title_slide.png")
+to_png(from = 
+  "https://jhelvy.github.io/renderthis/example/slides.html",
+  to = "title_slide.png"
+)
+
+# Use the `slides` argument to control which slides get rendered into pngs
+to_png(from = "slides.pdf", to = "first_slide.png", slides = "first")
+to_png(from = "slides.pdf", to = "last_slide.png", slides = "last")
+to_png(from = "slides.pdf", slides = c(1, 3, 5)) # Choose subsets of slides
+to_png(from = "slides.pdf", slides = -1) # Negative indices remove slides
+to_png(from = "slides.pdf", slides = "all")
+```
+
+Example:
+
+<img src="`r pkgdown_url("example/title_slide.png")`" width=500>
+
+## Render Social
+
+Render a png of the first slide from an Rmd file. Image is sized for sharing on social media (e.g. Twitter).
+
+```{r}
+to_social(from = "slides.Rmd")
+```
+
+**Note**: This option requires the [chromote](https://github.com/rstudio/chromote) and [pdftools](https://github.com/ropensci/pdftools) packages.
+
+Example:
+
+<img src="`r pkgdown_url("example/title_social.png")`" width=500>
+
+## "Complex" slides and partial / incremental slides
+
+"Complex" slides are slides that contain [panelsets](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) or other html widgets / advanced features that might not render well as a pdf. To render these on each slide, set `complex_slides = TRUE`. 
+
+If you want to render a new slide for each increment on [incremental slides](https://slides.yihui.org/xaringan/incremental.html#1), set `partial_slides = TRUE`.
+
+These options are available as options in any of the functions that depend on rendering the pdf:
+
+- `to_pdf()`
+- `to_png()`
+- `to_gif()`
+- `to_mp4()`
+- `to_pptx()`
+
+**Note**: These options require the [chromote](https://github.com/rstudio/chromote) and [pdftools](https://github.com/ropensci/pdftools) packages.
