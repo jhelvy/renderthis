@@ -43,7 +43,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Build examples
-        working-directory: pkgdown/assets/example
+        working-directory: docs/example
         run: |
           rm .gitignore
           Rscript examples.R
