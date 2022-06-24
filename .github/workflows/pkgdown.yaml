@@ -44,9 +44,7 @@ jobs:
 
       - name: Build examples
         working-directory: docs/example
-        run: |
-          rm .gitignore
-          Rscript examples.R
+        run: Rscript examples.R
 
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'
