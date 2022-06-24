@@ -35,7 +35,7 @@ Imports:
     zip
 Suggests:
     av,
-    chromote (>= 0.0.0.9003),
+    chromote,
     knitr,
     lifecycle,
     officer,
@@ -43,10 +43,6 @@ Suggests:
     testthat (>= 3.0.0),
     webshot2,
     xaringanExtra
-Remotes:
-    gadenbuie/xaringanExtra,
-    rstudio/chromote,
-    rstudio/webshot2
 Config/testthat/edition: 3
 Encoding: UTF-8
 RoxygenNote: 7.2.0
