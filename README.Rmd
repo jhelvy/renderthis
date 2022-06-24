@@ -52,11 +52,9 @@ remotes::install_github("jhelvy/renderthis", dependencies = TRUE)
 
 ## Usage
 
-```{r child="man/fragments/usage.Rmd"}
+```{r child="man/fragments/usage.Rmd", eval = TRUE}
 
 ```
-
-You can render all of the examples below from [here](https://github.com/jhelvy/renderthis/tree/master/inst/example)
 
 Learn more about renderthis in the [Get Started article](https://jhelvy.github.io/renderthis/articles/renderthis.html).
 

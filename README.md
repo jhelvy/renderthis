@@ -47,8 +47,42 @@ Chrome](https://jhelvy.github.io/renderthis/articles/renderthis-setup.html#local
 
 ## Usage
 
-You can render all of the examples below from
-[here](https://github.com/jhelvy/renderthis/tree/master/inst/example)
+Use renderthis to render slides to different formats. Here is a diagram
+of the render hierarchy:
+
+    Rmd
+     |
+     |--> social (png)
+     |
+     |--> html
+           |
+           |--> pdf
+                 |
+                 |--> png
+                       |
+                       |--> gif
+                       |
+                       |--> mp4
+                       |
+                       |--> pptx
+
+To use renderthis, first load the package:
+
+``` r
+library(renderthis)
+```
+
+All of the package functions follow a common pattern:
+
+-   All functions start with `to_*()` to render slides to a desired
+    format (e.g., `to_pdf()`).
+-   All functions have a required `from` argument which should be set to
+    the full or local path to the input file.
+-   All functions have an optional `to` argument. If provided, it can be
+    a full or local path to the output file, and it must end in an
+    appropriate extension (e.g. `slides.gif` for `to_gif()`). If it is
+    not provided, the output file name will be determined based on the
+    `from` argument.
 
 Learn more about renderthis in the [Get Started
 article](https://jhelvy.github.io/renderthis/articles/renderthis.html).
