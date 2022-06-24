@@ -13,16 +13,6 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-pkgdown_url <- function(path) {
-  paste0(
-    if (!identical(Sys.getenv("IN_PKGDOWN"), "true")) {
-      "https://jhelvy.github.io/renderthis/"
-    } else {
-      "//renderthis/"
-    },
-    path
-  )
-}
 ```
 
 ## Overview
@@ -64,7 +54,7 @@ to_gif(from = "https://jhelvy.github.io/renderthis/example/slides.html")
 
 Example:
 
-<img src="`r pkgdown_url("example/slides.gif")`" width=500>
+<img src="https://jhelvy.github.io/renderthis/example/slides.gif" width=500>
 
 ## Render MP4
 
@@ -118,7 +108,7 @@ to_png(from = "slides.pdf", slides = "all")
 
 Example:
 
-<img src="`r pkgdown_url("example/title_slide.png")`" width=500>
+<img src="https://jhelvy.github.io/renderthis/example/title_slide.png" width=500>
 
 ## Render Social
 
@@ -132,7 +122,7 @@ to_social(from = "slides.Rmd")
 
 Example:
 
-<img src="`r pkgdown_url("example/title_social.png")`" width=500>
+<img src="https://jhelvy.github.io/renderthis/example/title_social.png" width=500>
 
 ## "Complex" slides and partial / incremental slides
 
