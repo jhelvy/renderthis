@@ -16,7 +16,14 @@ background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharin
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
-xaringanExtra::use_panelset() # So we can add some slides with fancy panelsets!
+if (!requireNamespace("xaringanExtra", quietly = TRUE)) {
+  warning(
+    "These example slides use panelsets from {xaringanExtra}, which is not ", 
+    "installed. You may notice some unusual text on the panelset slides."
+  )
+} else {
+  xaringanExtra::use_panelset() # So we can add some slides with fancy panelsets!
+}
 ```
 
 ???
