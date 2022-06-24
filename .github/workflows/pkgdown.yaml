@@ -28,6 +28,11 @@ jobs:
         with:
           use-public-rspm: true
 
+      - name: Install {av} system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libavfilter-dev
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::pkgdown, local::.
@@ -36,6 +41,12 @@ jobs:
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
         shell: Rscript {0}
+
+      - name: Build examples
+        working-directory: pkgdown/assets/example
+        run: |
+          rm .gitignore
+          Rscript examples.R
 
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'

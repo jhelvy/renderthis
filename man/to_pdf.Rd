@@ -40,6 +40,9 @@ relevant if the \code{from} file is an \code{.Rmd} file. Default is \code{TRUE}
 if the \code{to} file is written into the same directory as the \code{from} argument,
 otherwise the intermediate file isn't kept.}
 }
+\value{
+Slides are rendered as a pdf file.
+}
 \description{
 Render slides as a pdf file. Requires a local installation of Chrome.
 If you set \code{complex_slides = TRUE} or \code{partial_slides = TRUE}, you will also
