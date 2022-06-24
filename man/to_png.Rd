@@ -47,6 +47,10 @@ Only used if \code{complex_slides = TRUE} or \code{partial_slides = TRUE}.}
 \item{keep_intermediates}{Should we keep the intermediate files used to
 render the final output? The default is \code{FALSE}.}
 }
+\value{
+Slides are rendered as a png file (single) or zip file of multiple
+png files.
+}
 \description{
 Render png image(s) of slides. The function renders to the pdf and
 then converts it into png files of each slide. The slide numbers defined by
