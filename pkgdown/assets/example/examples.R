@@ -2,6 +2,12 @@
 # remotes::install_github('jhelvy/renderthis')
 library(renderthis)
 
+# Always use the packaged example slides
+file.copy(
+    system.file("example", "slides.Rmd", package = "renderthis"),
+    "slides.Rmd"
+)
+
 url <- "https://jhelvy.github.io/renderthis/reference/figures/slides.html"
 
 # Render an html file from a Rmd file
