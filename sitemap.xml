@@ -1,33 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jhelvy.github.io/xaringanBuilder//index.html</loc>
+    <loc>https://jhelvy.github.io/renderthis/404.html</loc>
   </url>
   <url>
-    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_all.html</loc>
+    <loc>https://jhelvy.github.io/renderthis/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_gif.html</loc>
+    <loc>https://jhelvy.github.io/renderthis/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_html.html</loc>
+    <loc>https://jhelvy.github.io/renderthis/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_mp4.html</loc>
+    <loc>https://jhelvy.github.io/renderthis/articles/renderthis-setup.html</loc>
   </url>
   <url>
-    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_pdf.html</loc>
+    <loc>https://jhelvy.github.io/renderthis/authors.html</loc>
   </url>
   <url>
-    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_png.html</loc>
+    <loc>https://jhelvy.github.io/renderthis/index.html</loc>
   </url>
   <url>
-    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_pptx.html</loc>
+    <loc>https://jhelvy.github.io/renderthis/news/index.html</loc>
   </url>
   <url>
-    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_social.html</loc>
+    <loc>https://jhelvy.github.io/renderthis/reference/build_all.html</loc>
   </url>
   <url>
-    <loc>https://jhelvy.github.io/xaringanBuilder//reference/build_thumbnail.html</loc>
+    <loc>https://jhelvy.github.io/renderthis/reference/deprecated-build.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/renderthis/reference/figures/slides.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/renderthis/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/renderthis/reference/to_gif.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/renderthis/reference/to_html.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/renderthis/reference/to_mp4.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/renderthis/reference/to_pdf.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/renderthis/reference/to_png.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/renderthis/reference/to_pptx.html</loc>
+  </url>
+  <url>
+    <loc>https://jhelvy.github.io/renderthis/reference/to_social.html</loc>
   </url>
 </urlset>

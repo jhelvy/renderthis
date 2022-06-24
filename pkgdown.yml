@@ -1,9 +1,10 @@
-pandoc: 2.7.3
-pkgdown: 1.6.1
+pandoc: 2.14.2
+pkgdown: 2.0.4
 pkgdown_sha: ~
-articles: {}
-last_built: 2021-10-21T10:54Z
+articles:
+  renderthis-setup: renderthis-setup.html
+last_built: 2022-06-24T13:59Z
 urls:
-  reference: https://jhelvy.github.io/xaringanBuilder//reference
-  article: https://jhelvy.github.io/xaringanBuilder//articles
+  reference: https://jhelvy.github.io/renderthis/reference
+  article: https://jhelvy.github.io/renderthis/articles
 
