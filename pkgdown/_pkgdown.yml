@@ -16,7 +16,9 @@ template:
 
 navbar:
   structure:
-    left: [setup, reference, articles, news]
+    # all articles are listed in the navbar
+    # add "articles" below if we add a new vignette
+    left: [setup, intro, reference, news]
     right: [search, twitter, github]
   components:
     setup:
@@ -42,8 +44,8 @@ reference:
   - to_gif
   - to_mp4
   - to_pptx
-- title: "Depreciated"
-  desc: "Depreciated functions from earlier package version (as {xaringanBuilder})"
+- title: "Deprecated"
+  desc: "Deprecated functions from earlier package version (as {xaringanBuilder})"
   contents:
   - build_all
   - build_html

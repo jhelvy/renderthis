@@ -22,6 +22,9 @@ than the one containing the \code{from} R Markdown file.}
 
 \item{rmd_args}{A list of arguments passed to \code{\link[rmarkdown:render]{rmarkdown::render()}}.}
 }
+\value{
+Slides are rendered as an html file.
+}
 \description{
 Render xaringan or quarto slides as an html file. For xaringan slides, it
 is the same thing as \code{\link[rmarkdown:render]{rmarkdown::render()}} with

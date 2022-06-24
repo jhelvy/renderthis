@@ -41,9 +41,9 @@ Suggests:
     officer,
     pdftools,
     testthat (>= 3.0.0),
-    webshot2,
-    xaringanExtra
+    webshot2
 Config/testthat/edition: 3
+Config/Needs/website: xaringanExtra
 Encoding: UTF-8
 RoxygenNote: 7.2.0
 Roxygen: list(markdown = TRUE)

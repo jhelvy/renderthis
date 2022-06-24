@@ -13,6 +13,9 @@ to_social(from, to = NULL)
 the output filename will be based on filename for the \code{from} file.
 If a filename is provided, a path to the output file can also be provided.}
 }
+\value{
+Slides are rendered as a png file.
+}
 \description{
 Render png image of first slide for sharing on social media.
 Requires a local installation of Chrome as well as the {webshot2} package:
@@ -24,5 +27,4 @@ Requires a local installation of Chrome as well as the {webshot2} package:
 # sized for sharing on social media
 to_social("slides.Rmd")
 }
-
 }

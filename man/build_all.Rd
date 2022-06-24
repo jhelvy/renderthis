@@ -51,6 +51,9 @@ all slides are included.}
 
 \item{fps}{Frames per second of the resulting mp4 file.}
 }
+\value{
+Builds slides to multiple output formats.
+}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 

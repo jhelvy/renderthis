@@ -49,6 +49,9 @@ Only used if \code{complex_slides = TRUE} or \code{partial_slides = TRUE}.}
 \item{keep_intermediates}{Should we keep the intermediate files used to
 render the final output? The default is \code{FALSE}.}
 }
+\value{
+Slides are rendered as an mp4 file.
+}
 \description{
 Render slides as a mp4 video file. The function renders to the pdf,
 converts each slide in the pdf to a png, and then converts the deck of

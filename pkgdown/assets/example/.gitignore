@@ -1,0 +1,8 @@
+# ignore all rendered outputs in this folder
+*.html
+*.png
+*.gif
+*.mp4
+*.pdf
+*.pptx
+libs/

@@ -46,6 +46,9 @@ Only used if \code{complex_slides = TRUE} or \code{partial_slides = TRUE}.}
 \item{keep_intermediates}{Should we keep the intermediate files used to
 render the final output? The default is \code{FALSE}.}
 }
+\value{
+Slides are rendered as a pptx file.
+}
 \description{
 Render slides as a pptx file. The function renders to the pdf and
 then converts it into png images that are inserted on each slide in the
