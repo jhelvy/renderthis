@@ -28,9 +28,14 @@ jobs:
         with:
           use-public-rspm: true
 
+      - name: Install {av} system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libavfilter-dev
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::pkgdown, local::., deps::.
+          extra-packages: any::pkgdown, local::.
           needs: website
 
       - name: Build site
