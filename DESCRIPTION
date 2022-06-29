@@ -16,8 +16,8 @@ Authors@R:
              family = "Shalloway",
              role = "ctb"))
 Description: Functions for rendering slides to different formats, including
-    html, pdf, png, gif, pptx, and mp4, as well as a 'social' output, a png
-    of the first slide re-sized for sharing on social media.
+    .html, .pdf, .png, .gif, .pptx, and .mp4, as well as a 'social' output, a
+    .png of the first slide re-sized for sharing on social media.
 License: MIT + file LICENSE
 Depends: 
     R (>= 3.4.0)
