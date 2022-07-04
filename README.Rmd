@@ -61,7 +61,7 @@ The table below lists the packages required for each output type:
 | PDF (complex) | [chromote](https://rstudio.github.io/chromote/) |
 | PNG | Requires PDF |
 | GIF | Requires PDF |
-| MP4 | [av](https://docs.ropensci.org/av) |
+| MP4 | [av](https://docs.ropensci.org/av/) |
 | PPTX | [officer](https://ardata-fr.github.io/officeverse/) |
 | Social | [chromote](https://rstudio.github.io/chromote/) |
 
