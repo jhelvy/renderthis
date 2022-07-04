@@ -40,8 +40,13 @@ with_example <- function(example, code, clean = TRUE) {
     # Copy the example into the temp dir
     path <- fs::file_copy(example, fs::path_file(example))
 
-    # evaluate the expression here
-    res <- force(code)
+    # evaluate the expression here, muffling errors as needed
+    res <- tryCatch(force(code), error = identity)
+
+    if (inherits(res, "error")) {
+        message("Error running example: ", conditionMessage(res))
+        return(invisible(NULL))
+    }
 
     invisible(if (isTRUE(clean)) res else dir)
 }
