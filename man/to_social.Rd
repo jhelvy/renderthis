@@ -24,7 +24,8 @@ Requires a local installation of Chrome as well as the {webshot2} package:
 \examples{
 if (
     requireNamespace("webshot2", quietly = TRUE) &&
-    nzchar(pagedown::find_chrome())
+    nzchar(pagedown::find_chrome()) &&
+    interactive()
 ) {
     with_example("slides.Rmd", {
         # Render png image of first slide from Rmd file

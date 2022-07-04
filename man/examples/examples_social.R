@@ -1,6 +1,7 @@
 if (
     requireNamespace("webshot2", quietly = TRUE) &&
-    nzchar(pagedown::find_chrome())
+    nzchar(pagedown::find_chrome()) &&
+    interactive()
 ) {
     with_example("slides.Rmd", {
         # Render png image of first slide from Rmd file
