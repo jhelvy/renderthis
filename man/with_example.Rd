@@ -33,3 +33,4 @@ with_example("slides.Rmd", {
 
 print(with_example("slides.Rmd", getwd()))
 }
+\keyword{internal}

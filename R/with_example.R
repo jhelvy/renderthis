@@ -17,6 +17,7 @@
 #'   was created when `clean = FALSE`, otherwise invisibly returns the output
 #'   from evaluating `expr`.
 #'
+#' @keywords internal
 #' @export
 with_example <- function(example, expr, clean = TRUE) {
     examples <- dir(system.file("example", package = "renderthis"))
