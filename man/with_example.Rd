@@ -4,13 +4,13 @@
 \alias{with_example}
 \title{Try renderthis functions with an example}
 \usage{
-with_example(example, expr, clean = TRUE)
+with_example(example, code, clean = TRUE)
 }
 \arguments{
 \item{example}{The name of the example file, currently only \code{"slides.Rmd"}.}
 
-\item{expr}{The expression to evaluate. You can use the example as an input
-by referencing it directly, e.g. \code{from = "slides.Rmd"}.}
+\item{code}{The code expression to evaluate. You can use the example as an
+input by referencing it directly, e.g. \code{from = "slides.Rmd"}.}
 
 \item{clean}{Should the example file and any extra files be cleaned up when
 the function exits? The default is \code{TRUE}, but if you want to inspect the
