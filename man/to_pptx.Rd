@@ -61,7 +61,7 @@ if (
 ) {
     with_example("slides.Rmd", {
         # Render pptx from Rmd, html, pdf, or url
-        to_pptx("slides.Rmd")
+        to_pptx("slides.Rmd", keep_intermediates = TRUE)
         to_pptx("slides.html")
         to_pptx("slides.pdf")
 

@@ -4,7 +4,7 @@ if (
 ) {
     with_example("slides.Rmd", {
         # Render mp4 from Rmd, html, pdf
-        to_mp4("slides.Rmd")
+        to_mp4("slides.Rmd", keep_intermediates = TRUE)
         to_mp4("slides.html")
         to_mp4("slides.pdf")
 

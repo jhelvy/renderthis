@@ -52,7 +52,7 @@ need to install the {chromote} and {pdftools} packages.
 if (nzchar(pagedown::find_chrome())) {
     with_example("slides.Rmd", {
         # Render pdf from Rmd, html, or url
-        to_pdf("slides.Rmd")
+        to_pdf("slides.Rmd", keep_intermediates = TRUE)
         to_pdf("slides.html")
         to_pdf("https://jhelvy.github.io/renderthis/example/slides.html")
 
@@ -68,7 +68,7 @@ if (
 ) {
     with_example("slides.Rmd", {
         # Render a pdf with partial (continuation) slides
-        to_pdf("slides.Rmd", partial_slides = TRUE)
+        to_pdf("slides.Rmd", partial_slides = TRUE, keep_intermediates = TRUE)
         to_pdf("slides.html", partial_slides = TRUE)
     })
 }
