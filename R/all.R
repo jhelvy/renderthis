@@ -20,15 +20,7 @@
 #'
 #' @return Builds slides to multiple output formats.
 #'
-#' @examples
-#' \dontrun{
-#' # Builds every output by default
-#' build_all("slides.Rmd")
-#'
-#' # Both of these build html, pdf, and gif outputs
-#' build_all("slides.Rmd", include = c("html", "pdf", "gif"))
-#' build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
-#' }
+#' @example man/examples/examples_all.R
 #'
 #' @export
 build_all <- function(

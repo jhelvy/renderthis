@@ -29,14 +29,7 @@
 #'
 #' @return Slides are rendered as a gif file.
 #'
-#' @examples
-#' \dontrun{
-#' # Render gif from Rmd, html, pdf, or url
-#' to_gif("slides.Rmd")
-#' to_gif("slides.html")
-#' to_gif("slides.pdf")
-#' to_gif("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
-#' }
+#' @example man/examples/examples_gif.R
 #'
 #' @export
 to_gif <- function(

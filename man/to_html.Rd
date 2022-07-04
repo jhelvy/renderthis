@@ -33,9 +33,8 @@ option is forced to \code{TRUE} if the HTML file is built into a directory other
 than the one containing \code{from}.
 }
 \examples{
-\dontrun{
-# Render html from Rmd file
-to_html("slides.Rmd")
-}
-
+with_example("slides.Rmd", {
+    # Render html from Rmd file
+    to_html("slides.Rmd")
+})
 }

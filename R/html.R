@@ -20,11 +20,7 @@
 #'
 #' @return Slides are rendered as an html file.
 #'
-#' @examples
-#' \dontrun{
-#' # Render html from Rmd file
-#' to_html("slides.Rmd")
-#' }
+#' @example man/examples/examples_html.R
 #'
 #' @export
 to_html <- function(from, to = NULL, self_contained = FALSE, rmd_args = NULL) {
