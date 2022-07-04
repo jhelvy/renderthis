@@ -69,7 +69,7 @@ if (
         to_mp4("slides.pdf")
 
         # You can also render directly from a URL
-        to_mp4("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
+        to_mp4("https://jhelvy.github.io/renderthis/example/slides.html")
     })
 }
 }

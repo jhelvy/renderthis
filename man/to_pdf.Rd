@@ -54,7 +54,7 @@ if (nzchar(pagedown::find_chrome())) {
         # Render pdf from Rmd, html, or url
         to_pdf("slides.Rmd")
         to_pdf("slides.html")
-        to_pdf("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
+        to_pdf("https://jhelvy.github.io/renderthis/example/slides.html")
 
         # Render a pdf with partial (continuation) slides
         to_pdf("slides.Rmd", partial_slides = TRUE)

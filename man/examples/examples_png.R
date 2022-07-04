@@ -10,6 +10,6 @@ if (nzchar(pagedown::find_chrome())) {
         to_png("slides.pdf", slides = "all")
 
         # You can also render directly from a URL
-        to_png("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
+        to_png("https://jhelvy.github.io/renderthis/example/slides.html")
     })
 }

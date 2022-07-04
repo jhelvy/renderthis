@@ -9,7 +9,7 @@ if (
         to_pptx("slides.pdf")
 
         # You can also render directly from a URL
-        to_pptx("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
+        to_pptx("https://jhelvy.github.io/renderthis/example/slides.html")
     })
 }
 
