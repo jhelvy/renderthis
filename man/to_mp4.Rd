@@ -58,10 +58,7 @@ converts each slide in the pdf to a png, and then converts the deck of
 png files to a mp4 video file.
 }
 \examples{
-if (
-    requireNamespace("av", quietly = TRUE) &&
-    nzchar(pagedown::find_chrome())
-) {
+if (requireNamespace("av", quietly = TRUE)) {
     with_example("slides.Rmd", {
         # Render mp4 from Rmd, html, pdf, or direct URL
         to_mp4("slides.Rmd")

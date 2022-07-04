@@ -22,11 +22,7 @@ Requires a local installation of Chrome as well as the {webshot2} package:
 \code{remotes::install_github("rstudio/webshot2")}.
 }
 \examples{
-if (
-    requireNamespace("webshot2", quietly = TRUE) &&
-    nzchar(pagedown::find_chrome()) &&
-    interactive()
-) {
+if (requireNamespace("webshot2", quietly = TRUE) && interactive()) {
     with_example("slides.Rmd", {
         # Render png image of first slide from Rmd file
         # sized for sharing on social media

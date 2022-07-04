@@ -58,10 +58,8 @@ converts each slide in the pdf to a png, and then converts the deck of
 png files to a gif file.
 }
 \examples{
-if (nzchar(pagedown::find_chrome())) {
-    with_example("slides.Rmd", {
-        # Render gif from Rmd, html, pdf, or direct URL
-        to_gif("slides.Rmd")
-    })
-}
+with_example("slides.Rmd", {
+    # Render gif from Rmd, html, pdf, or direct URL
+    to_gif("slides.Rmd")
+})
 }
