@@ -8,4 +8,4 @@
 0 errors | 0 warnings | 0 notes
 
 * This is a new release.
-* On windows, a note about spelling flags common file extensions like png, gif, etc. We have checked and these are all spelled as intended.
+* We have addressed all comments from a previous submission regarding issues with the DESCRIPTION file and function examples.
