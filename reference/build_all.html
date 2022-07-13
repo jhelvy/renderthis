@@ -16,7 +16,7 @@ build_*() function for details about each output type.'><meta property="og:image
     
     <a class="navbar-brand me-2" href="../index.html">renderthis</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,6 +25,12 @@ build_*() function for details about each output type.'><meta property="og:image
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item">
+  <a class="nav-link" href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li class="nav-item">
   <a class="nav-link" href="../articles/renderthis-setup.html">Setup</a>
 </li>
 <li class="nav-item">
@@ -72,17 +78,17 @@ build_*() function for details about each output type.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">build_all</span><span class="op">(</span>
-  <span class="va">input</span>,
-  include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"html"</span>, <span class="st">"social"</span>, <span class="st">"pdf"</span>, <span class="st">"png"</span>, <span class="st">"gif"</span>, <span class="st">"mp4"</span>, <span class="st">"pptx"</span><span class="op">)</span>,
-  exclude <span class="op">=</span> <span class="cn">NULL</span>,
-  complex_slides <span class="op">=</span> <span class="cn">FALSE</span>,
-  partial_slides <span class="op">=</span> <span class="cn">FALSE</span>,
-  delay <span class="op">=</span> <span class="fl">1</span>,
-  density <span class="op">=</span> <span class="fl">100</span>,
-  slides <span class="op">=</span> <span class="st">"all"</span>,
-  fps <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">build_all</span><span class="op">(</span></span>
+<span>  <span class="va">input</span>,</span>
+<span>  include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"html"</span>, <span class="st">"social"</span>, <span class="st">"pdf"</span>, <span class="st">"png"</span>, <span class="st">"gif"</span>, <span class="st">"mp4"</span>, <span class="st">"pptx"</span><span class="op">)</span>,</span>
+<span>  exclude <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  complex_slides <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  partial_slides <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  delay <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  density <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  slides <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  fps <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -148,15 +154,19 @@ all slides are included.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Builds every output by default</span></span>
-<span class="r-in"><span class="fu">build_all</span><span class="op">(</span><span class="st">"slides.Rmd"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Both of these build html, pdf, and gif outputs</span></span>
-<span class="r-in"><span class="fu">build_all</span><span class="op">(</span><span class="st">"slides.Rmd"</span>, include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"html"</span>, <span class="st">"pdf"</span>, <span class="st">"gif"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">build_all</span><span class="op">(</span><span class="st">"slides.Rmd"</span>, exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"social"</span>, <span class="st">"png"</span>, <span class="st">"mp4"</span>, <span class="st">"pptx"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="co"># Build every output by default</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="with_example.html">with_example</a></span><span class="op">(</span><span class="st">"slides.Rmd"</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>        <span class="fu">build_all</span><span class="op">(</span><span class="st">"slides.Rmd"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="co"># Both of these build html, pdf, and gif outputs</span></span></span>
+<span class="r-in"><span>    <span class="co"># (PDF outputs require Google Chrome for {pagedown})</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="with_example.html">with_example</a></span><span class="op">(</span><span class="st">"slides.Rmd"</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>        <span class="fu">build_all</span><span class="op">(</span><span class="st">"slides.Rmd"</span>, include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"html"</span>, <span class="st">"pdf"</span>, <span class="st">"gif"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="fu">build_all</span><span class="op">(</span><span class="st">"slides.Rmd"</span>, exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"social"</span>, <span class="st">"png"</span>, <span class="st">"mp4"</span>, <span class="st">"pptx"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

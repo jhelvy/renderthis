@@ -37,7 +37,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">renderthis</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,6 +46,12 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li class="active nav-item">
   <a class="nav-link" href="../articles/renderthis-setup.html">Setup</a>
 </li>
@@ -103,12 +109,12 @@
 </h2>
 <p>You can install the current version of renderthis from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jhelvy/renderthis"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jhelvy/renderthis"</span><span class="op">)</span></span></code></pre></div>
 <p>Some output formats require additional packages, and each format will provide instructions about how to install any missing dependencies. You can also choose to install renderthis with all of its dependencies:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jhelvy/renderthis"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jhelvy/renderthis"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="local-chrome-installation">Local Chrome Installation<a class="anchor" aria-label="anchor" href="#local-chrome-installation"></a>
@@ -116,8 +122,8 @@
 <p>Rendering the PDF requires a local installation of Chrome. If you don’t have Chrome installed, you can use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera. In this case, you will need to set the path to the browser you want to use for the <a href="https://github.com/rstudio/pagedown" class="external-link">pagedown</a> package as well as the <a href="https://github.com/rstudio/chromote" class="external-link">chromote</a> package if you use the <code>complex_slides = TRUE</code> or <code>partial_slides = TRUE</code> arguments.</p>
 <p>After installing the packages, you can set the paths like this:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>PAGEDOWN_CHROME <span class="op">=</span> <span class="st">"/path/to/browser"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>CHROMOTE_CHROME <span class="op">=</span> <span class="st">"/path/to/browser"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>PAGEDOWN_CHROME <span class="op">=</span> <span class="st">"/path/to/browser"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>CHROMOTE_CHROME <span class="op">=</span> <span class="st">"/path/to/browser"</span><span class="op">)</span></span></code></pre></div>
 <p>If you are unable to install Chrome (e.g. on a computing cluster), the recommended workflow is to render intermediate output formats and use an alternative method for rendering the PDF.</p>
 <p>For example, to render a pptx from a Rmd file without Chrome, you could:</p>
 <ol style="list-style-type: decimal">

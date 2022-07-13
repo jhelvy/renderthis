@@ -5,8 +5,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Functions for rendering slides to different formats, including
-    html, pdf, png, gif, pptx, and mp4, as well as a social output, a png
+<meta name="description" content="Render slides to different formats, including html, pdf,
+    png, gif, pptx, and mp4, as well as a social output, a png
     of the first slide re-sized for sharing on social media.">
 <title>Render media to different formats • renderthis</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -20,8 +20,8 @@
 <script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Render media to different formats">
-<meta property="og:description" content="Functions for rendering slides to different formats, including
-    html, pdf, png, gif, pptx, and mp4, as well as a social output, a png
+<meta property="og:description" content="Render slides to different formats, including html, pdf,
+    png, gif, pptx, and mp4, as well as a social output, a png
     of the first slide re-sized for sharing on social media.">
 <meta property="og:image" content="https://jhelvy.github.io/renderthis/reference/figures/logo.png">
 <meta property="og:image:alt" content="Logo for the renderthis package">
@@ -41,7 +41,7 @@
     
     <a class="navbar-brand me-2" href="index.html">renderthis</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +50,12 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="active nav-item">
+  <a class="nav-link" href="index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="articles/renderthis-setup.html">Setup</a>
 </li>
@@ -101,13 +107,50 @@
 </h2>
 <p>You can install the current version of renderthis from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jhelvy/renderthis"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jhelvy/renderthis"</span><span class="op">)</span></span></code></pre></div>
 <p>Some output formats require additional packages, and each format will provide instructions about how to install any missing dependencies. You can also choose to install renderthis with all of its dependencies:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jhelvy/renderthis"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jhelvy/renderthis"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Note</strong>: To get the most out of renderthis, we recommend installing the package <strong>with dependencies</strong> and making sure that you have a <a href="https://jhelvy.github.io/renderthis/articles/renderthis-setup.html#local-chrome-installation">local installation of Google Chrome</a>.</p>
+<p>Because many users will not need all output formats, several outputs require additional packages that are suggested dependencies and aren’t installed by default unless requested as described above. The table below lists the packages required for each output type:</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Output</th>
+<th align="left">Requires</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">PDF (simple)</td>
+<td align="left">Google Chrome (for <a href="https://pagedown.rbind.io/" class="external-link">pagedown</a>)</td>
+</tr>
+<tr class="even">
+<td align="left">PDF (complex)</td>
+<td align="left"><a href="https://rstudio.github.io/chromote/" class="external-link">chromote</a></td>
+</tr>
+<tr class="odd">
+<td align="left">PNG</td>
+<td align="left">Requires PDF</td>
+</tr>
+<tr class="even">
+<td align="left">GIF</td>
+<td align="left">Requires PDF</td>
+</tr>
+<tr class="odd">
+<td align="left">MP4</td>
+<td align="left"><a href="https://docs.ropensci.org/av/" class="external-link">av</a></td>
+</tr>
+<tr class="even">
+<td align="left">PPTX</td>
+<td align="left"><a href="https://ardata-fr.github.io/officeverse/" class="external-link">officer</a></td>
+</tr>
+<tr class="odd">
+<td align="left">Social</td>
+<td align="left"><a href="https://rstudio.github.io/chromote/" class="external-link">chromote</a></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -130,7 +173,7 @@
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                   <span class="er">|</span><span class="sc">-</span><span class="ot">-&gt;</span> pptx</span></code></pre></div>
 <p>To use renderthis, first load the package:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">renderthis</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">renderthis</span><span class="op">)</span></span></code></pre></div>
 <p>All of the package functions follow a common pattern:</p>
 <ul>
 <li>All functions start with <code>to_*()</code> to render slides to a desired format (e.g., <code><a href="reference/to_pdf.html">to_pdf()</a></code>).</li>
@@ -143,8 +186,8 @@
 <h2 id="author-and-license-information">Author and License Information<a class="anchor" aria-label="anchor" href="#author-and-license-information"></a>
 </h2>
 <ul>
-<li>Authors: <a href="http://www.jhelvy.com/" class="external-link">John Paul Helveston</a> (<em>aut</em>, <em>cre</em>, <em>cph</em>) &amp; <a href="https://www.garrickadenbuie.com/" class="external-link">Garrick Aden-Buie</a> (<em>aut</em>)</li>
-<li>Date First Written: Originally as <a href="https://github.com/jhelvy/xaringanBuilder" class="external-link">{xaringanBuilder}</a> on <em>September 27, 2020</em>
+<li>Authors: <a href="https://www.jhelvy.com/" class="external-link">John Paul Helveston</a> (<em>aut</em>, <em>cre</em>, <em>cph</em>) &amp; <a href="https://www.garrickadenbuie.com/" class="external-link">Garrick Aden-Buie</a> (<em>aut</em>)</li>
+<li>Date First Written: Originally as {xaringanBuilder} on <em>September 27, 2020</em>
 </li>
 <li>License: <a href="https://github.com/jhelvy/renderthis/blob/master/LICENSE.md" class="external-link">MIT</a>
 </li>
@@ -164,11 +207,18 @@
 </h2>
 <p>You can install the xaringanBuilder package as it was just prior to the name change with:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jhelvy/renderthis@v0.0.9"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jhelvy/renderthis@v0.0.9"</span><span class="op">)</span></span></code></pre></div>
 <p>Even though the install command mentions <code>renderthis</code>, the package will be installed as xaringanBuilder.</p>
 </div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=renderthis" class="external-link">View on CRAN</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
@@ -198,7 +248,7 @@
 <ul class="list-unstyled">
 <li><a href="https://github.com/jhelvy/renderthis/actions" class="external-link"><img src="https://github.com/jhelvy/renderthis/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://CRAN.R-project.org/package=renderthis" class="external-link"><img src="https://www.r-pkg.org/badges/version/renderthis" alt="CRAN status"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg" alt="Lifecycle: stable"></a></li>
 </ul>
 </div>
 
