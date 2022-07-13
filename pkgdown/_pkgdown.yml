@@ -18,9 +18,12 @@ navbar:
   structure:
     # all articles are listed in the navbar
     # add "articles" below if we add a new vignette
-    left: [setup, intro, reference, news]
+    left: [home, setup, intro, reference, news]
     right: [search, twitter, github]
   components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
     setup:
       text: Setup
       href: articles/renderthis-setup.html

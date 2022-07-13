@@ -1,3 +1,5 @@
+# renderthis 0.1.0
+
 # renderthis 0.0.1
 
 * Initial version, most functionality copied / modified from v0.0.9 of xaringanBuilder

@@ -1,6 +1,6 @@
 Package: renderthis
-Title: Render Slides To Different Formats
-Version: 0.0.9.9000
+Title: Render Slides to Different Formats
+Version: 0.1.0
 Authors@R:
     c(person(given = "John",
              family = "Helveston",
@@ -15,8 +15,8 @@ Authors@R:
       person(given = "Bryan",
              family = "Shalloway",
              role = "ctb"))
-Description: Functions for rendering slides to different formats, including
-    html, pdf, png, gif, pptx, and mp4, as well as a 'social' output, a png
+Description: Render slides to different formats, including 'html', 'pdf',
+    'png', 'gif', 'pptx', and 'mp4', as well as a 'social' output, a 'png'
     of the first slide re-sized for sharing on social media.
 License: MIT + file LICENSE
 Depends: 
@@ -35,16 +35,13 @@ Imports:
     zip
 Suggests:
     av,
-    chromote (>= 0.0.0.9003),
+    chromote,
     knitr,
     lifecycle,
     officer,
     pdftools,
     testthat (>= 3.0.0),
     webshot2
-Remotes:
-    rstudio/chromote,
-    rstudio/webshot2
 Config/testthat/edition: 3
 Config/Needs/website: xaringanExtra
 Encoding: UTF-8

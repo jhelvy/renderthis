@@ -18,11 +18,9 @@
 #'   than the one containing the `from` R Markdown file.
 #' @param rmd_args A list of arguments passed to [rmarkdown::render()].
 #'
-#' @examples
-#' \dontrun{
-#' # Render html from Rmd file
-#' to_html("slides.Rmd")
-#' }
+#' @return Slides are rendered as an html file.
+#'
+#' @example man/examples/examples_html.R
 #'
 #' @export
 to_html <- function(from, to = NULL, self_contained = FALSE, rmd_args = NULL) {

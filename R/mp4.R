@@ -16,14 +16,9 @@
 #' @inheritParams to_png
 #' @inheritParams to_pdf
 #'
-#' @examples
-#' \dontrun{
-#' # Render mp4 from Rmd, html, pdf, or url
-#' to_mp4("slides.Rmd")
-#' to_mp4("slides.html")
-#' to_mp4("slides.pdf")
-#' to_mp4("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
-#' }
+#' @return Slides are rendered as an mp4 file.
+#'
+#' @example man/examples/examples_mp4.R
 #'
 #' @export
 to_mp4 <- function(

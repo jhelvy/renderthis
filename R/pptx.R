@@ -15,14 +15,9 @@
 #' @inheritParams to_png
 #' @inheritParams to_pdf
 #'
-#' @examples
-#' \dontrun{
-#' # Render pptx from Rmd, html, pdf, or url
-#' to_pptx("slides.Rmd")
-#' to_pptx("slides.html")
-#' to_pptx("slides.pdf")
-#' to_pptx("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
-#' }
+#' @return Slides are rendered as a pptx file.
+#'
+#' @example man/examples/examples_pptx.R
 #'
 #' @export
 to_pptx <- function(

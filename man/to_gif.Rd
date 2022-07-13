@@ -58,12 +58,8 @@ converts each slide in the pdf to a png, and then converts the deck of
 png files to a gif file.
 }
 \examples{
-\dontrun{
-# Render gif from Rmd, html, pdf, or url
-to_gif("slides.Rmd")
-to_gif("slides.html")
-to_gif("slides.pdf")
-to_gif("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
-}
-
+with_example("slides.Rmd", {
+    # Render gif from Rmd, html, pdf, or direct URL
+    to_gif("slides.Rmd")
+})
 }

@@ -58,12 +58,10 @@ converts each slide in the pdf to a png, and then converts the deck of
 png files to a mp4 video file.
 }
 \examples{
-\dontrun{
-# Render mp4 from Rmd, html, pdf, or url
-to_mp4("slides.Rmd")
-to_mp4("slides.html")
-to_mp4("slides.pdf")
-to_mp4("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
+if (requireNamespace("av", quietly = TRUE)) {
+    with_example("slides.Rmd", {
+        # Render mp4 from Rmd, html, pdf, or direct URL
+        to_mp4("slides.Rmd")
+    })
 }
-
 }

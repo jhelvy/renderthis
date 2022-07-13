@@ -27,14 +27,9 @@
 #'   Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.
 #' @inheritParams to_png
 #'
-#' @examples
-#' \dontrun{
-#' # Render gif from Rmd, html, pdf, or url
-#' to_gif("slides.Rmd")
-#' to_gif("slides.html")
-#' to_gif("slides.pdf")
-#' to_gif("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
-#' }
+#' @return Slides are rendered as a gif file.
+#'
+#' @example man/examples/examples_gif.R
 #'
 #' @export
 to_gif <- function(

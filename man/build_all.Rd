@@ -62,13 +62,17 @@ Build xaringan slides to multiple outputs. Options are \code{"html"}, \code{"soc
 build_*() function for details about each output type.
 }
 \examples{
-\dontrun{
-# Builds every output by default
-build_all("slides.Rmd")
+if (interactive()) {
+    # Build every output by default
+    with_example("slides.Rmd", {
+        build_all("slides.Rmd")
+    })
 
-# Both of these build html, pdf, and gif outputs
-build_all("slides.Rmd", include = c("html", "pdf", "gif"))
-build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
+    # Both of these build html, pdf, and gif outputs
+    # (PDF outputs require Google Chrome for {pagedown})
+    with_example("slides.Rmd", {
+        build_all("slides.Rmd", include = c("html", "pdf", "gif"))
+        build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
+    })
 }
-
 }

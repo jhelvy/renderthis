@@ -59,16 +59,11 @@ slide). If \code{length(slides) > 1}, it will return the png files in a zip file
 You can also get a zip file of all the slides as pngs by setting \code{slides = "all"}).
 }
 \examples{
-\dontrun{
-# By default, a png of only the first slide is built
-to_png("slides.Rmd")
-to_png("slides.html")
-to_png("slides.pdf")
-to_png("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
+with_example("slides.Rmd", {
+    # By default a png of only the first slide is built
+    to_png("slides.Rmd", keep_intermediates = TRUE)
 
-# Render zip file of multiple or all slides
-to_png("slides.pdf", slides = c(1, 3, 5))
-to_png("slides.pdf", slides = "all")
-}
-
+    # or render a zip file of multiple or all slides (`slides = "all"`)
+    to_png("slides.pdf", slides = c(1, 3, 5))
+})
 }

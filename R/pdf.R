@@ -25,32 +25,9 @@
 #'   if the `to` file is written into the same directory as the `from` argument,
 #'   otherwise the intermediate file isn't kept.
 #'
-#' @examples
-#' \dontrun{
-#' # Render pdf from Rmd, html, or url
-#' to_pdf("slides.Rmd")
-#' to_pdf("slides.html")
-#' to_pdf("https://jhelvy.github.io/renderthis/reference/figures/slides.html")
+#' @return Slides are rendered as a pdf file.
 #'
-#' # Render a pdf with partial (continuation) slides
-#' to_pdf("slides.Rmd", partial_slides = TRUE)
-#' to_pdf("slides.html", partial_slides = TRUE)
-#'
-#' # Render a pdf of "complex" slides
-#' to_pdf("slides_complex.Rmd", complex_slides = TRUE)
-#' to_pdf("slides_complex.html", complex_slides = TRUE)
-#'
-#' # Render a pdf of "complex" slides and include partial
-#' # (continuation) slides
-#' to_pdf(from = "slides_complex.Rmd",
-#'        to = "slides_complex_partial.pdf",
-#'        complex_slides = TRUE,
-#'        partial_slides = TRUE)
-#' to_pdf(from = "slides_complex.html",
-#'        to = "slides_complex_partial.pdf",
-#'        complex_slides = TRUE,
-#'        partial_slides = TRUE)
-#' }
+#' @example man/examples/examples_pdf.R
 #'
 #' @export
 to_pdf <- function(
