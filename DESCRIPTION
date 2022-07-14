@@ -19,6 +19,9 @@ Description: Render slides to different formats, including 'html', 'pdf',
     'png', 'gif', 'pptx', and 'mp4', as well as a 'social' output, a 'png'
     of the first slide re-sized for sharing on social media.
 License: MIT + file LICENSE
+URL: https://jhelvy.github.io/renderthis/,
+    https://github.com/jhelvy/renderthis
+BugReports: https://github.com/jhelvy/renderthis/issues
 Depends: 
     R (>= 3.4.0)
 Imports:
