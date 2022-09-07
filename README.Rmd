@@ -63,7 +63,7 @@ The table below lists the packages required for each output type:
 | GIF | Requires PDF |
 | MP4 | [av](https://docs.ropensci.org/av/) |
 | PPTX | [officer](https://ardata-fr.github.io/officeverse/) |
-| Social | [chromote](https://rstudio.github.io/chromote/) |
+| Social | [webshot2](https://rstudio.github.io/webshot2/) |
 
 
 ## Usage

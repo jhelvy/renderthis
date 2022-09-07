@@ -56,9 +56,9 @@ below lists the packages required for each output type:
 | PDF (complex) | [chromote](https://rstudio.github.io/chromote/)            |
 | PNG           | Requires PDF                                               |
 | GIF           | Requires PDF                                               |
-| MP4           | [av](https://docs.ropensci.org/av/)                         |
+| MP4           | [av](https://docs.ropensci.org/av/)                        |
 | PPTX          | [officer](https://ardata-fr.github.io/officeverse/)        |
-| Social        | [chromote](https://rstudio.github.io/chromote/)            |
+| Social        | [webshot2](https://rstudio.github.io/webshot2/)            |
 
 ## Usage
 
@@ -89,28 +89,27 @@ library(renderthis)
 
 All of the package functions follow a common pattern:
 
--   All functions start with `to_*()` to render slides to a desired
-    format (e.g., `to_pdf()`).
--   All functions have a required `from` argument which should be set to
-    the full or local path to the input file.
--   All functions have an optional `to` argument. If provided, it can be
-    a full or local path to the output file, and it must end in an
-    appropriate extension (e.g. `slides.gif` for `to_gif()`). If it is
-    not provided, the output file name will be determined based on the
-    `from` argument.
+- All functions start with `to_*()` to render slides to a desired format
+  (e.g., `to_pdf()`).
+- All functions have a required `from` argument which should be set to
+  the full or local path to the input file.
+- All functions have an optional `to` argument. If provided, it can be a
+  full or local path to the output file, and it must end in an
+  appropriate extension (e.g. `slides.gif` for `to_gif()`). If it is not
+  provided, the output file name will be determined based on the `from`
+  argument.
 
 Learn more about renderthis in the [Get Started
 article](https://jhelvy.github.io/renderthis/articles/renderthis.html).
 
 ## Author and License Information
 
--   Authors: [John Paul Helveston](https://www.jhelvy.com/) (*aut*,
-    *cre*, *cph*) & [Garrick
-    Aden-Buie](https://www.garrickadenbuie.com/) (*aut*)
--   Date First Written: Originally as {xaringanBuilder} on *September
-    27, 2020*
--   License:
-    [MIT](https://github.com/jhelvy/renderthis/blob/master/LICENSE.md)
+- Authors: [John Paul Helveston](https://www.jhelvy.com/) (*aut*, *cre*,
+  *cph*) & [Garrick Aden-Buie](https://www.garrickadenbuie.com/) (*aut*)
+- Date First Written: Originally as {xaringanBuilder} on *September 27,
+  2020*
+- License:
+  [MIT](https://github.com/jhelvy/renderthis/blob/master/LICENSE.md)
 
 ## Citation Information
 
