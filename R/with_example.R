@@ -19,7 +19,35 @@
 #'
 #' @keywords internal
 #' @export
-with_example <- function(example, code, clean = TRUE) {
+with_example <- function(
+    example,
+    code,
+    clean = TRUE,
+    requires_packages = NULL,
+    requires_chrome = FALSE
+) {
+    if (!interactive() && !identical(Sys.getenv("IN_PKGDOWN"), "true")) {
+        return(invisible())
+    }
+
+    if (isTRUE(requires_chrome)) {
+        requires_packages <- c(requires_packages, "chromote")
+    }
+    if (!is.null(requires_packages)) {
+        pkg_is_avail <- vapply(requires_packages, requireNamespace, logical(1), quietly = TRUE)
+        pkgs_miss <- requires_packages[!pkg_is_avail]
+        if (length(pkgs_miss)) {
+            cli::cli_inform("This example requires the packages {.pkg {pkgs_miss}}.")
+            return(invisible())
+        }
+    }
+    if (isTRUE(requires_chrome)) {
+        if (!check_chrome_installed()) {
+            cli::cli_inform("This example requires {.strong Google Chrome}.")
+            return(invisible())
+        }
+    }
+
     examples <- dir(system.file("example", package = "renderthis"))
     example <- match.arg(tolower(example), choices = tolower(examples))
     example <- examples[tolower(example) == tolower(examples)]

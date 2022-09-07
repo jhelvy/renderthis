@@ -63,16 +63,10 @@ build_*() function for details about each output type.
 }
 \examples{
 if (interactive()) {
-    # Build every output by default
-    with_example("slides.Rmd", {
-        build_all("slides.Rmd")
-    })
-
-    # Both of these build html, pdf, and gif outputs
+    # Both of these build html and pdf outputs
     # (PDF outputs require Google Chrome for {pagedown})
-    with_example("slides.Rmd", {
-        build_all("slides.Rmd", include = c("html", "pdf", "gif"))
-        build_all("slides.Rmd", exclude = c("social", "png", "mp4", "pptx"))
+    with_example("slides.Rmd", requires_chrome = TRUE, {
+        build_all("slides.Rmd", include = c("html", "pdf"))
     })
 }
 }

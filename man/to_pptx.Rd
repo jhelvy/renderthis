@@ -55,10 +55,8 @@ then converts it into png images that are inserted on each slide in the
 pptx file.
 }
 \examples{
-if (requireNamespace("officer", quietly = TRUE)) {
-    with_example("slides.Rmd", {
-        # Render pptx from Rmd, html, pdf, or direct URL
-        to_pptx("slides.Rmd")
-    })
-}
+with_example("slides.Rmd", requires_chrome = TRUE, requires_packages = "officer", {
+    # Render pptx from Rmd, html, pdf, or direct URL
+    to_pptx("slides.Rmd")
+})
 }

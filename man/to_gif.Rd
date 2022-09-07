@@ -58,7 +58,7 @@ converts each slide in the pdf to a png, and then converts the deck of
 png files to a gif file.
 }
 \examples{
-with_example("slides.Rmd", {
+with_example("slides.Rmd", requires_chrome = TRUE, {
     # Render gif from Rmd, html, pdf, or direct URL
     to_gif("slides.Rmd")
 })
