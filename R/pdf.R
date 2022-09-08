@@ -48,7 +48,7 @@ to_pdf <- function(
 
     complex_slides <- complex_slides || partial_slides
 
-    if (complex_slides && test_path_ext(input, "qmd") {
+    if (complex_slides && test_path_ext(input, "qmd")) {
         cli::cli_abort(c(
             "Complex PDF rendering is currently only available for xaringan slides in {.path .Rmd} documents.",
             "x" = "{.strong input}: {.val {input}}"
