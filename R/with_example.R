@@ -27,7 +27,7 @@ with_example <- function(
     requires_chrome = FALSE
 ) {
     if (!interactive()) {
-        in_pkgdown <- !identical(Sys.getenv("IN_PKGDOWN"), "true")
+        in_pkgdown <- identical(Sys.getenv("IN_PKGDOWN"), "true")
         in_ci <- nzchar(Sys.getenv("CI", ""))
         if (!(in_pkgdown || in_ci)) {
             return(invisible())
