@@ -1,17 +1,15 @@
-#' Render slides as pptx file.
+#' Render slides as a PowerPoint file.
 #'
-#' Render slides as a pptx file. The function renders to the pdf and
-#' then converts it into png images that are inserted on each slide in the
-#' pptx file.
+#' Render slides as a `.pptx` file. The function renders to the PDF and
+#' then converts it into PNG images that are inserted on each slide in the
+#' PowerPoint file.
 #'
-#' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
-#'   is a url to slides on a website, you must provide the full url
-#'   ending in `".html"`.
-#' @param to Name of the output pptx file.
+#' @param to Name of the output `.pptx` file.
 #' @param slides A numeric or integer vector of the slide number(s) to include
 #'   in the pptx, or one of `"all"`, `"first"`, or `"last"`. Negative integers
 #'   select which slides _not_ to include. Defaults to `"all"`, in which case
 #'   all slides are included.
+#' @inheritParams to_gif
 #' @inheritParams to_png
 #' @inheritParams to_pdf
 #'
@@ -42,8 +40,7 @@ to_pptx <- function(
     }
 
     # Check input and output files have correct extensions
-    assert_path_ext(input, c("rmd", "html", "pdf"))
-    assert_path_ext(output_file, "pptx")
+    assert_path_ext(output_file, "pptx", arg = "to")
 
     # Render html and / or pdf (if input is not pdf)
     step_pdf <- input

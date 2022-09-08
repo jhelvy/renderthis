@@ -4,10 +4,10 @@
 \alias{to_html}
 \title{Render slides as html file.}
 \usage{
-to_html(from, to = NULL, self_contained = FALSE, rmd_args = NULL)
+to_html(from, to = NULL, self_contained = FALSE, render_args = NULL)
 }
 \arguments{
-\item{from}{Path to an Rmd file of xaringan slides.}
+\item{from}{Path to an \code{.Rmd} or \code{.qmd} file.}
 
 \item{to}{The name of the output file. If using \code{NULL} then the
 output file name will be based on file name for the \code{from} file. If a file
@@ -20,17 +20,17 @@ you can share with others, but it may be very large. This feature is
 enabled by default when the \code{to} file is written in a directory other
 than the one containing the \code{from} R Markdown file.}
 
-\item{rmd_args}{A list of arguments passed to \code{\link[rmarkdown:render]{rmarkdown::render()}}.}
+\item{render_args}{A list of arguments passed to \code{\link[rmarkdown:render]{rmarkdown::render()}} or
+\code{\link[quarto:quarto_render]{quarto::quarto_render()}}.}
 }
 \value{
-Slides are rendered as an html file.
+Slides are rendered as an \code{.html} file.
 }
 \description{
-Render xaringan or quarto slides as an html file. For xaringan slides, it
-is the same thing as \code{\link[rmarkdown:render]{rmarkdown::render()}} with
-\code{output_format = "xaringan::moon_reader"} except that the \code{self_contained}
-option is forced to \code{TRUE} if the HTML file is built into a directory other
-than the one containing \code{from}.
+Render xaringan or Quarto slides as an html file. In generally, it is the
+same thing as \code{\link[rmarkdown:render]{rmarkdown::render()}} or \code{\link[quarto:quarto_render]{quarto::quarto_render()}} except that
+the \code{self_contained} option is forced to \code{TRUE} if the HTML file is built
+into a directory other than the one containing \code{from}.
 }
 \examples{
 with_example("slides.Rmd", {

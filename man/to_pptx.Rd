@@ -2,7 +2,7 @@
 % Please edit documentation in R/pptx.R
 \name{to_pptx}
 \alias{to_pptx}
-\title{Render slides as pptx file.}
+\title{Render slides as a PowerPoint file.}
 \usage{
 to_pptx(
   from,
@@ -16,13 +16,13 @@ to_pptx(
 )
 }
 \arguments{
-\item{from}{Path to a Rmd file, html file, pdf file, or a url. If \code{from}
-is a url to slides on a website, you must provide the full url
+\item{from}{Path to an \code{.Rmd}, \code{.qmd}, \code{.html}, \code{.pdf} file, or a URL. If
+\code{from} is a URL to slides on a website, you must provide the full URL
 ending in \code{".html"}.}
 
-\item{to}{Name of the output pptx file.}
+\item{to}{Name of the output \code{.pptx} file.}
 
-\item{density}{Resolution of the resulting pngs in each slide file. Defaults
+\item{density}{Resolution of the resulting PNGs in each slide file. Defaults
 to \code{100}.}
 
 \item{slides}{A numeric or integer vector of the slide number(s) to include
@@ -50,9 +50,9 @@ render the final output? The default is \code{FALSE}.}
 Slides are rendered as a pptx file.
 }
 \description{
-Render slides as a pptx file. The function renders to the pdf and
-then converts it into png images that are inserted on each slide in the
-pptx file.
+Render slides as a \code{.pptx} file. The function renders to the PDF and
+then converts it into PNG images that are inserted on each slide in the
+PowerPoint file.
 }
 \examples{
 with_example("slides.Rmd", requires_chrome = TRUE, requires_packages = "officer", {

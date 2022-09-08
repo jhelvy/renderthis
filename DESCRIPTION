@@ -32,6 +32,7 @@ Imports:
     magick (>= 2.7.1),
     pagedown,
     progress,
+    quarto,
     rmarkdown,
     withr,
     xaringan,

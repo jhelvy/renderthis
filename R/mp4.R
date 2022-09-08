@@ -1,22 +1,20 @@
-#' Render slides as a mp4 video file.
+#' Render slides as an MP4 video file.
 #'
-#' Render slides as a mp4 video file. The function renders to the pdf,
+#' Render slides as an MP4 video file. The function renders to the pdf,
 #' converts each slide in the pdf to a png, and then converts the deck of
-#' png files to a mp4 video file.
+#' png files to a MP4 video file.
 #'
-#' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
-#'   is a url to slides on a website, you must provide the full url
-#'   ending in `".html"`.
-#' @param to Name of the output mp4 file.
+#' @param to Name of the output `.mp4` file.
 #' @param slides A numeric or integer vector of the slide number(s) to include
 #'   in the mp4, or one of `"all"`, `"first"`, or `"last"`. Negative integers
 #'   select which slides _not_ to include. Defaults to `"all"`, in which case
 #'   all slides are included.
-#' @param fps Frames per second of the resulting mp4 file.
+#' @param fps Frames per second of the resulting `.mp4` file.
+#' @inheritParams to_gif
 #' @inheritParams to_png
 #' @inheritParams to_pdf
 #'
-#' @return Slides are rendered as an mp4 file.
+#' @return Slides are rendered as an `.mp4` file.
 #'
 #' @example man/examples/examples_mp4.R
 #'
@@ -44,8 +42,7 @@ to_mp4 <- function(
     }
 
     # Check input and output files have correct extensions
-    assert_path_ext(input, c("rmd", "html", "pdf"))
-    assert_path_ext(output_file, "mp4")
+    assert_path_ext(output_file, "mp4", arg = "to")
 
     # Render html and / or pdf (if input is not pdf)
     step_pdf <- input

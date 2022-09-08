@@ -2,7 +2,7 @@
 % Please edit documentation in R/gif.R
 \name{to_gif}
 \alias{to_gif}
-\title{Render slides as a gif file.}
+\title{Render slides as a GIF file.}
 \usage{
 to_gif(
   from,
@@ -17,21 +17,21 @@ to_gif(
 )
 }
 \arguments{
-\item{from}{Path to a Rmd file, html file, pdf file, or a url. If \code{from}
-is a url to slides on a website, you must provide the full url
+\item{from}{Path to an \code{.Rmd}, \code{.qmd}, \code{.html}, \code{.pdf} file, or a URL. If
+\code{from} is a URL to slides on a website, you must provide the full URL
 ending in \code{".html"}.}
 
-\item{to}{Name of the output gif file.}
+\item{to}{Name of the output \code{.gif} file.}
 
-\item{density}{Resolution of the resulting pngs in each slide file. Defaults
+\item{density}{Resolution of the resulting PNGs in each slide file. Defaults
 to \code{100}.}
 
 \item{slides}{A numeric or integer vector of the slide number(s) to include
-in the gif, or one of \code{"all"}, \code{"first"}, or \code{"last"}. Negative integers
+in the GIF, or one of \code{"all"}, \code{"first"}, or \code{"last"}. Negative integers
 select which slides \emph{not} to include. Defaults to \code{"all"}, in which case
 all slides are included.}
 
-\item{fps}{Frames per second of the resulting gif file.}
+\item{fps}{Frames per second in the animated GIF.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set \code{complex_slides = TRUE}.
@@ -50,12 +50,12 @@ Only used if \code{complex_slides = TRUE} or \code{partial_slides = TRUE}.}
 render the final output? The default is \code{FALSE}.}
 }
 \value{
-Slides are rendered as a gif file.
+Slides are rendered as a \code{.gif} file.
 }
 \description{
-Render slides as a gif video file. The function renders to the pdf,
-converts each slide in the pdf to a png, and then converts the deck of
-png files to a gif file.
+Render slides as a GIF video file. The function renders to the PDF,
+converts each slide in the PDF to a PNG, and then converts the deck of
+PNG files to a GIF file.
 }
 \examples{
 with_example("slides.Rmd", requires_chrome = TRUE, {

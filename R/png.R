@@ -1,29 +1,27 @@
-#' Render slides as png file(s).
+#' Render slides as PNG file(s).
 #'
-#' Render png image(s) of slides. The function renders to the pdf and
-#' then converts it into png files of each slide. The slide numbers defined by
+#' Render PNG image(s) of slides. The function renders to the PDF and
+#' then converts it into PNG files of each slide. The slide numbers defined by
 #' the `slides` argument are saved (defaults to `1`, returning only the title
-#' slide). If `length(slides) > 1`, it will return the png files in a zip file.
-#' You can also get a zip file of all the slides as pngs by setting `slides =
+#' slide). If `length(slides) > 1`, it will return the PNG files in a ZIP file.
+#' You can also get a ZIP file of all the slides as PNGs by setting `slides =
 #' "all"`).
 #'
-#' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
-#'   is a url to slides on a website, you must provide the full url
-#'   ending in `".html"`.
-#' @param to Name of the output png or zip file.
-#' @param density Resolution of the resulting pngs in each slide file. Defaults
+#' @param to Name of the output `.png` or `.zip` file.
+#' @param density Resolution of the resulting PNGs in each slide file. Defaults
 #'   to `100`.
 #' @param slides A numeric or integer vector of the slide number(s) to render
-#'   as png files , or one of `"all"`, `"first"`, or `"last"`. Negative integers
+#'   as PNG files , or one of `"all"`, `"first"`, or `"last"`. Negative integers
 #'   select which slides _not_ to include. If more than one slide are included,
-#'   pngs will be returned as a zip file. Defaults to `"all"`, in which case
+#'   PNGs will be returned as a ZIP file. Defaults to `"all"`, in which case
 #'   all slides are included.
+#' @inheritParams to_gif
 #' @inheritParams to_pdf
 #' @param keep_intermediates Should we keep the intermediate files used to
 #'   render the final output? The default is `FALSE`.
 #'
-#' @return Slides are rendered as a png file (single) or zip file of multiple
-#' png files.
+#' @return Slides are rendered as a `.png` file (single) or `.zip` file of
+#'   multiple `.png` files.
 #'
 #' @example man/examples/examples_png.R
 #'
@@ -53,8 +51,7 @@ to_png <- function(
     slides <- slides_arg_validate(slides)
 
     # Check input and output files have correct extensions
-    assert_path_ext(input, c("rmd", "html", "pdf"))
-    assert_path_ext(output_file, c("png", "zip"))
+    assert_path_ext(output_file, c("png", "zip"), arg = "from")
 
     # Render html and / or pdf (if input is not pdf)
     step_pdf <- input

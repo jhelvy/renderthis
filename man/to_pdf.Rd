@@ -2,7 +2,7 @@
 % Please edit documentation in R/pdf.R
 \name{to_pdf}
 \alias{to_pdf}
-\title{Render slides as pdf file.}
+\title{Render slides as PDF file.}
 \usage{
 to_pdf(
   from,
@@ -14,11 +14,11 @@ to_pdf(
 )
 }
 \arguments{
-\item{from}{Path to a Rmd file, html file, pdf file, or a url. If \code{from}
-is a url to slides on a website, you must provide the full url
-ending in \code{".html"}.}
+\item{from}{Path to an \code{.Rmd}, \code{.qmd}, \code{.html} file, or a URL. If \code{from} is a
+URL to slides on a website, you must provide the full URL ending in
+\code{".html"}.}
 
-\item{to}{The name of the output file. If \code{NULL} (the default) then
+\item{to}{The name of the output \code{.pdf} file. If \code{NULL} (the default) then
 the output filename will be based on filename for the \code{from} file. If a
 filename is provided, a path to the output file can also be provided.}
 
@@ -41,10 +41,10 @@ if the \code{to} file is written into the same directory as the \code{from} argu
 otherwise the intermediate file isn't kept.}
 }
 \value{
-Slides are rendered as a pdf file.
+Slides are rendered as a \code{.pdf} file.
 }
 \description{
-Render slides as a pdf file. Requires a local installation of Chrome.
+Render slides as a PDF file. Requires a local installation of Chrome.
 If you set \code{complex_slides = TRUE} or \code{partial_slides = TRUE}, you will also
 need to install the {chromote} and {pdftools} packages.
 }
