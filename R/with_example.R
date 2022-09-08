@@ -26,8 +26,12 @@ with_example <- function(
     requires_packages = NULL,
     requires_chrome = FALSE
 ) {
-    if (!interactive() && !identical(Sys.getenv("IN_PKGDOWN"), "true")) {
-        return(invisible())
+    if (!interactive()) {
+        in_pkgdown <- !identical(Sys.getenv("IN_PKGDOWN"), "true")
+        in_ci <- nzchar(Sys.getenv("CI", ""))
+        if (!(in_pkgdown || in_ci)) {
+            return(invisible())
+        }
     }
 
     if (isTRUE(requires_chrome)) {
