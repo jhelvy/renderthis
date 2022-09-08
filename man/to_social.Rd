@@ -22,9 +22,11 @@ Requires a local installation of Chrome as well as the {webshot2} package:
 \code{remotes::install_github("rstudio/webshot2")}.
 }
 \examples{
-with_example("slides.Rmd", requires_chrome = TRUE, requires_packages = "webshot2", {
-    # Render png image of first slide from Rmd file
-    # sized for sharing on social media
-    to_social("slides.Rmd")
-})
+if (interactive()) {
+    with_example("slides.Rmd", requires_chrome = TRUE, requires_packages = "webshot2", {
+        # Render png image of first slide from Rmd file
+        # sized for sharing on social media
+        to_social("slides.Rmd")
+    })
+}
 }
