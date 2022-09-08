@@ -48,7 +48,7 @@ to_pdf <- function(
 
     complex_slides <- complex_slides || partial_slides
 
-    if (complex_slides && !test_path_ext(input, "rmd")) {
+    if (complex_slides && test_path_ext(input, "qmd") {
         cli::cli_abort(c(
             "Complex PDF rendering is currently only available for xaringan slides in {.path .Rmd} documents.",
             "x" = "{.strong input}: {.val {input}}"
@@ -77,7 +77,7 @@ to_pdf <- function(
     if (complex_slides) {
         to_pdf_complex(path_from(step_html, "url"), output_file, partial_slides, delay)
     } else {
-        assert_path_ext(input, c("qmd", "rmd"), arg = "from")
+        assert_path_ext(input, c("qmd", "rmd", "html"), arg = "from")
         to_pdf_simple(step_html, output_file)
     }
 }
