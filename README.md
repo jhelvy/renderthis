@@ -12,7 +12,11 @@ status](https://www.r-pkg.org/badges/version/renderthis)](https://CRAN.R-project
 stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-This package contains functions for rendering xaringan slides to
+This package contains functions for rendering [R
+Markdown](https://rmarkdown.rstudio.com) and
+[Quarto](https://quarto.org) documents — priamrily
+[xaringan](https://slides.yihui.org/xaringan/) or
+[revealjs](https://quarto.org/docs/presentations/revealjs/) slides — to
 different formats, including html, pdf, png, gif, pptx, and mp4, as well
 as a ‘social’ output, a png of the first slide re-sized for sharing on
 social media.
@@ -24,7 +28,14 @@ below](#installing-xaringanbuilder).
 
 ## Installation
 
-You can install the current version of renderthis from GitHub:
+You can install the latest version of renderthis from
+[CRAN](https://cran.r-project.org/) with:
+
+``` r
+install.packages("renderthis")
+```
+
+And the development version from GitHub with:
 
 ``` r
 # install.packages("remotes")
@@ -36,7 +47,10 @@ provide instructions about how to install any missing dependencies. You
 can also choose to install renderthis with all of its dependencies:
 
 ``` r
-# install.packages("remotes")
+# From CRAN
+install.packages("renderthis", dependencies = TRUE)
+
+# From GitHub
 remotes::install_github("jhelvy/renderthis", dependencies = TRUE)
 ```
 
@@ -65,9 +79,9 @@ below lists the packages required for each output type:
 Use renderthis to render slides to different formats. Here is a diagram
 of the render hierarchy:
 
-    Rmd
+    Rmd / qmd
      |
-     |--> social (png)
+     |--> social (png, from Rmd only)
      |
      |--> html
            |

@@ -4,6 +4,11 @@ output:
     html_preview: false
 ---
 
+[rmarkdown]: https://rmarkdown.rstudio.com
+[quarto]: https://quarto.org
+[xaringan]: https://slides.yihui.org/xaringan/
+[revealjs]: https://quarto.org/docs/presentations/revealjs/
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, include = FALSE}
@@ -26,7 +31,7 @@ IS_README <- TRUE
 stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-This package contains functions for rendering xaringan slides to different formats, including html, pdf, png, gif, pptx, and mp4, as well as a 'social' output, a png of the first slide re-sized for sharing on social media.
+This package contains functions for rendering [R Markdown][rmarkdown] and [Quarto][quarto] documents — priamrily [xaringan] or [revealjs] slides — to different formats, including html, pdf, png, gif, pptx, and mp4, as well as a 'social' output, a png of the first slide re-sized for sharing on social media.
 
 **Looking for xaringanBuilder?**
 The package formerly known as xaringanBuilder is now **renderthis**.
@@ -34,7 +39,13 @@ If you need to install xaringanBuilder under the previous package name, [see the
 
 ## Installation
 
-You can install the current version of renderthis from GitHub:
+You can install the latest version of renderthis from [CRAN](https://cran.r-project.org/) with:
+
+```{r}
+install.packages("renderthis")
+```
+
+And the development version from GitHub with:
 
 ```{r}
 # install.packages("remotes")
@@ -44,7 +55,10 @@ remotes::install_github("jhelvy/renderthis")
 Some output formats require additional packages, and each format will provide instructions about how to install any missing dependencies. You can also choose to install renderthis with all of its dependencies:
 
 ```{r}
-# install.packages("remotes")
+# From CRAN
+install.packages("renderthis", dependencies = TRUE)
+
+# From GitHub
 remotes::install_github("jhelvy/renderthis", dependencies = TRUE)
 ```
 
