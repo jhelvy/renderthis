@@ -1,4 +1,5 @@
 test_that("to_html() output in input directory", {
+    skip_if_not_pandoc()
     skip_if_not_chrome_installed()
     skip_if_not_installed("webshot2")
 

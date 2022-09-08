@@ -11,5 +11,10 @@ expect_equal_images <- function(x, y) {
 }
 
 skip_if_not_chrome_installed <- function() {
+    skip_on_cran()
     skip_if_not(check_chrome_installed(), "Chrome is not installed")
+}
+
+skip_if_not_pandoc <- function() {
+    skip_if_not(rmarkdown::pandoc_available())
 }

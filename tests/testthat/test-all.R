@@ -10,7 +10,9 @@ test_that("build_all() from basic slides.Rmd", {
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_all("slides.Rmd", slides = NULL)
+        lifecycle::expect_deprecated(
+            build_all("slides.Rmd", slides = NULL)
+        )
     )
 
     expect_true(fs::file_exists("slides.html"))
@@ -33,7 +35,9 @@ test_that("build_all() from basic slides.Rmd with a few excluded formats", {
     withr::local_dir(tmpdir)
 
     suppressMessages(
-        build_all("slides.Rmd", slides = NULL, exclude = c("html", "pdf", "png"))
+        lifecycle::expect_deprecated(
+            build_all("slides.Rmd", slides = NULL, exclude = c("html", "pdf", "png"))
+        )
     )
 
     expect_false(fs::file_exists("slides.html"))

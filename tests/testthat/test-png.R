@@ -10,6 +10,7 @@ test_that("to_png() handles bad inputs", {
 })
 
 test_that("to_png() from .Rmd doesn't keep intermediates by default", {
+    skip_if_not_pandoc()
     skip_if_not_chrome_installed()
 
     tmpdir <- withr::local_tempdir()
@@ -47,6 +48,7 @@ test_that("to_png() from basic.pdf", {
 })
 
 test_that("to_png() chooses .zip even if .png is given", {
+    skip_if_not_pandoc()
     skip_if_not_chrome_installed()
 
     tmpdir <- withr::local_tempdir()

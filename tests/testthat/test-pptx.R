@@ -23,6 +23,7 @@ test_that("to_pptx() simple from pdf", {
 
 test_that("to_pptx() simple from Rmd", {
     skip_if_not_installed("officer")
+    skip_if_not_pandoc()
     skip_if_not_chrome_installed()
 
     tmpdir <- withr::local_tempdir()
