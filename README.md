@@ -17,7 +17,7 @@ Markdown](https://rmarkdown.rstudio.com) and
 [Quarto](https://quarto.org) documents — priamrily
 [xaringan](https://slides.yihui.org/xaringan/) or
 [revealjs](https://quarto.org/docs/presentations/revealjs/) slides — to
-different formats, including html, pdf, png, gif, pptx, and mp4, as well
+different formats, including HTML, PDF, PNG, GIF, PPTX, and MP4, as well
 as a ‘social’ output, a png of the first slide re-sized for sharing on
 social media.
 

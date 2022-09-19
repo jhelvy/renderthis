@@ -31,7 +31,7 @@ IS_README <- TRUE
 stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-This package contains functions for rendering [R Markdown][rmarkdown] and [Quarto][quarto] documents — priamrily [xaringan] or [revealjs] slides — to different formats, including html, pdf, png, gif, pptx, and mp4, as well as a 'social' output, a png of the first slide re-sized for sharing on social media.
+This package contains functions for rendering [R Markdown][rmarkdown] and [Quarto][quarto] documents — priamrily [xaringan] or [revealjs] slides — to different formats, including HTML, PDF, PNG, GIF, PPTX, and MP4, as well as a 'social' output, a png of the first slide re-sized for sharing on social media.
 
 **Looking for xaringanBuilder?**
 The package formerly known as xaringanBuilder is now **renderthis**.
