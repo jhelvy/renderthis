@@ -1,4 +1,5 @@
 test_that("to_pdf() simple", {
+    skip_if_not_pandoc()
     skip_if_not_chrome_installed()
 
     tmpdir <- withr::local_tempdir()
@@ -17,6 +18,7 @@ test_that("to_pdf() simple", {
 })
 
 test_that("to_pdf() simple, other directory", {
+    skip_if_not_pandoc()
     skip_if_not_chrome_installed()
 
     tmpdir <- withr::local_tempdir()
@@ -36,6 +38,7 @@ test_that("to_pdf() simple, other directory", {
 })
 
 test_that("to_pdf() complex slides", {
+    skip_if_not_pandoc()
     skip_if_not_chrome_installed()
     skip_if_not_installed("pdftools")
 
@@ -55,6 +58,7 @@ test_that("to_pdf() complex slides", {
 })
 
 test_that("to_pdf() partial slides", {
+    skip_if_not_pandoc()
     skip_if_not_chrome_installed()
     skip_if_not_installed("pdftools")
 

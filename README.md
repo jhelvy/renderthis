@@ -12,8 +12,12 @@ status](https://www.r-pkg.org/badges/version/renderthis)](https://CRAN.R-project
 stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-This package contains functions for rendering xaringan slides to
-different formats, including html, pdf, png, gif, pptx, and mp4, as well
+This package contains functions for rendering [R
+Markdown](https://rmarkdown.rstudio.com) and
+[Quarto](https://quarto.org) documents — priamrily
+[xaringan](https://slides.yihui.org/xaringan/) or
+[revealjs](https://quarto.org/docs/presentations/revealjs/) slides — to
+different formats, including HTML, PDF, PNG, GIF, PPTX, and MP4, as well
 as a ‘social’ output, a png of the first slide re-sized for sharing on
 social media.
 
@@ -24,7 +28,20 @@ below](#installing-xaringanbuilder).
 
 ## Installation
 
-You can install the current version of renderthis from GitHub:
+**Note**: To get the most out of renderthis, we recommend installing the
+package **with dependencies** and making sure that you have a local
+installation of Google Chrome. See the
+[Setup](https://jhelvy.github.io/renderthis/articles/renderthis-setup.html)
+page for details.
+
+You can install the latest version of renderthis from
+[CRAN](https://cran.r-project.org/) with:
+
+``` r
+install.packages("renderthis")
+```
+
+And the development version from GitHub with:
 
 ``` r
 # install.packages("remotes")
@@ -36,38 +53,21 @@ provide instructions about how to install any missing dependencies. You
 can also choose to install renderthis with all of its dependencies:
 
 ``` r
-# install.packages("remotes")
+# From CRAN
+install.packages("renderthis", dependencies = TRUE)
+
+# From GitHub
 remotes::install_github("jhelvy/renderthis", dependencies = TRUE)
 ```
-
-**Note**: To get the most out of renderthis, we recommend installing the
-package **with dependencies** and making sure that you have a [local
-installation of Google
-Chrome](https://jhelvy.github.io/renderthis/articles/renderthis-setup.html#local-chrome-installation).
-
-Because many users will not need all output formats, several outputs
-require additional packages that are suggested dependencies and aren’t
-installed by default unless requested as described above. The table
-below lists the packages required for each output type:
-
-| Output        | Requires                                                   |
-|:--------------|:-----------------------------------------------------------|
-| PDF (simple)  | Google Chrome (for [pagedown](https://pagedown.rbind.io/)) |
-| PDF (complex) | [chromote](https://rstudio.github.io/chromote/)            |
-| PNG           | Requires PDF                                               |
-| GIF           | Requires PDF                                               |
-| MP4           | [av](https://docs.ropensci.org/av/)                         |
-| PPTX          | [officer](https://ardata-fr.github.io/officeverse/)        |
-| Social        | [chromote](https://rstudio.github.io/chromote/)            |
 
 ## Usage
 
 Use renderthis to render slides to different formats. Here is a diagram
 of the render hierarchy:
 
-    Rmd
+    Rmd / qmd
      |
-     |--> social (png)
+     |--> social (png, from Rmd only)
      |
      |--> html
            |

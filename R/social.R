@@ -36,8 +36,8 @@ to_social <- function(from, to = NULL) {
     }
 
     # Check input and output files have correct extensions
-    assert_path_ext(input, "rmd")
-    assert_path_ext(output_file, "png")
+    assert_path_ext(input, "rmd", arg = "from")
+    assert_path_ext(output_file, "png", arg = "to")
 
     # Render a temporary html file for the slide snapshot
     # We used to use `webshot2::rmdshot()` but this way we have more control
@@ -47,7 +47,7 @@ to_social <- function(from, to = NULL) {
         from = input,
         to = step_html,
         self_contained = TRUE,
-        rmd_args = list(
+        render_args = list(
             output_options = list(nature = list(ratio = "191:100"))
         )
     )

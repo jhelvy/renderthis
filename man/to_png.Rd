@@ -2,7 +2,7 @@
 % Please edit documentation in R/png.R
 \name{to_png}
 \alias{to_png}
-\title{Render slides as png file(s).}
+\title{Render slides as PNG file(s).}
 \usage{
 to_png(
   from,
@@ -16,19 +16,19 @@ to_png(
 )
 }
 \arguments{
-\item{from}{Path to a Rmd file, html file, pdf file, or a url. If \code{from}
-is a url to slides on a website, you must provide the full url
+\item{from}{Path to an \code{.Rmd}, \code{.qmd}, \code{.html}, \code{.pdf} file, or a URL. If
+\code{from} is a URL to slides on a website, you must provide the full URL
 ending in \code{".html"}.}
 
-\item{to}{Name of the output png or zip file.}
+\item{to}{Name of the output \code{.png} or \code{.zip} file.}
 
-\item{density}{Resolution of the resulting pngs in each slide file. Defaults
+\item{density}{Resolution of the resulting PNGs in each slide file. Defaults
 to \code{100}.}
 
 \item{slides}{A numeric or integer vector of the slide number(s) to render
-as png files , or one of \code{"all"}, \code{"first"}, or \code{"last"}. Negative integers
+as PNG files , or one of \code{"all"}, \code{"first"}, or \code{"last"}. Negative integers
 select which slides \emph{not} to include. If more than one slide are included,
-pngs will be returned as a zip file. Defaults to \code{"all"}, in which case
+PNGs will be returned as a ZIP file. Defaults to \code{"all"}, in which case
 all slides are included.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
@@ -48,18 +48,18 @@ Only used if \code{complex_slides = TRUE} or \code{partial_slides = TRUE}.}
 render the final output? The default is \code{FALSE}.}
 }
 \value{
-Slides are rendered as a png file (single) or zip file of multiple
-png files.
+Slides are rendered as a \code{.png} file (single) or \code{.zip} file of
+multiple \code{.png} files.
 }
 \description{
-Render png image(s) of slides. The function renders to the pdf and
-then converts it into png files of each slide. The slide numbers defined by
+Render PNG image(s) of slides. The function renders to the PDF and
+then converts it into PNG files of each slide. The slide numbers defined by
 the \code{slides} argument are saved (defaults to \code{1}, returning only the title
-slide). If \code{length(slides) > 1}, it will return the png files in a zip file.
-You can also get a zip file of all the slides as pngs by setting \code{slides = "all"}).
+slide). If \code{length(slides) > 1}, it will return the PNG files in a ZIP file.
+You can also get a ZIP file of all the slides as PNGs by setting \code{slides = "all"}).
 }
 \examples{
-with_example("slides.Rmd", {
+with_example("slides.Rmd", requires_chrome = TRUE, {
     # By default a png of only the first slide is built
     to_png("slides.Rmd", keep_intermediates = TRUE)
 

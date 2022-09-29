@@ -4,7 +4,13 @@
 \alias{with_example}
 \title{Try renderthis functions with an example}
 \usage{
-with_example(example, code, clean = TRUE)
+with_example(
+  example,
+  code,
+  clean = TRUE,
+  requires_packages = NULL,
+  requires_chrome = FALSE
+)
 }
 \arguments{
 \item{example}{The name of the example file, currently only \code{"slides.Rmd"}.}

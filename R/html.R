@@ -1,12 +1,11 @@
 #' Render slides as html file.
 #'
-#' Render xaringan or quarto slides as an html file. For xaringan slides, it
-#' is the same thing as [rmarkdown::render()] with
-#' `output_format = "xaringan::moon_reader"` except that the `self_contained`
-#' option is forced to `TRUE` if the HTML file is built into a directory other
-#'  than the one containing `from`.
+#' Render xaringan or Quarto slides as an html file. In generally, it is the
+#' same thing as [rmarkdown::render()] or [quarto::quarto_render()] except that
+#' the `self_contained` option is forced to `TRUE` if the HTML file is built
+#' into a directory other than the one containing `from`.
 #'
-#' @param from Path to an Rmd file of xaringan slides.
+#' @param from Path to an `.Rmd` or `.qmd` file.
 #' @param to The name of the output file. If using `NULL` then the
 #'   output file name will be based on file name for the `from` file. If a file
 #'   name is provided, a path to the output file can also be provided.
@@ -16,14 +15,15 @@
 #'   you can share with others, but it may be very large. This feature is
 #'   enabled by default when the `to` file is written in a directory other
 #'   than the one containing the `from` R Markdown file.
-#' @param rmd_args A list of arguments passed to [rmarkdown::render()].
+#' @param render_args A list of arguments passed to [rmarkdown::render()] or
+#'   [quarto::quarto_render()].
 #'
-#' @return Slides are rendered as an html file.
+#' @return Slides are rendered as an `.html` file.
 #'
 #' @example man/examples/examples_html.R
 #'
 #' @export
-to_html <- function(from, to = NULL, self_contained = FALSE, rmd_args = NULL) {
+to_html <- function(from, to = NULL, self_contained = FALSE, render_args = NULL) {
 
     input <- from
     output_file <- to
@@ -35,14 +35,21 @@ to_html <- function(from, to = NULL, self_contained = FALSE, rmd_args = NULL) {
     }
 
     # Check input and output files have correct extensions
-    assert_path_ext(input, "rmd")
-    assert_path_ext(output_file, "html")
+    assert_path_ext(input, c("rmd", "qmd"), arg = "from")
+    assert_path_ext(output_file, "html", arg = "to")
 
     input <- fs::path_abs(input)
     output_file <- fs::path_abs(output_file)
 
-    rmd_args <- build_html_rmd_args(input, output_file, self_contained, rmd_args)
-    self_contained <- rmd_args$output_options$self_contained
+    if (test_path_ext(input, "rmd")) {
+        render_args <- build_html_rmd_args(input, output_file, self_contained, render_args)
+        self_contained <- render_args$output_options$self_contained
+        render_fn <- rmarkdown::render
+    } else {
+        render_args <- build_html_qmd_args(input, output_file, self_contained, render_args)
+        self_contained <- "--self-contained" %in% render_args$pandoc_args
+        render_fn <- quarto::quarto_render
+    }
 
     # Render html from rmd
     #
@@ -55,20 +62,21 @@ to_html <- function(from, to = NULL, self_contained = FALSE, rmd_args = NULL) {
         withr::local_dir(fs::path_dir(input))
 
         if (self_contained) {
-            rmd_args$output_file <- path_from(
-                fs::path_file(rmd_args$output_file), "html", temporary = TRUE
+            render_args$output_file <- path_from(
+                fs::path_file(render_args$output_file), "html", temporary = TRUE
             )
             withr::defer(
-                fs::file_move(rmd_args$output_file, output_file),
+                fs::file_move(render_args$output_file, output_file),
                 priority = "first"
             )
         }
 
-
-        do.call(rmarkdown::render, rmd_args)
+        do.call(render_fn, render_args)
     },
         error = cli_build_failed(proc)
     )
+
+    invisible(output_file)
 }
 
 build_html_rmd_args <- function(input, output_file, self_contained = FALSE, rmd_args = NULL) {
@@ -88,6 +96,28 @@ build_html_rmd_args <- function(input, output_file, self_contained = FALSE, rmd_
     }
 
     rmd_args
+}
+
+build_html_qmd_args <- function(input, output_file, self_contained = FALSE, qmd_args = NULL) {
+    qmd_args <- c(list(), qmd_args)
+    qmd_args$input <- fs::path_file(input)
+    qmd_args$output_file <- fs::path_file(output_file)
+
+    self_contained <-
+        isTRUE(self_contained) ||
+        self_contained_is_required(input, output_file)
+
+    if (self_contained) {
+        # TODO: this argument is deprecated in latest pandoc, we should check
+        # for pandoc version and pick best version
+        qmd_args$pandoc_args <- c("--self-contained")
+    }
+
+    if (is.null(qmd_args$quiet)) {
+        qmd_args$quiet <- TRUE
+    }
+
+    qmd_args
 }
 
 self_contained_is_required <- function(input, output_file) {

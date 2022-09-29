@@ -2,7 +2,7 @@
 % Please edit documentation in R/mp4.R
 \name{to_mp4}
 \alias{to_mp4}
-\title{Render slides as a mp4 video file.}
+\title{Render slides as an MP4 video file.}
 \usage{
 to_mp4(
   from,
@@ -17,13 +17,13 @@ to_mp4(
 )
 }
 \arguments{
-\item{from}{Path to a Rmd file, html file, pdf file, or a url. If \code{from}
-is a url to slides on a website, you must provide the full url
+\item{from}{Path to an \code{.Rmd}, \code{.qmd}, \code{.html}, \code{.pdf} file, or a URL. If
+\code{from} is a URL to slides on a website, you must provide the full URL
 ending in \code{".html"}.}
 
-\item{to}{Name of the output mp4 file.}
+\item{to}{Name of the output \code{.mp4} file.}
 
-\item{density}{Resolution of the resulting pngs in each slide file. Defaults
+\item{density}{Resolution of the resulting PNGs in each slide file. Defaults
 to \code{100}.}
 
 \item{slides}{A numeric or integer vector of the slide number(s) to include
@@ -31,7 +31,7 @@ in the mp4, or one of \code{"all"}, \code{"first"}, or \code{"last"}. Negative i
 select which slides \emph{not} to include. Defaults to \code{"all"}, in which case
 all slides are included.}
 
-\item{fps}{Frames per second of the resulting mp4 file.}
+\item{fps}{Frames per second of the resulting \code{.mp4} file.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set \code{complex_slides = TRUE}.
@@ -50,18 +50,16 @@ Only used if \code{complex_slides = TRUE} or \code{partial_slides = TRUE}.}
 render the final output? The default is \code{FALSE}.}
 }
 \value{
-Slides are rendered as an mp4 file.
+Slides are rendered as an \code{.mp4} file.
 }
 \description{
-Render slides as a mp4 video file. The function renders to the pdf,
+Render slides as an MP4 video file. The function renders to the pdf,
 converts each slide in the pdf to a png, and then converts the deck of
-png files to a mp4 video file.
+png files to a MP4 video file.
 }
 \examples{
-if (requireNamespace("av", quietly = TRUE)) {
-    with_example("slides.Rmd", {
-        # Render mp4 from Rmd, html, pdf, or direct URL
-        to_mp4("slides.Rmd")
-    })
-}
+with_example("slides.Rmd", requires_chrome = TRUE, requires_packages = "av", {
+    # Render mp4 from Rmd, html, pdf, or direct URL
+    to_mp4("slides.Rmd")
+})
 }

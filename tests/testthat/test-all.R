@@ -4,13 +4,11 @@ test_that("build_all() from basic slides.Rmd", {
     skip_if_not_installed("officer")
     skip_if_not_installed("webshot2")
 
-    tmpdir <- withr::local_tempdir()
-    fs::dir_copy(test_path("slides", "basic"), tmpdir, overwrite = TRUE)
-
-    withr::local_dir(tmpdir)
-
+    local_test_example_dir("slides", "basic")
     suppressMessages(
-        build_all("slides.Rmd", slides = NULL)
+        lifecycle::expect_deprecated(
+            build_all("slides.Rmd", slides = NULL)
+        )
     )
 
     expect_true(fs::file_exists("slides.html"))
@@ -27,13 +25,11 @@ test_that("build_all() from basic slides.Rmd with a few excluded formats", {
     skip_if_not_installed("officer")
     skip_if_not_installed("webshot2")
 
-    tmpdir <- withr::local_tempdir()
-    fs::dir_copy(test_path("slides", "basic"), tmpdir, overwrite = TRUE)
-
-    withr::local_dir(tmpdir)
-
+    local_test_example_dir("slides", "basic")
     suppressMessages(
-        build_all("slides.Rmd", slides = NULL, exclude = c("html", "pdf", "png"))
+        lifecycle::expect_deprecated(
+            build_all("slides.Rmd", slides = NULL, exclude = c("html", "pdf", "png"))
+        )
     )
 
     expect_false(fs::file_exists("slides.html"))

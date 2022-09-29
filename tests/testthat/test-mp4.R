@@ -1,4 +1,5 @@
 test_that("to_gif() builds an mp4", {
+    skip_on_cran()
     skip_if_not_installed("av")
 
     tmpdir <- withr::local_tempdir()
@@ -22,6 +23,7 @@ test_that("to_gif() builds an mp4", {
 })
 
 test_that("to_gif() builds a widescreen mp4", {
+    skip_on_cran()
     skip_if_not_installed("av")
 
     tmpdir <- withr::local_tempdir()

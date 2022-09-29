@@ -1,4 +1,5 @@
 test_that("to_gif() simple from .Rmd", {
+    skip_if_not_pandoc()
     skip_if_not_chrome_installed()
 
     tmpdir <- withr::local_tempdir()
@@ -45,6 +46,7 @@ test_that("to_gif() simple from pdf", {
 })
 
 test_that("to_gif() keeps intermediates", {
+    skip_if_not_pandoc()
     skip_if_not_chrome_installed()
 
     tmpdir <- withr::local_tempdir()

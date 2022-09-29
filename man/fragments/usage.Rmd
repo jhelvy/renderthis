@@ -1,9 +1,9 @@
 Use renderthis to render slides to different formats. Here is a diagram of the render hierarchy:
 
 ```
-Rmd
+Rmd / qmd
  |
- |--> social (png)
+ |--> social (png, from Rmd only)
  |
  |--> html
        |

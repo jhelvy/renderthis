@@ -1,4 +1,6 @@
 test_that("to_html() output in input directory", {
+    skip_if_not_pandoc()
+
     tmpdir <- withr::local_tempdir()
     fs::dir_copy(test_path("slides", "basic"), tmpdir, overwrite = TRUE)
 
@@ -10,6 +12,8 @@ test_that("to_html() output in input directory", {
 })
 
 test_that("to_html() self-contained output in input directory", {
+    skip_if_not_pandoc()
+
     tmpdir <- withr::local_tempdir()
     fs::dir_copy(test_path("slides", "basic"), tmpdir, overwrite = TRUE)
 
@@ -21,6 +25,8 @@ test_that("to_html() self-contained output in input directory", {
 })
 
 test_that("to_html() output in sub-directory", {
+    skip_if_not_pandoc()
+
     tmpdir <- withr::local_tempdir()
     fs::dir_copy(
         test_path("slides", "basic"),
@@ -42,6 +48,8 @@ test_that("to_html() output in sub-directory", {
 })
 
 test_that("to_html() output in parent directory", {
+    skip_if_not_pandoc()
+
     tmpdir <- withr::local_tempdir()
 
     fs::dir_copy(
@@ -63,6 +71,8 @@ test_that("to_html() output in parent directory", {
 })
 
 test_that("to_html() output in totally different directory", {
+    skip_if_not_pandoc()
+
     tmpdir <- withr::local_tempdir()
 
     fs::dir_copy(

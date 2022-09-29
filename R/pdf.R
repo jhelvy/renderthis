@@ -1,13 +1,13 @@
-#' Render slides as pdf file.
+#' Render slides as PDF file.
 #'
-#' Render slides as a pdf file. Requires a local installation of Chrome.
+#' Render slides as a PDF file. Requires a local installation of Chrome.
 #' If you set `complex_slides = TRUE` or `partial_slides = TRUE`, you will also
 #' need to install the {chromote} and {pdftools} packages.
 #'
-#' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
-#'   is a url to slides on a website, you must provide the full url
-#'   ending in `".html"`.
-#' @param to The name of the output file. If `NULL` (the default) then
+#' @param from Path to an `.Rmd`, `.qmd`, `.html` file, or a URL. If `from` is a
+#'   URL to slides on a website, you must provide the full URL ending in
+#'   `".html"`.
+#' @param to The name of the output `.pdf` file. If `NULL` (the default) then
 #'   the output filename will be based on filename for the `from` file. If a
 #'   filename is provided, a path to the output file can also be provided.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
@@ -25,7 +25,7 @@
 #'   if the `to` file is written into the same directory as the `from` argument,
 #'   otherwise the intermediate file isn't kept.
 #'
-#' @return Slides are rendered as a pdf file.
+#' @return Slides are rendered as a `.pdf` file.
 #'
 #' @example man/examples/examples_pdf.R
 #'
@@ -46,13 +46,21 @@ to_pdf <- function(
 
     assert_path_exists(input)
 
+    complex_slides <- complex_slides || partial_slides
+
+    if (complex_slides && test_path_ext(input, "qmd")) {
+        cli::cli_abort(c(
+            "Complex PDF rendering is currently only available for xaringan slides in {.path .Rmd} documents.",
+            "x" = "{.strong input}: {.val {input}}"
+        ))
+    }
+
     if (is.null(output_file)) {
         output_file <- path_from(input, "pdf")
     }
 
     # Check input and output files have correct extensions
-    assert_path_ext(input, c("rmd", "html"))
-    assert_path_ext(output_file, "pdf")
+    assert_path_ext(output_file, "pdf", arg = "to")
 
     if (is.null(keep_intermediates)) {
         keep_intermediates <- in_same_directory(input, output_file)
@@ -60,15 +68,16 @@ to_pdf <- function(
 
     # Render html (if input is rmd)
     step_html <- input
-    if (test_path_ext(input, "rmd")) {
+    if (!test_path_ext(input, "html")) {
         step_html <- path_from(output_file, "html", temporary = !keep_intermediates)
         to_html(from = input, to = step_html)
     }
 
     # Render pdf from html
-    if (complex_slides | partial_slides) {
+    if (complex_slides) {
         to_pdf_complex(path_from(step_html, "url"), output_file, partial_slides, delay)
     } else {
+        assert_path_ext(input, c("qmd", "rmd", "html"), arg = "from")
         to_pdf_simple(step_html, output_file)
     }
 }

@@ -1,20 +1,20 @@
-#' Render slides as a gif file.
+#' Render slides as a GIF file.
 #'
-#' Render slides as a gif video file. The function renders to the pdf,
-#' converts each slide in the pdf to a png, and then converts the deck of
-#' png files to a gif file.
+#' Render slides as a GIF video file. The function renders to the PDF,
+#' converts each slide in the PDF to a PNG, and then converts the deck of
+#' PNG files to a GIF file.
 #'
-#' @param from Path to a Rmd file, html file, pdf file, or a url. If `from`
-#'   is a url to slides on a website, you must provide the full url
+#' @param from Path to an `.Rmd`, `.qmd`, `.html`, `.pdf` file, or a URL. If
+#'   `from` is a URL to slides on a website, you must provide the full URL
 #'   ending in `".html"`.
-#' @param to Name of the output gif file.
-#' @param density Resolution of the resulting pngs in each slide file. Defaults
+#' @param to Name of the output `.gif` file.
+#' @param density Resolution of the resulting PNGs in each slide file. Defaults
 #'   to `100`.
 #' @param slides A numeric or integer vector of the slide number(s) to include
-#'   in the gif, or one of `"all"`, `"first"`, or `"last"`. Negative integers
+#'   in the GIF, or one of `"all"`, `"first"`, or `"last"`. Negative integers
 #'   select which slides _not_ to include. Defaults to `"all"`, in which case
 #'   all slides are included.
-#' @param fps Frames per second of the resulting gif file.
+#' @param fps Frames per second in the animated GIF.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #'   other html widgets or advanced features), set `complex_slides = TRUE`.
 #'   Defaults to `FALSE`. This will use the {chromote} package to iterate
@@ -27,7 +27,7 @@
 #'   Only used if `complex_slides = TRUE` or `partial_slides = TRUE`.
 #' @inheritParams to_png
 #'
-#' @return Slides are rendered as a gif file.
+#' @return Slides are rendered as a `.gif` file.
 #'
 #' @example man/examples/examples_gif.R
 #'
@@ -52,8 +52,7 @@ to_gif <- function(
     }
 
     # Check input and output files have correct extensions
-    assert_path_ext(input, c("rmd", "html", "pdf"))
-    assert_path_ext(output_file, "gif")
+    assert_path_ext(output_file, "gif", arg = "to")
 
     # Render html and / or pdf (if input is not pdf)
     step_pdf <- input

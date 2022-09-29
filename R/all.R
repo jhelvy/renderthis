@@ -1,13 +1,13 @@
-#' Build xaringan slides to multiple outputs.
+#' Build slides to multiple outputs.
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' Build xaringan slides to multiple outputs. Options are `"html"`, `"social"`
-#' `"pdf"`, `"png"`, `"gif"`, `"mp4"`, and `"pptx"`. See each individual
-#' build_*() function for details about each output type.
+#' Build slides to multiple outputs. Options are `"html"`, `"social"` `"pdf"`,
+#' `"png"`, `"gif"`, `"mp4"`, and `"pptx"`. See each individual build_*()
+#' function for details about each output type.
 #'
-#' @param input Path to Rmd file of xaringan slides.
+#' @param input Path to an `.Rmd` or `.qmd` file of slides.
 #' @param include A vector of the different output types to build. Options are
 #'   `"html"`, `"social"`, `"pdf"`, `"png"`, `"gif"`, `"mp4"`, and `"pptx"`.
 #'   Defaults to `c("html", "social", "pdf", "png", "gif", "mp4", "pptx")`.
@@ -37,7 +37,7 @@ build_all <- function(
     lifecycle::deprecate_warn("0.1.0", "build_all()")
 
     # Check that input file has the correct extension
-    assert_path_ext(input, "rmd")
+    assert_path_ext(input, c("rmd", "qmd"))
 
     # Build hierarchy:
     #

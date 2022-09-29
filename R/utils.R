@@ -48,10 +48,8 @@ assert_chrome_installed <- function() {
 check_chrome_installed <- function() {
     assert_chromote()
 
-    tryCatch(
-        !is.null(chromote::find_chrome()),
-        error = function(e) FALSE
-    )
+    chrome <- tryCatch(chromote::find_chrome(), error = function(e) FALSE)
+    !is.null(chrome) && fs::file_exists(chrome)
 }
 
 assert_chromote <- function() {
