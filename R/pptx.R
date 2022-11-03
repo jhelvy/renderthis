@@ -12,6 +12,8 @@
 #' @inheritParams to_gif
 #' @inheritParams to_png
 #' @inheritParams to_pdf
+#' @param ratio PowerPoint slides ratio. Possible values are
+#'   `"4:3"``, `"16:9"``, or `"guess"``. Default to "guess".
 #'
 #' @return Slides are rendered as a pptx file.
 #'
@@ -26,7 +28,8 @@ to_pptx <- function(
     complex_slides = FALSE,
     partial_slides = FALSE,
     delay = 1,
-    keep_intermediates = FALSE
+    keep_intermediates = FALSE,
+    ratio = "guess"
 ) {
     if (!requireNamespace("officer", quietly = TRUE)) {
         stop("`officer` is required: install.packages('officer')")
@@ -67,7 +70,7 @@ to_pptx <- function(
     }
 
     # Render the pptx
-    doc <- get_pptx_template(imgs[1])
+    doc <- get_pptx_template(imgs[1], ratio)
     for (i in 1:length(imgs)) {
         png_path <- magick::image_write(imgs[i], tempfile(fileext = ".png"))
         doc <- officer::add_slide(
@@ -86,15 +89,25 @@ to_pptx <- function(
     print(doc, output_file)
 }
 
-get_pptx_template <- function(png) {
+get_pptx_template <- function(png, ratio = "guess") {
     dims <- magick::image_info(png)
-    ar <- floor(100*(dims$width / dims$height))
-    if (ar == 177) {
-        file <- "16-9.pptx"
-    } else {
-        file <- "4-3.pptx"
+    ar <- dims$width / dims$height
+    pptx_ratio <- c(
+        "4:3" = 4 / 3,
+        "16:9" = 16 / 9
+    )
+    pptx_ratio_files <- c(
+        "4:3" = "4-3.pptx",
+        "16:9" = "16-9.pptx"
+    )
+    if (ratio %in% "guess" || !ratio %in% c("4:3", "16:9")) {
+        ratio <- names(which.min(abs(pptx_ratio - ar)))
     }
+
     template <- system.file(
-        "extdata", file, package = "renderthis", mustWork = TRUE)
+        "extdata", pptx_ratio_files[[ratio]],
+        package = "renderthis",
+        mustWork = TRUE
+    )
     officer::read_pptx(template)
 }
