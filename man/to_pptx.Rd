@@ -12,7 +12,8 @@ to_pptx(
   complex_slides = FALSE,
   partial_slides = FALSE,
   delay = 1,
-  keep_intermediates = FALSE
+  keep_intermediates = FALSE,
+  ratio = "guess"
 )
 }
 \arguments{
@@ -45,6 +46,9 @@ Only used if \code{complex_slides = TRUE} or \code{partial_slides = TRUE}.}
 
 \item{keep_intermediates}{Should we keep the intermediate files used to
 render the final output? The default is \code{FALSE}.}
+
+\item{ratio}{PowerPoint slides ratio. Possible values are
+\verb{"4:3"``, }"16:9"\verb{, or `"guess"}. Default to "guess".}
 }
 \value{
 Slides are rendered as a pptx file.
