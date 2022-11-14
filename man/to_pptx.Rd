@@ -13,7 +13,7 @@ to_pptx(
   partial_slides = FALSE,
   delay = 1,
   keep_intermediates = FALSE,
-  ratio = "guess"
+  ratio = NULL
 )
 }
 \arguments{
@@ -48,7 +48,7 @@ Only used if \code{complex_slides = TRUE} or \code{partial_slides = TRUE}.}
 render the final output? The default is \code{FALSE}.}
 
 \item{ratio}{PowerPoint slides ratio. Possible values are
-\verb{"4:3"``, }"16:9"\verb{, or `"guess"}. Default to "guess".}
+\code{"4:3"}, \code{"16:9"}. Default to \code{NULL}, meaning it will be guessed frm the slides.}
 }
 \value{
 Slides are rendered as a pptx file.
