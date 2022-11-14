@@ -103,7 +103,9 @@
 
     
     
-<p>To get the most out of renderthis, we recommend installing the package <strong>with dependencies</strong> and making sure that you have a local installation of Chrome.</p>
+<p>To get the most out of renderthis, we recommend installing the
+package <strong>with dependencies</strong> and making sure that you have
+a local installation of Chrome.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -114,7 +116,9 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jhelvy/renderthis"</span><span class="op">)</span></span></code></pre></div>
-<p>Some output formats require additional packages, and each format will provide instructions about how to install any missing dependencies. You can also choose to install renderthis with all of its dependencies:</p>
+<p>Some output formats require additional packages, and each format will
+provide instructions about how to install any missing dependencies. You
+can also choose to install renderthis with all of its dependencies:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># From CRAN</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"renderthis"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -125,20 +129,32 @@
 <div class="section level2">
 <h2 id="local-chrome-installation">Local Chrome Installation<a class="anchor" aria-label="anchor" href="#local-chrome-installation"></a>
 </h2>
-<p>Rendering the PDF requires a local installation of Chrome. If you don’t have Chrome installed, you can use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera. In this case, you will need to set the path to the browser you want to use for the <a href="https://github.com/rstudio/pagedown" class="external-link">pagedown</a> package as well as the <a href="https://github.com/rstudio/chromote" class="external-link">chromote</a> package if you use the <code>complex_slides = TRUE</code> or <code>partial_slides = TRUE</code> arguments.</p>
+<p>Rendering the PDF requires a local installation of Chrome. If you
+don’t have Chrome installed, you can use other browsers based on
+Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera. In
+this case, you will need to set the path to the browser you want to use
+for the <a href="https://github.com/rstudio/pagedown" class="external-link">pagedown</a>
+package as well as the <a href="https://github.com/rstudio/chromote" class="external-link">chromote</a> package if you
+use the <code>complex_slides = TRUE</code> or
+<code>partial_slides = TRUE</code> arguments.</p>
 <p>After installing the packages, you can set the paths like this:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>PAGEDOWN_CHROME <span class="op">=</span> <span class="st">"/path/to/browser"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>CHROMOTE_CHROME <span class="op">=</span> <span class="st">"/path/to/browser"</span><span class="op">)</span></span></code></pre></div>
-<p>If you’re not sure where Chrome lives on your machine, try the following command to search for it:</p>
+<p>If you’re not sure where Chrome lives on your machine, try the
+following command to search for it:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pagedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pagedown/man/find_chrome.html" class="external-link">find_chrome</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>If you are unable to install Chrome (e.g. on a computing cluster), the recommended workflow is to render intermediate output formats and use an alternative method for rendering the PDF.</p>
-<p>For example, to render a pptx from a Rmd file without Chrome, you could:</p>
+<p>If you are unable to install Chrome (e.g. on a computing cluster),
+the recommended workflow is to render intermediate output formats and
+use an alternative method for rendering the PDF.</p>
+<p>For example, to render a pptx from a Rmd file without Chrome, you
+could:</p>
 <ol style="list-style-type: decimal">
 <li>Render the html with <code>to_html(from = "slides.Rmd")</code>
 </li>
-<li>Use vscode remote and vscode-preview-server extension to open the html on a local machine (preferrably with Chrome installed)</li>
+<li>Use vscode remote and vscode-preview-server extension to open the
+html on a local machine (preferrably with Chrome installed)</li>
 <li>Save to pdf on Chrome</li>
 <li>Render the pptx with <code>to_pptx(from = "slides.pdf")</code>
 </li>
@@ -147,8 +163,15 @@
 <div class="section level2">
 <h2 id="dependencies">Dependencies<a class="anchor" aria-label="anchor" href="#dependencies"></a>
 </h2>
-<p>Because many users will not need all output formats, several outputs require additional packages that are suggested dependencies and aren’t installed by default unless requested as described above. The table below lists the packages required for each output type:</p>
+<p>Because many users will not need all output formats, several outputs
+require additional packages that are suggested dependencies and aren’t
+installed by default unless requested as described above. The table
+below lists the packages required for each output type:</p>
 <table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">Output</th>
 <th align="left">Requires</th>

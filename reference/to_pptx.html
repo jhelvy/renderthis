@@ -83,7 +83,8 @@ PowerPoint file.</p>
 <span>  complex_slides <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  partial_slides <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  delay <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  keep_intermediates <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  keep_intermediates <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ratio <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -134,6 +135,11 @@ Only used if <code>complex_slides = TRUE</code> or <code>partial_slides = TRUE</
 <dd><p>Should we keep the intermediate files used to
 render the final output? The default is <code>FALSE</code>.</p></dd>
 
+
+<dt>ratio</dt>
+<dd><p>PowerPoint slides ratio. Possible values are
+<code>"4:3"</code>, <code>"16:9"</code>. Default to <code>NULL</code>, meaning it will be guessed frm the slides.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -148,17 +154,17 @@ render the final output? The default is <code>FALSE</code>.</p></dd>
 <span class="r-in"><span>    <span class="co"># Render pptx from Rmd, html, pdf, or direct URL</span></span></span>
 <span class="r-in"><span>    <span class="fu">to_pptx</span><span class="op">(</span><span class="st">"slides.Rmd"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rendering <span style="color: #0000BB;">slides.Rmd</span> into <span style="color: #00BB00;">renderthis_3a0a401f423a.html</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Rendering <span style="color: #0000BB;">slides.Rmd</span> into <span style="color: #00BB00;">renderthis_3a0a401f423a.html</span> ... done</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rendering <span style="color: #0000BB;">slides.Rmd</span> into <span style="color: #00BB00;">renderthis_40777c2474dc.html</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Rendering <span style="color: #0000BB;">slides.Rmd</span> into <span style="color: #00BB00;">renderthis_40777c2474dc.html</span> ... done</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rendering <span style="color: #0000BB;">renderthis_3a0a401f423a.html</span> into <span style="color: #00BB00;">renderthis_3a0a797384ef.pdf</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Rendering <span style="color: #0000BB;">renderthis_3a0a401f423a.html</span> into <span style="color: #00BB00;">renderthis_3a0a797384ef.pdf</span> ... d…</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rendering <span style="color: #0000BB;">renderthis_40777c2474dc.html</span> into <span style="color: #00BB00;">renderthis_4077697e5c54.pdf</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Rendering <span style="color: #0000BB;">renderthis_40777c2474dc.html</span> into <span style="color: #00BB00;">renderthis_4077697e5c54.pdf</span> ... d…</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Removed temporary <span style="color: #0000BB;">renderthis_3a0a401f423a.html</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rendering <span style="color: #0000BB;">renderthis_3a0a797384ef.pdf</span> into <span style="color: #00BB00;">slides.pptx</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Rendering <span style="color: #0000BB;">renderthis_3a0a797384ef.pdf</span> into <span style="color: #00BB00;">slides.pptx</span> ... done</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Removed temporary <span style="color: #0000BB;">renderthis_40777c2474dc.html</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rendering <span style="color: #0000BB;">renderthis_4077697e5c54.pdf</span> into <span style="color: #00BB00;">slides.pptx</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Rendering <span style="color: #0000BB;">renderthis_4077697e5c54.pdf</span> into <span style="color: #00BB00;">slides.pptx</span> ... done</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Removed temporary <span style="color: #0000BB;">renderthis_3a0a797384ef.pdf</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Removed temporary <span style="color: #0000BB;">renderthis_4077697e5c54.pdf</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

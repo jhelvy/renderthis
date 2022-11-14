@@ -1,10 +1,10 @@
-pandoc: 2.14.2
+pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   renderthis-setup: renderthis-setup.html
   renderthis: renderthis.html
-last_built: 2022-09-29T15:26Z
+last_built: 2022-11-14T22:07Z
 urls:
   reference: https://jhelvy.github.io/renderthis/reference
   article: https://jhelvy.github.io/renderthis/articles
