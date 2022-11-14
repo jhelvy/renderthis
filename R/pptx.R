@@ -12,8 +12,9 @@
 #' @inheritParams to_gif
 #' @inheritParams to_png
 #' @inheritParams to_pdf
-#' @param ratio PowerPoint slides ratio. Possible values are
-#'   `"4:3"`, `"16:9"`. Default to `NULL`, meaning it will be guessed frm the slides.
+#' @param ratio PowerPoint slides aspect ratio. Possible values are `"4:3"` or
+#' `"16:9"`. Default to `NULL`, in which case the ratio will be guessed from
+#' the slides.
 #'
 #' @return Slides are rendered as a pptx file.
 #'
