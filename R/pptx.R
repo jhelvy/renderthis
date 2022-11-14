@@ -13,7 +13,7 @@
 #' @inheritParams to_png
 #' @inheritParams to_pdf
 #' @param ratio PowerPoint slides ratio. Possible values are
-#'   `"4:3"``, `"16:9"``, or `"guess"``. Default to "guess".
+#'   `"4:3"`, `"16:9"`. Default to `NULL`, meaning it will be guessed frm the slides.
 #'
 #' @return Slides are rendered as a pptx file.
 #'
@@ -29,7 +29,7 @@ to_pptx <- function(
     partial_slides = FALSE,
     delay = 1,
     keep_intermediates = FALSE,
-    ratio = "guess"
+    ratio = NULL
 ) {
     if (!requireNamespace("officer", quietly = TRUE)) {
         stop("`officer` is required: install.packages('officer')")
@@ -89,7 +89,7 @@ to_pptx <- function(
     print(doc, output_file)
 }
 
-get_pptx_template <- function(png, ratio = "guess") {
+get_pptx_template <- function(png, ratio = NULL) {
     dims <- magick::image_info(png)
     ar <- dims$width / dims$height
     pptx_ratio <- c(
@@ -100,7 +100,7 @@ get_pptx_template <- function(png, ratio = "guess") {
         "4:3" = "4-3.pptx",
         "16:9" = "16-9.pptx"
     )
-    if (ratio %in% "guess" || !ratio %in% c("4:3", "16:9")) {
+    if (is.null(ratio) || !ratio %in% c("4:3", "16:9")) {
         ratio <- names(which.min(abs(pptx_ratio - ar)))
     }
 
