@@ -62,9 +62,13 @@ to_html <- function(from, to = NULL, self_contained = FALSE, render_args = NULL)
         withr::local_dir(fs::path_dir(input))
 
         if (self_contained) {
-            render_args$output_file <- path_from(
+            # path_from() returns an absolute path
+            temp_output_file <- path_from(
                 fs::path_file(render_args$output_file), "html", temporary = TRUE
             )
+            # discard the path directory so that rmd/qmd is rendered into source dir
+            render_args$output_file <- fs::path_file(temp_output_file)
+            # and then move the output into the right place at the end
             withr::defer(
                 fs::file_move(render_args$output_file, output_file),
                 priority = "first"
