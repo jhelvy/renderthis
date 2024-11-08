@@ -34,6 +34,7 @@ Imports:
     progress,
     quarto,
     rmarkdown,
+    servr (>= 0.32),
     withr,
     xaringan,
     zip
