@@ -21,9 +21,12 @@ different formats, including HTML, PDF, PNG, GIF, PPTX, and MP4, as well
 as a ‘social’ output, a png of the first slide re-sized for sharing on
 social media.
 
-**Looking for xaringanBuilder?** The package formerly known as
-xaringanBuilder is now **renderthis**. If you need to install
-xaringanBuilder under the previous package name, [see the instructions
+**Looking for xaringanBuilder?** The `renderthis` package was previously
+called `xaringanBuilder`. We updated the name as the package evolved
+(see [this blog
+post](https://www.jhelvy.com/blog/2022-06-28-introducing-renderthis/)
+detailing the package’s history) If you need to install
+`xaringanBuilder` under the previous package name, [see the instructions
 below](#installing-xaringanbuilder).
 
 ## Installation
@@ -34,30 +37,21 @@ installation of Google Chrome. See the
 [Setup](https://jhelvy.github.io/renderthis/articles/renderthis-setup.html)
 page for details.
 
-You can install the latest version of renderthis from
-[CRAN](https://cran.r-project.org/) with:
+Since `renderthis` is temporarily not on CRAN (we’ll eventually get it
+back up), you can install it from GitHub with:
 
 ``` r
-install.packages("renderthis")
-```
-
-And the development version from GitHub with:
-
-``` r
-# install.packages("remotes")
-remotes::install_github("jhelvy/renderthis")
+# install.packages("pak")
+pak::pak("jhelvy/renderthis")
 ```
 
 Some output formats require additional packages, and each format will
 provide instructions about how to install any missing dependencies. You
-can also choose to install renderthis with all of its dependencies:
+can also choose to install `renderthis` with all of its dependencies:
 
 ``` r
-# From CRAN
-install.packages("renderthis", dependencies = TRUE)
-
 # From GitHub
-remotes::install_github("jhelvy/renderthis", dependencies = TRUE)
+pak::pak("jhelvy/renderthis", dependencies = TRUE)
 ```
 
 ## Usage
@@ -89,28 +83,27 @@ library(renderthis)
 
 All of the package functions follow a common pattern:
 
--   All functions start with `to_*()` to render slides to a desired
-    format (e.g., `to_pdf()`).
--   All functions have a required `from` argument which should be set to
-    the full or local path to the input file.
--   All functions have an optional `to` argument. If provided, it can be
-    a full or local path to the output file, and it must end in an
-    appropriate extension (e.g. `slides.gif` for `to_gif()`). If it is
-    not provided, the output file name will be determined based on the
-    `from` argument.
+- All functions start with `to_*()` to render slides to a desired format
+  (e.g., `to_pdf()`).
+- All functions have a required `from` argument which should be set to
+  the full or local path to the input file.
+- All functions have an optional `to` argument. If provided, it can be a
+  full or local path to the output file, and it must end in an
+  appropriate extension (e.g. `slides.gif` for `to_gif()`). If it is not
+  provided, the output file name will be determined based on the `from`
+  argument.
 
 Learn more about renderthis in the [Get Started
 article](https://jhelvy.github.io/renderthis/articles/renderthis.html).
 
 ## Author and License Information
 
--   Authors: [John Paul Helveston](https://www.jhelvy.com/) (*aut*,
-    *cre*, *cph*) & [Garrick
-    Aden-Buie](https://www.garrickadenbuie.com/) (*aut*)
--   Date First Written: Originally as {xaringanBuilder} on *September
-    27, 2020*
--   License:
-    [MIT](https://github.com/jhelvy/renderthis/blob/master/LICENSE.md)
+- Authors: [John Paul Helveston](https://www.jhelvy.com/) (*aut*, *cre*,
+  *cph*) & [Garrick Aden-Buie](https://www.garrickadenbuie.com/) (*aut*)
+- Date First Written: Originally as {xaringanBuilder} on *September 27,
+  2020*
+- License:
+  [MIT](https://github.com/jhelvy/renderthis/blob/master/LICENSE.md)
 
 ## Citation Information
 
@@ -132,8 +125,8 @@ author = {{Helveston} and John Paul and {Aden-Buie} and {Garrick}}, year
 
 ## Installing xaringanBuilder
 
-You can install the xaringanBuilder package as it was just prior to the
-name change with:
+If you want, you can still install the `xaringanBuilder` package as it
+was just prior to the name change with:
 
 ``` r
 remotes::install_github("jhelvy/renderthis@v0.0.9")
