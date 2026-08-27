@@ -1,6 +1,6 @@
 Package: renderthis
 Title: Render Slides to Different Formats
-Version: 0.2.1
+Version: 0.2.2
 Authors@R:
     c(person(given = "John",
              family = "Helveston",
@@ -47,9 +47,12 @@ Suggests:
     pdftools,
     testthat (>= 3.0.0),
     webshot2
+SystemRequirements: Quarto command line tool
+    (https://github.com/quarto-dev/quarto-cli), Pandoc (>= 1.14) - required
+    to render R Markdown slides
 Config/testthat/edition: 3
 Config/Needs/website: xaringanExtra
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

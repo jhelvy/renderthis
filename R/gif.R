@@ -17,7 +17,7 @@
 #' @param fps Frames per second in the animated GIF.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #'   other html widgets or advanced features), set `complex_slides = TRUE`.
-#'   Defaults to `FALSE`. This will use the {chromote} package to iterate
+#'   Defaults to `FALSE`. This will use the \pkg{chromote} package to iterate
 #'   through the slides at a pace set by the `delay` argument. Requires a local
 #'   installation of Chrome.
 #' @param partial_slides Should partial (continuation) slides be included in the

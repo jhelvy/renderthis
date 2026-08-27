@@ -1,3 +1,8 @@
+# renderthis 0.2.2
+
+- Declares `SystemRequirements` for the Quarto command line tool, which is used via the quarto package to render `.qmd` slides.
+- Fixes an error when rendering self-contained HTML (and any format built from it) caused by a `return()` inside a `withr::defer()` block, which withr 3.0.0 no longer supports.
+- Fixes `to_pdf(complex_slides = TRUE)` looking up the Chrome window by a hard-coded window id, which failed with recent versions of Chrome.
 
 # renderthis 0.2.1
 

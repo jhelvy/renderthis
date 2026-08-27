@@ -2,7 +2,7 @@
 #'
 #' Render slides as a PDF file. Requires a local installation of Chrome.
 #' If you set `complex_slides = TRUE` or `partial_slides = TRUE`, you will also
-#' need to install the {chromote} and {pdftools} packages.
+#' need to install the \pkg{chromote} and \pkg{pdftools} packages.
 #'
 #' @param from Path to an `.Rmd`, `.qmd`, `.html` file, or a URL. If `from` is a
 #'   URL to slides on a website, you must provide the full URL ending in
@@ -12,7 +12,7 @@
 #'   filename is provided, a path to the output file can also be provided.
 #' @param complex_slides For "complex" slides (e.g. slides with panelsets or
 #'   other html widgets or advanced features), set `complex_slides = TRUE`.
-#'   Defaults to `FALSE`. This will use the {chromote} package to iterate
+#'   Defaults to `FALSE`. This will use the \pkg{chromote} package to iterate
 #'   through the slides at a pace set by the `delay` argument. Requires a local
 #'   installation of Chrome.
 #' @param partial_slides Should partial (continuation) slides be included in the
@@ -155,7 +155,10 @@ to_pdf_complex <- function(input, output_file, partial_slides, delay) {
 
   max_slides <- expected_slides * 4
 
-  b$Browser$setWindowBounds(1, bounds = list(
+  # The window id isn't guaranteed to be 1, ask chrome which window holds the
+  # session's target
+  window_id <- b$Browser$getWindowForTarget()$windowId
+  b$Browser$setWindowBounds(window_id, bounds = list(
     width = slide_size$width,
     height = slide_size$height
   ))

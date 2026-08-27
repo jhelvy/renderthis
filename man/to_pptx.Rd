@@ -33,7 +33,7 @@ all slides are included.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set \code{complex_slides = TRUE}.
-Defaults to \code{FALSE}. This will use the {chromote} package to iterate
+Defaults to \code{FALSE}. This will use the \pkg{chromote} package to iterate
 through the slides at a pace set by the \code{delay} argument. Requires a local
 installation of Chrome.}
 
@@ -47,8 +47,9 @@ Only used if \code{complex_slides = TRUE} or \code{partial_slides = TRUE}.}
 \item{keep_intermediates}{Should we keep the intermediate files used to
 render the final output? The default is \code{FALSE}.}
 
-\item{ratio}{PowerPoint slides ratio. Possible values are
-\code{"4:3"}, \code{"16:9"}. Default to \code{NULL}, meaning it will be guessed frm the slides.}
+\item{ratio}{PowerPoint slides aspect ratio. Possible values are \code{"4:3"} or
+\code{"16:9"}. Default to \code{NULL}, in which case the ratio will be guessed from
+the slides.}
 }
 \value{
 Slides are rendered as a pptx file.

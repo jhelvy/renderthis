@@ -18,7 +18,7 @@ Slides are rendered as a png file.
 }
 \description{
 Render png image of first slide for sharing on social media.
-Requires a local installation of Chrome as well as the {webshot2} package:
+Requires a local installation of Chrome as well as the \pkg{webshot2} package:
 \code{remotes::install_github("rstudio/webshot2")}.
 }
 \examples{

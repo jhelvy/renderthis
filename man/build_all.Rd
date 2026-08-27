@@ -29,7 +29,7 @@ Defaults to \code{NULL}, in which case all all output types are built.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set \code{complex_slides = TRUE}.
-Defaults to \code{FALSE}. This will use the {chromote} package to iterate
+Defaults to \code{FALSE}. This will use the \pkg{chromote} package to iterate
 through the slides at a pace set by the \code{delay} argument. Requires a local
 installation of Chrome.}
 

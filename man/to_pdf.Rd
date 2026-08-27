@@ -24,7 +24,7 @@ filename is provided, a path to the output file can also be provided.}
 
 \item{complex_slides}{For "complex" slides (e.g. slides with panelsets or
 other html widgets or advanced features), set \code{complex_slides = TRUE}.
-Defaults to \code{FALSE}. This will use the {chromote} package to iterate
+Defaults to \code{FALSE}. This will use the \pkg{chromote} package to iterate
 through the slides at a pace set by the \code{delay} argument. Requires a local
 installation of Chrome.}
 
@@ -46,7 +46,7 @@ Slides are rendered as a \code{.pdf} file.
 \description{
 Render slides as a PDF file. Requires a local installation of Chrome.
 If you set \code{complex_slides = TRUE} or \code{partial_slides = TRUE}, you will also
-need to install the {chromote} and {pdftools} packages.
+need to install the \pkg{chromote} and \pkg{pdftools} packages.
 }
 \examples{
 with_example("slides.Rmd", requires_chrome = TRUE, {
