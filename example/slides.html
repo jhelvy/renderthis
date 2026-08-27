@@ -4,7 +4,7 @@
     <title>{renderthis}</title>
     <meta charset="utf-8" />
     <meta name="author" content="John Paul Helveston &amp; Garrick Aden-Buie" />
-    <meta name="date" content="2022-11-14" />
+    <meta name="date" content="2026-08-27" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
@@ -25,7 +25,7 @@ class: center, middle, inverse, title-slide
 ### John Paul Helveston &amp; Garrick Aden-Buie
 ]
 .date[
-### 2022-11-14
+### 2026-08-27
 ]
 
 ---
@@ -129,7 +129,7 @@ to_pdf("slides.html", partial_slides = TRUE)
 .panel[.panel-name[Chunk]
 
 
-```r
+``` r
 head(mtcars)
 ```
 ]
@@ -156,7 +156,7 @@ head(mtcars)
 Examples rendering from PDF to PNG:
 
 
-```r
+``` r
 # Render the first or last slide only
 to_png(from = "slides.pdf", to = "first_slide.png", slides = "first")
 to_png(from = "slides.pdf", to = "last_slide.png", slides = "last")
@@ -185,9 +185,9 @@ Visit [xaringan.club](https://xaringan.club/) for more {xaringan} tools!
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

@@ -1,0 +1,4 @@
+# License
+
+    YEAR: 2020-2022
+    COPYRIGHT HOLDER: John Paul Helveston
