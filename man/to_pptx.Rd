@@ -47,8 +47,9 @@ Only used if \code{complex_slides = TRUE} or \code{partial_slides = TRUE}.}
 \item{keep_intermediates}{Should we keep the intermediate files used to
 render the final output? The default is \code{FALSE}.}
 
-\item{ratio}{PowerPoint slides ratio. Possible values are
-\code{"4:3"}, \code{"16:9"}. Default to \code{NULL}, meaning it will be guessed frm the slides.}
+\item{ratio}{PowerPoint slides aspect ratio. Possible values are \code{"4:3"} or
+\code{"16:9"}. Default to \code{NULL}, in which case the ratio will be guessed from
+the slides.}
 }
 \value{
 Slides are rendered as a pptx file.
