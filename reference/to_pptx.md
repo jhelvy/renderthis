@@ -84,15 +84,15 @@ with_example("slides.Rmd", requires_chrome = TRUE, requires_packages = "officer"
     # Render pptx from Rmd, html, pdf, or direct URL
     to_pptx("slides.Rmd")
 })
-#> ℹ Rendering slides.Rmd into renderthis_27b02968960a.html
-#> ✔ Rendering slides.Rmd into renderthis_27b02968960a.html ... done
+#> ℹ Rendering slides.Rmd into renderthis_2af12bf5b82a.html
+#> ✔ Rendering slides.Rmd into renderthis_2af12bf5b82a.html ... done
 #> 
-#> ℹ Rendering renderthis_27b02968960a.html into renderthis_27b09eaa696.pdf
-#> ✔ Rendering renderthis_27b02968960a.html into renderthis_27b09eaa696.pdf ... do…
+#> ℹ Rendering renderthis_2af12bf5b82a.html into renderthis_2af129452f3e.pdf
+#> ✔ Rendering renderthis_2af12bf5b82a.html into renderthis_2af129452f3e.pdf ... d…
 #> 
-#> ℹ Removed temporary renderthis_27b02968960a.html
-#> ℹ Rendering renderthis_27b09eaa696.pdf into slides.pptx
-#> ✔ Rendering renderthis_27b09eaa696.pdf into slides.pptx ... done
+#> ℹ Removed temporary renderthis_2af12bf5b82a.html
+#> ℹ Rendering renderthis_2af129452f3e.pdf into slides.pptx
+#> ✔ Rendering renderthis_2af129452f3e.pdf into slides.pptx ... done
 #> 
-#> ℹ Removed temporary renderthis_27b09eaa696.pdf
+#> ℹ Removed temporary renderthis_2af129452f3e.pdf
 ```

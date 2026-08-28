@@ -82,15 +82,12 @@ with_example("slides.Rmd", requires_chrome = TRUE, {
     # Render gif from Rmd, html, pdf, or direct URL
     to_gif("slides.Rmd")
 })
-#> ℹ Rendering slides.Rmd into renderthis_27b025ca1280.html
-#> ✔ Rendering slides.Rmd into renderthis_27b025ca1280.html ... done
+#> ℹ Rendering slides.Rmd into renderthis_2af1348d48cd.html
+#> ✔ Rendering slides.Rmd into renderthis_2af1348d48cd.html ... done
 #> 
-#> ℹ Rendering renderthis_27b025ca1280.html into renderthis_27b06aedb43d.pdf
-#> ✔ Rendering renderthis_27b025ca1280.html into renderthis_27b06aedb43d.pdf ... d…
+#> ℹ Rendering renderthis_2af1348d48cd.html into renderthis_2af121087367.pdf
+#> ✖ Rendering renderthis_2af1348d48cd.html into renderthis_2af121087367.pdf ... f…
 #> 
-#> ℹ Removed temporary renderthis_27b025ca1280.html
-#> ℹ Rendering renderthis_27b06aedb43d.pdf into slides.gif
-#> ✔ Rendering renderthis_27b06aedb43d.pdf into slides.gif ... done
-#> 
-#> ℹ Removed temporary renderthis_27b06aedb43d.pdf
+#> ℹ Removed temporary renderthis_2af1348d48cd.html
+#> Error running example: Cannot find headless Chrome after 20 attempts
 ```
