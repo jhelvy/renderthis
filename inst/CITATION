@@ -1,11 +1,19 @@
 citHeader("To cite renderthis in publications use:")
 
-citEntry(
-  entry    = "Manual",
-  title    = "renderthis: Render slides to different formats.",
-  author   = "Helveston, John Paul and Aden-Buie, Garrick",
+bibentry(
+  bibtype  = "Manual",
+  title    = "renderthis: Render slides to different formats",
+  author   = c(
+    person(given = "John Paul", family = "Helveston"),
+    person(given = "Garrick", family = "Aden-Buie")
+  ),
   year     = "2021",
-  note     = "R package version 0.0.1",
+  note     = sprintf("R package version %s", meta$Version),
   url      = "https://jhelvy.github.io/renderthis/",
-  textVersion = "Helveston, John Paul and Aden-Buie, Garrick (2021). renderthis: Render slides to different formats."
+  textVersion = paste0(
+    "Helveston, John Paul and Aden-Buie, Garrick (2021). ",
+    "renderthis: Render slides to different formats. ",
+    "R package version ", meta$Version, ". ",
+    "https://jhelvy.github.io/renderthis/"
+  )
 )
