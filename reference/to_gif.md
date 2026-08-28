@@ -82,15 +82,15 @@ with_example("slides.Rmd", requires_chrome = TRUE, {
     # Render gif from Rmd, html, pdf, or direct URL
     to_gif("slides.Rmd")
 })
-#> ℹ Rendering slides.Rmd into renderthis_294d2b2e7f3f.html
-#> ✔ Rendering slides.Rmd into renderthis_294d2b2e7f3f.html ... done
+#> ℹ Rendering slides.Rmd into renderthis_27b025ca1280.html
+#> ✔ Rendering slides.Rmd into renderthis_27b025ca1280.html ... done
 #> 
-#> ℹ Rendering renderthis_294d2b2e7f3f.html into renderthis_294d7c314912.pdf
-#> ✔ Rendering renderthis_294d2b2e7f3f.html into renderthis_294d7c314912.pdf ... d…
+#> ℹ Rendering renderthis_27b025ca1280.html into renderthis_27b06aedb43d.pdf
+#> ✔ Rendering renderthis_27b025ca1280.html into renderthis_27b06aedb43d.pdf ... d…
 #> 
-#> ℹ Removed temporary renderthis_294d2b2e7f3f.html
-#> ℹ Rendering renderthis_294d7c314912.pdf into slides.gif
-#> ✔ Rendering renderthis_294d7c314912.pdf into slides.gif ... done
+#> ℹ Removed temporary renderthis_27b025ca1280.html
+#> ℹ Rendering renderthis_27b06aedb43d.pdf into slides.gif
+#> ✔ Rendering renderthis_27b06aedb43d.pdf into slides.gif ... done
 #> 
-#> ℹ Removed temporary renderthis_294d7c314912.pdf
+#> ℹ Removed temporary renderthis_27b06aedb43d.pdf
 ```

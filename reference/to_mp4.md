@@ -82,15 +82,15 @@ with_example("slides.Rmd", requires_chrome = TRUE, requires_packages = "av", {
     # Render mp4 from Rmd, html, pdf, or direct URL
     to_mp4("slides.Rmd")
 })
-#> ℹ Rendering slides.Rmd into renderthis_294d16931121.html
-#> ✔ Rendering slides.Rmd into renderthis_294d16931121.html ... done
+#> ℹ Rendering slides.Rmd into renderthis_27b05fb7d13d.html
+#> ✔ Rendering slides.Rmd into renderthis_27b05fb7d13d.html ... done
 #> 
-#> ℹ Rendering renderthis_294d16931121.html into renderthis_294d7d64f236.pdf
-#> ✔ Rendering renderthis_294d16931121.html into renderthis_294d7d64f236.pdf ... d…
+#> ℹ Rendering renderthis_27b05fb7d13d.html into renderthis_27b058088502.pdf
+#> ✔ Rendering renderthis_27b05fb7d13d.html into renderthis_27b058088502.pdf ... d…
 #> 
-#> ℹ Removed temporary renderthis_294d16931121.html
-#> ℹ Rendering renderthis_294d7d64f236.pdf into slides.mp4
-#> ✔ Rendering renderthis_294d7d64f236.pdf into slides.mp4 ... done
+#> ℹ Removed temporary renderthis_27b05fb7d13d.html
+#> ℹ Rendering renderthis_27b058088502.pdf into slides.mp4
+#> ✔ Rendering renderthis_27b058088502.pdf into slides.mp4 ... done
 #> 
-#> ℹ Removed temporary renderthis_294d7d64f236.pdf
+#> ℹ Removed temporary renderthis_27b058088502.pdf
 ```
