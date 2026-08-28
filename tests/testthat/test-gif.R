@@ -25,6 +25,7 @@ test_that("to_gif() simple from .Rmd", {
 })
 
 test_that("to_gif() simple from pdf", {
+    skip_pdf_rasterize_on_cran()
     tmpdir <- withr::local_tempdir()
     fs::file_copy(test_path("slides", "basic.pdf"), tmpdir, overwrite = TRUE)
 
@@ -72,6 +73,7 @@ test_that("to_gif() keeps intermediates", {
 })
 
 test_that("to_gif() only includes `slides`", {
+    skip_pdf_rasterize_on_cran()
     tmpdir <- withr::local_tempdir()
     fs::file_copy(test_path("slides", "basic.pdf"), tmpdir, overwrite = TRUE)
 

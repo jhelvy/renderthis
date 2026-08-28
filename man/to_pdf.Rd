@@ -48,6 +48,11 @@ Render slides as a PDF file. Requires a local installation of Chrome.
 If you set \code{complex_slides = TRUE} or \code{partial_slides = TRUE}, you will also
 need to install the \pkg{chromote} and \pkg{pdftools} packages.
 }
+\details{
+Rendering waits up to 120 seconds for Chrome to print the slides. Set the
+\code{renderthis.chrome_timeout} option to a different number of seconds for
+decks that need longer.
+}
 \examples{
 with_example("slides.Rmd", requires_chrome = TRUE, {
     # Render pdf from Rmd, html, or direct URL

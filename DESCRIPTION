@@ -25,12 +25,14 @@ BugReports: https://github.com/jhelvy/renderthis/issues
 Depends: 
     R (>= 3.4.0)
 Imports:
+    callr,
     cli (>= 3.0.0),
     digest,
     fs,
     jsonlite,
     magick (>= 2.7.1),
     pagedown,
+    pdftools,
     progress,
     quarto,
     rmarkdown,
@@ -44,7 +46,6 @@ Suggests:
     knitr,
     lifecycle,
     officer,
-    pdftools,
     testthat (>= 3.0.0),
     webshot2
 SystemRequirements: Quarto command line tool

@@ -116,13 +116,14 @@ if you cited it. You can get the citation information by typing
 To cite renderthis in publications use:
 
 Helveston, John Paul and Aden-Buie, Garrick (2021). renderthis: Render
-slides to different formats.
+slides to different formats. R package version 0.2.2.
+<https://jhelvy.github.io/renderthis/>
 
 A BibTeX entry for LaTeX users is
 
-@Manual{, title = {renderthis: Render slides to different formats.},
-author = {{Helveston} and John Paul and {Aden-Buie} and {Garrick}}, year
-= {2021}, note = {R package version 0.0.1}, url =
+@Manual{, title = {renderthis: Render slides to different formats},
+author = {John Paul Helveston and Garrick Aden-Buie}, year = {2021},
+note = {R package version 0.2.2}, url =
 {<https://jhelvy.github.io/renderthis/>}, }
 
 ## Installing xaringanBuilder

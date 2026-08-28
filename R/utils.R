@@ -186,8 +186,64 @@ cli_build_failed <- function(id) {
   }
 }
 
-pdf_to_imgs <- function(input, density) {
-    magick::image_read_pdf(input, density = density)
+# Rasterizing a PDF is done with ImageMagick's own renderer (Ghostscript) where
+# that is available. The alternative, magick::image_read_pdf(), goes through
+# pdftools and poppler, which segfaults intermittently on some builds and takes
+# the whole R session down with it. Where we have to fall back to poppler, we
+# run it in a throwaway process so that a crash is an error we can retry.
+pdf_to_imgs <- function(input, density, attempts = 10) {
+    imgs <- tryCatch(
+        magick::image_read(input, density = density),
+        error = function(e) NULL
+    )
+
+    if (is.null(imgs)) {
+        tmpdir <- withr::local_tempdir()
+        pngs <- pdf_to_pngs(input, density, tmpdir, attempts = attempts)
+        imgs <- magick::image_read(pngs, density = density)
+    }
+
+    # Callers write these out as .png files and hand them to ffmpeg and zip, and
+    # magick::image_write() writes whatever format the image already carries.
+    # Reading a PDF directly leaves that as "PDF", so make it a raster format.
+    magick::image_convert(imgs, format = "png")
+}
+
+pdf_to_pngs <- function(input, density, tmpdir, attempts = 10) {
+    input <- fs::path_abs(input)
+
+    for (attempt in seq_len(attempts)) {
+        # A crashed attempt can leave partial files behind, so each try renders
+        # into its own directory.
+        outdir <- fs::dir_create(fs::path(tmpdir, attempt))
+
+        pngs <- tryCatch(
+            callr::r(
+                function(pdf, dpi, outdir) {
+                    setwd(outdir)
+                    pdftools::pdf_convert(
+                        pdf,
+                        format = "png",
+                        dpi = dpi,
+                        verbose = FALSE
+                    )
+                },
+                args = list(input, density, outdir)
+            ),
+            error = function(e) e
+        )
+
+        if (!inherits(pngs, "error")) {
+            return(fs::path(outdir, fs::path_file(pngs)))
+        }
+    }
+
+    cli::cli_abort(c(
+        "Could not render {.file {fs::path_file(input)}} to images.",
+        "x" = "The PDF renderer failed {attempts} time{?s} in a row.",
+        "i" = "This is usually a {.pkg pdftools}/poppler crash rather than a
+               problem with the PDF."
+    ))
 }
 
 slides_arg_validate <- function(slides, imgs = NULL) {

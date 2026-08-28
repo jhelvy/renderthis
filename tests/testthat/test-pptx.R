@@ -1,4 +1,5 @@
 test_that("to_pptx() simple from pdf", {
+    skip_pdf_rasterize_on_cran()
     skip_if_not_installed("officer")
 
     tmpdir <- withr::local_tempdir()
@@ -50,6 +51,7 @@ test_that("to_pptx() simple from Rmd", {
 
 
 test_that("to_pptx() widescreen", {
+    skip_pdf_rasterize_on_cran()
     skip_if_not_installed("officer")
 
     tmpdir <- withr::local_tempdir()

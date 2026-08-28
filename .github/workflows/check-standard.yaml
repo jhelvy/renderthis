@@ -38,7 +38,13 @@ jobs:
       - if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libavfilter-dev
+          sudo apt-get install -y libavfilter-dev ghostscript
+
+      # ImageMagick rasterizes PDFs through Ghostscript. Without it, magick
+      # falls back to pdftools/poppler, which segfaults intermittently on the
+      # macOS runners.
+      - if: runner.os == 'macOS'
+        run: brew install ghostscript
 
       - uses: r-lib/actions/setup-r@v2
         with:

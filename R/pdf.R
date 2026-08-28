@@ -27,6 +27,11 @@
 #'
 #' @return Slides are rendered as a `.pdf` file.
 #'
+#' @details
+#' Rendering waits up to 120 seconds for Chrome to print the slides. Set the
+#' `renderthis.chrome_timeout` option to a different number of seconds for
+#' decks that need longer.
+#'
 #' @example man/examples/examples_pdf.R
 #'
 #' @export
@@ -82,12 +87,20 @@ to_pdf <- function(
     }
 }
 
+# pagedown::chrome_print() waits 30 seconds for Chrome by default, which is not
+# always enough on a slow or loaded machine (Windows CI runners in particular).
+# The option lets users raise it further for very large decks.
+chrome_timeout <- function() {
+    getOption("renderthis.chrome_timeout", 120)
+}
+
 to_pdf_simple <- function(input, output_file = NULL) {
     proc <- cli_build_start(input, output_file, on_exit = "done")
     tryCatch({
         pagedown::chrome_print(
-            input  = input,
-            output = output_file
+            input   = input,
+            output  = output_file,
+            timeout = chrome_timeout()
         )
     },
         error = cli_build_failed(proc)

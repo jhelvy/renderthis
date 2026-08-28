@@ -41,3 +41,10 @@ skip_if_not_quarto <- function() {
     skip_if_not(!is.null(quarto::quarto_path()), "quarto binary not available")
     skip_if_not_pandoc()
 }
+
+# Rasterizing a PDF can fall back to poppler (via pdftools), which segfaults
+# intermittently on some macOS builds. The crash is in the system library rather
+# than in renderthis, so we don't exercise that path on CRAN. See ISSUE.md.
+skip_pdf_rasterize_on_cran <- function() {
+    skip_on_cran()
+}

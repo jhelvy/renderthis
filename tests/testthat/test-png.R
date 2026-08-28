@@ -1,4 +1,5 @@
 test_that("to_png() handles bad inputs", {
+    skip_pdf_rasterize_on_cran()
     pdf_slides <- test_path("slides", "basic.pdf")
 
     # Detect errors
@@ -29,6 +30,7 @@ test_that("to_png() from .Rmd doesn't keep intermediates by default", {
 })
 
 test_that("to_png() from basic.pdf", {
+    skip_pdf_rasterize_on_cran()
     tmpdir <- withr::local_tempdir()
     fs::file_copy(
         test_path("slides", "basic.pdf"),
