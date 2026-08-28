@@ -50,5 +50,5 @@ with_example("slides.Rmd", {
 #> 
 
 print(with_example("slides.Rmd", getwd()))
-#> [1] "/tmp/RtmpLQ74Qk/file2af1437f925c"
+#> [1] "/tmp/RtmpqFtU0T/file286875a3a13"
 ```
