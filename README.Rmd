@@ -29,6 +29,7 @@ IS_README <- TRUE
 [![CRAN status](https://www.r-pkg.org/badges/version/renderthis)](https://CRAN.R-project.org/package=renderthis)
 [![Lifecycle:
 stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/logitr)](https://cran.r-project.org/package=logitr)
 <!-- badges: end -->
 
 This package contains functions for rendering [R Markdown][rmarkdown] and [Quarto][quarto] documents — priamrily [xaringan] or [revealjs] slides — to different formats, including HTML, PDF, PNG, GIF, PPTX, and MP4, as well as a 'social' output, a png of the first slide re-sized for sharing on social media.

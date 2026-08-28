@@ -10,6 +10,8 @@
 status](https://www.r-pkg.org/badges/version/renderthis)](https://CRAN.R-project.org/package=renderthis)
 [![Lifecycle:
 stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![metacran
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/logitr)](https://cran.r-project.org/package=logitr)
 <!-- badges: end -->
 
 This package contains functions for rendering [R
