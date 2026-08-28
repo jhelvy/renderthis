@@ -60,6 +60,12 @@ to_pdf(
 
 Slides are rendered as a `.pdf` file.
 
+## Details
+
+Rendering waits up to 120 seconds for Chrome to print the slides. Set
+the `renderthis.chrome_timeout` option to a different number of seconds
+for decks that need longer.
+
 ## Examples
 
 ``` r

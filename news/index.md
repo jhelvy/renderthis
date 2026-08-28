@@ -11,6 +11,17 @@
   block, which withr 3.0.0 no longer supports.
 - Fixes `to_pdf(complex_slides = TRUE)` looking up the Chrome window by
   a hard-coded window id, which failed with recent versions of Chrome.
+- Rasterizes PDFs with ImageMagick’s own renderer (Ghostscript) where it
+  is available, rather than always going through pdftools and poppler.
+  Recent poppler builds segfault intermittently while rendering, which
+  crashed the whole R session. Where poppler is still needed, it now
+  runs in a separate process and is retried, so a crash surfaces as an
+  ordinary error instead.
+- Waits longer for Chrome when printing slides to PDF. The 30 second
+  default in pagedown was not always enough on slow machines, which
+  surfaced as a “Failed to generate output in 30 seconds (timeout)”
+  error. The wait is now 120 seconds and can be changed with the
+  `renderthis.chrome_timeout` option.
 
 ## renderthis 0.2.1
 

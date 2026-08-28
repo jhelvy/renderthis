@@ -40,6 +40,8 @@
 <ul><li>Declares <code>SystemRequirements</code> for the Quarto command line tool, which is used via the quarto package to render <code>.qmd</code> slides.</li>
 <li>Fixes an error when rendering self-contained HTML (and any format built from it) caused by a <code><a href="https://rdrr.io/r/base/function.html" class="external-link">return()</a></code> inside a <code><a href="https://withr.r-lib.org/reference/defer.html" class="external-link">withr::defer()</a></code> block, which withr 3.0.0 no longer supports.</li>
 <li>Fixes <code>to_pdf(complex_slides = TRUE)</code> looking up the Chrome window by a hard-coded window id, which failed with recent versions of Chrome.</li>
+<li>Rasterizes PDFs with ImageMagick’s own renderer (Ghostscript) where it is available, rather than always going through pdftools and poppler. Recent poppler builds segfault intermittently while rendering, which crashed the whole R session. Where poppler is still needed, it now runs in a separate process and is retried, so a crash surfaces as an ordinary error instead.</li>
+<li>Waits longer for Chrome when printing slides to PDF. The 30 second default in pagedown was not always enough on slow machines, which surfaced as a “Failed to generate output in 30 seconds (timeout)” error. The wait is now 120 seconds and can be changed with the <code>renderthis.chrome_timeout</code> option.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.1" id="renderthis-021">renderthis 0.2.1<a class="anchor" aria-label="anchor" href="#renderthis-021"></a></h2>
